@@ -22,7 +22,16 @@ public class Player : MonoBehaviour
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
-        movementInputVector = new Vector2(moveHorizontal, moveVertical);
+        Vector2 input = new Vector2(moveHorizontal, moveVertical);
+
+        float angle = 45f * Mathf.Deg2Rad;
+        float cos = Mathf.Cos(angle);
+        float sin = Mathf.Sin(angle);
+
+        movementInputVector = new Vector2(
+            input.x * cos - input.y * sin,
+            input.x * sin + input.y * cos
+        );
     }
 
     void FixedUpdate()
