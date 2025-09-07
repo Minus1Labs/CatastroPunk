@@ -9,6 +9,12 @@ public class Player : MonoBehaviour
 
     private float speed = 5f;
 
+    [SerializeField]
+    private GameObject projectilePrefab;
+
+    [SerializeField]
+    private Transform firePoint;
+
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +25,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SetInputVector();
+        if (Input.GetMouseButtonDown(0))
+        {
+            FireProjectile();
+        }
+    }
+
+    private void SetInputVector()
+    { 
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
@@ -28,10 +43,35 @@ public class Player : MonoBehaviour
         float cos = Mathf.Cos(angle);
         float sin = Mathf.Sin(angle);
 
+        // Rotate input vector by 45 degrees to align with isometric view
         movementInputVector = new Vector2(
             input.x * cos - input.y * sin,
             input.x * sin + input.y * cos
         );
+    }
+
+    void FireProjectile()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
+        var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
+
+        if (plane.Raycast(ray, out float enter))
+        {
+            Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
+            Vector2 dir = (hit - firePoint.position);       // 2D direction (x,y)
+            dir.Normalize();
+
+            // EITHER: rotate by angle (if your projectile faces +X in local space)
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            // OR (cleaner): align local +X with the direction
+            // firePoint.right = dir;
+
+            GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
     void FixedUpdate()
