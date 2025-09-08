@@ -26,7 +26,7 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
 
     void Start()
     {
-        SpecialInteract(ISpecialInteractible.SpecialInteractType.EXPLOSION);
+        
     }
 
     public void SpecialInteract(ISpecialInteractible.SpecialInteractType it)
