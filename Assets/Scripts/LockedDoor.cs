@@ -23,6 +23,12 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
         spriteRenderer.sprite = closedSprite;
         doorCollider.enabled = true;
     }
+
+    void Start()
+    {
+        SpecialInteract(ISpecialInteractible.SpecialInteractType.EXPLOSION);
+    }
+
     public void SpecialInteract(ISpecialInteractible.SpecialInteractType it)
     {
         if (it == ISpecialInteractible.SpecialInteractType.EXPLOSION)
