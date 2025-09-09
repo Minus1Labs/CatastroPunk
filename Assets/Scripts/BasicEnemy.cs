@@ -15,6 +15,8 @@ public class BasicEnemy : Enemy
 
     public GameObject explosionPrefab;
 
+    public Animator robotAnimator;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,10 +42,12 @@ public class BasicEnemy : Enemy
         if (dist <= detectionRadius)
         {
             Move();
+            robotAnimator.SetBool("Follow", true);
         }
         else
         {
             rb.velocity = Vector2.zero; // stop when player is out of range
+            robotAnimator.SetBool("Follow", false);
         }
     }
 
@@ -73,6 +77,7 @@ public class BasicEnemy : Enemy
     public override void Attack(GameObject target)
     {
         Debug.Log("Attacking Player!");
+        robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
         if (damageable != null && Time.time >= damageTimer)
         {
@@ -86,6 +91,11 @@ public class BasicEnemy : Enemy
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
+
+        }
+        else 
+        {
+            robotAnimator.SetBool("Attack", false);
         }
     }
 
