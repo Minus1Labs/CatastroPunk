@@ -12,6 +12,8 @@ public class BasicEnemy : Enemy
     private Vector2 moveDirection;
     private Transform player;
 
+    public GameObject explosionPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -94,7 +96,9 @@ public class BasicEnemy : Enemy
 
     protected override void Die()
     {
-        throw new System.NotImplementedException();
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        //TODO: add any other death logic before destroying
+        Destroy(gameObject);
     }
 
     public override void Reverse(int strength)

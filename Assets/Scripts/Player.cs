@@ -27,6 +27,9 @@ public class Player : MonoBehaviour, IDamageable
     public float iFrameDuration = 1f;
     private bool isInvincible = false;
 
+    //a list of the current player card upgrades
+    public List<Card> cards = new List<Card>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,10 @@ public class Player : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         currentSpeed = baseSpeed;
         currentHealth = baseHealth;
+        foreach (var card in cards)
+        {
+            card.ApplyUpgrade(this);
+        }
     }
 
     // Update is called once per frame
@@ -110,10 +117,19 @@ public class Player : MonoBehaviour, IDamageable
             GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         }
     }
+    
+    public void AddHealth(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > baseHealth)
+        {
+            currentHealth = baseHealth;
+        }
+    }
 
     public void TakeDamage(int damage)
     {
-        if(isInvincible) return;
+        if (isInvincible) return;
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());
         if (currentHealth <= 0)
