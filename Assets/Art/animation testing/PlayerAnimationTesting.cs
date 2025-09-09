@@ -72,17 +72,6 @@ public class PlayerAnimationTesting : MonoBehaviour
         if (plane.Raycast(ray, out float enter))
         {
             Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
-
-            float angleh = 45f * Mathf.Deg2Rad;
-            float cos = Mathf.Cos(angleh);
-            float sin = Mathf.Sin(angleh);
-
-            Vector3 rotationHit = new Vector2(
-            hit.x * cos - hit.y * sin,
-            hit.x * sin + hit.y * cos
-            );
-            Vector3 invertedHit = new Vector3(-rotationHit.x, rotationHit.y, -rotationHit.z);
-
             Vector2 dir = (hit - firePoint.position);       // 2D direction (x,y)
 
             dir.Normalize();
@@ -94,13 +83,12 @@ public class PlayerAnimationTesting : MonoBehaviour
             // OR (cleaner): align local +X with the direction
             // firePoint.right = dir;
 
-
+            //Animation
+            Vector2 invertedHit = new Vector3(-dir.x, dir.y);
             //change IK Gun bone target
             if (currentIKManager != null)
-            {
-                //(currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit; //weird circular motion
-                (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit; //weird circular motion
-
+            { 
+                (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
             }
 
             //simple version
@@ -111,8 +99,6 @@ public class PlayerAnimationTesting : MonoBehaviour
 
 
             GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-
-
         }
     }
 
