@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
     private Vector2 movementInputVector;
 
-    private float speed = 5f;
+    public float baseSpeed = 5f;
+    private float currentSpeed;
 
     [SerializeField]
     private GameObject projectilePrefab;
@@ -15,25 +16,61 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform firePoint;
 
+    public int baseHealth = 5;
+    private int currentHealth;
+
+    private bool isDashing = false;
+    private bool canDash = true;
+
+    private float dashCooldown = 1f;
+
+    public float iFrameDuration = 1f;
+    private bool isInvincible = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentSpeed = baseSpeed;
+        currentHealth = baseHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        SetInputVector();
+        if (!isDashing) //bc dashing locks movement
+        {
+            SetInputVector();
+        }
         if (Input.GetMouseButtonDown(0))
         {
             FireProjectile();
         }
+
+        // make a dash button (shift)
+        if (canDash &&
+        Input.GetKeyDown(KeyCode.LeftShift) &&
+        movementInputVector != Vector2.zero)
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+        currentSpeed = baseSpeed * 3;
+        yield return new WaitForSeconds(0.3f);
+        isDashing = false;
+        currentSpeed = baseSpeed;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     private void SetInputVector()
-    { 
+    {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
@@ -74,8 +111,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        if(isInvincible) return;
+        currentHealth -= damage;
+        StartCoroutine(InvincibilityFrames());
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private IEnumerator InvincibilityFrames()
+    {
+        isInvincible = true;
+        //make the player flash from opacity 0 to 1 for iframes:
+        for (float i = 0; i < iFrameDuration; i += 0.1f)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            yield return new WaitForSeconds(0.05f);
+            GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(0.05f);
+        }
+        isInvincible = false;
+    }
+
+    private void Die()
+    {
+        Debug.Log("Player died!");
+        //TODO: more logic for player death
+    }
+
     void FixedUpdate()
     {
-        rb.velocity = movementInputVector.normalized * speed;
+        rb.velocity = movementInputVector.normalized * currentSpeed;
     }
 }

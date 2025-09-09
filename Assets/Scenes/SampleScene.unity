@@ -192,9 +192,10 @@ GameObject:
   - component: {fileID: 354337216}
   - component: {fileID: 354337215}
   - component: {fileID: 354337217}
+  - component: {fileID: 354337218}
   m_Layer: 0
   m_Name: WallTilemap
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1129,6 +1130,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!114 &354337218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354337213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c2a2c5e12d3ae4696468fa2522070c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,7 +1446,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42470583, y: 0.17592171, z: 0.33985272, w: 0.82047343}
+  m_LocalRotation: {x: 0.41381004, y: 0.18422283, z: 0.3468282, w: 0.82129985}
   m_LocalPosition: {x: -0.755, y: -4.693, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1538,14 +1551,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507211504}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42470583, y: 0.17592171, z: 0.33985272, w: 0.82047343}
+  m_LocalRotation: {x: 0.41381004, y: 0.18422283, z: 0.3468282, w: 0.82129985}
   m_LocalPosition: {x: -0.755, y: -4.693, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 762136443}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 35.264, y: 45, z: 60}
+  m_LocalEulerAnglesHint: {x: 33.5, y: 45, z: 60}
 --- !u!1 &1589177312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1574,7 @@ GameObject:
   - component: {fileID: 1589177317}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1646,8 +1659,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf3c7941c43d2d4aa7bd4fcd978d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 5
   projectilePrefab: {fileID: 3412664266963024560, guid: 790d5c2d643e2c0478ec4097de77c812, type: 3}
   firePoint: {fileID: 831466996}
+  baseHealth: 5
 --- !u!50 &1589177316
 Rigidbody2D:
   serializedVersion: 4
