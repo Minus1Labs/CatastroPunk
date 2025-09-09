@@ -12,27 +12,11 @@ public class Projectile : MonoBehaviour
 
     public bool isReverseBullet = false;
 
-    void Awake()
-    {
-        isoBase = Quaternion.Euler(35.264f, 45f, 15f);
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
         StartCoroutine(DestroyAfterTime());
-    }
-
-    void LateUpdate()
-    {
-        float z = transform.eulerAngles.z;
-        Quaternion faceZ = Quaternion.AngleAxis(z, Vector3.forward);
-
-        // Apply Z spin on top of the iso tilt (order matters!)
-        transform.GetChild(0).rotation = isoBase * faceZ;
-        // If it spins the “wrong” way, try the other order:
-        // childSprite.rotation = faceZ * isoBase;
     }
 
     //ontriggerenter2D

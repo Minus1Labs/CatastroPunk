@@ -1,5 +1,6 @@
 using Unity.Mathematics;
 using UnityEngine;
+using System.Collections;
 
 public class BasicEnemy : Enemy
 {
@@ -103,6 +104,16 @@ public class BasicEnemy : Enemy
 
     public override void Reverse(int strength)
     {
-        throw new System.NotImplementedException();
+        // for now, instead of reversing, just freeze for a bit:
+        StartCoroutine(FreezeForSeconds(2f * strength));
+    }
+
+    private IEnumerator FreezeForSeconds(float seconds)
+    {
+        float originalSpeed = baseSpeed;
+        baseSpeed = 0;
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(seconds);
+        baseSpeed = originalSpeed;
     }
 }
