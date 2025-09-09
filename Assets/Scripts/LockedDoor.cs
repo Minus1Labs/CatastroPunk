@@ -8,7 +8,7 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
     [SerializeField] private Sprite blownOpenSprite;
     [SerializeField] private Sprite openedSprite;
 
-    private Collider2D doorCollider;
+    private Collider2D doorCollider = null;
     private bool is_closed = true;
 
     protected override void Awake()
@@ -16,8 +16,20 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
         base.Awake();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        doorCollider = GetComponent<Collider2D>();
+        Transform parentTransform = transform.parent; // get parent
+        Transform sibling = parentTransform.Find("DoorCollider"); // find the sibling by name
 
+        if (sibling != null)
+        {
+            // Access the sibling's GameObject or components
+            GameObject siblingGO = sibling.gameObject;
+            // Example: get a component
+            doorCollider = siblingGO.GetComponent<Collider2D>();
+        }
+        else
+        {
+            Debug.LogWarning("DoorCollider Sibling not found!");
+        }
         // Start closed
         interactible_type = InteractibleType.SPECIAL_INTERACTIBLE;
         spriteRenderer.sprite = closedSprite;
