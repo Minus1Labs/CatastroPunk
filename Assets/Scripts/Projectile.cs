@@ -17,11 +17,6 @@ public class Projectile : MonoBehaviour
 
     public bool isReverseBullet = false;
 
-    void Awake()
-    {
-        isoBase = Quaternion.Euler(35.264f, 45f, 15f);
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

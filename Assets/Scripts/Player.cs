@@ -18,6 +18,9 @@ public class Player : MonoBehaviour, IDamageable
     private GameObject projectilePrefab;
 
     [SerializeField]
+    private GameObject reversalProjectilePrefab;
+
+    [SerializeField]
     private Transform firePoint;
 
     
@@ -178,6 +181,15 @@ public class Player : MonoBehaviour, IDamageable
         }
 
 
+        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0)
+        {
+            currentAmmoCount -= 1;
+            FireProjectile(projectilePrefab);
+        }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            FireProjectile(reversalProjectilePrefab);
+        }
     }
 
     IEnumerator Dash()
@@ -218,7 +230,7 @@ public class Player : MonoBehaviour, IDamageable
         );
     }
 
-    void FireProjectile()
+    void FireProjectile(GameObject projectile = null)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -228,19 +240,19 @@ public class Player : MonoBehaviour, IDamageable
         if (plane.Raycast(ray, out float enter))
         {
             Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
-            Vector2 dir = (hit - firePoint.position);       // 2D direction (x,y)
+            Vector2 dir = new Vector2(hit.x - firePoint.position.x, hit.y - firePoint.position.y);
+            if(dir.sqrMagnitude < 1e-6f) return; // don't shoot if too close to center
             dir.Normalize();
 
             // EITHER: rotate by angle (if your projectile faces +X in local space)
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
+            firePoint.right = new Vector3(dir.x, dir.y, 0f);
 
             // OR (cleaner): align local +X with the direction
             // firePoint.right = dir;
 
-            GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject go = Instantiate(projectile, firePoint.position, firePoint.rotation);
 
-            Projectile proj = projectileInstance.GetComponent<Projectile>();
+            Projectile proj = go.GetComponent<Projectile>();
 
             proj.SetStats(currentDamage, projectileSpeed, projLifetime);
         }
