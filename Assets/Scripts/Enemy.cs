@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour, IReversible, IDamageable
     protected abstract void Die();
 
     // Movement — override in subclasses
-    public abstract void Move(Vector2 direction);
+    public abstract void Move();
 
     // Attack — override in subclasses
     public abstract void Attack(GameObject target);
