@@ -16,29 +16,19 @@ public class PlayerAnimationTesting : MonoBehaviour
     [SerializeField]
     private Transform firePoint;
 
+    //Animation 
+    public Animator catBodyAnimator;
+
+    public IKManager2D currentIKManager;
+    [SerializeField]
+    public Transform tailIKTarget;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
-
-    //Animation 
-    private string currentDirection;
-
-    public Animator catBodyAnimator;
-    public GameObject tailRigUp;
-    public GameObject tailRigDown;
-    public GameObject tailRigRight;
-    public GameObject tailRigLeft;
-
-    private GameObject currentActiveTailRig;
-    public IKManager2D currentIKManager;
-    [SerializeField]
-    public Transform tailIKTarget;
-
-
-
 
     // Update is called once per frame
     void Update()
@@ -66,6 +56,10 @@ public class PlayerAnimationTesting : MonoBehaviour
             input.x * cos - input.y * sin,
             input.x * sin + input.y * cos
         );
+
+        //Animation
+        catBodyAnimator.SetFloat("MoveX", moveVertical);
+        catBodyAnimator.SetFloat("MoveY", moveHorizontal);
     }
 
     void FireProjectile()
@@ -82,13 +76,13 @@ public class PlayerAnimationTesting : MonoBehaviour
 
 
             //change IK Gun bone target
-            Debug.Log(hit);
             if (currentIKManager != null)
             {
               (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = hit; //weird circular motion
                           
             }
-            //simple
+
+            //simple version
             //if (tailIKTarget != null)
             //{
              //  tailIKTarget.position = gunHit;
