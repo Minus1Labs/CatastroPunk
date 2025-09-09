@@ -107,6 +107,14 @@ public class BasicEnemy : Enemy
 
     protected override void Die()
     {
+        if (player != null)
+        {
+            Player pl = player.GetComponent<Player>();
+            if (pl != null)
+            {
+                pl.KilledEnemy();
+            }
+        }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //TODO: add any other death logic before destroying
         Destroy(gameObject);

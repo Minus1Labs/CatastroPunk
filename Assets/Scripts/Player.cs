@@ -1,3 +1,5 @@
+using System;
+using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,8 @@ public class Player : MonoBehaviour, IDamageable
     public float baseSpeed = 5f;
     private float currentSpeed;
 
+    [Header("Required Setup")]
+
     [SerializeField]
     private GameObject projectilePrefab;
 
@@ -19,19 +23,46 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     private Transform firePoint;
 
-    public int baseHealth = 5;
-    private int currentHealth;
-
+    
     private bool isDashing = false;
     private bool canDash = true;
+    [Header("Base Player Stats")]
+    [SerializeField] public int baseHealth = 5;
+    private int currentHealth;
 
-    private float dashCooldown = 1f;
+
+    [SerializeField] private float baseDashCd = 1f;
+    private float dashCooldown;
 
     public float iFrameDuration = 1f;
     private bool isInvincible = false;
 
+    [SerializeField] private int baseDamage = 80;
+    private int currentDamage;
+
+    [SerializeField] private float baseProjectileSpeed = 3f;
+    private float projectileSpeed;
+
+    [SerializeField] private float baseDashSpeed = 3f;
+    private float dashSpeed;
+
+    [SerializeField] private int baseAmmoPerRoom = 6;
+    private int ammoPerRoom;
+
+    [SerializeField] private float baseRefundTime = 10f;
+    private float refundTime;
+
+    [SerializeField] private float baseProjectileLifetime = 5f;
+    private float projLifetime;
+
+    private int currentAmmoCount = 0;
+
+    private bool canRefund = false;
+
+
+
     //a list of the current player card upgrades
-    public List<Card> cards = new List<Card>();
+    private List<Card> cards = new List<Card>();
 
 
     // Start is called before the first frame update
@@ -40,11 +71,88 @@ public class Player : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         currentSpeed = baseSpeed;
         currentHealth = baseHealth;
+        currentDamage = baseDamage;
+        projectileSpeed = baseProjectileSpeed;
+        dashSpeed = baseDashSpeed;
+        dashCooldown = baseDashCd;
+        ammoPerRoom = baseAmmoPerRoom;
+        refundTime = baseRefundTime;
+        projLifetime = baseProjectileLifetime;
         foreach (var card in cards)
         {
             card.ApplyUpgrade(this);
         }
     }
+
+    public void AddCard(Card c)
+    {
+        c.ApplyUpgrade(this);
+        cards.Add(c);
+    }
+
+    public void SetDamage(float multiplier = 1f, int additive = 0, int setTo = -1)
+    {
+        currentDamage = (int)(currentDamage * multiplier) + additive;
+        if (setTo >= 0)
+        {
+            currentDamage = setTo;
+        }
+    }
+
+    public void SetSpeed(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    {
+        currentSpeed = currentSpeed * multiplier + additive;
+        if (setTo >= 0)
+        {
+            currentSpeed = setTo;
+        }
+    }
+
+    public void SetHealth(float multiplier = 1f, int additive = 0, int setTo = -1)
+    {
+        currentHealth = (int)(currentHealth * multiplier) + additive;
+        if (setTo > 0)
+        {
+            currentHealth = setTo;
+        }
+    }
+
+    public void SetDashCd(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    {
+        dashCooldown = dashCooldown * multiplier + additive;
+        if (setTo >= 0)
+        {
+            dashCooldown = setTo;
+        }
+    }
+
+    public void SetIFrameDur(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    {
+        iFrameDuration = iFrameDuration * multiplier + additive;
+        if (setTo >= 0)
+        {
+            iFrameDuration = setTo;
+        }
+    }
+
+    public void SetAmmoPerRoom(float multiplier = 1f, int additive = 0, int setTo = -1)
+    {
+        ammoPerRoom = (int)(ammoPerRoom * multiplier) + additive;
+        if (setTo >= 0)
+        {
+            ammoPerRoom = setTo;
+        }
+    }
+
+    public void SetCurrentAmmo(float multiplier = 1f, int additive = 0, int setTo = -1)
+    {
+        currentAmmoCount = (int)(currentAmmoCount * multiplier) + additive;
+        if (setTo >= 0)
+        {
+            currentAmmoCount = setTo;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -53,6 +161,12 @@ public class Player : MonoBehaviour, IDamageable
         {
             SetInputVector();
         }
+        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0)
+        {
+            currentAmmoCount -= 1;
+            FireProjectile();
+        }
+
         // make a dash button (shift)
         if (canDash &&
         Input.GetKeyDown(KeyCode.LeftShift) &&
@@ -61,8 +175,15 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Dash());
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (canRefund && currentAmmoCount < ammoPerRoom)
         {
+            StartCoroutine(RefundAmmo());
+        }
+
+
+        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0)
+        {
+            currentAmmoCount -= 1;
             FireProjectile(projectilePrefab);
         }
         else if (Input.GetMouseButtonDown(1))
@@ -75,12 +196,20 @@ public class Player : MonoBehaviour, IDamageable
     {
         canDash = false;
         isDashing = true;
-        currentSpeed = baseSpeed * 3;
+        currentSpeed = baseSpeed * dashSpeed;
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
         currentSpeed = baseSpeed;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    IEnumerator RefundAmmo()
+    {
+        canRefund = false;
+        yield return new WaitForSeconds(refundTime);
+        currentAmmoCount += 1;
+        canRefund = true;
     }
 
     private void SetInputVector()
@@ -118,9 +247,36 @@ public class Player : MonoBehaviour, IDamageable
             // EITHER: rotate by angle (if your projectile faces +X in local space)
             firePoint.right = new Vector3(dir.x, dir.y, 0f);
 
-             GameObject go = Instantiate(projectile, firePoint.position, firePoint.rotation);
+            // OR (cleaner): align local +X with the direction
+            // firePoint.right = dir;
+
+            GameObject go = Instantiate(projectile, firePoint.position, firePoint.rotation);
+
+            Projectile proj = go.GetComponent<Projectile>();
+
+            proj.SetStats(currentDamage, projectileSpeed, projLifetime);
         }
     }
+
+    public void HitTarget() {
+        foreach (Card c in cards) {
+            c.OnProjectileHit(this);
+        }
+    }
+
+    public void KilledEnemy() {
+        foreach (Card c in cards) {
+            c.OnEnemyKill(this);
+        }
+    }
+
+    public void MissTarget() {
+        foreach (Card c in cards) {
+            c.OnProjectileMiss(this);
+        }
+    }
+
+
     
     public void AddHealth(int amount)
     {
