@@ -20,6 +20,7 @@ public class PlayerAnimationTesting : MonoBehaviour
     public Animator catBodyAnimator;
 
     public IKManager2D currentIKManager;
+    [SerializeField]
     public GameObject tailBone;
     public Transform tailIKTarget;//probably wont need this
 
