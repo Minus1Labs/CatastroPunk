@@ -96,8 +96,11 @@ public class Player : MonoBehaviour, IDamageable
 
     public void AddCard(Card c)
     {
-        c.ApplyUpgrade(this);
-        cards.Add(c);
+        if (c != null)
+        {
+            c.ApplyUpgrade(this);
+            cards.Add(c);
+        }
     }
 
     public void SetDamage(float multiplier = 1f, int additive = 0, int setTo = -1)

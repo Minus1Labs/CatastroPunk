@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class CardDealer : MonoBehaviour
 {
@@ -26,6 +28,10 @@ public class CardDealer : MonoBehaviour
         currentCards[0] = database.GetRandomCard();
         currentCards[1] = database.GetRandomCard();
         currentCards[2] = database.GetRandomCard();
+
+        uiCardOptions[0].GetComponent<Button>().onClick.AddListener(() => SelectCard(0));
+        uiCardOptions[1].GetComponent<Button>().onClick.AddListener(() => SelectCard(1));
+        uiCardOptions[2].GetComponent<Button>().onClick.AddListener(() => SelectCard(2));
 
         // for each of the gameobjects we will
         // set active to true

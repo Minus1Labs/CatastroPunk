@@ -9,6 +9,7 @@ public class DoorButton : MonoBehaviour
     //ontriggerenter2d if player, call door.OpenDoor()
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Collision with " + collision.name);
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Door opened!");

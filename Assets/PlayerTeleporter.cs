@@ -28,8 +28,8 @@ public class PlayerTeleporter : MonoBehaviour
         {
             Debug.Log("Player teleported!");
 
-            Transform root = collision.transform.parent != null 
-                ? collision.transform.parent 
+            Transform root = collision.transform.parent != null
+                ? collision.transform.parent
                 : collision.transform;
 
             root.position = targetLocation;
@@ -42,6 +42,11 @@ public class PlayerTeleporter : MonoBehaviour
                 // or, if you want the delta approach instead:
                 // Vector3 delta = targetLocation - root.position;
                 // vcam.OnTargetObjectWarped(root, delta);
+            }
+            Player p = collision.GetComponent<Player>();
+            if (p != null)
+            {
+                p.SetCurrentAmmo(p.getAmmoPerRoom());
             }
         }
     }
