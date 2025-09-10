@@ -329,7 +329,7 @@ public class Player : MonoBehaviour, IDamageable
             //  tailIKTarget.position = gunHit;
             //}
 
-            if (projectilePrefab != null)
+            if (projectilePrefab != null && !reverse)
             {
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
