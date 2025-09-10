@@ -55,10 +55,7 @@ public class Projectile : MonoBehaviour
             IReversible reversible = other.GetComponent<IReversible>();
             if (reversible != null)
             {
-                if (player != null)
-                {
-                    player.HitTarget();
-                }
+                
                 reversible.Reverse(1);
                 Destroy(gameObject);
             }
@@ -69,8 +66,12 @@ public class Projectile : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player")) //TODO: nuke this later, no enemies have projectiles
         {
-
-            damageable.TakeDamage(1);
+            if (player != null)
+            {
+                player.HitTarget();
+            }
+            damageable.TakeDamage(damage);
+            Debug.Log("Hit " + other.name + " for " + damage);
             Destroy(gameObject);
         }
     }

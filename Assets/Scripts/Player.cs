@@ -3,6 +3,7 @@ using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.IK;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -23,6 +24,14 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     private Transform firePoint;
 
+    public Animator catBodyAnimator;
+
+    public IKManager2D currentIKManager;
+    [SerializeField] public GameObject tailBone;
+    public Transform tailIKTarget;
+
+    public bool onlyAnimations = false;
+
     
     private bool isDashing = false;
     private bool canDash = true;
@@ -40,7 +49,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private int baseDamage = 80;
     private int currentDamage;
 
-    [SerializeField] private float baseProjectileSpeed = 3f;
+    [SerializeField] private float baseProjectileSpeed = 12f;
     private float projectileSpeed;
 
     [SerializeField] private float baseDashSpeed = 3f;
@@ -55,9 +64,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float baseProjectileLifetime = 5f;
     private float projLifetime;
 
-    private int currentAmmoCount = 20;
+    private int currentAmmoCount;
 
-    private bool canRefund = false;
+    private bool canRefund = true;
 
 
 
@@ -76,6 +85,7 @@ public class Player : MonoBehaviour, IDamageable
         dashSpeed = baseDashSpeed;
         dashCooldown = baseDashCd;
         ammoPerRoom = baseAmmoPerRoom;
+        currentAmmoCount = ammoPerRoom;
         refundTime = baseRefundTime;
         projLifetime = baseProjectileLifetime;
         foreach (var card in cards)
@@ -171,6 +181,11 @@ public class Player : MonoBehaviour, IDamageable
         return currentAmmoCount;
     }
 
+    public int getAmmoPerRoom()
+    {
+        return ammoPerRoom;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -181,8 +196,9 @@ public class Player : MonoBehaviour, IDamageable
         }
         if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0 && !isDashing)
         {
+            Debug.Log("SHOOTING " + currentAmmoCount);
             currentAmmoCount -= 1;
-            FireProjectile(projectilePrefab);
+            FireProjectile();
         }
 
         // make a dash button (shift)
@@ -200,7 +216,7 @@ public class Player : MonoBehaviour, IDamageable
 
         else if (Input.GetMouseButtonDown(1) && !isDashing)
         {
-            FireProjectile(reversalProjectilePrefab);
+            FireProjectile(true);
         }
     }
 
@@ -240,10 +256,46 @@ public class Player : MonoBehaviour, IDamageable
             input.x * cos - input.y * sin,
             input.x * sin + input.y * cos
         );
+
+        //Animation
+        catBodyAnimator.SetFloat("MoveX", moveVertical);
+        catBodyAnimator.SetFloat("MoveY", moveHorizontal);
+        tailChange(moveHorizontal, moveVertical);
     }
 
-    void FireProjectile(GameObject projectile = null)
+    void FireReverse()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
+            var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
+
+            if (plane.Raycast(ray, out float enter))
+            {
+                Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
+                Vector2 dir = new Vector2(hit.x - firePoint.position.x, hit.y - firePoint.position.y);
+                if(dir.sqrMagnitude < 1e-6f) return; // don't shoot if too close to center
+                dir.Normalize();
+
+                // EITHER: rotate by angle (if your projectile faces +X in local space)
+                firePoint.right = new Vector3(dir.x, dir.y, 0f);
+
+                // OR (cleaner): align local +X with the direction
+                // firePoint.right = dir;
+
+                GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            }
+    }
+
+    void FireProjectile(bool reverse = false)
+    {
+        //Scuffed btw
+        if (reverse)
+        {
+            FireReverse();
+        }
+
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
@@ -252,21 +304,77 @@ public class Player : MonoBehaviour, IDamageable
         if (plane.Raycast(ray, out float enter))
         {
             Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
-            Vector2 dir = new Vector2(hit.x - firePoint.position.x, hit.y - firePoint.position.y);
-            if(dir.sqrMagnitude < 1e-6f) return; // don't shoot if too close to center
+            Vector2 dir = (hit - firePoint.position);       // 2D direction (x,y)
+
             dir.Normalize();
 
             // EITHER: rotate by angle (if your projectile faces +X in local space)
-            firePoint.right = new Vector3(dir.x, dir.y, 0f);
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
 
             // OR (cleaner): align local +X with the direction
             // firePoint.right = dir;
 
-            GameObject go = Instantiate(projectile, firePoint.position, firePoint.rotation);
+            //Animation
+            Vector2 invertedHit = new Vector3(-dir.x, dir.y);
+            //change IK Gun bone target
+            if (currentIKManager != null)
+            { 
+                (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
+            }
 
-            Projectile proj = go.GetComponent<Projectile>();
+            //simple version
+            //if (tailIKTarget != null)
+            //{
+            //  tailIKTarget.position = gunHit;
+            //}
 
-            proj.SetStats(currentDamage, projectileSpeed, projLifetime);
+            if (projectilePrefab != null)
+            {
+                GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+                Projectile proj = projectileInstance.GetComponent<Projectile>();
+
+                proj.SetStats(currentDamage, projectileSpeed, projLifetime);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(onlyAnimations) return;
+        rb.velocity = movementInputVector.normalized * currentSpeed;
+    }
+
+    void tailChange(float x, float y)//will probably make this prefabs next time
+    {
+       
+        if ((x == 0 && y == -1) || (x == 0 && y == 1)) 
+        {//up & down
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.11f, -0.1f);
+        }
+        else if (x == 1 && y == 0)
+        {//right
+            tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
+        }
+        else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
+{
+            tailBone.transform.localPosition = new Vector3(-1.84f, -0.5f, -0.1f);
+        }
+        else if (x == 1 && y == -1)//down right
+ {
+            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+        }
+        else if (x == -1 && y == 0)//left
+ {
+            tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
+        }
+        else if (x == -1 && y == 1)//upleft
+{
+            tailBone.transform.localPosition = new Vector3(2.5f, -1f, -0.1f);
+        }
+        else if (x == -1 && y == -1)// downleft
+        {
+            tailBone.transform.localPosition = new Vector3(2f, 0.1f, -0.1f);
         }
     }
 
@@ -328,10 +436,5 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("Player died!");
         //TODO: more logic for player death
-    }
-
-    void FixedUpdate()
-    {
-        rb.velocity = movementInputVector.normalized * currentSpeed;
     }
 }

@@ -10,7 +10,6 @@ public class BasicEnemy : Enemy
     [SerializeField] private float detectionRadius = 6f;
 
     private float damageTimer = 0f;
-    private Vector2 moveDirection;
     private Transform player;
 
     public GameObject explosionPrefab;
@@ -20,9 +19,6 @@ public class BasicEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
-
-        // Decide initial direction
-        moveDirection = new Vector2(1f, 0f).normalized;
 
         // Find player by tag
         GameObject p = GameObject.FindGameObjectWithTag("Player");
