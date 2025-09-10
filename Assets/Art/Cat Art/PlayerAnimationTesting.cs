@@ -111,4 +111,37 @@ public class PlayerAnimationTesting : MonoBehaviour
         if(onlyAnimations) return;
         rb.velocity = movementInputVector.normalized * speed;
     }
+
+    void tailChange(float x, float y)//will probably make this prefabs next time
+    {
+       
+        if ((x == 0 && y == -1) || (x == 0 && y == 1)) 
+        {//up & down
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.11f, -0.1f);
+        }
+        else if (x == 1 && y == 0)
+        {//right
+            tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
+        }
+        else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
+{
+            tailBone.transform.localPosition = new Vector3(-1.84f, -0.5f, -0.1f);
+        }
+        else if (x == 1 && y == -1)//down right
+ {
+            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+        }
+        else if (x == -1 && y == 0)//left
+ {
+            tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
+        }
+        else if (x == -1 && y == 1)//upleft
+{
+            tailBone.transform.localPosition = new Vector3(2.5f, -1f, -0.1f);
+        }
+        else if (x == -1 && y == -1)// downleft
+        {
+            tailBone.transform.localPosition = new Vector3(2f, 0.1f, -0.1f);
+        }
+    }
 }
