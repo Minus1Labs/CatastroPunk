@@ -43,7 +43,7 @@ public class PlayerAnimationTesting : MonoBehaviour
     }
 
     private void SetInputVector()
-    { 
+    {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
@@ -62,6 +62,7 @@ public class PlayerAnimationTesting : MonoBehaviour
         //Animation
         catBodyAnimator.SetFloat("MoveX", moveVertical);
         catBodyAnimator.SetFloat("MoveY", moveHorizontal);
+        tailChange(moveHorizontal, moveVertical);
     }
 
     void FireProjectile()
