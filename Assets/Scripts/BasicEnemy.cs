@@ -75,6 +75,10 @@ public class BasicEnemy : Enemy
         Debug.Log("Attacking Player!");
         robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
+        if (target.transform.parent != null)
+        { 
+            damageable = target.transform.parent.GetComponent<IDamageable>();
+        }
         if (damageable != null && Time.time >= damageTimer)
         {
             damageable.TakeDamage(baseDamage);
@@ -84,12 +88,13 @@ public class BasicEnemy : Enemy
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        Debug.Log("Colliding with: " + other.name);
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
 
         }
-        else 
+        else
         {
             robotAnimator.SetBool("Attack", false);
         }

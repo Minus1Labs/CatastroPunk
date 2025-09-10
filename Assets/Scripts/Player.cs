@@ -73,6 +73,8 @@ public class Player : MonoBehaviour, IDamageable
     //a list of the current player card upgrades
     private List<Card> cards = new List<Card>();
 
+    public AudioSource fireSound;
+
 
     // Start is called before the first frame update
     void Start()
@@ -287,6 +289,7 @@ public class Player : MonoBehaviour, IDamageable
                 // firePoint.right = dir;
 
                 GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+                if(fireSound != null) fireSound.Play();
             }
     }
 
@@ -320,9 +323,14 @@ public class Player : MonoBehaviour, IDamageable
 
             //Animation
             Vector2 invertedHit = new Vector3(-dir.x, dir.y);
+            //lets rotate inverted hit 45 degrees:
+            invertedHit = new Vector2(
+                invertedHit.x * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
+                invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
+            );
             //change IK Gun bone target
             if (currentIKManager != null)
-            { 
+            {
                 (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
             }
 
@@ -338,6 +346,7 @@ public class Player : MonoBehaviour, IDamageable
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
 
                 proj.SetStats(currentDamage, projectileSpeed, projLifetime);
+                if(fireSound != null) fireSound.Play();
             }
         }
     }
@@ -412,6 +421,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("TAKING DAMAGE");
         if (isInvincible) return;
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());
