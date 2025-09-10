@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Bloodrush", menuName = "Cards/Bloodrush")]
 public class Bloodrush : Card
 {
     void Awake()

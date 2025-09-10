@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "MaxAmmoUp", menuName = "Cards/Just-Stats/MaxAmmoUp")]
 public class MaxAmmoUp : Card
 {
-    void Awake() {
+    void Awake()
+    {
         cardName = "Ammo Up - Additive";
     }
     public override void ApplyUpgrade(Player player)

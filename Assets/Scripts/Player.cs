@@ -55,7 +55,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float baseProjectileLifetime = 5f;
     private float projLifetime;
 
-    private int currentAmmoCount = 0;
+    private int currentAmmoCount = 20;
 
     private bool canRefund = false;
 
@@ -153,6 +153,24 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void LockPlayer()
+    {
+        //cant move nor shoot:
+        this.enabled = false;
+        // set rb velocity to 0:
+        rb.velocity = Vector2.zero;
+    }
+
+    public void UnlockPlayer()
+    {
+        this.enabled = true;
+    }
+
+    public int GetCurrentAmmoCount()
+    {
+        return currentAmmoCount;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -161,10 +179,10 @@ public class Player : MonoBehaviour, IDamageable
         {
             SetInputVector();
         }
-        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0)
+        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0 && !isDashing)
         {
             currentAmmoCount -= 1;
-            FireProjectile();
+            FireProjectile(projectilePrefab);
         }
 
         // make a dash button (shift)
@@ -180,13 +198,7 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(RefundAmmo());
         }
 
-
-        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0)
-        {
-            currentAmmoCount -= 1;
-            FireProjectile(projectilePrefab);
-        }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1) && !isDashing)
         {
             FireProjectile(reversalProjectilePrefab);
         }

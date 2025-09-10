@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Marksman", menuName = "Cards/Marksman")]
 public class Marksman : Card
 {
     void Awake()

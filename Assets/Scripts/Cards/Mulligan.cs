@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Mulligan", menuName = "Cards/Mulligan")]
 public class Mulligan : Card
 {
     void Awake()
@@ -12,7 +13,8 @@ public class Mulligan : Card
     public override void OnProjectileMiss(Player player)
     {
         float rand = Random.Range(0f, 1f);
-        if (rand < 0.8f) {
+        if (rand < 0.8f)
+        {
             player.SetCurrentAmmo(1f, 1, -1);
         }
     }

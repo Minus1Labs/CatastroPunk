@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "SpeedUp", menuName = "Cards/Just-Stats/SpeedUp")]
 public class SpeedUp : Card
 {
-    void Awake() {
+    void Awake()
+    {
         cardName = "Speed Up - Multiplicative";
     }
     public override void ApplyUpgrade(Player player)

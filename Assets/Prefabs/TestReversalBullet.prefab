@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3d624ff5d4b3184c9b1267565a356bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 9
   projectileLifetime: 5
+  damage: 1
   isReverseBullet: 1
 --- !u!50 &5162329496497276359
 Rigidbody2D:
