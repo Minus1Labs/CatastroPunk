@@ -20,8 +20,8 @@ public class PlayerAnimationTesting : MonoBehaviour
     public Animator catBodyAnimator;
 
     public IKManager2D currentIKManager;
-    [SerializeField]
-    public Transform tailIKTarget;
+    public GameObject tailBone;
+    public Transform tailIKTarget;//probably wont need this
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +41,7 @@ public class PlayerAnimationTesting : MonoBehaviour
     }
 
     private void SetInputVector()
-    { 
+    {
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         float moveVertical = Input.GetAxisRaw("Vertical");
 
@@ -60,6 +60,9 @@ public class PlayerAnimationTesting : MonoBehaviour
         //Animation
         catBodyAnimator.SetFloat("MoveX", moveVertical);
         catBodyAnimator.SetFloat("MoveY", moveHorizontal);
+        //change 
+        tailChange(moveHorizontal, moveVertical);
+
     }
 
     void FireProjectile()
@@ -85,9 +88,9 @@ public class PlayerAnimationTesting : MonoBehaviour
 
             //Animation
             Vector2 invertedHit = new Vector3(-dir.x, dir.y);
-            //change IK Gun bone target
+            //move effector
             if (currentIKManager != null)
-            { 
+            {
                 (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
             }
 
@@ -105,5 +108,38 @@ public class PlayerAnimationTesting : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = movementInputVector.normalized * speed;
+    }
+
+    void tailChange(float x, float y)//will probably make this prefabs next time
+    {
+       
+        if ((x == 0 && y == -1) || (x == 0 && y == 1) || (x == 0 && y == 0)) 
+        {//up & down
+            tailBone.transform.localPosition = new Vector3(-0.4f, 0.11f, -0.1f);
+        }
+        else if (x == 1 && y == 0)
+        {//right
+            tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
+        }
+        else if (x == 1 && y == 1)//up right
+        {
+            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+        }
+        else if (x == 1 && y == -1)//down right
+        {
+            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+        }
+        else if (x == -1 && y == 0)//left
+        {
+            tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
+        }
+        else if (x == -1 && y == 1)//upleft
+        {
+            tailBone.transform.localPosition = new Vector3(2.6f, -0.4f, -0.1f);
+        }
+        else if (x == -1 && y == -1)// downleft
+        {
+            tailBone.transform.localPosition = new Vector3(2f, 0.1f, -0.1f);
+        }
     }
 }
