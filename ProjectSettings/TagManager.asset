@@ -48,6 +48,9 @@ TagManager:
   - name: Player
     uniqueID: 2768766461
     locked: 0
+  - name: Enemies
+    uniqueID: 1258380117
+    locked: 0
   - name: FloorTileMap
     uniqueID: 2599623039
     locked: 0
