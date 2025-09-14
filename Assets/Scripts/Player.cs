@@ -26,7 +26,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public Animator catBodyAnimator;
 
-    private Vector2 lastAnimDir = Vector2.right;
+    private Vector2 lastAnimDir = new Vector2(1, 1);
     private Vector2 lastRawDir = Vector2.right;
 
     public IKManager2D currentIKManager;
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private Vector2 prevInput = Vector2.zero;
     private bool wasMoving = false;
-    
+
 
 
     // Start is called before the first frame update
