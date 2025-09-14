@@ -31399,8 +31399,8 @@ GameObject:
   - component: {fileID: 880937594}
   - component: {fileID: 880937593}
   - component: {fileID: 880937592}
-  - component: {fileID: 880937595}
   - component: {fileID: 880937596}
+  - component: {fileID: 880937597}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -31476,7 +31476,21 @@ Transform:
   - {fileID: 1073908030}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &880937595
+--- !u!114 &880937596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880937590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d7de74a558054185d9f64a6bf1546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrel1: {fileID: 1502606699}
+  barrel2: {fileID: 1073908026}
+--- !u!61 &880937597
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31508,7 +31522,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.47902727, y: -0.47902763}
+  m_Offset: {x: 0.61172247, y: -0.65313417}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -31519,22 +31533,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9952812, y: 1.0330365}
+  m_Size: {x: 0.7298908, y: 1.1534399}
   m_EdgeRadius: 0
---- !u!114 &880937596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880937590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127d7de74a558054185d9f64a6bf1546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barrel1: {fileID: 1502606699}
-  barrel2: {fileID: 1073908026}
 --- !u!4 &884656629 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5382974337209552931, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
