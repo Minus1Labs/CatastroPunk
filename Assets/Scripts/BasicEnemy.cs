@@ -101,7 +101,6 @@ public class BasicEnemy : Enemy
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Colliding with: " + other.name);
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
