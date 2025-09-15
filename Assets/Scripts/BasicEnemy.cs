@@ -107,7 +107,7 @@ public class BasicEnemy : Enemy
 
         }
         else
-        {
+        { 
             robotAnimator.SetBool("Attack", false);
         }
     }
