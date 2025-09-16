@@ -30,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4916991142357727099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.42470583, y: 0.17592171, z: 0.33985272, w: 0.82047343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.887354, y: 2.346142, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 35.264, y: 45, z: 60}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3207852397226261638
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -155,9 +155,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.51987433, y: -5.342628}
+  m_Offset: {x: -0.5198749, y: 0.20589192}
   serializedVersion: 2
-  m_Radius: 18.006783
+  m_Radius: 15.038963
 --- !u!114 &4561463850065379065
 MonoBehaviour:
   m_ObjectHideFlags: 0
