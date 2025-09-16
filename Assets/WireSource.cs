@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class WireSource : MonoBehaviour
 {
+    public WireTrailRecorder recorder;   // assign in Inspector
+    private Transform player;             // your player Transform
 
+    public float wireLength = 10f;
 
-    // on trigger enter 2D:
+    void Start()
+    { 
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    }
+    void Reset()
+    {
+        var col = GetComponent<Collider2D>();
+        if (col) col.isTrigger = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (!player) return;
+        if (collision.transform == player || collision.CompareTag("Player"))
         {
-            // now we want to start dragging wire from this point
-            Debug.Log("Player entered wire source");
+            // Start tracing from THIS source and keep going even after we leave
+            recorder?.BeginFromSource(transform.position);
+            recorder?.SetWireLength(wireLength);
+            Debug.Log("Wire armed: recording started");
         }
     }
+
 }
