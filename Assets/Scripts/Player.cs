@@ -278,8 +278,8 @@ public class Player : MonoBehaviour, IDamageable
 
         // Rotate input vector by 45 degrees to align with isometric view
         movementInputVector = new Vector2(
-            input.x * cos - input.y * sin,
-            input.x * sin + input.y * cos
+            input.x,
+            input.y
         );
 
         // Your animator mapping (MoveX <- vertical, MoveY <- horizontal)

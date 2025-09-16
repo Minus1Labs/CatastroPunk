@@ -16,7 +16,7 @@ public class BasicEnemy : Enemy
 
     public Animator robotAnimator;
 
-    [SerializeField] private float reverseLookbackSeconds = 2f;
+    [SerializeField] private float reverseLookbackSeconds = 3f;
     [SerializeField] private float historyKeepSeconds = 2f;
 
     private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p){ this.t=t; this.p=p; } }
@@ -140,9 +140,10 @@ public class BasicEnemy : Enemy
         float targetT = Time.time - Mathf.Max(0.01f, lookback);
 
         if (posHistory.Count == 0) return;
+        
 
         // Find the first sample with time <= targetT (scan from newest backward for fewer steps)
-        var node = posHistory.Last;
+            var node = posHistory.Last;
         while (node != null && node.Value.t > targetT) node = node.Previous;
 
         Vector2 targetPos;
@@ -173,14 +174,4 @@ public class BasicEnemy : Enemy
         // (Optional tiny cleanup) write a fresh sample now so history stays consistent
         posHistory.AddLast(new PosSample(Time.time, rb.position));
     }
-
-
-    // private IEnumerator FreezeForSeconds(float seconds)
-    // {
-    //     float originalSpeed = baseSpeed;
-    //     baseSpeed = 0;
-    //     rb.velocity = Vector2.zero;
-    //     yield return new WaitForSeconds(seconds);
-    //     baseSpeed = originalSpeed;
-    // }
 }
