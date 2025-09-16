@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5193025778459965075}
-  - component: {fileID: 814360452564961024}
+  - component: {fileID: 8884669441950338678}
   m_Layer: 0
   m_Name: DoorCollider
   m_TagString: DoorCollider
@@ -32,8 +32,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5382974337209552931}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &814360452564961024
-BoxCollider2D:
+--- !u!60 &8884669441950338678
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -74,9 +74,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.8640471, y: 2.2419028}
+      - {x: -0.85328966, y: 1.1942025}
+      - {x: -0.2601344, y: -0.3069712}
+      - {x: -0.25248057, y: 1.5690947}
+      - {x: -0.52601457, y: 1.8812134}
+  m_UseDelaunayMesh: 0
 --- !u!1 &4575819471698520609
 GameObject:
   m_ObjectHideFlags: 0
