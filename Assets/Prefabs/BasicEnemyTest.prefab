@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: robot_anim
       objectReference: {fileID: 0}
+    - target: {fileID: -7943066488479538740, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -244,6 +248,14 @@ PrefabInstance:
     - target: {fileID: -7552582706839291426, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3648381908040356953, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359103177601667974, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
