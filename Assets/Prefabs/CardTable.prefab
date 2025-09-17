@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9111267649061459867}
   - component: {fileID: 3237961104117473823}
-  - component: {fileID: 917327873581626132}
   - component: {fileID: 8014451012150734745}
+  - component: {fileID: 4988196448398451777}
   m_Layer: 0
   m_Name: CardTable
   m_TagString: Untagged
@@ -86,8 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &917327873581626132
-BoxCollider2D:
+--- !u!114 &8014451012150734745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946329355643536262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3e2ff3ca28fbe4aaaccfa4c7a3f0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  database: {fileID: 11400000, guid: 9728584ac011518488576cc505954fd6, type: 2}
+  uiCardOptions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!60 &4988196448398451777
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,7 +136,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.0423756, y: -1.1756322}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,24 +146,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 8.94475, y: 14.462528}
-  m_EdgeRadius: 0
---- !u!114 &8014451012150734745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3946329355643536262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3e2ff3ca28fbe4aaaccfa4c7a3f0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  database: {fileID: 11400000, guid: 9728584ac011518488576cc505954fd6, type: 2}
-  uiCardOptions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -5.7679005, y: 0.35901546}
+      - {x: -5.914713, y: -2.1814346}
+      - {x: -1.1399453, y: -4.5924306}
+      - {x: 5.8119087, y: -0.9364456}
+      - {x: 5.798666, y: 1.6463583}
+      - {x: 1.1685399, y: 3.855126}
+  m_UseDelaunayMesh: 0
