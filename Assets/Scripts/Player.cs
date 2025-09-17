@@ -26,6 +26,9 @@ public class Player : MonoBehaviour, IDamageable
 
     public Animator catBodyAnimator;
 
+    private Vector2 lastAnimDir = new Vector2(1, 1);
+    private Vector2 lastRawDir = Vector2.right;
+
     public IKManager2D currentIKManager;
     [SerializeField] public GameObject tailBone;
     public Transform tailIKTarget;
@@ -74,6 +77,10 @@ public class Player : MonoBehaviour, IDamageable
     private List<Card> cards = new List<Card>();
 
     public AudioSource fireSound;
+
+    private Vector2 prevInput = Vector2.zero;
+    private bool wasMoving = false;
+
 
 
     // Start is called before the first frame update
@@ -199,7 +206,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             SetInputVector();
         }
-        if (Input.GetMouseButtonDown(0) && currentAmmoCount > 0 && !isDashing)
+        if ( (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0 && !isDashing)
         {
             Debug.Log("SHOOTING " + currentAmmoCount);
             currentAmmoCount -= 1;
@@ -219,7 +226,7 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(RefundAmmo());
         }
 
-        else if (Input.GetMouseButtonDown(1) && !isDashing)
+        else if ( (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)) && !isDashing)
         {
             FireProjectile(true);
         }
@@ -244,6 +251,18 @@ public class Player : MonoBehaviour, IDamageable
         currentAmmoCount += 1;
         canRefund = true;
     }
+    
+    // Helpers to snap to your 8-way grid and measure “strength”
+    private static Vector2 Snap8(Vector2 v) {
+        return new Vector2(
+            Mathf.Clamp(Mathf.Round(v.x), -1, 1),
+            Mathf.Clamp(Mathf.Round(v.y), -1, 1)
+        );
+    }
+    private static int TaxiMag(Vector2 v) {
+        // 1 for single-axis, 2 for diagonal
+        return Mathf.Abs(Mathf.RoundToInt(v.x)) + Mathf.Abs(Mathf.RoundToInt(v.y));
+    }
 
     private void SetInputVector()
     {
@@ -251,21 +270,52 @@ public class Player : MonoBehaviour, IDamageable
         float moveVertical = Input.GetAxisRaw("Vertical");
 
         Vector2 input = new Vector2(moveHorizontal, moveVertical);
+        bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
-        float angle = 45f * Mathf.Deg2Rad;
-        float cos = Mathf.Cos(angle);
-        float sin = Mathf.Sin(angle);
+        
 
-        // Rotate input vector by 45 degrees to align with isometric view
-        movementInputVector = new Vector2(
-            input.x * cos - input.y * sin,
-            input.x * sin + input.y * cos
+        const float isoYScale = 0.5f; // tweak to match your tile/grid art
+        Vector2 iso = new Vector2(
+            input.x,
+            input.y * isoYScale
         );
 
-        //Animation
-        catBodyAnimator.SetFloat("MoveX", moveVertical);
-        catBodyAnimator.SetFloat("MoveY", moveHorizontal);
-        tailChange(moveHorizontal, moveVertical);
+        movementInputVector = iso;
+
+        // Your animator mapping (MoveX <- vertical, MoveY <- horizontal)
+        float animX = moveVertical;
+        float animY = moveHorizontal;
+
+        // Decide when to update lastAnimDir (avoid diagonal→single on release)
+        Vector2 curAnimDir = new Vector2(animX, animY);
+        Vector2 curSnap = Snap8(curAnimDir);
+        Vector2 prevAnimDir = new Vector2(prevInput.y, prevInput.x); // map prev input same way
+        Vector2 prevSnap = Snap8(prevAnimDir);
+
+        bool startedMoving = !wasMoving && isMovingNow;                 // 0 → non-zero
+        bool gotStronger = TaxiMag(curSnap) > TaxiMag(prevSnap);      // single → diagonal
+
+        if (startedMoving || (isMovingNow && gotStronger))
+        {
+            lastAnimDir = curSnap;
+            lastRawDir = input; // keep for tail logic
+        }
+
+        // --- push animator params ---
+        catBodyAnimator.SetFloat("MoveX", animX);
+        catBodyAnimator.SetFloat("MoveY", animY);
+        catBodyAnimator.SetFloat("LastX", lastAnimDir.x);
+        catBodyAnimator.SetFloat("LastY", lastAnimDir.y);
+        catBodyAnimator.SetBool("IsMoving", isMovingNow);
+
+        // Tail keeps the last facing when stopped
+        if (isMovingNow) tailChange(moveHorizontal, moveVertical);
+        else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.y));
+
+        // Remember for next frame
+        prevInput = input;
+        wasMoving = isMovingNow;
+
     }
 
     void FireReverse()
@@ -354,7 +404,17 @@ public class Player : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         if(onlyAnimations) return;
-        rb.velocity = movementInputVector.normalized * currentSpeed;
+        // if not moving diagonal:
+        float speedModifier = currentSpeed;
+        // if (Mathf.Abs(movementInputVector.x) < 0.01f && !(Mathf.Abs(movementInputVector.y) < 0.01f) ) //only y movement
+        // {
+        //     speedModifier = (2.0f / Mathf.Sqrt(5)) * currentSpeed;
+        // } else if (!(Mathf.Abs(movementInputVector.x) < 0.01f) && Mathf.Abs(movementInputVector.y) < 0.01f) //only x movement
+        // {
+        //     speedModifier = (4.0f / Mathf.Sqrt(5)) * currentSpeed;
+        // }
+        Debug.Log("Speed mod: " + speedModifier);
+        rb.velocity = movementInputVector.normalized * speedModifier;
     }
 
     void tailChange(float x, float y)//will probably make this prefabs next time

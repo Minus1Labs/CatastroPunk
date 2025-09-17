@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>9.0</LangVersion>          <!-- match Unity 2022 -->
+    <ImplicitUsings>disable</ImplicitUsings><!-- stop GlobalUsings.g.cs -->
+    <!-- keep any MSBuild outputs OUTSIDE Assets so Unity won't see them -->
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)MSBuildObj\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(MSBuildProjectName)\</IntermediateOutputPath>
+    <OutputPath>$(MSBuildThisFileDirectory)MSBuildBin\$(MSBuildProjectName)\</OutputPath>
+  </PropertyGroup>
+</Project>

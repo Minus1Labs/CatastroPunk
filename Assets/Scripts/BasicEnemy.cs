@@ -16,6 +16,12 @@ public class BasicEnemy : Enemy
 
     public Animator robotAnimator;
 
+    [SerializeField] private float reverseLookbackSeconds = 3f;
+    [SerializeField] private float historyKeepSeconds = 2f;
+
+    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p){ this.t=t; this.p=p; } }
+    private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,6 +34,9 @@ public class BasicEnemy : Enemy
         }
 
         Debug.Log("Woke up enemy");
+
+        posHistory.Clear();
+        posHistory.AddLast(new PosSample(Time.time, transform.position));
     }
 
     private void Update()
@@ -45,6 +54,10 @@ public class BasicEnemy : Enemy
             rb.velocity = Vector2.zero; // stop when player is out of range
             robotAnimator.SetBool("Follow", false);
         }
+        posHistory.AddLast(new PosSample(Time.time, transform.position));
+        float cutoff = Time.time - Mathf.Max(historyKeepSeconds, reverseLookbackSeconds + 0.25f);
+        while (posHistory.Count > 1 && posHistory.First.Value.t < cutoff)
+            posHistory.RemoveFirst();
     }
 
     //simple 4-d movement towards player
@@ -88,14 +101,13 @@ public class BasicEnemy : Enemy
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Colliding with: " + other.name);
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
 
         }
         else
-        {
+        { 
             robotAnimator.SetBool("Attack", false);
         }
     }
@@ -123,16 +135,43 @@ public class BasicEnemy : Enemy
 
     public override void Reverse(int strength)
     {
-        // for now, instead of reversing, just freeze for a bit:
-        StartCoroutine(FreezeForSeconds(2f * strength));
-    }
+        // lookback = 1s by default; multiply by strength if you want (keep 1s: ignore strength)
+        float lookback = reverseLookbackSeconds; // or: reverseLookbackSeconds * Mathf.Max(1, strength);
+        float targetT = Time.time - Mathf.Max(0.01f, lookback);
 
-    private IEnumerator FreezeForSeconds(float seconds)
-    {
-        float originalSpeed = baseSpeed;
-        baseSpeed = 0;
+        if (posHistory.Count == 0) return;
+        
+
+        // Find the first sample with time <= targetT (scan from newest backward for fewer steps)
+            var node = posHistory.Last;
+        while (node != null && node.Value.t > targetT) node = node.Previous;
+
+        Vector2 targetPos;
+        if (node == null)
+        {
+            // All samples newer than target -> use oldest we have
+            targetPos = posHistory.First.Value.p;
+        }
+        else
+        {
+            // Interpolate with the next newer sample if it exists
+            var newer = node.Next;
+            if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
+            {
+                targetPos = node.Value.p;
+            }
+            else
+            {
+                float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
+                targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            }
+        }
+
+        // Teleport + stop motion
+        rb.position = targetPos;
         rb.velocity = Vector2.zero;
-        yield return new WaitForSeconds(seconds);
-        baseSpeed = originalSpeed;
+
+        // (Optional tiny cleanup) write a fresh sample now so history stays consistent
+        posHistory.AddLast(new PosSample(Time.time, rb.position));
     }
 }
