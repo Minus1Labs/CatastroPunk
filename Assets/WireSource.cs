@@ -14,7 +14,7 @@ public class WireSource : MonoBehaviour
     }
     void Reset()
     {
-        var col = GetComponent<Collider2D>();
+        var col = GetComponent<PolygonCollider2D>();
         if (col) col.isTrigger = true;
     }
 

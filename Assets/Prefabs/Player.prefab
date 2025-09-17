@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf3c7941c43d2d4aa7bd4fcd978d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 4
+  baseSpeed: 5
   projectilePrefab: {fileID: 3412664266963024560, guid: 790d5c2d643e2c0478ec4097de77c812, type: 3}
   reversalProjectilePrefab: {fileID: 829520782942192253, guid: a5defd99f402508498c8fd06b76dcbf0, type: 3}
   firePoint: {fileID: 6637450677528127453}
@@ -390,7 +390,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06519359, y: -0.3948938}
+  m_Offset: {x: -0.011675805, y: 0.039320856}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.25}
@@ -401,7 +401,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.62174726, y: 0.5773837}
+  m_Size: {x: 0.42480272, y: 0.6422939}
   m_EdgeRadius: 0
 --- !u!1 &9100276502300092637
 GameObject:
