@@ -11,7 +11,7 @@ public class WireReceiver : MonoBehaviour
     private void Awake()
     {
         // collider as trigger
-        var col = GetComponent<Collider2D>();
+        var col = GetComponent<PolygonCollider2D>();
         col.isTrigger = true;
 
         // 2D kinematic body
