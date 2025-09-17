@@ -272,15 +272,15 @@ public class Player : MonoBehaviour, IDamageable
         Vector2 input = new Vector2(moveHorizontal, moveVertical);
         bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
-        float angle = 45f * Mathf.Deg2Rad;
-        float cos = Mathf.Cos(angle);
-        float sin = Mathf.Sin(angle);
+        
 
-        // Rotate input vector by 45 degrees to align with isometric view
-        movementInputVector = new Vector2(
+        const float isoYScale = 0.5f; // tweak to match your tile/grid art
+        Vector2 iso = new Vector2(
             input.x,
-            input.y
+            input.y * isoYScale
         );
+
+        movementInputVector = iso;
 
         // Your animator mapping (MoveX <- vertical, MoveY <- horizontal)
         float animX = moveVertical;
@@ -404,7 +404,17 @@ public class Player : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         if(onlyAnimations) return;
-        rb.velocity = movementInputVector.normalized * currentSpeed;
+        // if not moving diagonal:
+        float speedModifier = currentSpeed;
+        // if (Mathf.Abs(movementInputVector.x) < 0.01f && !(Mathf.Abs(movementInputVector.y) < 0.01f) ) //only y movement
+        // {
+        //     speedModifier = (2.0f / Mathf.Sqrt(5)) * currentSpeed;
+        // } else if (!(Mathf.Abs(movementInputVector.x) < 0.01f) && Mathf.Abs(movementInputVector.y) < 0.01f) //only x movement
+        // {
+        //     speedModifier = (4.0f / Mathf.Sqrt(5)) * currentSpeed;
+        // }
+        Debug.Log("Speed mod: " + speedModifier);
+        rb.velocity = movementInputVector.normalized * speedModifier;
     }
 
     void tailChange(float x, float y)//will probably make this prefabs next time

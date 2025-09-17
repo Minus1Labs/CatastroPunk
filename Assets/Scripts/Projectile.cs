@@ -45,23 +45,20 @@ public class Projectile : MonoBehaviour
     //ontriggerenter2D
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
+
 
         if (isReverseBullet)
         {
             IReversible reversible = other.GetComponent<IReversible>();
             if (reversible != null)
             {
-                
+
                 reversible.Reverse(1);
                 Destroy(gameObject);
             }
             return;
         }
-        
+
         // check if other object has the IDamageable interface:
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player")) //TODO: nuke this later, no enemies have projectiles
@@ -72,6 +69,11 @@ public class Projectile : MonoBehaviour
             }
             damageable.TakeDamage(damage);
             Debug.Log("Hit " + other.name + " for " + damage);
+            Destroy(gameObject);
+        }
+        
+        if (other.CompareTag("Wall"))
+        {
             Destroy(gameObject);
         }
     }
