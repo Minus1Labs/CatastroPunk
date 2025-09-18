@@ -12,7 +12,8 @@ public class CardDealer : MonoBehaviour
 
     //3 elements for the card options that the player sees on the UI:
     public GameObject[] uiCardOptions = new GameObject[3];
-    
+
+    public GameObject cardShopUI;
     private Card[] currentCards = new Card[3];
 
     void Start()
@@ -21,10 +22,19 @@ public class CardDealer : MonoBehaviour
         {
             player = FindObjectOfType<Player>();
         }
+
+        if (cardShopUI == null)
+        {
+            cardShopUI = GameObject.Find("CardShopUI");
+        }
+
     }
 
     public void DealCards()
     {
+        //enable canvas component of cardShopUI:
+        cardShopUI.GetComponent<Canvas>().enabled = true;
+
         currentCards[0] = database.GetRandomCard();
         currentCards[1] = database.GetRandomCard();
         currentCards[2] = database.GetRandomCard();
@@ -32,10 +42,6 @@ public class CardDealer : MonoBehaviour
         uiCardOptions[0].GetComponent<Button>().onClick.AddListener(() => SelectCard(0));
         uiCardOptions[1].GetComponent<Button>().onClick.AddListener(() => SelectCard(1));
         uiCardOptions[2].GetComponent<Button>().onClick.AddListener(() => SelectCard(2));
-
-        // for each of the gameobjects we will
-        // set active to true
-        // set the textmesprougui for each object's child to the card name:
         uiCardOptions[0].SetActive(true);
         uiCardOptions[0].GetComponentInChildren<TextMeshProUGUI>().text = currentCards[0].cardName;
         uiCardOptions[1].SetActive(true);
@@ -62,6 +68,7 @@ public class CardDealer : MonoBehaviour
         }
         player.UnlockPlayer();
         Destroy(gameObject);
+        cardShopUI.GetComponent<Canvas>().enabled = false;
     }
 
     // on trigger enter2d with player, call give card:
