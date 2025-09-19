@@ -413,7 +413,7 @@ public class Player : MonoBehaviour, IDamageable
         // {
         //     speedModifier = (4.0f / Mathf.Sqrt(5)) * currentSpeed;
         // }
-        Debug.Log("Speed mod: " + speedModifier);
+        //Debug.Log("Speed mod: " + speedModifier);
         rb.velocity = movementInputVector.normalized * speedModifier;
     }
 
