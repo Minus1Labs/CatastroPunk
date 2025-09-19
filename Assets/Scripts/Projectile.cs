@@ -46,7 +46,11 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
 
-
+        if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
+        
         if (isReverseBullet)
         {
             IReversible reversible = other.GetComponent<IReversible>();
@@ -72,10 +76,7 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
         
-        if (other.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
     private IEnumerator DestroyAfterTime()
