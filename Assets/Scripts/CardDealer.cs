@@ -16,6 +16,10 @@ public class CardDealer : MonoBehaviour
     public GameObject cardShopUI;
     private Card[] currentCards = new Card[3];
 
+    private Card selectedCard = null;
+
+    public GameObject cardHighlight;
+
     void Start()
     {
         if (player == null)
@@ -32,7 +36,6 @@ public class CardDealer : MonoBehaviour
 
     public void DealCards()
     {
-        //enable canvas component of cardShopUI:
         cardShopUI.GetComponent<Canvas>().enabled = true;
 
         currentCards[0] = database.GetRandomCard();
@@ -60,8 +63,21 @@ public class CardDealer : MonoBehaviour
             return;
         }
         // otherwise, select the card!
-        player.AddCard(currentCards[index]);
-        // now, we hide the cards and destroy this shiz:
+        selectedCard = currentCards[index];
+        // find object called card highlight:
+        if (cardHighlight == null)
+        {
+            cardHighlight = GameObject.Find("CardHighlight");
+        }
+
+        //the positions for 0, 1, 2 are (-536, -5), (-398.8, -5), (-264.3, -5):
+        //this is for rect transform local position:
+        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-536 + index * 137.2f, -5, 0);
+    }
+
+    public void ConfirmCard()
+    {
+        player.AddCard(selectedCard);
         foreach (GameObject cardOption in uiCardOptions)
         {
             cardOption.SetActive(false);

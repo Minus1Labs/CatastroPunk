@@ -16,6 +16,9 @@ public class BasicEnemy : Enemy
 
     public Animator robotAnimator;
 
+    public AudioSource attackSound;
+    public AudioSource deathSound;
+
     [SerializeField] private float reverseLookbackSeconds = 3f;
     [SerializeField] private float historyKeepSeconds = 2f;
 
@@ -32,8 +35,6 @@ public class BasicEnemy : Enemy
         {
             player = p.transform;
         }
-
-        Debug.Log("Woke up enemy");
 
         posHistory.Clear();
         posHistory.AddLast(new PosSample(Time.time, transform.position));
@@ -85,7 +86,6 @@ public class BasicEnemy : Enemy
 
     public override void Attack(GameObject target)
     {
-        Debug.Log("Attacking Player!");
         robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
         if (target.transform.parent != null)
@@ -96,6 +96,8 @@ public class BasicEnemy : Enemy
         {
             damageable.TakeDamage(baseDamage);
             damageTimer = Time.time + damageInterval;
+
+            if (attackSound != null) attackSound.Play();
         }
     }
 
@@ -128,10 +130,30 @@ public class BasicEnemy : Enemy
                 pl.KilledEnemy();
             }
         }
+
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        //TODO: add any other death logic before destroying
-        Destroy(gameObject);
+
+        robotAnimator.SetTrigger("Die");
+
+        if (deathSound != null)
+        {
+            GameObject deathSoundGO = new GameObject("DeathSound");
+            AudioSource audioSource = deathSoundGO.AddComponent<AudioSource>();
+            audioSource.clip = deathSound.clip;
+            audioSource.volume = deathSound.volume;
+            audioSource.spatialBlend = deathSound.spatialBlend;
+            audioSource.Play();
+
+
+            Destroy(deathSoundGO, deathSound.clip.length);
+        }
+
+        Destroy(gameObject); 
     }
+
+
+
+
 
     public override void Reverse(int strength)
     {
