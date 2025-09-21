@@ -102,6 +102,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             card.ApplyUpgrade(this);
         }
+        
     }
 
     public void AddCard(Card c)
@@ -421,35 +422,41 @@ public class Player : MonoBehaviour, IDamageable
 
     void tailChange(float x, float y)//will probably make this prefabs next time
     {
-       
-        if ((x == 0 && y == -1) || (x == 0 && y == 1)) 
-        {//up & down
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.11f, -0.1f);
+
+        if (x == 0 && y == -1)
+        {//down
+
+            tailBone.transform.localPosition = new Vector3(0f, 0.4f, 0f);
+        }
+        else if (x == 0 && y == 1)
+        {//up 
+            tailBone.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
         else if (x == 1 && y == 0)
         {//right
-            tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, .2f, 0f);
         }
         else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
 {
-            tailBone.transform.localPosition = new Vector3(-1.84f, -0.5f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.2f, 0f);
         }
         else if (x == 1 && y == -1)//down right
  {
-            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.3f, 0f);
         }
         else if (x == -1 && y == 0)//left
  {
-            tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.3f, .3f, 0f);
         }
         else if (x == -1 && y == 1)//upleft
 {
-            tailBone.transform.localPosition = new Vector3(2.5f, -1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.25f, 0.2f, 0f);
         }
         else if (x == -1 && y == -1)// downleft
         {
-            tailBone.transform.localPosition = new Vector3(2f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.2f, 0.3f, 0f);
         }
+
     }
 
     public void HitTarget() {
