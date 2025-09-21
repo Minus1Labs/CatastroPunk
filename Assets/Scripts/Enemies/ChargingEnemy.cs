@@ -12,6 +12,11 @@ public class ChargingEnemy : Enemy, IEnemyCommunicator
     [SerializeField] private float detectionRadius = 12f;
     [SerializeField] private bool alertsOtherEnemies = true;
 
+    [SerializeField] private float chargeWindupDuration = 0.5f;
+    [SerializeField] private float chargeDuration = 1.2f;
+    [SerializeField] private float chargeSpeed = 12f;
+    [SerializeField] private float chargeEndlagDuration = 3f;
+    [SerializeField] private float directionSwitchLockout = 1.5f;    
     private float damageTimer = 0f;
     private Transform player;
 
@@ -34,10 +39,10 @@ public class ChargingEnemy : Enemy, IEnemyCommunicator
     private bool isIdleMoving = false;
     private bool hasTarget = false;
     private bool inChargeEndlag = false;
-    private float chargeWindupDuration = 0.5f;
-    private float chargeDuration = 1.2f;
-    private float chargeSpeed = 12f;
-    private float chargeEndlagDuration = 3f;
+
+    private Vector2 lastMoveDirection = new(0, 0);
+    private float lastMoveTime; 
+    
 
 
     [SerializeField] private float reverseLookbackSeconds = 3f;
@@ -144,8 +149,17 @@ public class ChargingEnemy : Enemy, IEnemyCommunicator
         }
         else
         {
-
-            rb.velocity = playerGridDirection.normalized * baseSpeed;
+            if (Time.time - lastMoveTime >= directionSwitchLockout)
+            {
+                rb.velocity = playerGridDirection.normalized * baseSpeed;
+                lastMoveDirection = playerGridDirection.normalized;
+                lastMoveTime = Time.time;
+            }
+            else
+            {
+                rb.velocity = lastMoveDirection.normalized * baseSpeed;
+            }
+            
         }
     }
 
@@ -227,14 +241,21 @@ public class ChargingEnemy : Enemy, IEnemyCommunicator
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
-
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //
+    }
+
+
+
 
     private void OnDrawGizmosSelected()
     {
