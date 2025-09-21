@@ -192,9 +192,20 @@ public class Player : MonoBehaviour, IDamageable
         this.enabled = true;
     }
 
-    public int GetCurrentAmmoCount()
+    public int GetCounter(string counterName = "Ammo")
     {
-        return currentAmmoCount;
+        switch (counterName)
+        {
+            case "Health":
+                return currentHealth;
+            case "Ammo":
+                return currentAmmoCount;
+            case "Damage":
+                return currentDamage;
+            default:
+                Debug.LogError("Invalid counter name: " + counterName);
+                return -1;
+        }
     }
 
     public int getAmmoPerRoom()
