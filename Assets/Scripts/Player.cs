@@ -35,7 +35,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool onlyAnimations = false;
 
-    
     private bool isDashing = false;
     private bool canDash = true;
     [Header("Base Player Stats")]
@@ -77,6 +76,8 @@ public class Player : MonoBehaviour, IDamageable
     private List<Card> cards = new List<Card>();
 
     public AudioSource fireSound;
+    public AudioSource dashSound;
+    public AudioSource hurtSound;
 
     private Vector2 prevInput = Vector2.zero;
     private bool wasMoving = false;
@@ -234,6 +235,7 @@ public class Player : MonoBehaviour, IDamageable
 
     IEnumerator Dash()
     {
+        if (dashSound != null) dashSound.Play();
         canDash = false;
         isDashing = true;
         currentSpeed = baseSpeed * dashSpeed;
@@ -482,6 +484,7 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         Debug.Log("TAKING DAMAGE");
+        if (hurtSound != null) hurtSound.Play();
         if (isInvincible) return;
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());
