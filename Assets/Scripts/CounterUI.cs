@@ -11,6 +11,8 @@ public class CounterUI : MonoBehaviour
 
     public Slider slider;
     public Player player;
+    public bool displayMax = false;
+    public int maxValue = 0;
 
     public TextMeshProUGUI text;
     // Start is called before the first frame update
@@ -34,7 +36,14 @@ public class CounterUI : MonoBehaviour
         if (text != null && player != null)
         {
             int value = (int)player.GetCounter(CounterName);
-            text.text = value.ToString();
+            if (displayMax)
+            {
+                text.text = value.ToString() + "/" + maxValue.ToString();
+            }
+            else
+            {
+                text.text = value.ToString();
+            }
             slider.value = value;
         }
     }
