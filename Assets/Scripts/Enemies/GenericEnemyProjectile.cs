@@ -1,0 +1,80 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Enemies
+{
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Collider2D))]
+    public abstract class GenericEnemyProjectile : MonoBehaviour
+    {
+        public float speed = 3f;
+        public float projectileLifetime = 2f;
+        public int damage = 1;
+
+        [SerializeField] private bool destroyOnWall = true;
+        [SerializeField] private bool destroyOnTargetHit = true;
+        [SerializeField, Tooltip("0 = Hurts only player, 1 = Hurts only enemy, 2 = Hurts only interactibles/environment, 3 = Hurts all")]
+        private int projectileTeam = 0;
+        private Rigidbody2D rb;
+        // Start is called before the first frame update
+        Quaternion isoBase;
+
+        void Start()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            StartCoroutine(DestroyAfterTime());
+        }
+
+        public void SetVelocity(Vector2 direction, float projectileSpeed = 3f)
+        {
+            rb.velocity = direction.normalized * projectileSpeed;
+        }
+
+        public void SetStats(int pDamage, float projectileSpeed = 3f, float lifetime = 5f)
+        {
+            damage = pDamage;
+            speed = projectileSpeed;
+            projectileLifetime = lifetime;
+        }
+
+        //ontriggerenter2D
+        void OnTriggerEnter2D(Collider2D other)
+        {
+
+            if (other.CompareTag("Wall") && destroyOnWall)
+            {
+                OnProjectileRemove();
+            }
+            // check if other object has the IDamageable interface:
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            if (damageable != null && CheckProjectileTeamCollision(damageable, other))
+            {
+                damageable.TakeDamage(damage);
+                Debug.Log("Hit " + other.name + " for " + damage);
+                OnProjectileRemove();
+            }
+        }
+
+
+        private bool CheckProjectileTeamCollision(IDamageable damageable, Collider2D other)
+        {
+            //TODO: Envrionment damage from enemy projectile
+            return projectileTeam == 3 ||
+                (projectileTeam == 0 && other.CompareTag("Player")) ||
+                (projectileTeam == 1 && (other.CompareTag("Player") || other.CompareTag("Enemy")));
+        }
+
+        private IEnumerator DestroyAfterTime()
+        {
+            yield return new WaitForSeconds(projectileLifetime);
+            OnProjectileRemove();
+        }
+
+        //Override this for death behavior
+        public virtual void OnProjectileRemove()
+        {
+            Destroy(gameObject);
+        }
+    }
+}
