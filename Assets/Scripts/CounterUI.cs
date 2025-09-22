@@ -2,11 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
-public class AmmoUI : MonoBehaviour
+public class CounterUI : MonoBehaviour
 {
     // reference to player:
+    public string CounterName = "Ammo";
+
+    public Slider slider;
     public Player player;
+    public bool displayMax = false;
+    public int maxValue = 0;
+
+    public TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +33,18 @@ public class AmmoUI : MonoBehaviour
     void Update()
     {
         //update text to show current ammo count:
-        TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
         if (text != null && player != null)
         {
-            text.text = "Ammo: " + player.GetCurrentAmmoCount().ToString();
+            int value = (int)player.GetCounter(CounterName);
+            if (displayMax)
+            {
+                text.text = value.ToString() + "/" + maxValue.ToString();
+            }
+            else
+            {
+                text.text = value.ToString();
+            }
+            slider.value = value;
         }
     }
 }

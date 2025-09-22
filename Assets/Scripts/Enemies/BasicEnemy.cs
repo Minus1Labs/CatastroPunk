@@ -2,7 +2,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using System.Collections;
 
-public class BasicEnemy : Enemy
+public class BasicEnemy : Enemies.Enemy
 {
 
     [Header("Basic Enemy Properties")]

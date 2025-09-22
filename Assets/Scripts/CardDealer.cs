@@ -11,10 +11,14 @@ public class CardDealer : MonoBehaviour
     [SerializeField] private CardDatabase database;
 
     //3 elements for the card options that the player sees on the UI:
-    public GameObject[] uiCardOptions = new GameObject[3];
+    public static GameObject[] uiCardOptions = new GameObject[3];
 
     public GameObject cardShopUI;
-    private Card[] currentCards = new Card[3];
+    private static Card[] currentCards = new Card[3];
+
+    private static Card selectedCard = null;
+
+    public static GameObject cardHighlight;
 
     void Start()
     {
@@ -26,13 +30,16 @@ public class CardDealer : MonoBehaviour
         if (cardShopUI == null)
         {
             cardShopUI = GameObject.Find("CardShopUI");
+            //under cardshop UI, there is Card1, Card2, Card3:
+            uiCardOptions[0] = cardShopUI.transform.Find("Card1").gameObject;
+            uiCardOptions[1] = cardShopUI.transform.Find("Card2").gameObject;
+            uiCardOptions[2] = cardShopUI.transform.Find("Card3").gameObject;
         }
 
     }
 
     public void DealCards()
     {
-        //enable canvas component of cardShopUI:
         cardShopUI.GetComponent<Canvas>().enabled = true;
 
         currentCards[0] = database.GetRandomCard();
@@ -49,10 +56,15 @@ public class CardDealer : MonoBehaviour
         uiCardOptions[2].SetActive(true);
         uiCardOptions[2].GetComponentInChildren<TextMeshProUGUI>().text = currentCards[2].cardName;
 
+        //TODO: make this less jank
+        cardShopUI.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener(ConfirmCard);
+        cardShopUI.transform.Find("ConfirmButton (1)").GetComponent<Button>().onClick.AddListener(ConfirmCard);
+
         player.LockPlayer();
+        selectedCard = currentCards[0];
     }
 
-    public void SelectCard(int index)
+    public static void SelectCard(int index)
     {
         if (index < 0 || index >= uiCardOptions.Length)
         {
@@ -60,8 +72,23 @@ public class CardDealer : MonoBehaviour
             return;
         }
         // otherwise, select the card!
-        player.AddCard(currentCards[index]);
-        // now, we hide the cards and destroy this shiz:
+        selectedCard = currentCards[index];
+        // find object called card highlight:
+        if (cardHighlight == null)
+        {
+            cardHighlight = GameObject.Find("CardHighlight");
+        }
+
+        //the positions for 0, 1, 2 are (-536, -5), (-398.8, -5), (-264.3, -5):
+        //this is for rect transform local position:
+        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-536 + index * 137.2f, -5, 0);
+    }
+
+    public void ConfirmCard()
+    {
+        
+        player.AddCard(selectedCard);
+        
         foreach (GameObject cardOption in uiCardOptions)
         {
             cardOption.SetActive(false);

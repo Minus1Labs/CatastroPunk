@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D.IK;
+//scene management
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool canDash = true;
     [Header("Base Player Stats")]
     [SerializeField] public int baseHealth = 5;
-    private int currentHealth;
+    private float currentHealth;
 
 
     [SerializeField] private float baseDashCd = 1f;
@@ -75,7 +77,8 @@ public class Player : MonoBehaviour, IDamageable
     //a list of the current player card upgrades
     private List<Card> cards = new List<Card>();
 
-    public AudioSource fireSound;
+    public AudioSource fireSource;
+    public AudioClip fireSound;
     public AudioSource dashSound;
     public AudioSource hurtSound;
 
@@ -189,9 +192,20 @@ public class Player : MonoBehaviour, IDamageable
         this.enabled = true;
     }
 
-    public int GetCurrentAmmoCount()
+    public float GetCounter(string counterName = "Ammo")
     {
-        return currentAmmoCount;
+        switch (counterName)
+        {
+            case "Health":
+                return currentHealth;
+            case "Ammo":
+                return currentAmmoCount;
+            case "Damage":
+                return currentDamage;
+            default:
+                Debug.LogError("Invalid counter name: " + counterName);
+                return -1;
+        }
     }
 
     public int getAmmoPerRoom()
@@ -207,9 +221,8 @@ public class Player : MonoBehaviour, IDamageable
         {
             SetInputVector();
         }
-        if ( (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0 && !isDashing)
+        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0 && !isDashing)
         {
-            Debug.Log("SHOOTING " + currentAmmoCount);
             currentAmmoCount -= 1;
             FireProjectile();
         }
@@ -227,7 +240,7 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(RefundAmmo());
         }
 
-        else if ( (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)) && !isDashing)
+        else if ((Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)) && !isDashing)
         {
             FireProjectile(true);
         }
@@ -253,15 +266,17 @@ public class Player : MonoBehaviour, IDamageable
         currentAmmoCount += 1;
         canRefund = true;
     }
-    
+
     // Helpers to snap to your 8-way grid and measure “strength”
-    private static Vector2 Snap8(Vector2 v) {
+    private static Vector2 Snap8(Vector2 v)
+    {
         return new Vector2(
             Mathf.Clamp(Mathf.Round(v.x), -1, 1),
             Mathf.Clamp(Mathf.Round(v.y), -1, 1)
         );
     }
-    private static int TaxiMag(Vector2 v) {
+    private static int TaxiMag(Vector2 v)
+    {
         // 1 for single-axis, 2 for diagonal
         return Mathf.Abs(Mathf.RoundToInt(v.x)) + Mathf.Abs(Mathf.RoundToInt(v.y));
     }
@@ -274,7 +289,7 @@ public class Player : MonoBehaviour, IDamageable
         Vector2 input = new Vector2(moveHorizontal, moveVertical);
         bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
-        
+
 
         const float isoYScale = 0.5f; // tweak to match your tile/grid art
         Vector2 iso = new Vector2(
@@ -324,25 +339,25 @@ public class Player : MonoBehaviour, IDamageable
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
-            var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
+        // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
+        var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
 
-            if (plane.Raycast(ray, out float enter))
-            {
-                Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
-                Vector2 dir = new Vector2(hit.x - firePoint.position.x, hit.y - firePoint.position.y);
-                if(dir.sqrMagnitude < 1e-6f) return; // don't shoot if too close to center
-                dir.Normalize();
+        if (plane.Raycast(ray, out float enter))
+        {
+            Vector3 hit = ray.GetPoint(enter);              // mouse world position on the XY plane
+            Vector2 dir = new Vector2(hit.x - firePoint.position.x, hit.y - firePoint.position.y);
+            if (dir.sqrMagnitude < 1e-6f) return; // don't shoot if too close to center
+            dir.Normalize();
 
-                // EITHER: rotate by angle (if your projectile faces +X in local space)
-                firePoint.right = new Vector3(dir.x, dir.y, 0f);
+            // EITHER: rotate by angle (if your projectile faces +X in local space)
+            firePoint.right = new Vector3(dir.x, dir.y, 0f);
 
-                // OR (cleaner): align local +X with the direction
-                // firePoint.right = dir;
+            // OR (cleaner): align local +X with the direction
+            // firePoint.right = dir;
 
-                GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
-                if(fireSound != null) fireSound.Play();
-            }
+            GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            if (fireSource != null) fireSource.PlayOneShot(fireSound);
+        }
     }
 
     void FireProjectile(bool reverse = false)
@@ -398,14 +413,14 @@ public class Player : MonoBehaviour, IDamageable
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
 
                 proj.SetStats(currentDamage, projectileSpeed, projLifetime);
-                if(fireSound != null) fireSound.Play();
+                if (fireSource != null) fireSource.PlayOneShot(fireSound);
             }
         }
     }
 
     void FixedUpdate()
     {
-        if(onlyAnimations) return;
+        if (onlyAnimations) return;
         // if not moving diagonal:
         float speedModifier = currentSpeed;
         // if (Mathf.Abs(movementInputVector.x) < 0.01f && !(Mathf.Abs(movementInputVector.y) < 0.01f) ) //only y movement
@@ -415,14 +430,13 @@ public class Player : MonoBehaviour, IDamageable
         // {
         //     speedModifier = (4.0f / Mathf.Sqrt(5)) * currentSpeed;
         // }
-        Debug.Log("Speed mod: " + speedModifier);
         rb.velocity = movementInputVector.normalized * speedModifier;
     }
 
     void tailChange(float x, float y)//will probably make this prefabs next time
     {
-       
-        if ((x == 0 && y == -1) || (x == 0 && y == 1)) 
+
+        if ((x == 0 && y == -1) || (x == 0 && y == 1))
         {//up & down
             tailBone.transform.localPosition = new Vector3(-0.2f, 0.11f, -0.1f);
         }
@@ -431,19 +445,19 @@ public class Player : MonoBehaviour, IDamageable
             tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
         }
         else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
-{
+        {
             tailBone.transform.localPosition = new Vector3(-1.84f, -0.5f, -0.1f);
         }
         else if (x == 1 && y == -1)//down right
- {
+        {
             tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
         }
         else if (x == -1 && y == 0)//left
- {
+        {
             tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
         }
         else if (x == -1 && y == 1)//upleft
-{
+        {
             tailBone.transform.localPosition = new Vector3(2.5f, -1f, -0.1f);
         }
         else if (x == -1 && y == -1)// downleft
@@ -452,26 +466,32 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    public void HitTarget() {
-        foreach (Card c in cards) {
+    public void HitTarget()
+    {
+        foreach (Card c in cards)
+        {
             c.OnProjectileHit(this);
         }
     }
 
-    public void KilledEnemy() {
-        foreach (Card c in cards) {
+    public void KilledEnemy()
+    {
+        foreach (Card c in cards)
+        {
             c.OnEnemyKill(this);
         }
     }
 
-    public void MissTarget() {
-        foreach (Card c in cards) {
+    public void MissTarget()
+    {
+        foreach (Card c in cards)
+        {
             c.OnProjectileMiss(this);
         }
     }
 
 
-    
+
     public void AddHealth(int amount)
     {
         currentHealth += amount;
@@ -494,6 +514,18 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void TakeContinuousDamage(float damage)
+    {
+        Debug.Log("Taking continuous damage");
+        if (hurtSound != null) hurtSound.Play();
+        if (isInvincible) return;
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
@@ -510,7 +542,9 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log("Player died!");
         //TODO: more logic for player death
+        // for now, we will just have it reload the scene:
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 }
