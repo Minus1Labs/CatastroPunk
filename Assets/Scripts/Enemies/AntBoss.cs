@@ -26,6 +26,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     [SerializeField] private float chargeEndlagDuration = 1f;
     [SerializeField] private float directionSwitchLockout = 1.5f;
     [SerializeField] private GameObject ThrownBarrelPrefab;
+    [SerializeField] private GameObject ToxicPuddlePrefab;
     private float damageTimer = 0f;
     private Transform player;
 
@@ -222,6 +223,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
                 float xdiv = UnityEngine.Random.Range(-1, 1);
                 float ydiv = UnityEngine.Random.Range(-1, 1);
                 Vector2 diversionAngle = new(xdiv, ydiv);
+                float distanceMult = UnityEngine.Random.Range(0.5f, 1f);
+                Vector2 puddlePosition = transform.position + (Vector3)(rb.velocity * diversionAngle * distanceMult);
+                GameObject puddle = Instantiate(ToxicPuddlePrefab, puddlePosition, Quaternion.identity);
                 //Create prefab at diversionAngle distance from transform position
             }
             openBarrelUsesLeft--;
@@ -253,15 +257,20 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
             Debug.Log("Error with prefab. skipping throw");
             return;
         }
-        GameObject thrownBarrel = Instantiate(ThrownBarrelPrefab, transform.position, transform.rotation);
+        GameObject thrownBarrel = Instantiate(ThrownBarrelPrefab, transform.position, Quaternion.identity);
         AntBossProjectile proj = thrownBarrel.GetComponent<AntBossProjectile>();
         //TODO set barrel speed as variable?
-        if (proj == null)
+        if (proj == null || thrownBarrel == null)
         {
             Debug.Log("Projectile instance is null? what the helly!");
             return;
         }
+        Debug.Log("Prefab is " + ThrownBarrelPrefab);
+        Debug.Log("Spawned object: " + thrownBarrel);
+        Debug.Log("Found projectile: " + proj);
         proj.SetVelocity(direction, 7f);
+
+        
 
     }
 

@@ -20,7 +20,7 @@ namespace Enemies
         // Start is called before the first frame update
         Quaternion isoBase;
 
-        void Start()
+        void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
             StartCoroutine(DestroyAfterTime());
