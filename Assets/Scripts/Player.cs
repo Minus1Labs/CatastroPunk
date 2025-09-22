@@ -27,6 +27,7 @@ public class Player : MonoBehaviour, IDamageable
     private Transform firePoint;
 
     public Animator catBodyAnimator;
+    public Animator catTailAnimator;
 
     private Vector2 lastAnimDir = new Vector2(1, 1);
     private Vector2 lastRawDir = Vector2.right;
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        catTailAnimator = tailBone.GetComponent<Animator>();
         currentSpeed = baseSpeed;
         currentHealth = baseHealth;
         currentDamage = baseDamage;
@@ -355,6 +357,7 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            shootAnimation(dir);
             if (fireSource != null) fireSource.PlayOneShot(fireSound);
         }
     }
@@ -387,31 +390,34 @@ public class Player : MonoBehaviour, IDamageable
             // OR (cleaner): align local +X with the direction
             // firePoint.right = dir;
 
-            //Animation
-            Vector2 invertedHit = new Vector3(-dir.x, dir.y);
-            //lets rotate inverted hit 45 degrees:
-            invertedHit = new Vector2(
-                invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
-                invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
-            );
-            //change IK Gun bone target
-            if (currentIKManager != null)
-            {
-                (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
-            }
 
-        
+            //change IK Gun bone target
             if (projectilePrefab != null && !reverse)
             {
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
-
+                shootAnimation(dir);
                 proj.SetStats(currentDamage, projectileSpeed, projLifetime);
                 if (fireSource != null) fireSource.PlayOneShot(fireSound);
             }
         }
     }
+    void shootAnimation(Vector2 dir)
+    {
+        //Animation
+        Vector2 invertedHit = new Vector3(-dir.x, dir.y);
+        //lets rotate inverted hit 45 degrees:
+        invertedHit = new Vector2(
+            invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
+            invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
+        );
 
+        if (currentIKManager != null)
+        {
+            (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
+        }
+        catTailAnimator.SetTrigger("shoot");
+    }
     void FixedUpdate()
     {
         if (onlyAnimations) return;
