@@ -262,9 +262,9 @@ MonoBehaviour:
   reversalProjectilePrefab: {fileID: 829520782942192253, guid: a5defd99f402508498c8fd06b76dcbf0, type: 3}
   firePoint: {fileID: 6637450677528127453}
   catBodyAnimator: {fileID: 7779849858504169308}
+  catTailAnimator: {fileID: 0}
   currentIKManager: {fileID: 6330575002740866444}
   tailBone: {fileID: 5693431847914597828}
-  tailIKTarget: {fileID: 2527897790655524245}
   onlyAnimations: 0
   baseHealth: 5
   baseDashCd: 1
@@ -275,6 +275,7 @@ MonoBehaviour:
   baseAmmoPerRoom: 6
   baseRefundTime: 10
   baseProjectileLifetime: 5
+  fireSource: {fileID: 0}
   fireSound: {fileID: 8789384875300192159}
   dashSound: {fileID: 797350745824914300}
   hurtSound: {fileID: 1790850676508089123}
@@ -414,7 +415,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 839557506, guid: f2417f89a4d5f594ea889b76228a31ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
