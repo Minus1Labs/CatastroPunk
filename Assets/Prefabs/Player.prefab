@@ -266,7 +266,7 @@ MonoBehaviour:
   tailBone: {fileID: 5601006481155984671}
   tailIKTarget: {fileID: 2527897790655524245}
   onlyAnimations: 0
-  baseHealth: 5
+  baseHealth: 100
   baseDashCd: 1
   iFrameDuration: 1
   baseDamage: 80
