@@ -41,7 +41,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool canDash = true;
     [Header("Base Player Stats")]
     [SerializeField] public int baseHealth = 5;
-    private int currentHealth;
+    private float currentHealth;
 
 
     [SerializeField] private float baseDashCd = 1f;
@@ -192,7 +192,7 @@ public class Player : MonoBehaviour, IDamageable
         this.enabled = true;
     }
 
-    public int GetCounter(string counterName = "Ammo")
+    public float GetCounter(string counterName = "Ammo")
     {
         switch (counterName)
         {
@@ -508,6 +508,18 @@ public class Player : MonoBehaviour, IDamageable
         if (isInvincible) return;
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void TakeContinuousDamage(float damage)
+    {
+        Debug.Log("Taking continuous damage");
+        if (hurtSound != null) hurtSound.Play();
+        if (isInvincible) return;
+        currentHealth -= damage;
         if (currentHealth <= 0)
         {
             Die();

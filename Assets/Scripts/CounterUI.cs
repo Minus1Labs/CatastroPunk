@@ -11,11 +11,10 @@ public class CounterUI : MonoBehaviour
 
     public Slider slider;
     public Player player;
-
-    public TextMeshProUGUI text;
-
     public bool displayMax = false;
     public int maxValue = 0;
+
+    public TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +35,7 @@ public class CounterUI : MonoBehaviour
         //update text to show current ammo count:
         if (text != null && player != null)
         {
-            int value = player.GetCounter(CounterName);
+            int value = (int)player.GetCounter(CounterName);
             if (displayMax)
             {
                 text.text = value.ToString() + "/" + maxValue.ToString();

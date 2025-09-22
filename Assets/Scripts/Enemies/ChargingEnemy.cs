@@ -4,7 +4,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using System.Collections.Generic;
 
-public class ChargingEnemy : Enemy, IEnemyCommunicator
+public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
 {
 
     [Header("Basic Enemy Properties")]
