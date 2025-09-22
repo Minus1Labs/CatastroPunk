@@ -33,7 +33,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public IKManager2D currentIKManager;
     [SerializeField] public GameObject tailBone;
-    public Transform tailIKTarget;
 
     public bool onlyAnimations = false;
 
@@ -392,7 +391,7 @@ public class Player : MonoBehaviour, IDamageable
             Vector2 invertedHit = new Vector3(-dir.x, dir.y);
             //lets rotate inverted hit 45 degrees:
             invertedHit = new Vector2(
-                invertedHit.x * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
+                invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
                 invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
             );
             //change IK Gun bone target
@@ -401,12 +400,7 @@ public class Player : MonoBehaviour, IDamageable
                 (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
             }
 
-            //simple version
-            //if (tailIKTarget != null)
-            //{
-            //  tailIKTarget.position = gunHit;
-            //}
-
+        
             if (projectilePrefab != null && !reverse)
             {
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
