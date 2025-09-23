@@ -31,6 +31,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private Transform player;
 
     public GameObject explosionPrefab;
+    //Animation
+    public Animator antBossAnimator;
+
 
     public enum ANT_BOSS_ENEMY_STATE
     {
@@ -76,6 +79,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     protected override void Awake()
     {
         base.Awake();
+        antBossAnimator = GetComponent<Animator>();
 
         // Find player by tag
         GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -290,14 +294,19 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         charging = true;
         canCharge = false;
         //play charge windup animation here. Moves back slightly and extends mouth blades
+       
+
         rb.velocity = (direction * -1).normalized * (baseSpeed * .1f);
+        antBossAnimator.SetTrigger("windup");
         yield return new WaitForSeconds(chargeWindupDuration);
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
+        antBossAnimator.SetTrigger("attack");
         //play charge animation here. Quick dash with stabbing mouth blades
         rb.velocity = chargeSpeed * direction;
-
+        
         yield return new WaitForSeconds(chargeDuration);
+        
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
         //play charge animation endlag here. Boss is stunned in place after charge.

@@ -45338,6 +45338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4257508509235537429, guid: a556e4c022505394ba086c190e2cb9da, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.11777
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46054,7 +46058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.00231765, w: 0.9999974}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0025812516, w: 0.9999967}
   m_LocalPosition: {x: 11, y: -15.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47794,6 +47798,7 @@ MonoBehaviour:
   ThrownBarrelPrefab: {fileID: 3779433509979182295, guid: 0fc49dbc0cc8e43988da302f55e99094, type: 3}
   ToxicPuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
   explosionPrefab: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
+  antBossAnimator: {fileID: 0}
   BossCurrentBarrels: 0000000000000000000000000000000000000000000000000000000000000000
   reverseLookbackSeconds: 3
   historyKeepSeconds: 2
