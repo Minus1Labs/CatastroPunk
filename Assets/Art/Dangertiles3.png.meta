@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 12b03354c32bc6b458a61f500f90ba4e
+guid: 048079281847b5d48b6513db9d516228
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Floortile_danger2_0
+      name: Dangertiles3_0
       rect:
         serializedVersion: 2
         x: 14
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f4315badb3d0fb46b20468148ecaf52
-      internalID: 162384029
+      spriteID: 03b26e19d7c301149be711077a50b590
+      internalID: 179719159
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Floortile_danger2_0: 162384029
+      Dangertiles3_0: 179719159
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
