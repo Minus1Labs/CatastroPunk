@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Floortile_danger1_0
+  m_Name: Dangertiles2_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 733105105, guid: 1349c06278abd8143a366dc8d4f35a17, type: 3}
+  m_Sprite: {fileID: -108733219, guid: 14b16adaf05c27948833faac6849ff2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
