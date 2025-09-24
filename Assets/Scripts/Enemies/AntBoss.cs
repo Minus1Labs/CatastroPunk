@@ -257,8 +257,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         Vector2 direction = (player.position - transform.position).normalized;
         //play grabbing barrel from back animation
+        antBossAnimator.SetBool("barrel", true);
         yield return new WaitForSeconds(1f);
-
+        antBossAnimator.SetBool("barrel", false);
         rb.velocity = (direction * -1).normalized * (baseSpeed * .2f);
         yield return new WaitForSeconds(throwWindupDuration);
 
