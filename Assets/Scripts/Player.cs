@@ -542,6 +542,10 @@ public class Player : MonoBehaviour, IDamageable
         if (isInvincible) return;
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());
+        if (chargingAmmoRefund)
+        {
+            chargingAmmoRefund = false;
+        }
         if (currentHealth <= 0)
         {
             Die();
