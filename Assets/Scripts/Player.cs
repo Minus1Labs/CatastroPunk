@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.U2D.IK;
 //scene management
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -71,6 +72,13 @@ public class Player : MonoBehaviour, IDamageable
     private int currentAmmoCount;
 
     private bool canRefund = true;
+    private bool chargingAmmoRefund = false;
+    private bool canChargeAmmoRefund = false;
+    [SerializeField, Tooltip("How long it takes to hold to refund ammo")]
+
+    private float ammoRefundStartTime = 0f;
+    private float ammoRefundAnimationTime = 3f;
+
 
 
 
@@ -214,18 +222,25 @@ public class Player : MonoBehaviour, IDamageable
         return ammoPerRoom;
     }
 
+    public bool CanInput()
+    {
+        return !isDashing && !chargingAmmoRefund;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        if (!isDashing) //bc dashing locks movement
-        {
+        if (CanInput()) {
             SetInputVector();
-        }
-        if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0 && !isDashing)
-        {
-            currentAmmoCount -= 1;
-            FireProjectile();
+            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0)
+            {
+                currentAmmoCount -= 1;
+                FireProjectile();
+            } else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P))
+            {
+                FireProjectile(true);
+            }
         }
 
         // make a dash button (shift)
@@ -236,15 +251,29 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Dash());
         }
 
-        if (canRefund && currentAmmoCount < ammoPerRoom)
+        if (Input.GetKey(KeyCode.R))
         {
-            StartCoroutine(RefundAmmo());
-        }
-
-        else if ((Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)) && !isDashing)
+            if (!chargingAmmoRefund)
+            {
+                Debug.Log("Starting ammo refund at time " + Time.time);
+                ammoRefundStartTime = Time.time;
+                chargingAmmoRefund = true;
+            }
+            else
+            {
+                if (Time.time - ammoRefundStartTime >= ammoRefundAnimationTime)
+                {
+                    Debug.Log("Completed ammo refund at time " + Time.time);
+                    chargingAmmoRefund = false;
+                    currentAmmoCount = ammoPerRoom;
+                }
+            }
+        } else if (chargingAmmoRefund)
         {
-            FireProjectile(true);
+            chargingAmmoRefund = false;
+            Debug.Log("Stopped ammo refund because key stopped being held after seconds: " + (Time.time - ammoRefundStartTime));
         }
+    
     }
 
     IEnumerator Dash()
