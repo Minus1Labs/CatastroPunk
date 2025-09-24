@@ -27,13 +27,13 @@ public class Player : MonoBehaviour, IDamageable
     private Transform firePoint;
 
     public Animator catBodyAnimator;
+    public Animator catTailAnimator;
 
     private Vector2 lastAnimDir = new Vector2(1, 1);
     private Vector2 lastRawDir = Vector2.right;
 
     public IKManager2D currentIKManager;
     [SerializeField] public GameObject tailBone;
-    public Transform tailIKTarget;
 
     public bool onlyAnimations = false;
 
@@ -91,6 +91,7 @@ public class Player : MonoBehaviour, IDamageable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        catTailAnimator = tailBone.GetComponent<Animator>();
         currentSpeed = baseSpeed;
         currentHealth = baseHealth;
         currentDamage = baseDamage;
@@ -356,6 +357,7 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            shootAnimation(dir);
             if (fireSource != null) fireSource.PlayOneShot(fireSound);
         }
     }
@@ -388,36 +390,34 @@ public class Player : MonoBehaviour, IDamageable
             // OR (cleaner): align local +X with the direction
             // firePoint.right = dir;
 
-            //Animation
-            Vector2 invertedHit = new Vector3(-dir.x, dir.y);
-            //lets rotate inverted hit 45 degrees:
-            invertedHit = new Vector2(
-                invertedHit.x * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
-                invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
-            );
+
             //change IK Gun bone target
-            if (currentIKManager != null)
-            {
-                (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
-            }
-
-            //simple version
-            //if (tailIKTarget != null)
-            //{
-            //  tailIKTarget.position = gunHit;
-            //}
-
             if (projectilePrefab != null && !reverse)
             {
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
-
+                shootAnimation(dir);
                 proj.SetStats(currentDamage, projectileSpeed, projLifetime);
                 if (fireSource != null) fireSource.PlayOneShot(fireSound);
             }
         }
     }
+    void shootAnimation(Vector2 dir)
+    {
+        //Animation
+        Vector2 invertedHit = new Vector3(-dir.x, dir.y);
+        //lets rotate inverted hit 45 degrees:
+        invertedHit = new Vector2(
+            invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad) - invertedHit.y * Mathf.Sin(-45f * Mathf.Deg2Rad),
+            invertedHit.x * Mathf.Sin(-45f * Mathf.Deg2Rad) + invertedHit.y * Mathf.Cos(-45f * Mathf.Deg2Rad)
+        );
 
+        if (currentIKManager != null)
+        {
+            (currentIKManager.solvers[0] as LimbSolver2D).GetChain(0).effector.localPosition = invertedHit;
+        }
+        catTailAnimator.SetTrigger("shoot");
+    }
     void FixedUpdate()
     {
         if (onlyAnimations) return;
@@ -435,36 +435,41 @@ public class Player : MonoBehaviour, IDamageable
 
     void tailChange(float x, float y)//will probably make this prefabs next time
     {
-
-        if ((x == 0 && y == -1) || (x == 0 && y == 1))
-        {//up & down
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.11f, -0.1f);
+        if (x == 0 && y == -1)
+        {//down
+            tailBone.transform.localPosition = new Vector3(0f, 0.4f, 0f);
+        }
+        else if (x == 0 && y == 1)
+        {//up 
+            tailBone.transform.localPosition = new Vector3(0f, 0f, 0f);
         }
         else if (x == 1 && y == 0)
         {//right
-            tailBone.transform.localPosition = new Vector3(-2.4f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, .2f, 0f);
         }
         else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
         {
-            tailBone.transform.localPosition = new Vector3(-1.84f, -0.5f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.2f, 0f);
         }
         else if (x == 1 && y == -1)//down right
         {
-            tailBone.transform.localPosition = new Vector3(-1.6f, 0.11f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(-0.2f, 0.3f, 0f);
         }
         else if (x == -1 && y == 0)//left
         {
-            tailBone.transform.localPosition = new Vector3(3f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.3f, .3f, 0f);
         }
         else if (x == -1 && y == 1)//upleft
         {
-            tailBone.transform.localPosition = new Vector3(2.5f, -1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.25f, 0.2f, 0f);
         }
         else if (x == -1 && y == -1)// downleft
         {
-            tailBone.transform.localPosition = new Vector3(2f, 0.1f, -0.1f);
+            tailBone.transform.localPosition = new Vector3(0.2f, 0.3f, 0f);
         }
+
     }
+
 
     public void HitTarget()
     {
