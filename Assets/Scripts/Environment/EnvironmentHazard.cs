@@ -1,6 +1,5 @@
 
 using System.Collections;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
