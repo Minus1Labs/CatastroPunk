@@ -17,7 +17,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     [SerializeField] private float barrelCycleTimer = 5f;
 
     [SerializeField] private float chargeWindupDuration = 0.5f;
-    [SerializeField] private float chargeDuration = 0.7f;
+    [SerializeField] private float chargeDuration = 3f;
     [SerializeField] private float chargeSpeed = 10f;
 
     [SerializeField] private float throwWindupDuration = 0.5f;
@@ -31,6 +31,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private Transform player;
 
     public GameObject explosionPrefab;
+    //Animation
+    public Animator antBossAnimator;
+
 
     public enum ANT_BOSS_ENEMY_STATE
     {
@@ -65,7 +68,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     public ANT_BOSS_BARREL_TYPE[] BossCurrentBarrels = new ANT_BOSS_BARREL_TYPE[8];
     private int NextBarrelIndex = 0;
     private int openBarrelCount = 0;
-    private int openBarrelUsesLeft = 2;
+    private int openBarrelUsesLeft = 4;
     private float lastBarrelUseTime = 0.0f;
 
 
@@ -76,6 +79,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     protected override void Awake()
     {
         base.Awake();
+        antBossAnimator = GetComponent<Animator>();
 
         // Find player by tag
         GameObject p = GameObject.FindGameObjectWithTag("Player");
@@ -96,17 +100,16 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     public void FillBossBarrels()
     {
-        //Completely random. adds more variety and can be pretty funny if there are more than average of one type
+        openBarrelCount = 0;
         for (int i = 0; i < BossCurrentBarrels.Length; i++)
         {
-            openBarrelCount = 0;
             int rand = (int)UnityEngine.Random.Range(0, 3);
             ANT_BOSS_BARREL_TYPE selected = ANT_BOSS_BARREL_TYPE.NO_BARREL;
             if (rand == 0)
             {
                 selected = ANT_BOSS_BARREL_TYPE.SEALED;
             }
-            else if (rand == 1)
+            else if (rand == 1 && openBarrelCount < 4)
             {
                 openBarrelCount++;
                 selected = ANT_BOSS_BARREL_TYPE.OPEN;
@@ -114,7 +117,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
             BossCurrentBarrels[i] = selected;
         }
         NextBarrelIndex = 0;
-        openBarrelUsesLeft = 2;
+        openBarrelUsesLeft = 4;
         Debug.Log("Filled boss barrels. Open count: " + openBarrelCount);
     }
 
@@ -176,6 +179,15 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         return Time.time - lastBarrelUseTime > barrelCycleTimer;
     }
 
+
+    /* Likely going to change this. 
+
+    good: barrel attack and charge are cool
+
+    bad: limited by barrels, feels bad to fight
+    -downtime is weird
+    
+    */
     public void BarrelCycle()
     {
         if (NextBarrelIndex >= BossCurrentBarrels.Length)
@@ -206,7 +218,8 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         else if (BossCurrentBarrels[NextBarrelIndex] == ANT_BOSS_BARREL_TYPE.NO_BARREL)
         {
             //Start charge coroutine
-            coroutines.Add(StartCoroutine(ChargeCoroutine((player.position - transform.position).normalized)));
+            Vector2 chargeDirection = (player.position - transform.position).normalized;
+            coroutines.Add(StartCoroutine(ChargeCoroutine(chargeDirection)));
         }
 
         lastBarrelUseTime = Time.time;
@@ -217,14 +230,21 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         if (openBarrelUsesLeft > 0)
         {
-            Debug.Log("Splashing Toxic waste towards " + direction);
+            Debug.Log("Splashing Toxic waste towards " + direction + ". rb velocity mag is " + rb.velocity.magnitude);
+            float distanceMult = UnityEngine.Random.Range(2f, 4f) * ((rb.velocity.magnitude / 3f) + 2f);
             for (int i = 0; i < openBarrelCount; i++)
             {
-                float xdiv = UnityEngine.Random.Range(-1, 1);
-                float ydiv = UnityEngine.Random.Range(-1, 1);
-                Vector2 diversionAngle = new(xdiv, ydiv);
-                float distanceMult = UnityEngine.Random.Range(0.5f, 1f);
-                Vector2 puddlePosition = transform.position + (Vector3)(rb.velocity * diversionAngle * distanceMult);
+                float arcOffset;
+                if (openBarrelCount == 1)
+                {
+                    arcOffset = 0f;
+                }
+                else
+                {
+                    arcOffset = (((float)i / (openBarrelCount - 1f)) * 90f) - 45f;
+                }
+                Vector2 diversionAngle = Quaternion.Euler(0, 0, arcOffset) * direction;
+                Vector2 puddlePosition = transform.position + (Vector3)(diversionAngle.normalized * distanceMult);
                 GameObject puddle = Instantiate(ToxicPuddlePrefab, puddlePosition, Quaternion.identity);
                 //Create prefab at diversionAngle distance from transform position
             }
@@ -245,6 +265,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         rb.velocity = (direction).normalized * (baseSpeed * .5f);
         yield return new WaitForSeconds(throwWindupStartlag);
         ThrowBarrel(direction);
+        ToxicWasteSplash(direction);
         yield return new WaitForSeconds(throwEndlagDuration);
         rb.velocity = new Vector2(0,0);
         isBarrelAttacking = false;
@@ -265,13 +286,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
             Debug.Log("Projectile instance is null? what the helly!");
             return;
         }
-        Debug.Log("Prefab is " + ThrownBarrelPrefab);
-        Debug.Log("Spawned object: " + thrownBarrel);
-        Debug.Log("Found projectile: " + proj);
-        proj.SetVelocity(direction, 7f);
-
-        
-
+        proj.SetVelocity(direction, 30f);
     }
 
     IEnumerator ChargeCoroutine(Vector2 direction)
@@ -279,15 +294,19 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         charging = true;
         canCharge = false;
         //play charge windup animation here. Moves back slightly and extends mouth blades
+       
+
         rb.velocity = (direction * -1).normalized * (baseSpeed * .1f);
+        antBossAnimator.SetTrigger("windup");
         yield return new WaitForSeconds(chargeWindupDuration);
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
+        antBossAnimator.SetTrigger("attack");
         //play charge animation here. Quick dash with stabbing mouth blades
         rb.velocity = chargeSpeed * direction;
-        ToxicWasteSplash((direction * -1));
-
+        
         yield return new WaitForSeconds(chargeDuration);
+        
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
         //play charge animation endlag here. Boss is stunned in place after charge.
