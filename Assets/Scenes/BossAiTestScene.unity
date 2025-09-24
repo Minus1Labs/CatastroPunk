@@ -727,6 +727,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 180386743755762398, guid: 390d018ff34964ab4805ee5d1a50c043, type: 3}
+      propertyPath: m_text
+      value: level 1 - boss
+      objectReference: {fileID: 0}
     - target: {fileID: 2542224085695689642, guid: 390d018ff34964ab4805ee5d1a50c043, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -1630,7 +1634,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.002623541, w: 0.9999966}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0026243308, w: 0.9999966}
   m_LocalPosition: {x: 10.55, y: -25.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -95561,10 +95565,10 @@ SceneRoots:
   - {fileID: 996461283}
   - {fileID: 1824635883748231907}
   - {fileID: 7670881502756627801}
+  - {fileID: 1942521414}
   - {fileID: 1338104435}
   - {fileID: 1764913902}
   - {fileID: 622500439}
   - {fileID: 916633722}
-  - {fileID: 1942521414}
   - {fileID: 1054705062}
   - {fileID: 686835512}

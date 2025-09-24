@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 
 public class PlayerTeleporter : MonoBehaviour
 {
     public Vector2 targetLocation;
 
     [SerializeField] private CinemachineVirtualCamera vcam; // optional drag in inspector
+
+    public bool loadScene = false;
+    public string sceneName = "BossAiTestScene";
 
     private void Start()
     {
@@ -27,6 +31,11 @@ public class PlayerTeleporter : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player teleported!");
+            if (loadScene)
+            {
+                SceneManager.LoadScene(sceneName);
+                return; // don't do the rest of the teleport logic
+            }
 
             Transform root = collision.transform.parent != null
                 ? collision.transform.parent

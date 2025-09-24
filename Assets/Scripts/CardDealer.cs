@@ -58,7 +58,7 @@ public class CardDealer : MonoBehaviour
 
         //TODO: make this less jank
         cardShopUI.transform.Find("ConfirmButton").GetComponent<Button>().onClick.AddListener(ConfirmCard);
-        cardShopUI.transform.Find("ConfirmButton (1)").GetComponent<Button>().onClick.AddListener(ConfirmCard);
+        // cardShopUI.transform.Find("ConfirmButton (1)").GetComponent<Button>().onClick.AddListener(ConfirmCard);
 
         player.LockPlayer();
         selectedCard = currentCards[0];
@@ -81,7 +81,7 @@ public class CardDealer : MonoBehaviour
 
         //the positions for 0, 1, 2 are (-536, -5), (-398.8, -5), (-264.3, -5):
         //this is for rect transform local position:
-        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-536 + index * 137.2f, -5, 0);
+        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-418 + index * 422, 0, 0);
     }
 
     public void ConfirmCard()
