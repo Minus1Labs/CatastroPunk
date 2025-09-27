@@ -89,6 +89,7 @@ public class Player : MonoBehaviour, IDamageable
     public AudioClip fireSound;
     public AudioSource dashSound;
     public AudioSource hurtSound;
+    public AudioSource reverseBulletSound;
 
     private Vector2 prevInput = Vector2.zero;
     private bool wasMoving = false;
@@ -387,7 +388,10 @@ public class Player : MonoBehaviour, IDamageable
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
             shootAnimation(dir);
-            if (fireSource != null) fireSource.PlayOneShot(fireSound);
+            if (reverseBulletSound != null)
+            {
+                reverseBulletSound.Play();
+            }
         }
     }
 
