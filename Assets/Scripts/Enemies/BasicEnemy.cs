@@ -188,7 +188,7 @@ public class BasicEnemy : Enemies.Enemy
                 targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
             }
         }
-
+        robotAnimator.SetTrigger("Reverse");
         // Teleport + stop motion
         rb.position = targetPos;
         rb.velocity = Vector2.zero;
