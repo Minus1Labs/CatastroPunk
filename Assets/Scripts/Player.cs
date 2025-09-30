@@ -30,6 +30,9 @@ public class Player : MonoBehaviour, IDamageable
     public Animator catBodyAnimator;
     public Animator catTailAnimator;
 
+    private Vector3 mousePos;
+    public GameObject gunPos;
+
     private Vector2 lastAnimDir = new Vector2(1, 1);
     private Vector2 lastRawDir = Vector2.right;
 
@@ -274,7 +277,14 @@ public class Player : MonoBehaviour, IDamageable
             chargingAmmoRefund = false;
             Debug.Log("Stopped ammo refund because key stopped being held after seconds: " + (Time.time - ammoRefundStartTime));
         }
-    
+
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        gunPos.transform.position = mousePos;
+        Debug.Log(gunPos.transform.position);
+
+        //If you get an error with the above line, replace it with this:
+        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, zAxis);
     }
 
     IEnumerator Dash()
