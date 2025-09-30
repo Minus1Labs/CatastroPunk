@@ -29,6 +29,7 @@ public abstract class Enemy : MonoBehaviour, IReversible, IDamageable
 
     public virtual void TakeDamage(int damage)
     {
+        Debug.Log(currentHealth);
         currentHealth -= damage;
         //play animation to take damage goes here
         if (currentHealth <= 0)

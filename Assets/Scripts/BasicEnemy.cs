@@ -85,7 +85,7 @@ public class BasicEnemy : Enemy
 
     public override void Attack(GameObject target)
     {
-        Debug.Log("Attacking Player!");
+        // Debug.Log("Attacking Player!");
         robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
         if (target.transform.parent != null)

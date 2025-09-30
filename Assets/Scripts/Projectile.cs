@@ -17,6 +17,8 @@ public class Projectile : MonoBehaviour
 
     public bool isReverseBullet = false;
 
+    public bool damagesPlayer = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +47,7 @@ public class Projectile : MonoBehaviour
     //ontriggerenter2D
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.tag);
 
         if (other.CompareTag("Wall"))
         {
@@ -65,7 +68,7 @@ public class Projectile : MonoBehaviour
 
         // check if other object has the IDamageable interface:
         IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null && !other.CompareTag("Player")) //TODO: nuke this later, no enemies have projectiles
+        if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
         {
             if (player != null)
             {
@@ -74,6 +77,11 @@ public class Projectile : MonoBehaviour
             damageable.TakeDamage(damage);
             Debug.Log("Hit " + other.name + " for " + damage);
             Destroy(gameObject);
+        }
+
+        if(damageable != null && damagesPlayer && other.CompareTag("Player"))
+        {
+            damageable.TakeDamage(damage);
         }
         
         

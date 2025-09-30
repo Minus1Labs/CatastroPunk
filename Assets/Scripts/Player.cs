@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IDamageable
     public float iFrameDuration = 1f;
     private bool isInvincible = false;
 
-    [SerializeField] private int baseDamage = 80;
+    [SerializeField] private int baseDamage = 2;
     private int currentDamage;
 
     [SerializeField] private float baseProjectileSpeed = 12f;
@@ -413,7 +413,7 @@ public class Player : MonoBehaviour, IDamageable
         // {
         //     speedModifier = (4.0f / Mathf.Sqrt(5)) * currentSpeed;
         // }
-        Debug.Log("Speed mod: " + speedModifier);
+        // Debug.Log("Speed mod: " + speedModifier);
         rb.velocity = movementInputVector.normalized * speedModifier;
     }
 
@@ -507,7 +507,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log("Player died!");
+        // Debug.Log("Player died!");
         //TODO: more logic for player death
     }
 }
