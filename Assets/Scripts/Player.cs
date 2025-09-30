@@ -30,6 +30,9 @@ public class Player : MonoBehaviour, IDamageable
     public Animator catBodyAnimator;
     public Animator catTailAnimator;
 
+    private Vector3 mousePos;
+    public GameObject gunPos;
+
     private Vector2 lastAnimDir = new Vector2(1, 1);
     private Vector2 lastRawDir = Vector2.right;
 
@@ -274,7 +277,14 @@ public class Player : MonoBehaviour, IDamageable
             chargingAmmoRefund = false;
             Debug.Log("Stopped ammo refund because key stopped being held after seconds: " + (Time.time - ammoRefundStartTime));
         }
-    
+
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        gunPos.transform.position = mousePos;
+        Debug.Log(gunPos.transform.position);
+
+        //If you get an error with the above line, replace it with this:
+        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, zAxis);
     }
 
     IEnumerator Dash()
@@ -387,7 +397,7 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
-            shootAnimation(dir);
+            //shootAnimation(dir);//do not delete, will change it to a nice shoot animation
             if (reverseBulletSound != null)
             {
                 reverseBulletSound.Play();
@@ -429,7 +439,7 @@ public class Player : MonoBehaviour, IDamageable
             {
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
-                shootAnimation(dir);
+                //shootAnimation(dir);//do not delete will change to a nice shooting anim
                 proj.SetStats(currentDamage, projectileSpeed, projLifetime);
                 if (fireSource != null) fireSource.PlayOneShot(fireSound);
             }
