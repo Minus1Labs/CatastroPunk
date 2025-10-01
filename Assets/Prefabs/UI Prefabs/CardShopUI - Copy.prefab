@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 3661128800190484570}
   - component: {fileID: 7683899498930698226}
   m_Layer: 5
-  m_Name: CardShopUI
+  m_Name: CardShopUI - Copy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
