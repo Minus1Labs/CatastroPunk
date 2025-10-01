@@ -225,6 +225,15 @@ public class BasicEnemy : Enemies.Enemy
             float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
             targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
         }
+
+        robotAnimator.SetTrigger("Reverse");
+        // Teleport + stop motion
+        rb.position = targetPos;
+        rb.velocity = Vector2.zero;
+
+        // (Optional tiny cleanup) write a fresh sample now so history stays consistent
+        posHistory.AddLast(new PosSample(Time.time, rb.position));
+
     }
 
     // --- TRUNCATE FUTURE SAMPLES: remove any samples with t > targetT ---

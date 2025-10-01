@@ -275,6 +275,10 @@ public class Player : MonoBehaviour, IDamageable
                     Debug.Log("Completed ammo refund at time " + Time.time);
                     chargingAmmoRefund = false;
                     currentAmmoCount = ammoPerRoom;
+                    if(currentAmmoCount == 0)
+                    {
+                        currentAmmoCount = 6;
+                    }
                 }
             }
         } else if (chargingAmmoRefund)
