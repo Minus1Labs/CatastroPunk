@@ -47,8 +47,6 @@ public class Projectile : MonoBehaviour
     //ontriggerenter2D
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
-
         if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
@@ -75,7 +73,6 @@ public class Projectile : MonoBehaviour
                 player.HitTarget();
             }
             damageable.TakeDamage(damage);
-            Debug.Log("Hit " + other.name + " for " + damage);
             Destroy(gameObject);
         }
 

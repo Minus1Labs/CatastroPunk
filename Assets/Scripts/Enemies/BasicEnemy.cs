@@ -27,6 +27,10 @@ public class BasicEnemy : Enemies.Enemy
 
     private float currentEnemyTime = 0f;
 
+    private bool isShootingPlayer = true, canShoot = true;
+    [SerializeField] private float shootInterval = 1f;
+    [SerializeField] private GameObject bulletPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -48,6 +52,13 @@ public class BasicEnemy : Enemies.Enemy
         currentEnemyTime += Time.deltaTime;
         if (player == null) return;
 
+        if (canShoot && isShootingPlayer)
+        {
+            ShootPlayer();
+            canShoot = false;
+            StartCoroutine(ResetShoot());
+        }
+
         float dist = Vector2.Distance(transform.position, player.position);
         if (dist <= detectionRadius)
         {
@@ -62,7 +73,30 @@ public class BasicEnemy : Enemies.Enemy
         posHistory.AddLast(new PosSample(currentEnemyTime, transform.position));
         // float cutoff = Time.time - Mathf.Max(historyKeepSeconds, reverseLookbackSeconds + 0.25f);
         // while (posHistory.Count > 1 && posHistory.First.Value.t < cutoff)
-            // posHistory.RemoveFirst();
+        // posHistory.RemoveFirst();
+        while (posHistory.Count > 1 && posHistory.First.Value.t < currentEnemyTime - historyKeepSeconds)
+            posHistory.RemoveFirst();
+    }
+
+    void ShootPlayer()
+    {
+
+        // basically get player position, and we will instantiate a bullet prefab
+        //that points towards the player:
+        if (player == null || bulletPrefab == null) return;
+
+        Vector2 shootDir = (player.position - transform.position).normalized;
+
+        //simply instantiate the bullet prefab with a rotation that points towards the player:
+        float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+        Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
+        Instantiate(bulletPrefab, transform.position, rot);
+    }
+
+    IEnumerator ResetShoot()
+    {
+        yield return new WaitForSeconds(shootInterval);
+        canShoot = true;
     }
 
     //simple 4-d movement towards player
@@ -167,6 +201,7 @@ public class BasicEnemy : Enemies.Enemy
     targetT = Mathf.Max(0f, targetT);
     Debug.Log("Target T: " + targetT);
     currentEnemyTime -= lookback;
+    currentEnemyTime = Mathf.Max(0f, currentEnemyTime);
 
     if (posHistory.Count == 0) return;
 

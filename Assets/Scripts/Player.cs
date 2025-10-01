@@ -57,6 +57,9 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private int baseDamage = 2;
     private int currentDamage;
 
+    [SerializeField]
+    private float reverseBulletCooldown;
+
     [SerializeField] private float baseProjectileSpeed = 12f;
     private float projectileSpeed;
 
@@ -96,6 +99,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private Vector2 prevInput = Vector2.zero;
     private bool wasMoving = false;
+
+    private bool canShootReverse = true;
 
 
 
@@ -241,7 +246,7 @@ public class Player : MonoBehaviour, IDamageable
             {
                 currentAmmoCount -= 1;
                 FireProjectile();
-            } else if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P))
+            } else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
             {
                 FireProjectile(true);
             }
@@ -378,6 +383,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void FireReverse()
     {
+        canShootReverse = false;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
@@ -403,6 +409,13 @@ public class Player : MonoBehaviour, IDamageable
                 reverseBulletSound.Play();
             }
         }
+        StartCoroutine(ReverseCooldown());
+    }
+
+    IEnumerator ReverseCooldown()
+    {
+        yield return new WaitForSeconds(reverseBulletCooldown);
+        canShootReverse = true;
     }
 
     void FireProjectile(bool reverse = false)

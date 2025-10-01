@@ -162,7 +162,9 @@ MonoBehaviour:
   attackSound: {fileID: -4531253686184383317}
   deathSound: {fileID: 325335039402089892}
   reverseLookbackSeconds: 1
-  historyKeepSeconds: 20
+  historyKeepSeconds: 40
+  shootInterval: 1
+  bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0
