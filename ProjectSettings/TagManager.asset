@@ -10,7 +10,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Whiteboard
   - Water
   - UI
   - Player
@@ -24,7 +24,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Wall
   - 
   - 
   - 
