@@ -281,7 +281,7 @@ public class Player : MonoBehaviour, IDamageable
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         gunPos.transform.position = mousePos;
-        Debug.Log(gunPos.transform.position);
+        // Debug.Log(gunPos.transform.position);
 
         //If you get an error with the above line, replace it with this:
         //mousePosition = new Vector3(mousePosition.x, mousePosition.y, zAxis);

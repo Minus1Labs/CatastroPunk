@@ -161,8 +161,8 @@ MonoBehaviour:
   robotAnimator: {fileID: 995505005214128938}
   attackSound: {fileID: -4531253686184383317}
   deathSound: {fileID: 325335039402089892}
-  reverseLookbackSeconds: 3
-  historyKeepSeconds: 2
+  reverseLookbackSeconds: 1
+  historyKeepSeconds: 20
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0
