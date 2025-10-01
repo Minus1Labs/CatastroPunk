@@ -25,6 +25,8 @@ public class BasicEnemy : Enemies.Enemy
     private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p){ this.t=t; this.p=p; } }
     private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
 
+    private float currentEnemyTime = 0f;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,10 +40,12 @@ public class BasicEnemy : Enemies.Enemy
 
         posHistory.Clear();
         posHistory.AddLast(new PosSample(Time.time, transform.position));
+        currentEnemyTime = Time.time;
     }
 
     private void Update()
     {
+        currentEnemyTime += Time.deltaTime;
         if (player == null) return;
 
         float dist = Vector2.Distance(transform.position, player.position);
@@ -55,10 +59,10 @@ public class BasicEnemy : Enemies.Enemy
             rb.velocity = Vector2.zero; // stop when player is out of range
             robotAnimator.SetBool("Follow", false);
         }
-        posHistory.AddLast(new PosSample(Time.time, transform.position));
-        float cutoff = Time.time - Mathf.Max(historyKeepSeconds, reverseLookbackSeconds + 0.25f);
-        while (posHistory.Count > 1 && posHistory.First.Value.t < cutoff)
-            posHistory.RemoveFirst();
+        posHistory.AddLast(new PosSample(currentEnemyTime, transform.position));
+        // float cutoff = Time.time - Mathf.Max(historyKeepSeconds, reverseLookbackSeconds + 0.25f);
+        // while (posHistory.Count > 1 && posHistory.First.Value.t < cutoff)
+            // posHistory.RemoveFirst();
     }
 
     //simple 4-d movement towards player
@@ -156,38 +160,37 @@ public class BasicEnemy : Enemies.Enemy
 
 
     public override void Reverse(int strength)
+{
+    Debug.Log(posHistory.Count);
+    float lookback = reverseLookbackSeconds; // or scale by strength if desired
+    float targetT = currentEnemyTime - Mathf.Max(0.01f, lookback);
+    targetT = Mathf.Max(0f, targetT);
+    Debug.Log("Target T: " + targetT);
+    currentEnemyTime -= lookback;
+
+    if (posHistory.Count == 0) return;
+
+    // Find the sample node <= targetT (scan from newest backward)
+    var node = posHistory.Last;
+    while (node != null && node.Value.t > targetT) node = node.Previous;
+
+    Vector2 targetPos;
+    if (node == null)
     {
-        // lookback = 1s by default; multiply by strength if you want (keep 1s: ignore strength)
-        float lookback = reverseLookbackSeconds; // or: reverseLookbackSeconds * Mathf.Max(1, strength);
-        float targetT = Time.time - Mathf.Max(0.01f, lookback);
-
-        if (posHistory.Count == 0) return;
-        
-
-        // Find the first sample with time <= targetT (scan from newest backward for fewer steps)
-            var node = posHistory.Last;
-        while (node != null && node.Value.t > targetT) node = node.Previous;
-
-        Vector2 targetPos;
-        if (node == null)
-        {
-            // All samples newer than target -> use oldest we have
-            targetPos = posHistory.First.Value.p;
-        }
+        // All samples newer than target -> use oldest we have
+        targetPos = posHistory.First.Value.p;
+    }
+    else
+    {
+        var newer = node.Next;
+        if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
+            targetPos = node.Value.p;
         else
         {
-            // Interpolate with the next newer sample if it exists
-            var newer = node.Next;
-            if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
-            {
-                targetPos = node.Value.p;
-            }
-            else
-            {
-                float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
-                targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
-            }
+            float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
+            targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
         }
+
         robotAnimator.SetTrigger("Reverse");
         // Teleport + stop motion
         rb.position = targetPos;
@@ -195,5 +198,19 @@ public class BasicEnemy : Enemies.Enemy
 
         // (Optional tiny cleanup) write a fresh sample now so history stays consistent
         posHistory.AddLast(new PosSample(Time.time, rb.position));
+
     }
+
+    // --- TRUNCATE FUTURE SAMPLES: remove any samples with t > targetT ---
+    while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
+        posHistory.RemoveLast();
+
+    // Teleport & stop
+    rb.position = targetPos;
+    rb.velocity = Vector2.zero;
+
+    // Add a fresh sample at the CURRENT time/position (this becomes the new tail)
+    posHistory.AddLast(new PosSample(Time.time, rb.position));
+}
+
 }
