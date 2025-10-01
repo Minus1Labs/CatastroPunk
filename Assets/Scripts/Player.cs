@@ -298,9 +298,11 @@ public class Player : MonoBehaviour, IDamageable
         canDash = false;
         isDashing = true;
         currentSpeed = baseSpeed * dashSpeed;
+        isInvincible = true;
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
         currentSpeed = baseSpeed;
+        isInvincible = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
@@ -565,7 +567,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("TAKING DAMAGE");
+        if(isInvincible) return;
         if (hurtSound != null) hurtSound.Play();
         if (isInvincible) return;
         currentHealth -= damage;
