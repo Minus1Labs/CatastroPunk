@@ -156,6 +156,8 @@ MonoBehaviour:
   detectionRadius: 6
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
   robotAnimator: {fileID: 995505005214128938}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
   reverseLookbackSeconds: 3
   historyKeepSeconds: 2
 --- !u!58 &8370681384738457594
