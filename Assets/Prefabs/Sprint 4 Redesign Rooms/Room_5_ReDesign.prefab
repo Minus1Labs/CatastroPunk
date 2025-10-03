@@ -18105,8 +18105,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 0.34117648, g: 0.9490197, b: 0.18823531, a: 1}
+      key0: {r: 0.909804, g: 0.5764706, b: 0.68235296, a: 1}
+      key1: {r: 0.5294118, g: 0.80392164, b: 0.59607846, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -18405,11 +18405,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4927236963656732495, guid: 84fb8b54071d5644a9f44cd520b147f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09
+      value: -1.76
       objectReference: {fileID: 0}
     - target: {fileID: 4927236963656732495, guid: 84fb8b54071d5644a9f44cd520b147f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.51
+      value: 2.88
       objectReference: {fileID: 0}
     - target: {fileID: 4927236963656732495, guid: 84fb8b54071d5644a9f44cd520b147f2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -18477,13 +18477,17 @@ PrefabInstance:
       propertyPath: recorder
       value: 
       objectReference: {fileID: 7643439528328449454}
+    - target: {fileID: 536832066297980726, guid: 29606c54368b89b44a00816337bffb9e, type: 3}
+      propertyPath: wireLength
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 822110699869544472, guid: 29606c54368b89b44a00816337bffb9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.91
+      value: -14.73
       objectReference: {fileID: 0}
     - target: {fileID: 822110699869544472, guid: 29606c54368b89b44a00816337bffb9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.22
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 822110699869544472, guid: 29606c54368b89b44a00816337bffb9e, type: 3}
       propertyPath: m_LocalPosition.z
