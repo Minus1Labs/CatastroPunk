@@ -4,14 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Main Scenes/IntroCutScene.unity
-    guid: 91759ec382d12d041a989ca875edd54a
-  - enabled: 1
-    path: Assets/Scenes/Main Scenes/TubeRoom.unity
-    guid: b9405d0662bf7427c871638cb2f7e053
-  - enabled: 1
-    path: Assets/Scenes/Main Scenes/BossAiTestScene.unity
-    guid: 3ee7e0ac3abf0469bb96450ac0660985
+  m_Scenes: []
   m_configObjects: {}
