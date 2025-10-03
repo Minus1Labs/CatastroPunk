@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4927236963656732495}
   - component: {fileID: 1380686143151280459}
-  - component: {fileID: 3285184546580996133}
+  - component: {fileID: 9140021399477463193}
   - component: {fileID: 6847037094956173128}
   - component: {fileID: 7121816087313897175}
   m_Layer: 0
@@ -87,8 +87,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3285184546580996133
-BoxCollider2D:
+--- !u!60 &9140021399477463193
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,9 +129,30 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -1.268294, y: -0.32806778}
+      - {x: 0.9435245, y: -1.4252256}
+      - {x: 1.1216899, y: -1.2599096}
+      - {x: 1.3125, y: -1.084375}
+      - {x: 1.3390626, y: -1.0828125}
+      - {x: 1.3468751, y: -1.0796875}
+      - {x: 1.3625001, y: -1.0656251}
+      - {x: 1.3640625, y: -1.0609375}
+      - {x: 1.3640625, y: -0.1015625}
+      - {x: 1.3546876, y: -0.090625}
+      - {x: 1.3265625, y: -0.075}
+      - {x: 1.21875, y: -0.014062501}
+      - {x: 1.196875, y: -0.003125}
+      - {x: 1.171875, y: 0.025}
+      - {x: 1.140625, y: 0.0578125}
+      - {x: 1.0125, y: 0.1984375}
+      - {x: 0.98125, y: 0.234375}
+      - {x: 0.959375, y: 0.259375}
+      - {x: 0.934375, y: 0.284375}
+      - {x: -1.1953125, y: 1.3484375}
+      - {x: -1.2765828, y: 1.3826479}
+  m_UseDelaunayMesh: 0
 --- !u!50 &6847037094956173128
 Rigidbody2D:
   serializedVersion: 4
@@ -171,4 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c741c9b58c44440b09526e13069bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleTarget: {fileID: 90724205938943127, guid: 29606c54368b89b44a00816337bffb9e, type: 3}
+  interactibleTarget: {fileID: 5226547261882722337, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}

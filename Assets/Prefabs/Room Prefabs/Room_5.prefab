@@ -18050,6 +18050,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7121816087313897175, guid: 84fb8b54071d5644a9f44cd520b147f2, type: 3}
+      propertyPath: interactibleTarget
+      value: 
+      objectReference: {fileID: 1403365553953683520}
     - target: {fileID: 7532865120256502998, guid: 84fb8b54071d5644a9f44cd520b147f2, type: 3}
       propertyPath: m_Name
       value: wire_receiver
@@ -18234,5 +18238,10 @@ PrefabInstance:
 --- !u!4 &1244548350800920642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5382974337209552931, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+  m_PrefabInstance: {fileID: 6625266201841029217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1403365553953683520 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5226547261882722337, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
   m_PrefabInstance: {fileID: 6625266201841029217}
   m_PrefabAsset: {fileID: 0}
