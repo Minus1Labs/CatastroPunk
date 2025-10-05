@@ -8,6 +8,8 @@ public class PlayerTeleporter : MonoBehaviour
 {
     public Vector2 targetLocation;
 
+    public Transform targetTransform; 
+
     [SerializeField] private CinemachineVirtualCamera vcam; // optional drag in inspector
 
     public bool loadScene = false;
@@ -41,17 +43,24 @@ public class PlayerTeleporter : MonoBehaviour
                 ? collision.transform.parent
                 : collision.transform;
 
-            root.position = targetLocation;
+            if (targetTransform != null)
+            {
+                root.position = targetTransform.position;
+            }
+            else
+            {
+                root.position = targetLocation;
+            }
 
             if (vcam != null)
-            {
-                // simplest: reset Cinemachine so it snaps
-                vcam.PreviousStateIsValid = false;
+                {
+                    // simplest: reset Cinemachine so it snaps
+                    vcam.PreviousStateIsValid = false;
 
-                // or, if you want the delta approach instead:
-                // Vector3 delta = targetLocation - root.position;
-                // vcam.OnTargetObjectWarped(root, delta);
-            }
+                    // or, if you want the delta approach instead:
+                    // Vector3 delta = targetLocation - root.position;
+                    // vcam.OnTargetObjectWarped(root, delta);
+                }
             Player p = collision.GetComponent<Player>();
             if (p != null)
             {

@@ -101,6 +101,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool wasMoving = false;
 
     private bool canShootReverse = true;
+    
 
 
 
@@ -242,9 +243,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (CanInput()) {
             SetInputVector();
-            if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.O)) && currentAmmoCount > 0)
+            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentAmmoCount > 0)
             {
-                currentAmmoCount -= 1;
+                // currentAmmoCount -= 1;
                 FireProjectile();
             } else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
             {
