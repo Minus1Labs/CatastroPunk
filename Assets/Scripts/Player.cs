@@ -101,6 +101,9 @@ public class Player : MonoBehaviour, IDamageable
     private bool wasMoving = false;
 
     private bool canShootReverse = true;
+
+    private bool canFire = true;
+    public float fireInterval = 0.2f;
     
 
 
@@ -237,17 +240,26 @@ public class Player : MonoBehaviour, IDamageable
         return !isDashing && !chargingAmmoRefund;
     }
 
+    IEnumerator EnableFire()
+    {
+        yield return new WaitForSeconds(fireInterval);
+        canFire = true;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         if (CanInput()) {
             SetInputVector();
-            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentAmmoCount > 0)
+            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentAmmoCount > 0 && canFire)
             {
                 // currentAmmoCount -= 1;
+                canFire = false;
                 FireProjectile();
-            } else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
+                StartCoroutine(EnableFire());
+            }
+            else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
             {
                 FireProjectile(true);
             }

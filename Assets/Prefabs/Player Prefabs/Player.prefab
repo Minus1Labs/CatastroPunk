@@ -283,6 +283,7 @@ MonoBehaviour:
   dashSound: {fileID: 797350745824914300}
   hurtSound: {fileID: 1790850676508089123}
   reverseBulletSound: {fileID: 0}
+  fireInterval: 0.3
 --- !u!82 &8789384875300192159
 AudioSource:
   m_ObjectHideFlags: 0

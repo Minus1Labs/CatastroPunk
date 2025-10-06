@@ -24,7 +24,12 @@ public class WireReceiver : MonoBehaviour
         interactible = source.GetComponent<ISpecialInteractible>();
         if (interactible == null)
         {
-            Debug.LogError($"WireReceiver on {name}: target does not have a component implementing ISpecialInteractible.");
+            // find the component in children:
+            interactible = source.GetComponentInChildren<ISpecialInteractible>();
+            if (interactible == null)
+            {
+                Debug.LogWarning("No ISpecialInteractible found on WireReceiver target!", this);
+            }
         }
     }
 
@@ -34,7 +39,7 @@ public class WireReceiver : MonoBehaviour
         if (recorder != null)
         {
             recorder.CompleteAt(transform.position);
-            if (interactible != null)
+            if (interactible != null) 
             {
                 interactible.SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
             }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CardDealer : MonoBehaviour
 {
-    public Player player;
+    private Player player;
     [SerializeField] private CardDatabase database;
 
     //3 elements for the card options that the player sees on the UI:
@@ -30,10 +30,15 @@ public class CardDealer : MonoBehaviour
         if (cardShopUI == null)
         {
             cardShopUI = GameObject.Find("CardShopUI");
-            //under cardshop UI, there is Card1, Card2, Card3:
-            uiCardOptions[0] = cardShopUI.transform.Find("Card1").gameObject;
-            uiCardOptions[1] = cardShopUI.transform.Find("Card2").gameObject;
-            uiCardOptions[2] = cardShopUI.transform.Find("Card3").gameObject;
+            // ui card options are the 3 children of "Cards" in cardShopUI:
+            Transform cardsTransform = cardShopUI.transform.Find("Cards");
+            if (cardsTransform != null)
+            {
+                uiCardOptions[0] = cardsTransform.GetChild(0).gameObject;
+                uiCardOptions[1] = cardsTransform.GetChild(1).gameObject;
+                uiCardOptions[2] = cardsTransform.GetChild(2).gameObject;
+            }
+
         }
 
     }
@@ -46,9 +51,9 @@ public class CardDealer : MonoBehaviour
         currentCards[1] = database.GetRandomCard();
         currentCards[2] = database.GetRandomCard();
 
-        uiCardOptions[0].GetComponent<Button>().onClick.AddListener(() => SelectCard(0));
-        uiCardOptions[1].GetComponent<Button>().onClick.AddListener(() => SelectCard(1));
-        uiCardOptions[2].GetComponent<Button>().onClick.AddListener(() => SelectCard(2));
+        uiCardOptions[0].GetComponentInChildren<Button>().onClick.AddListener(() => SelectCard(0));
+        uiCardOptions[1].GetComponentInChildren<Button>().onClick.AddListener(() => SelectCard(1));
+        uiCardOptions[2].GetComponentInChildren<Button>().onClick.AddListener(() => SelectCard(2));
         uiCardOptions[0].SetActive(true);
         uiCardOptions[0].GetComponentInChildren<TextMeshProUGUI>().text = currentCards[0].cardName;
         uiCardOptions[1].SetActive(true);
@@ -76,12 +81,12 @@ public class CardDealer : MonoBehaviour
         // find object called card highlight:
         if (cardHighlight == null)
         {
-            cardHighlight = GameObject.Find("CardHighlight");
+            cardHighlight = GameObject.Find("CardSelect");
         }
 
         //the positions for 0, 1, 2 are (-536, -5), (-398.8, -5), (-264.3, -5):
         //this is for rect transform local position:
-        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-418 + index * 422, 0, 0);
+        cardHighlight.GetComponent<RectTransform>().anchoredPosition = new Vector3(-462 + (462 * index), -25, 0);
     }
 
     public void ConfirmCard()
