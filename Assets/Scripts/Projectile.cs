@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IReversible
 {
     public float speed = 3f;
     public float projectileLifetime = 5f;
@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
+
         if (isReverseBullet)
         {
             IReversible reversible = other.GetComponent<IReversible>();
@@ -68,6 +68,7 @@ public class Projectile : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
         {
+            Debug.Log("DAMAGING ENEMY");
             if (player != null)
             {
                 player.HitTarget();
@@ -76,12 +77,12 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if(damageable != null && damagesPlayer && other.CompareTag("Player"))
+        if (damageable != null && damagesPlayer && other.CompareTag("Player"))
         {
             damageable.TakeDamage(damage);
         }
-        
-        
+
+
     }
 
     private IEnumerator DestroyAfterTime()
@@ -92,5 +93,19 @@ public class Projectile : MonoBehaviour
             player.MissTarget();
         }
         Destroy(gameObject);
+    }
+
+    // implementing IReversible
+    public void Reverse(int direction)
+    {
+        if (!damagesPlayer) return; // only reverse if it can damage the player
+        speed = -speed;
+        rb.velocity = transform.right * speed;
+        damagesPlayer = false;
+        SetStats(80, this.speed, this.projectileLifetime); // make it do more damage to enemies
+        // // flip the sprite
+        // Vector3 localScale = transform.localScale;
+        // localScale.y *= -1;
+        // transform.localScale = localScale;
     }
 }
