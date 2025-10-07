@@ -77054,7 +77054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440443538626670539, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_TileSpriteArray.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2440443538626670539, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_Tiles.Array.data[1406].first.x
@@ -77282,11 +77282,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2440443538626670539, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_Tiles.Array.data[1430].second.m_TileSpriteIndex
-      value: 3
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2440443538626670539, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_Tiles.Array.data[1431].second.m_TileSpriteIndex
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2440443538626670539, guid: e9064155544fd6845b8db9f678043223, type: 3}
+      propertyPath: m_Tiles.Array.data[1430].second.m_TileObjectToInstantiateIndex
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 2741014839940720525, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77350,7 +77354,7 @@ PrefabInstance:
       objectReference: {fileID: 1386611019}
     - target: {fileID: 9070462652283788644, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9070462652283788644, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.size
@@ -78162,7 +78166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9070462652283788644, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9070462652283788644, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_CompositePaths.m_Paths.Array.data[1].Array.data[100].x
@@ -117407,7 +117411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.008406012, w: 0.9999647}
+  m_LocalRotation: {x: 0, y: 0, z: -0.01014009, w: 0.9999486}
   m_LocalPosition: {x: 55.08, y: -29.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

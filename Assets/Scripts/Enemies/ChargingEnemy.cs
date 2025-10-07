@@ -21,6 +21,7 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
     private Transform player;
 
     public GameObject explosionPrefab;
+    private Animator antAnimator;
 
     public enum ChargingEnemyState
     {
@@ -54,7 +55,7 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
     protected override void Awake()
     {
         base.Awake();
-
+        antAnimator = GetComponent<Animator>();
         // Find player by tag
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null)
@@ -172,6 +173,7 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
         if (enemyState == ChargingEnemyState.CrowdControlled ||
             enemyState == ChargingEnemyState.Dead) { charging = false; yield break; }
         //play charge animation here
+        antAnimator.SetTrigger("Chasing");
         rb.velocity = chargeSpeed * direction;
 
         yield return new WaitForSeconds(chargeDuration);
