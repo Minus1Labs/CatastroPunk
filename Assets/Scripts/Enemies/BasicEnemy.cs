@@ -51,7 +51,8 @@ public class BasicEnemy : Enemies.Enemy
     {
         currentEnemyTime += Time.deltaTime;
         if (player == null) return;
-
+        if (UIManager.isGamePaused)return;
+        
         if (canShoot && isShootingPlayer)
         {
             ShootPlayer();
