@@ -77300,6 +77300,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -7.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4927103291998118418, guid: e9064155544fd6845b8db9f678043223, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.514092
+      objectReference: {fileID: 0}
     - target: {fileID: 5527515712132498496, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_LocalPosition.x
       value: 77
@@ -117403,7 +117407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.008119463, w: 0.9999671}
+  m_LocalRotation: {x: 0, y: 0, z: -0.008406012, w: 0.9999647}
   m_LocalPosition: {x: 55.08, y: -29.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -355143,6 +355147,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 484644967411727714, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 182.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 484644967411727714, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 164
+      objectReference: {fileID: 0}
+    - target: {fileID: 994018435329916327, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 994018435329916327, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.59
+      objectReference: {fileID: 0}
     - target: {fileID: 3904105955110371975, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
       propertyPath: closedSprite
       value: 
@@ -355154,6 +355174,18 @@ PrefabInstance:
     - target: {fileID: 5734143835597220085, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
       propertyPath: m_Name
       value: Room6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229415232289072132, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 184.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229415232289072132, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 99.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8229415232289072132, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 164.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
