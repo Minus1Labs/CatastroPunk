@@ -23,11 +23,18 @@ public class UIManager : MonoBehaviour
     {
         onBoardingUIDeActive();
         GameplayUI.SetActive(true);
-        isGamePaused = false; 
     }
 
     public void onBoardingUIDeActive()
     {
         onBoardingUI.SetActive(false);
+        isGamePaused = false;
+    }
+
+    public void onBoardingUIActive()
+    {
+        onBoardingUI.SetActive(true);
+        isGamePaused = true;
+        GameplayUI.SetActive(false);
     }
 }
