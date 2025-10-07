@@ -127,7 +127,7 @@ Animator:
   m_GameObject: {fileID: 3770378573639926962}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb638c30a19a55f4287f3def70c7a7cc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   chargeSpeed: 12
   chargeEndlagDuration: 3
   directionSwitchLockout: 1.5
-  explosionPrefab: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
+  explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
   reverseLookbackSeconds: 3
   historyKeepSeconds: 2
 --- !u!58 &3453259124348639334
@@ -196,9 +196,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00012350082, y: 0}
+  m_Offset: {x: 0.00012350082, y: 1.4470997}
   serializedVersion: 2
-  m_Radius: 0.53500414
+  m_Radius: 1.0472507
 --- !u!61 &2386352436946480419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0808506, y: 1.181953}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -242,7 +242,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.4245033, y: 1.3002996}
   m_EdgeRadius: 0
 --- !u!1001 &5866001851381497112
 PrefabInstance:
