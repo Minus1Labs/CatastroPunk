@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onBoardingUI: {fileID: 6409511273017174590}
+  GameplayUI: {fileID: 0}
 --- !u!1001 &6389634427826000874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +138,14 @@ PrefabInstance:
     - target: {fileID: 510735696771519780, guid: b26e8a52d9b134208a4ab0ee60fcde23, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683821778792123456, guid: b26e8a52d9b134208a4ab0ee60fcde23, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683821778792123456, guid: b26e8a52d9b134208a4ab0ee60fcde23, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6620895753699095986, guid: b26e8a52d9b134208a4ab0ee60fcde23, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -5,6 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject onBoardingUI;
+    public GameObject GameplayUI;
     //public GameObject pauseMenuUI; //for implementing it
 
     public static bool isGamePaused;
@@ -14,12 +15,19 @@ public class UIManager : MonoBehaviour
     {
         isGamePaused = true;
         onBoardingUI.SetActive(true);
+        GameplayUI.SetActive(false);
     }
 
     // Update is called once per frame
     public void StartGame()
     {
-        onBoardingUI.SetActive(false);
+        onBoardingUIDeActive();
+        GameplayUI.SetActive(true);
         isGamePaused = false; 
+    }
+
+    public void onBoardingUIDeActive()
+    {
+        onBoardingUI.SetActive(false);
     }
 }
