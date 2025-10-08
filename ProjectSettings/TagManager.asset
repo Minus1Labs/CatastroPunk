@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - DoorCollider
+  - GroundTilemap
   layers:
   - Default
   - TransparentFX
