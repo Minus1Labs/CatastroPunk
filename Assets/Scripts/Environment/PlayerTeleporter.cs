@@ -64,7 +64,7 @@ public class PlayerTeleporter : MonoBehaviour
             Player p = collision.GetComponent<Player>();
             if (p != null)
             {
-                p.SetCurrentAmmo(p.getAmmoPerRoom());
+                //p.SetCurrentAmmo(p.getAmmoPerRoom());
             }
         }
     }

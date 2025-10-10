@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour, IReversible
     public float speed = 3f;
     public float projectileLifetime = 5f;
 
-    public int damage = 1;
+    public float damage = 1;
     private Rigidbody2D rb;
 
     private Player player = null;
@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour, IReversible
         StartCoroutine(DestroyAfterTime());
     }
 
-    public void SetStats(int pDamage, float projectileSpeed = 3f, float lifetime = 5f)
+    public void SetStats(float pDamage, float projectileSpeed = 3f, float lifetime = 5f)
     {
         damage = pDamage;
         speed = projectileSpeed;
@@ -79,7 +79,7 @@ public class Projectile : MonoBehaviour, IReversible
 
         if (damageable != null && damagesPlayer && other.CompareTag("Player"))
         {
-            damageable.TakeDamage(damage);
+            damageable.TakeDamage(1);
         }
 
 

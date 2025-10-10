@@ -15,6 +15,35 @@ public static class ScriptUtilities
         new Vector2(-2, -1).normalized
     };
 
+    public enum PLAYER_SPRITE_ZONES
+    {
+        FEET,
+        LEGS,
+        BODY1,
+        BODY2,
+        BODY3,
+        EYES,
+        HEAD,
+        ABOVE_HEAD,
+        ABOVE_BODY,
+        TAIL,
+        TAIL_LASER,
+        MOUTH,
+        AROUND_HEAD,
+        OUTLINE
+    }
+
+    public struct Item_Sprite_Info
+    {
+        bool hasCharcterSprite;
+        string spriteDescription;
+        PLAYER_SPRITE_ZONES spriteZone;
+        int spritePriority;
+        bool spriteIsStackable;
+        SpriteRenderer sprite;
+    }
+
+
     public enum FLOOR_NAMES
     {
         LAB,

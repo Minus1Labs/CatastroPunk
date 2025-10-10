@@ -35,15 +35,8 @@ public class CounterUI : MonoBehaviour
         //update text to show current ammo count:
         if (text != null && player != null)
         {
-            int value = (int)player.GetCounter(CounterName);
-            if (displayMax)
-            {
-                text.text = value.ToString() + "/" + maxValue.ToString();
-            }
-            else
-            {
-                text.text = value.ToString();
-            }
+            float value = player.GetCurrentCharge();
+            text.text = value.ToString() + " / " + player.GetBatteryCapacity();
             slider.value = value;
         }
     }
