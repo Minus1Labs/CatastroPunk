@@ -2189,7 +2189,7 @@ MonoBehaviour:
   slider: {fileID: 7555639908199414890}
   player: {fileID: 0}
   displayMax: 0
-  maxValue: 0
+  maxValue: 100
   text: {fileID: 7754141266133426084}
 --- !u!114 &7555639908199414890
 MonoBehaviour:
