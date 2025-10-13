@@ -117206,7 +117206,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.00066098565, w: 0.9999998}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0012790408, w: 0.9999992}
   m_LocalPosition: {x: 55.08, y: -29.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -118606,11 +118606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4243651851576341345, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 85.8998
+      value: 335
       objectReference: {fileID: 0}
     - target: {fileID: 4243651851576341345, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 62.797943
+      value: 185.7
       objectReference: {fileID: 0}
     - target: {fileID: 4243651851576341345, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalRotation.x
@@ -118626,11 +118626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.6
+      value: -283
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -255
+      value: -370.5
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -118642,15 +118642,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5745353633985816183, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -355874,7 +355874,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.28, y: 12.28}
+    oldSize: {x: 1.228, y: 1.228}
     newSize: {x: 12.28, y: 12.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
