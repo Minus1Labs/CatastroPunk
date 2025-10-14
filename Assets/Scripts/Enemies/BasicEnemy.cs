@@ -18,11 +18,12 @@ public class BasicEnemy : Enemies.Enemy
 
     public AudioSource attackSound;
     public AudioSource deathSound;
+    public AudioSource reverseSound;
 
     [SerializeField] private float reverseLookbackSeconds = 3f;
     [SerializeField] private float historyKeepSeconds = 2f;
 
-    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p){ this.t=t; this.p=p; } }
+    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p) { this.t = t; this.p = p; } }
     private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
 
     private float currentEnemyTime = 0f;
@@ -127,7 +128,7 @@ public class BasicEnemy : Enemies.Enemy
         robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
         if (target.transform.parent != null)
-        { 
+        {
             damageable = target.transform.parent.GetComponent<IDamageable>();
         }
         if (damageable != null && Time.time >= damageTimer)
@@ -147,7 +148,7 @@ public class BasicEnemy : Enemies.Enemy
 
         }
         else
-        { 
+        {
             robotAnimator.SetBool("Attack", false);
         }
     }
@@ -186,7 +187,7 @@ public class BasicEnemy : Enemies.Enemy
             Destroy(deathSoundGO, deathSound.clip.length);
         }
 
-        Destroy(gameObject); 
+        Destroy(gameObject);
     }
 
 
@@ -194,58 +195,57 @@ public class BasicEnemy : Enemies.Enemy
 
 
     public override void Reverse(int strength)
-{
-    Debug.Log(posHistory.Count);
-    float lookback = reverseLookbackSeconds; // or scale by strength if desired
-    float targetT = currentEnemyTime - Mathf.Max(0.01f, lookback);
-    targetT = Mathf.Max(0f, targetT);
-    Debug.Log("Target T: " + targetT);
-    currentEnemyTime -= lookback;
-    currentEnemyTime = Mathf.Max(0f, currentEnemyTime);
-
-    if (posHistory.Count == 0) return;
-
-    // Find the sample node <= targetT (scan from newest backward)
-    var node = posHistory.Last;
-    while (node != null && node.Value.t > targetT) node = node.Previous;
-
-    Vector2 targetPos;
-    if (node == null)
     {
-        // All samples newer than target -> use oldest we have
-        targetPos = posHistory.First.Value.p;
-    }
-    else
-    {
-        var newer = node.Next;
-        if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
-            targetPos = node.Value.p;
+        Debug.Log(posHistory.Count);
+        float lookback = reverseLookbackSeconds; // or scale by strength if desired
+        float targetT = currentEnemyTime - Mathf.Max(0.01f, lookback);
+        targetT = Mathf.Max(0f, targetT);
+        Debug.Log("Target T: " + targetT);
+        currentEnemyTime -= lookback;
+        currentEnemyTime = Mathf.Max(0f, currentEnemyTime);
+
+        if (posHistory.Count == 0) return;
+
+        var node = posHistory.Last;
+        while (node != null && node.Value.t > targetT) node = node.Previous;
+
+        Vector2 targetPos;
+        if (node == null)
+        {
+            targetPos = posHistory.First.Value.p;
+        }
         else
         {
-            float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
-            targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            var newer = node.Next;
+            if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
+                targetPos = node.Value.p;
+            else
+            {
+                float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
+                targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            }
+
+            robotAnimator.SetTrigger("Reverse");
+
+            // Teleport + stop motion
+            rb.position = targetPos;
+            rb.velocity = Vector2.zero;
+
+            // Play the reverse sound
+            if (reverseSound != null)
+            {
+                reverseSound.Play();
+            }
+
+            posHistory.AddLast(new PosSample(Time.time, rb.position));
         }
 
-        robotAnimator.SetTrigger("Reverse");
-        // Teleport + stop motion
+        while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
+            posHistory.RemoveLast();
+
         rb.position = targetPos;
         rb.velocity = Vector2.zero;
 
-        // (Optional tiny cleanup) write a fresh sample now so history stays consistent
         posHistory.AddLast(new PosSample(Time.time, rb.position));
-
     }
-
-    // --- TRUNCATE FUTURE SAMPLES: remove any samples with t > targetT ---
-    while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
-        posHistory.RemoveLast();
-
-    // Teleport & stop
-    rb.position = targetPos;
-    rb.velocity = Vector2.zero;
-
-    // Add a fresh sample at the CURRENT time/position (this becomes the new tail)
-    posHistory.AddLast(new PosSample(Time.time, rb.position));
-}
-
 }
