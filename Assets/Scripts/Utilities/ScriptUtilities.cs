@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public static class ScriptUtilities {
+public static class ScriptUtilities
+{
 
     public static readonly Vector2 gridUpRight = new Vector2(2, 1).normalized;
     public static readonly Vector2 gridDownRight = new Vector2(2, -1).normalized;
@@ -13,6 +14,15 @@ public static class ScriptUtilities {
         new Vector2(-2, 1).normalized,
         new Vector2(-2, -1).normalized
     };
+
+    public enum FLOOR_NAMES
+    {
+        LAB,
+        CRUISE_SHIP,
+        JUPITER_CITY_STREETS
+    }
+
+    public static readonly int gridScalar = 5;
 
     /*
     Returns the closest isometric-grid aligned vector to the 
@@ -35,5 +45,16 @@ public static class ScriptUtilities {
         }
 
         return bestVector;
+    }
+
+    //We want to have grid +x be y = -x; grid +y to be y = x
+    public static Vector2 IsoGridToWorld(Vector2 gridPos)
+    {
+        float dx = (1f / 2f) * 5f;    // tileWidth / 2 * scale = 2.5
+        float dy = (0.5f / 2f) * 5f;  // tileHeight / 2 * scale = 1.25
+
+        float wx = (gridPos.x + gridPos.y) * dx;
+        float wy = (-gridPos.x + gridPos.y) * dy;
+        return new Vector2(wx, wy);
     }
 }

@@ -44,7 +44,7 @@ public class CounterUI : MonoBehaviour
             {
                 text.text = value.ToString();
             }
-            slider.value = value;
+            slider.value = (value * 1.0f) / maxValue;
         }
     }
 }

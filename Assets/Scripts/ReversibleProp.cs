@@ -6,6 +6,7 @@ public class ReversibleProp : MonoBehaviour, IReversible
 {
 
     public GameObject oldVersion;
+    public ISpecialInteractible interactible;
 
     public void Reverse(int strength)
     {
@@ -14,6 +15,7 @@ public class ReversibleProp : MonoBehaviour, IReversible
         {
             oldVersion.SetActive(true);
             gameObject.SetActive(false);
+            interactible.SpecialInteract(ISpecialInteractible.SpecialInteractType.EXPLOSION);
         }
     }
 }

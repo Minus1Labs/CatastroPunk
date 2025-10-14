@@ -167,6 +167,7 @@ MonoBehaviour:
   historyKeepSeconds: 40
   shootInterval: 1
   bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
+  deadPrefab: {fileID: 575834101007669348, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0

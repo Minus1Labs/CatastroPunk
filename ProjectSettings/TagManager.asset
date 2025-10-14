@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Wall
   - DoorCollider
+  - GroundTilemap
+  - Red
+  - Green
+  - Blue
+  - Yellow
   layers:
   - Default
   - TransparentFX

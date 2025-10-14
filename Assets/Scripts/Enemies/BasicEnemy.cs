@@ -32,6 +32,8 @@ public class BasicEnemy : Enemies.Enemy
     [SerializeField] private float shootInterval = 1f;
     [SerializeField] private GameObject bulletPrefab;
 
+    [SerializeField] private GameObject deadPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -52,7 +54,8 @@ public class BasicEnemy : Enemies.Enemy
     {
         currentEnemyTime += Time.deltaTime;
         if (player == null) return;
-
+        if (UIManager.isGamePaused)return;
+        
         if (canShoot && isShootingPlayer)
         {
             ShootPlayer();
@@ -186,8 +189,8 @@ public class BasicEnemy : Enemies.Enemy
 
             Destroy(deathSoundGO, deathSound.clip.length);
         }
-
-        Destroy(gameObject);
+        Instantiate(deadPrefab, transform.position, transform.rotation);
+        Destroy(gameObject); 
     }
 
 
