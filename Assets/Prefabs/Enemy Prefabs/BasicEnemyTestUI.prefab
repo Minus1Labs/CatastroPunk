@@ -191,7 +191,7 @@ SpriteRenderer:
   m_Size: {x: 2.22, y: 2.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &995505005214128938
@@ -238,6 +238,8 @@ MonoBehaviour:
   deathSound: {fileID: 325335039402089892}
   reverseLookbackSeconds: 3
   historyKeepSeconds: 2
+  shootInterval: 1
+  bulletPrefab: {fileID: 0}
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -381,13 +383,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a3e87802f82c3f341a387d5f29dfc9a5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.534
+  m_Volume: 0.115
   m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 189
+  Priority: 84
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
