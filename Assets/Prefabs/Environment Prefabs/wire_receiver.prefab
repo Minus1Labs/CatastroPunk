@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f11c64aec0765bb44820b0685f979ccf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2eace0cf44f6fa94ea401d993a386a37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,11 +163,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.2578646, y: -0.98654556}
-      - {x: -0.039492488, y: -1.1010222}
-      - {x: 0.6209717, y: -1.3868561}
-      - {x: 1.2538538, y: -1.7150183}
-      - {x: 1.9644394, y: -2.0906615}
+    - - {x: -0.73833334, y: -1.1988564}
+      - {x: -0.3523587, y: -1.4362426}
+      - {x: 0.27458954, y: -1.7891083}
+      - {x: 0.9298105, y: -2.1172705}
+      - {x: 1.5845337, y: -2.481729}
       - {x: 2.3257494, y: -1.7506897}
       - {x: 2.389226, y: -1.7306732}
       - {x: 2.3938189, y: -0.7429017}
@@ -184,7 +184,7 @@ PolygonCollider2D:
       - {x: 0.4257828, y: 0.4410309}
       - {x: 0.16236418, y: 0.5568512}
       - {x: -0.19623566, y: 0.7240174}
-      - {x: -0.24344838, y: 0.61062944}
+      - {x: -0.7127477, y: 0.8452791}
   m_UseDelaunayMesh: 0
 --- !u!50 &6847037094956173128
 Rigidbody2D:
@@ -225,4 +225,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0c741c9b58c44440b09526e13069bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleTarget: {fileID: 5226547261882722337, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+  puzzleCompleteSFX: {fileID: 0}

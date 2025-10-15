@@ -212,7 +212,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2, y: -8.5, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6902676607330366887}
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf3c7941c43d2d4aa7bd4fcd978d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 5
+  baseSpeed: 7
   projectilePrefab: {fileID: 3412664266963024560, guid: 790d5c2d643e2c0478ec4097de77c812, type: 3}
   reversalProjectilePrefab: {fileID: 829520782942192253, guid: a5defd99f402508498c8fd06b76dcbf0, type: 3}
   firePoint: {fileID: 6637450677528127453}
@@ -272,7 +272,7 @@ MonoBehaviour:
   baseDashCd: 1
   iFrameDuration: 1
   baseDamage: 80
-  reverseBulletCooldown: 2
+  reverseBulletCooldown: 1
   baseProjectileSpeed: 12
   baseDashSpeed: 3
   baseAmmoPerRoom: 6
@@ -988,7 +988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.005025628
+      value: -0.005026136
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

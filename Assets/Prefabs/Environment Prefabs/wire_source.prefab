@@ -92,17 +92,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -1.8427887, y: -0.3250885}
-      - {x: -1.921257, y: -0.41635132}
+    - - {x: -1.9148483, y: -0.16896057}
+      - {x: -1.921257, y: -0.38032532}
       - {x: -2.3015976, y: -0.75107574}
-      - {x: -2.251124, y: -1.7654313}
-      - {x: -2.133471, y: -1.82341}
-      - {x: -1.7466736, y: -2.0977569}
-      - {x: 0.40649116, y: -0.9989579}
-      - {x: 0.4137162, y: -0.8669456}
-      - {x: 0.4178208, y: 0.6521164}
-      - {x: 0.30479896, y: 0.7579285}
-      - {x: -0.9512435, y: 0.07414019}
+      - {x: -2.311171, y: -1.7654313}
+      - {x: -2.1815095, y: -1.9675293}
+      - {x: -1.266285, y: -2.398004}
+      - {x: 0.74276435, y: -1.3592484}
+      - {x: 0.7620019, y: -0.9750389}
+      - {x: 0.7300767, y: 0.54402316}
+      - {x: 0.6650933, y: 0.8900391}
+      - {x: -0.9272224, y: 0.24227679}
   m_UseDelaunayMesh: 0
 --- !u!1 &8570785320880319556
 GameObject:
@@ -114,7 +114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7314554226461092907}
   - component: {fileID: 8370037896656812290}
-  - component: {fileID: 4692198150145368395}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -178,9 +177,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 60c75fb4f1c4793458f8c26cdd8939a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b51ea6d091563e94b86d760f3e183135, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2.56, y: 2.56}
@@ -189,59 +188,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4692198150145368395
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8570785320880319556}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 3.2}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -1.1447601, y: 0.20603943}
-      - {x: -1.2991028, y: -0.08251953}
-      - {x: -1.4214783, y: -0.12891388}
-      - {x: -1.3861755, y: -1.0674027}
-      - {x: -1.1167816, y: -1.2619629}
-      - {x: -0.8817291, y: -1.4755951}
-      - {x: 1.2410859, y: -0.33127904}
-      - {x: 1.2634858, y: -0.19926679}
-      - {x: 1.2675904, y: 1.3349625}
-      - {x: 1.1849183, y: 1.3649079}
-      - {x: -0.9664184, y: 0.33210528}
-  m_UseDelaunayMesh: 0

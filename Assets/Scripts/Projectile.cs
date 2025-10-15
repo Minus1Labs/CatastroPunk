@@ -68,7 +68,6 @@ public class Projectile : MonoBehaviour, IReversible
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
         {
-            Debug.Log("DAMAGING ENEMY");
             if (player != null)
             {
                 player.HitTarget();

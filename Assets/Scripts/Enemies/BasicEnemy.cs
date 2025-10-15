@@ -1,19 +1,17 @@
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 using System.Collections;
 
 public class BasicEnemy : Enemies.Enemy
 {
-
     [Header("Basic Enemy Properties")]
-    [SerializeField] private float damageInterval = 1f; // seconds between ticks
+    [SerializeField] private float damageInterval = 1f;
     [SerializeField] private float detectionRadius = 6f;
 
     private float damageTimer = 0f;
     private Transform player;
 
     public GameObject explosionPrefab;
-
     public Animator robotAnimator;
 
     public AudioSource attackSound;
@@ -22,7 +20,7 @@ public class BasicEnemy : Enemies.Enemy
     [SerializeField] private float reverseLookbackSeconds = 3f;
     [SerializeField] private float historyKeepSeconds = 2f;
 
-    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p){ this.t=t; this.p=p; } }
+    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p) { this.t = t; this.p = p; } }
     private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
 
     private float currentEnemyTime = 0f;
@@ -31,11 +29,12 @@ public class BasicEnemy : Enemies.Enemy
     [SerializeField] private float shootInterval = 1f;
     [SerializeField] private GameObject bulletPrefab;
 
+    [SerializeField] private GameObject deadPrefab;
+
     protected override void Awake()
     {
         base.Awake();
 
-        // Find player by tag
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null)
         {
@@ -51,8 +50,8 @@ public class BasicEnemy : Enemies.Enemy
     {
         currentEnemyTime += Time.deltaTime;
         if (player == null) return;
-        if (UIManager.isGamePaused)return;
-        
+        if (UIManager.isGamePaused) return;
+
         if (canShoot && isShootingPlayer)
         {
             ShootPlayer();
@@ -68,27 +67,20 @@ public class BasicEnemy : Enemies.Enemy
         }
         else
         {
-            rb.velocity = Vector2.zero; // stop when player is out of range
+            rb.velocity = Vector2.zero;
             robotAnimator.SetBool("Follow", false);
         }
+
         posHistory.AddLast(new PosSample(currentEnemyTime, transform.position));
-        // float cutoff = Time.time - Mathf.Max(historyKeepSeconds, reverseLookbackSeconds + 0.25f);
-        // while (posHistory.Count > 1 && posHistory.First.Value.t < cutoff)
-        // posHistory.RemoveFirst();
         while (posHistory.Count > 1 && posHistory.First.Value.t < currentEnemyTime - historyKeepSeconds)
             posHistory.RemoveFirst();
     }
 
     void ShootPlayer()
     {
-
-        // basically get player position, and we will instantiate a bullet prefab
-        //that points towards the player:
         if (player == null || bulletPrefab == null) return;
 
         Vector2 shootDir = (player.position - transform.position).normalized;
-
-        //simply instantiate the bullet prefab with a rotation that points towards the player:
         float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
         Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
         Instantiate(bulletPrefab, transform.position, rot);
@@ -100,16 +92,12 @@ public class BasicEnemy : Enemies.Enemy
         canShoot = true;
     }
 
-    //simple 4-d movement towards player
     public override void Move()
     {
-        if (player == null)
-        {
-            return;
-        }
+        if (player == null) return;
+
         Vector2 playerDir = player.position - transform.position;
         playerDir.Normalize();
-
 
         if (math.abs(playerDir.x) >= math.abs(playerDir.y))
         {
@@ -128,7 +116,7 @@ public class BasicEnemy : Enemies.Enemy
         robotAnimator.SetBool("Attack", true);
         var damageable = target.GetComponent<IDamageable>();
         if (target.transform.parent != null)
-        { 
+        {
             damageable = target.transform.parent.GetComponent<IDamageable>();
         }
         if (damageable != null && Time.time >= damageTimer)
@@ -145,10 +133,9 @@ public class BasicEnemy : Enemies.Enemy
         if (other.CompareTag("Player"))
         {
             Attack(other.gameObject);
-
         }
         else
-        { 
+        {
             robotAnimator.SetBool("Attack", false);
         }
     }
@@ -171,7 +158,6 @@ public class BasicEnemy : Enemies.Enemy
         }
 
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-
         robotAnimator.SetTrigger("Die");
 
         if (deathSound != null)
@@ -182,71 +168,54 @@ public class BasicEnemy : Enemies.Enemy
             audioSource.volume = deathSound.volume;
             audioSource.spatialBlend = deathSound.spatialBlend;
             audioSource.Play();
-
-
             Destroy(deathSoundGO, deathSound.clip.length);
         }
 
-        Destroy(gameObject); 
+        Instantiate(deadPrefab, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
-
-
-
-
 
     public override void Reverse(int strength)
-{
-    Debug.Log(posHistory.Count);
-    float lookback = reverseLookbackSeconds; // or scale by strength if desired
-    float targetT = currentEnemyTime - Mathf.Max(0.01f, lookback);
-    targetT = Mathf.Max(0f, targetT);
-    Debug.Log("Target T: " + targetT);
-    currentEnemyTime -= lookback;
-    currentEnemyTime = Mathf.Max(0f, currentEnemyTime);
-
-    if (posHistory.Count == 0) return;
-
-    // Find the sample node <= targetT (scan from newest backward)
-    var node = posHistory.Last;
-    while (node != null && node.Value.t > targetT) node = node.Previous;
-
-    Vector2 targetPos;
-    if (node == null)
     {
-        // All samples newer than target -> use oldest we have
-        targetPos = posHistory.First.Value.p;
-    }
-    else
-    {
-        var newer = node.Next;
-        if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
-            targetPos = node.Value.p;
+        Debug.Log(posHistory.Count);
+        float lookback = reverseLookbackSeconds;
+        float targetT = currentEnemyTime - Mathf.Max(0.01f, lookback);
+        targetT = Mathf.Max(0f, targetT);
+        Debug.Log("Target T: " + targetT);
+        currentEnemyTime -= lookback;
+        currentEnemyTime = Mathf.Max(0f, currentEnemyTime);
+
+        if (posHistory.Count == 0) return;
+
+        Vector2 targetPos;
+
+        var node = posHistory.Last;
+        while (node != null && node.Value.t > targetT) node = node.Previous;
+
+        if (node == null)
+        {
+            targetPos = posHistory.First.Value.p;
+        }
         else
         {
-            float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
-            targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            var newer = node.Next;
+            if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
+                targetPos = node.Value.p;
+            else
+            {
+                float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
+                targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            }
         }
 
         robotAnimator.SetTrigger("Reverse");
-        // Teleport + stop motion
+
         rb.position = targetPos;
         rb.velocity = Vector2.zero;
 
-        // (Optional tiny cleanup) write a fresh sample now so history stays consistent
+        while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
+            posHistory.RemoveLast();
+
         posHistory.AddLast(new PosSample(Time.time, rb.position));
-
     }
-
-    // --- TRUNCATE FUTURE SAMPLES: remove any samples with t > targetT ---
-    while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
-        posHistory.RemoveLast();
-
-    // Teleport & stop
-    rb.position = targetPos;
-    rb.velocity = Vector2.zero;
-
-    // Add a fresh sample at the CURRENT time/position (this becomes the new tail)
-    posHistory.AddLast(new PosSample(Time.time, rb.position));
-}
-
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class WireReceiver : MonoBehaviour
 {
-    [SerializeField] private GameObject interactibleTarget; // drag the target object here (or leave null to use self)
+    [SerializeField] private AudioClip puzzleCompleteSFX;   // ?? Assign sound effect in Inspector
 
     private ISpecialInteractible interactible;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -16,21 +17,25 @@ public class WireReceiver : MonoBehaviour
 
         // 2D kinematic body
         var rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic; // (prefer over isKinematic in 2D)
+        rb.bodyType = RigidbodyType2D.Kinematic;
         rb.gravityScale = 0f;
 
-        // resolve the interface component at runtime
-        var source = interactibleTarget != null ? interactibleTarget : gameObject;
-        interactible = source.GetComponent<ISpecialInteractible>();
+        // find ISpecialInteractible on self or children
+        interactible = GetComponent<ISpecialInteractible>() ?? GetComponentInChildren<ISpecialInteractible>();
         if (interactible == null)
         {
-            // find the component in children:
-            interactible = source.GetComponentInChildren<ISpecialInteractible>();
-            if (interactible == null)
-            {
-                Debug.LogWarning("No ISpecialInteractible found on WireReceiver target!", this);
-            }
+            Debug.LogWarning("No ISpecialInteractible found on WireReceiver!", this);
         }
+
+        // ?? Setup AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 0f; // 2D sound
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,12 +44,17 @@ public class WireReceiver : MonoBehaviour
         if (recorder != null)
         {
             recorder.CompleteAt(transform.position);
-            if (interactible != null) 
+
+            if (interactible != null)
             {
                 interactible.SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
             }
-        }
 
-        
+            // ?? Play SFX if assigned
+            if (puzzleCompleteSFX != null)
+            {
+                audioSource.PlayOneShot(puzzleCompleteSFX);
+            }
+        }
     }
 }
