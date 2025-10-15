@@ -77095,6 +77095,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room_1_ReDesign
       objectReference: {fileID: 0}
+    - target: {fileID: 2812620200727452025, guid: e9064155544fd6845b8db9f678043223, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 683cb63a03a6d46949ef7d75a9593606, type: 3}
     - target: {fileID: 5527515712132498496, guid: e9064155544fd6845b8db9f678043223, type: 3}
       propertyPath: m_LocalPosition.x
       value: 77
@@ -117201,7 +117205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0012790408, w: 0.9999992}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0014940645, w: 0.9999989}
   m_LocalPosition: {x: 55.08, y: -29.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -117427,11 +117431,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2001679457106721578, guid: f32b9d92b8f0741908b839d66d90b47f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2001679457106721578, guid: f32b9d92b8f0741908b839d66d90b47f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2475985724584404745, guid: f32b9d92b8f0741908b839d66d90b47f, type: 3}
       propertyPath: m_IsActive
@@ -118599,6 +118603,10 @@ PrefabInstance:
       propertyPath: loadScene
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2032224002656347292, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
+      propertyPath: openedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 53e2c61b1ebaf40149026193a3cb07b8, type: 3}
     - target: {fileID: 4243651851576341345, guid: c200168b0227fe94d8f34907c15b2be8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 335
@@ -355055,6 +355063,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.59
       objectReference: {fileID: 0}
+    - target: {fileID: 1180016815388589589, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: closedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c12f5fb74c67b8e4094edfcc18877562, type: 3}
+    - target: {fileID: 1180016815388589589, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
+      propertyPath: openedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c12f5fb74c67b8e4094edfcc18877562, type: 3}
     - target: {fileID: 3904105955110371975, guid: 3ca0b322ccdf04943ad5c522ded2eea2, type: 3}
       propertyPath: closedSprite
       value: 
