@@ -272,7 +272,7 @@ MonoBehaviour:
   baseDashCd: 1
   iFrameDuration: 1
   baseDamage: 80
-  reverseBulletCooldown: 2
+  reverseBulletCooldown: 1
   baseProjectileSpeed: 12
   baseDashSpeed: 3
   baseAmmoPerRoom: 6

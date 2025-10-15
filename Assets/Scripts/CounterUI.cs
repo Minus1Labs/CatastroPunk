@@ -38,13 +38,14 @@ public class CounterUI : MonoBehaviour
             int value = (int)player.GetCounter(CounterName);
             if (displayMax)
             {
+                Debug.Log(value.ToString() + " " + maxValue.ToString());
                 text.text = value.ToString() + "/" + maxValue.ToString();
             }
             else
             {
                 text.text = value.ToString();
             }
-            slider.value = (value * 1.0f) / maxValue;
+            slider.value = (value * 1.0f);
         }
     }
 }
