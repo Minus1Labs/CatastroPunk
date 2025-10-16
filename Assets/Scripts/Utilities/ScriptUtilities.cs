@@ -86,4 +86,15 @@ public static class ScriptUtilities
         float wy = (-gridPos.x + gridPos.y) * dy;
         return new Vector2(wx, wy);
     }
+
+    public static Vector2 WorldToIsoGrid(Vector2 worldPos)
+    {
+        float dx = (1f / 2f) * 5f;    // 2.5
+        float dy = (0.5f / 2f) * 5f;  // 1.25
+    
+        float gx = 0.5f * ((worldPos.x / dx) - (worldPos.y / dy));
+        float gy = 0.5f * ((worldPos.x / dx) + (worldPos.y / dy));
+    
+        return new Vector2(gx, gy);
+    }
 }
