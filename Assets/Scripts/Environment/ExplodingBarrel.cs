@@ -13,7 +13,7 @@ public class ExplodingBarrel : MonoBehaviour, IDamageable
         var source = interactibleTarget != null ? interactibleTarget : gameObject;
         interactible = source.GetComponent<ISpecialInteractible>();
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
 
         // instantaite explosion effect and destroy self

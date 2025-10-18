@@ -55,7 +55,7 @@ public class EnvironmentHazard : MonoBehaviour
             {
                 if (continuous)
                 {
-                    p.TakeContinuousDamage(damage);
+                    //p.TakeContinuousDamage(damage);
                 }
                 else
                 {

@@ -7,13 +7,16 @@ using UnityEngine.U2D.IK;
 //scene management
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Unity.Collections;
+using JetBrains.Annotations;
+using UnityEngine.Android;
 
 public class Player : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
     private Vector2 movementInputVector;
 
-    public float baseSpeed = 5f;
+    //public float baseSpeed = 5f;
     private float currentSpeed;
 
     [Header("Required Setup")]
@@ -44,21 +47,16 @@ public class Player : MonoBehaviour, IDamageable
     private bool isDashing = false;
     private bool canDash = true;
     [Header("Base Player Stats")]
-    [SerializeField] public int baseHealth = 5;
-    private float currentHealth;
+    
 
 
-    [SerializeField] private float baseDashCd = 1f;
+    [SerializeField] private float baseDashCd = 4.0f;
     private float dashCooldown;
 
     public float iFrameDuration = 1f;
     private bool isInvincible = false;
 
-    [SerializeField] private int baseDamage = 2;
-    private int currentDamage;
-
-    [SerializeField]
-    private float reverseBulletCooldown;
+    [SerializeField] private float reverseBulletCooldown = 1.5f;
 
     [SerializeField] private float baseProjectileSpeed = 12f;
     private float projectileSpeed;
@@ -66,30 +64,20 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private float baseDashSpeed = 3f;
     private float dashSpeed;
 
-    [SerializeField] private int baseAmmoPerRoom = 6;
-    private int ammoPerRoom;
-
-    [SerializeField] private float baseRefundTime = 10f;
-    private float refundTime;
 
     [SerializeField] private float baseProjectileLifetime = 5f;
     private float projLifetime;
 
-    private int currentAmmoCount;
-
-    private bool canRefund = true;
-    private bool chargingAmmoRefund = false;
-    private bool canChargeAmmoRefund = false;
-    [SerializeField, Tooltip("How long it takes to hold to refund ammo")]
-
-    private float ammoRefundStartTime = 0f;
-    private float ammoRefundAnimationTime = 3f;
-
-
-
-
     //a list of the current player card upgrades
-    private List<Card> cards = new List<Card>();
+    private Dictionary<int, (Card c, int stack)> cards = new Dictionary<int, (Card c, int stack)>();
+
+    public PlayerStats baseStats;
+    public PlayerStats additiveStats;
+    public PlayerStats multStats;
+    public int cash;
+    private int currentHealth;
+    public float currentCharge;
+
 
     public AudioSource fireSource;
     public AudioClip fireSound;
@@ -103,8 +91,8 @@ public class Player : MonoBehaviour, IDamageable
     private bool canShootReverse = true;
 
     private bool canFire = true;
-    public float fireInterval = 0.2f;
-    
+
+
 
 
 
@@ -113,92 +101,85 @@ public class Player : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody2D>();
         catTailAnimator = tailBone.GetComponent<Animator>();
-        currentSpeed = baseSpeed;
-        currentHealth = baseHealth;
-        currentDamage = baseDamage;
         projectileSpeed = baseProjectileSpeed;
         dashSpeed = baseDashSpeed;
-        dashCooldown = baseDashCd;
-        ammoPerRoom = baseAmmoPerRoom;
-        currentAmmoCount = ammoPerRoom;
-        refundTime = baseRefundTime;
         projLifetime = baseProjectileLifetime;
-        foreach (var card in cards)
-        {
-            card.ApplyUpgrade(this);
-        }
+
+        baseStats = ScriptableObject.CreateInstance<PlayerStats>();
+        additiveStats = ScriptableObject.CreateInstance<PlayerStats>();
+        additiveStats.SetAllNum(0);
+        multStats = ScriptableObject.CreateInstance<PlayerStats>();
+        multStats.SetAllNum(1);
+
+        currentHealth = baseStats.health;
+        currentSpeed = GetMoveSpeed();
+        currentCharge = GetBatteryCapacity();
     }
 
     public void AddCard(Card c)
     {
         if (c != null)
         {
+            int stacks = 1;
+            if (cards[c.itemID].Item1 != null)
+            {
+                stacks = cards[c.itemID].Item2 + 1;
+            }
+            cards[c.itemID] = (c, stacks);
             c.ApplyUpgrade(this);
-            cards.Add(c);
+            
         }
     }
 
-    public void SetDamage(float multiplier = 1f, int additive = 0, int setTo = -1)
+    public float GetDamage()
     {
-        currentDamage = (int)(currentDamage * multiplier) + additive;
-        if (setTo >= 0)
-        {
-            currentDamage = setTo;
-        }
+        return (baseStats.damage + additiveStats.damage) * multStats.damage;
     }
 
-    public void SetSpeed(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    public float GetMoveSpeed()
     {
-        currentSpeed = currentSpeed * multiplier + additive;
-        if (setTo >= 0)
-        {
-            currentSpeed = setTo;
-        }
+        return (baseStats.moveSpeed + additiveStats.moveSpeed) * multStats.moveSpeed;
     }
 
-    public void SetHealth(float multiplier = 1f, int additive = 0, int setTo = -1)
+    public int GetCurrentHealth()
     {
-        currentHealth = (int)(currentHealth * multiplier) + additive;
-        if (setTo > 0)
-        {
-            currentHealth = setTo;
-        }
+        return currentHealth;
     }
 
-    public void SetDashCd(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    public int GetMaxHP()
     {
-        dashCooldown = dashCooldown * multiplier + additive;
-        if (setTo >= 0)
-        {
-            dashCooldown = setTo;
-        }
+        return (baseStats.health + additiveStats.health) * multStats.health;
     }
 
-    public void SetIFrameDur(float multiplier = 1f, float additive = 0f, float setTo = -1f)
+    public float GetDashCd()
     {
-        iFrameDuration = iFrameDuration * multiplier + additive;
-        if (setTo >= 0)
-        {
-            iFrameDuration = setTo;
-        }
+        return (baseStats.dashCooldown + additiveStats.dashCooldown) * multStats.dashCooldown;
     }
 
-    public void SetAmmoPerRoom(float multiplier = 1f, int additive = 0, int setTo = -1)
+    //public float GetIFrameDur() {}
+
+    public float GetBatteryCapacity()
     {
-        ammoPerRoom = (int)(ammoPerRoom * multiplier) + additive;
-        if (setTo >= 0)
-        {
-            ammoPerRoom = setTo;
-        }
+        return (baseStats.batteryCapacity + additiveStats.batteryCapacity) * multStats.batteryCapacity;
     }
 
-    public void SetCurrentAmmo(float multiplier = 1f, int additive = 0, int setTo = -1)
+    public float GetCurrentCharge()
     {
-        currentAmmoCount = (int)(currentAmmoCount * multiplier) + additive;
-        if (setTo >= 0)
-        {
-            currentAmmoCount = setTo;
-        }
+        return currentCharge;
+    }
+
+    public float GetEnergyRegain() {
+        return (baseStats.energyRegain + additiveStats.energyRegain) * multStats.energyRegain;
+    }
+
+    public float GetFirerate()
+    {
+        return (baseStats.shotsPerSecond + additiveStats.shotsPerSecond) * multStats.shotsPerSecond;
+    }
+
+    public float GetShotEnergy()
+    {
+        return (baseStats.energyPerShot + additiveStats.energyPerShot) * multStats.energyPerShot;
     }
 
     public void LockPlayer()
@@ -214,35 +195,14 @@ public class Player : MonoBehaviour, IDamageable
         this.enabled = true;
     }
 
-    public float GetCounter(string counterName = "Ammo")
-    {
-        switch (counterName)
-        {
-            case "Health":
-                return currentHealth;
-            case "Ammo":
-                return currentAmmoCount;
-            case "Damage":
-                return currentDamage;
-            default:
-                Debug.LogError("Invalid counter name: " + counterName);
-                return -1;
-        }
-    }
-
-    public int getAmmoPerRoom()
-    {
-        return ammoPerRoom;
-    }
-
     public bool CanInput()
     {
-        return !isDashing && !chargingAmmoRefund;
+        return !isDashing;
     }
 
     IEnumerator EnableFire()
     {
-        yield return new WaitForSeconds(fireInterval);
+        yield return new WaitForSeconds(1/GetFirerate());
         canFire = true;
     }
 
@@ -252,9 +212,9 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (CanInput()) {
             SetInputVector();
-            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentAmmoCount > 0 && canFire)
+            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentCharge >= GetShotEnergy() && canFire)
             {
-                // currentAmmoCount -= 1;
+                currentCharge -= GetShotEnergy();
                 canFire = false;
                 FireProjectile();
                 StartCoroutine(EnableFire());
@@ -273,33 +233,6 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(Dash());
         }
 
-        if (Input.GetKey(KeyCode.R))
-        {
-            if (!chargingAmmoRefund)
-            {
-                Debug.Log("Starting ammo refund at time " + Time.time);
-                ammoRefundStartTime = Time.time;
-                chargingAmmoRefund = true;
-            }
-            else
-            {
-                if (Time.time - ammoRefundStartTime >= ammoRefundAnimationTime)
-                {
-                    Debug.Log("Completed ammo refund at time " + Time.time);
-                    chargingAmmoRefund = false;
-                    currentAmmoCount = ammoPerRoom;
-                    if(currentAmmoCount == 0)
-                    {
-                        currentAmmoCount = 6;
-                    }
-                }
-            }
-        } else if (chargingAmmoRefund)
-        {
-            chargingAmmoRefund = false;
-            Debug.Log("Stopped ammo refund because key stopped being held after seconds: " + (Time.time - ammoRefundStartTime));
-        }
-
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
         gunPos.transform.position = mousePos;
@@ -314,22 +247,14 @@ public class Player : MonoBehaviour, IDamageable
         if (dashSound != null) dashSound.Play();
         canDash = false;
         isDashing = true;
-        currentSpeed = baseSpeed * dashSpeed;
+        currentSpeed = GetMoveSpeed() * dashSpeed;
         isInvincible = true;
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
-        currentSpeed = baseSpeed;
+        currentSpeed = GetMoveSpeed();
         isInvincible = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-    }
-
-    IEnumerator RefundAmmo()
-    {
-        canRefund = false;
-        yield return new WaitForSeconds(refundTime);
-        currentAmmoCount += 1;
-        canRefund = true;
     }
 
     // Helpers to snap to your 8-way grid and measure “strength”
@@ -472,12 +397,12 @@ public class Player : MonoBehaviour, IDamageable
                 GameObject projectileInstance = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
                 //shootAnimation(dir);//do not delete will change to a nice shooting anim
-                proj.SetStats(currentDamage, projectileSpeed, projLifetime);
+                proj.SetStats(GetDamage(), projectileSpeed, projLifetime);
                 if (fireSource != null) fireSource.PlayOneShot(fireSound);
             }
         }
     }
-    void shootAnimation(Vector2 dir)
+    void ShootAnimation(Vector2 dir)
     {
         //Animation
         Vector2 invertedHit = new Vector3(-dir.x, dir.y);
@@ -497,7 +422,13 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (onlyAnimations) return;
         // if not moving diagonal:
-        float speedModifier = currentSpeed;
+        float speedModifier = currentSpeed * 5.0f;
+        if (currentCharge < GetBatteryCapacity())
+        {
+            currentCharge += GetEnergyRegain() / Time.fixedDeltaTime;
+            currentCharge = currentCharge > GetBatteryCapacity() ?
+                GetBatteryCapacity() : currentCharge;
+        }
         // if (Mathf.Abs(movementInputVector.x) < 0.01f && !(Mathf.Abs(movementInputVector.y) < 0.01f) ) //only y movement
         // {
         //     speedModifier = (2.0f / Mathf.Sqrt(5)) * currentSpeed;
@@ -507,6 +438,8 @@ public class Player : MonoBehaviour, IDamageable
         // }
         // Debug.Log("Speed mod: " + speedModifier);
         rb.velocity = movementInputVector.normalized * speedModifier;
+
+
     }
 
     void tailChange(float x, float y)//will probably make this prefabs next time
@@ -549,25 +482,25 @@ public class Player : MonoBehaviour, IDamageable
 
     public void HitTarget()
     {
-        foreach (Card c in cards)
+        foreach (var kv in cards)
         {
-            c.OnProjectileHit(this);
+            kv.Value.c.OnProjectileHit(this);
         }
     }
 
     public void KilledEnemy()
     {
-        foreach (Card c in cards)
+        foreach (var kv in cards)
         {
-            c.OnEnemyKill(this);
+            kv.Value.c.OnEnemyKill(this);
         }
     }
 
     public void MissTarget()
     {
-        foreach (Card c in cards)
+        foreach (var kv in cards)
         {
-            c.OnProjectileMiss(this);
+            kv.Value.c.OnProjectileMiss(this);
         }
     }
 
@@ -576,41 +509,25 @@ public class Player : MonoBehaviour, IDamageable
     public void AddHealth(int amount)
     {
         currentHealth += amount;
-        if (currentHealth > baseHealth)
+        if (currentHealth > GetMaxHP())
         {
-            currentHealth = baseHealth;
+            currentHealth = GetMaxHP();
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        if(isInvincible) return;
+
+        if (isInvincible) return;
         if (hurtSound != null) hurtSound.Play();
         if (isInvincible) return;
-        currentHealth -= damage;
+        currentHealth -= (int)damage;
         StartCoroutine(InvincibilityFrames());
-        if (chargingAmmoRefund)
-        {
-            chargingAmmoRefund = false;
-        }
         if (currentHealth <= 0)
         {
             Die();
         }
     }
-
-    public void TakeContinuousDamage(float damage)
-    {
-        Debug.Log("Taking continuous damage");
-        if (hurtSound != null) hurtSound.Play();
-        if (isInvincible) return;
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;

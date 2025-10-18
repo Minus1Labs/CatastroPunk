@@ -14,10 +14,10 @@ namespace Enemies
 
         [Header("Stats")]
         [SerializeField] protected float baseSpeed = 2f;
-        [SerializeField] protected int maxHealth = 100;
-        [SerializeField] protected int baseDamage = 10;
+        [SerializeField] protected float maxHealth = 100;
+        [SerializeField] protected int baseDamage = 1;
 
-        protected int currentHealth;
+        protected float currentHealth;
         protected Rigidbody2D rb;
         protected SpriteRenderer spriteRenderer;
         protected Animator animator;
@@ -30,7 +30,7 @@ namespace Enemies
             animator = GetComponent<Animator>();
         }
 
-        public virtual void TakeDamage(int damage)
+        public virtual void TakeDamage(float damage)
         {
             currentHealth -= damage;
             //play animation to take damage goes here
@@ -39,6 +39,7 @@ namespace Enemies
                 Die();
             }
         }
+        //aaahh
 
         protected abstract void Die();
 
