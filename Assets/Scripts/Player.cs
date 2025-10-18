@@ -267,7 +267,7 @@ public class Player : MonoBehaviour, IDamageable
 
         // make a dash button (shift)
         if (canDash &&
-        Input.GetKeyDown(KeyCode.LeftShift) &&
+        Input.GetKeyDown(KeyCode.Space) &&
         movementInputVector != Vector2.zero)
         {
             StartCoroutine(Dash());
