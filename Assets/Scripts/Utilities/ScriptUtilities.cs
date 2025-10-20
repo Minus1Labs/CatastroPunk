@@ -33,17 +33,6 @@ public static class ScriptUtilities
         OUTLINE
     }
 
-    public struct Item_Sprite_Info
-    {
-        bool hasCharcterSprite;
-        string spriteDescription;
-        PLAYER_SPRITE_ZONES spriteZone;
-        int spritePriority;
-        bool spriteIsStackable;
-        SpriteRenderer sprite;
-    }
-
-
     public enum FLOOR_NAMES
     {
         LAB,
@@ -91,10 +80,10 @@ public static class ScriptUtilities
     {
         float dx = (1f / 2f) * 5f;    // 2.5
         float dy = (0.5f / 2f) * 5f;  // 1.25
-    
+
         float gx = 0.5f * ((worldPos.x / dx) - (worldPos.y / dy));
         float gy = 0.5f * ((worldPos.x / dx) + (worldPos.y / dy));
-    
+
         return new Vector2(gx, gy);
     }
 }

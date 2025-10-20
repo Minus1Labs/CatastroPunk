@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 using Unity.Collections;
 using JetBrains.Annotations;
 using UnityEngine.Android;
+using Unity.VisualScripting;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -69,8 +70,6 @@ public class Player : MonoBehaviour, IDamageable
     private float projLifetime;
 
     //a list of the current player card upgrades
-    private Dictionary<int, (Card c, int stack)> cards = new Dictionary<int, (Card c, int stack)>();
-
     public PlayerStats baseStats;
     public PlayerStats additiveStats;
     public PlayerStats multStats;
@@ -118,17 +117,28 @@ public class Player : MonoBehaviour, IDamageable
 
     public void AddCard(Card c)
     {
-        if (c != null)
+        if (c == null)
         {
-            int stacks = 1;
-            if (cards[c.itemID].Item1 != null)
-            {
-                stacks = cards[c.itemID].Item2 + 1;
-            }
-            cards[c.itemID] = (c, stacks);
-            c.ApplyUpgrade(this);
-            
+            Debug.LogError("Attempted to add card, but object is null");
         }
+
+        if (c.cardBehavior == null)
+        {
+            Debug.LogError("Attempted to add card, but CardBehavior attribute of Card is null");
+        }
+
+        CardBehavior childComponent = GetComponent(c.cardBehavior.GetClass()) as CardBehavior;
+        if (childComponent != null)
+        {
+            childComponent.AddStack(this);
+        }
+        else
+        {
+            CardBehavior cb = gameObject.AddComponent(c.cardBehavior.GetClass()) as CardBehavior;
+            cb.ApplyUpgrade(this);
+        }
+        // TODO: send out signal OR directly call UI to update item UI
+        // TODO: send out signal to rigging to update visuals
     }
 
     public float GetDamage()
@@ -227,7 +237,7 @@ public class Player : MonoBehaviour, IDamageable
 
         // make a dash button (shift)
         if (canDash &&
-        Input.GetKeyDown(KeyCode.LeftShift) &&
+        (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space)) &&
         movementInputVector != Vector2.zero)
         {
             StartCoroutine(Dash());
@@ -478,33 +488,6 @@ public class Player : MonoBehaviour, IDamageable
         }
 
     }
-
-
-    public void HitTarget()
-    {
-        foreach (var kv in cards)
-        {
-            kv.Value.c.OnProjectileHit(this);
-        }
-    }
-
-    public void KilledEnemy()
-    {
-        foreach (var kv in cards)
-        {
-            kv.Value.c.OnEnemyKill(this);
-        }
-    }
-
-    public void MissTarget()
-    {
-        foreach (var kv in cards)
-        {
-            kv.Value.c.OnProjectileMiss(this);
-        }
-    }
-
-
 
     public void AddHealth(int amount)
     {
