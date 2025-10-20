@@ -70,7 +70,7 @@ public class Projectile : MonoBehaviour, IReversible
         {
             if (player != null)
             {
-                player.HitTarget();
+                //player.HitTarget();
             }
             damageable.TakeDamage(damage);
             Destroy(gameObject);
@@ -89,7 +89,7 @@ public class Projectile : MonoBehaviour, IReversible
         yield return new WaitForSeconds(projectileLifetime);
         if (player != null)
         {
-            player.MissTarget();
+            //player.MissTarget();
         }
         Destroy(gameObject);
     }

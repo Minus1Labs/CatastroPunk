@@ -272,7 +272,7 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
             Player pl = player.GetComponent<Player>();
             if (pl != null)
             {
-                pl.KilledEnemy();
+                //pl.KilledEnemy();
             }
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);

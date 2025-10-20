@@ -153,7 +153,7 @@ public class BasicEnemy : Enemies.Enemy
             Player pl = player.GetComponent<Player>();
             if (pl != null)
             {
-                pl.KilledEnemy();
+                //pl.KilledEnemy();
             }
         }
 
