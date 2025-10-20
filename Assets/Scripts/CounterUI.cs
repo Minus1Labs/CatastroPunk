@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class CounterUI : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class CounterUI : MonoBehaviour
             if (playerObj != null)
             {
                 player = playerObj.GetComponent<Player>();
+                slider.maxValue = player.GetBatteryCapacity();
             }
         }
     }
@@ -36,7 +38,7 @@ public class CounterUI : MonoBehaviour
         if (text != null && player != null)
         {
             float value = player.GetCurrentCharge();
-            text.text = value.ToString() + " / " + player.GetBatteryCapacity();
+            text.text = value.ToString().Truncate(4, "") + " / " + player.GetBatteryCapacity();
             slider.value = value;
         }
     }

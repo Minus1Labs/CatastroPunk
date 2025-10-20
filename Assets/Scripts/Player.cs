@@ -433,9 +433,9 @@ public class Player : MonoBehaviour, IDamageable
         if (onlyAnimations) return;
         // if not moving diagonal:
         float speedModifier = currentSpeed * 5.0f;
-        if (currentCharge < GetBatteryCapacity())
+        if (currentCharge < GetBatteryCapacity() && canFire)
         {
-            currentCharge += GetEnergyRegain() / Time.fixedDeltaTime;
+            currentCharge += GetEnergyRegain() * Time.fixedDeltaTime;
             currentCharge = currentCharge > GetBatteryCapacity() ?
                 GetBatteryCapacity() : currentCharge;
         }
