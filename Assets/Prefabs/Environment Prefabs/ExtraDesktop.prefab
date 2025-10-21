@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 2301763792541266664}
   - component: {fileID: 290428520611524479}
   - component: {fileID: 8096509752712771624}
-  - component: {fileID: 563057935263906383}
   - component: {fileID: 5131634449097566640}
+  - component: {fileID: 7341067371338447558}
   m_Layer: 0
   m_Name: Desktopforcardroom
   m_TagString: Untagged
@@ -179,20 +179,6 @@ PolygonCollider2D:
       - {x: -1.6393745, y: 1.4068052}
       - {x: -2.8038237, y: 0.9203746}
   m_UseDelaunayMesh: 0
---- !u!114 &563057935263906383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8562813327659424253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3e2ff3ca28fbe4aaaccfa4c7a3f0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  database: {fileID: 11400000, guid: 9728584ac011518488576cc505954fd6, type: 2}
-  cardShopUI: {fileID: 0}
 --- !u!114 &5131634449097566640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,3 +229,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &7341067371338447558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8562813327659424253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119999f98edd1ad42b4515d33fa414b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
