@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 
 
@@ -22,22 +23,49 @@ namespace Enemies
         protected SpriteRenderer spriteRenderer;
         protected Animator animator;
 
+        public SpriteRenderer[] spriteRenderers; // assign in inspector
+        public Material whiteFlashMaterial;       // assign the white material here
+        private Material[] originalMaterials;
+
+        private float flashDuration = 0.1f;
+
         protected virtual void Awake()
         {
             currentHealth = maxHealth;
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+
+            // store original colors
+            originalMaterials = new Material[spriteRenderers.Length];
+            for (int i = 0; i < spriteRenderers.Length; i++)
+            {
+                originalMaterials[i] = spriteRenderers[i].material;
+            }
         }
 
         public virtual void TakeDamage(float damage)
         {
             currentHealth -= damage;
+            StartCoroutine(FlashWhite());
             //play animation to take damage goes here
             if (currentHealth <= 0)
             {
                 Die();
             }
+        }
+
+        private IEnumerator FlashWhite()
+        {
+            // swap to white flash material
+            for (int i = 0; i < spriteRenderers.Length; i++)
+                spriteRenderers[i].material = whiteFlashMaterial;
+
+            yield return new WaitForSeconds(flashDuration);
+
+            // restore original materials
+            for (int i = 0; i < spriteRenderers.Length; i++)
+                spriteRenderers[i].material = originalMaterials[i];
         }
         //aaahh
 

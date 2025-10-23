@@ -10,5 +10,5 @@ public class Card : ScriptableObject
     public string pickupQuip;
     public int itemTier;
     public Sprite UISprite;
-    public MonoScript cardBehavior;
+    public MonoBehaviour cardBehavior;
 }

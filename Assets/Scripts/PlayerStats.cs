@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerStats : ScriptableObject
 {
     [Header("Core Stats")]
-    public int health = 9;
-    public float damage = 3f;
+    public int health = 30;
+    public float damage = 40f;
     public float shotsPerSecond = 1.5f;
-    public float moveSpeed = 1f;
+    public float moveSpeed = 1.5f;
 
     [Header("Dash")]
     public float dashDistance = 2f;

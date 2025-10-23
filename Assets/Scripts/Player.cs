@@ -127,14 +127,14 @@ public class Player : MonoBehaviour, IDamageable
             Debug.LogError("Attempted to add card, but CardBehavior attribute of Card is null");
         }
 
-        CardBehavior childComponent = GetComponent(c.cardBehavior.GetClass()) as CardBehavior;
+        CardBehavior childComponent = GetComponent(c.cardBehavior.GetType()) as CardBehavior;
         if (childComponent != null)
         {
             childComponent.AddStack(this);
         }
         else
         {
-            CardBehavior cb = gameObject.AddComponent(c.cardBehavior.GetClass()) as CardBehavior;
+            CardBehavior cb = gameObject.AddComponent(c.cardBehavior.GetType()) as CardBehavior;
             cb.ApplyUpgrade(this);
         }
         // TODO: send out signal OR directly call UI to update item UI
@@ -408,7 +408,12 @@ public class Player : MonoBehaviour, IDamageable
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
                 //shootAnimation(dir);//do not delete will change to a nice shooting anim
                 proj.SetStats(GetDamage(), projectileSpeed, projLifetime);
-                if (fireSource != null) fireSource.PlayOneShot(fireSound);
+                if (fireSource != null)
+                {
+                    //slightly shift the pitch for variety:
+                    fireSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                    fireSource.PlayOneShot(fireSound);
+                }
             }
         }
     }
