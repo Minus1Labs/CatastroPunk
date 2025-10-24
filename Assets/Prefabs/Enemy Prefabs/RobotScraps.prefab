@@ -255,8 +255,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalEnemyObject: {fileID: 4414995321013640732, guid: 6295babdd26c04f1e854b4ed62e18483, type: 3}
-  reverseClip: {fileID: 0}
+  reverseClip: {fileID: 6507705096131388260}
   reverseVolume: 1
+  sprites:
+  - {fileID: 760992298787330972}
+  - {fileID: 2721902297714494934}
+  - {fileID: 4210902154906158468}
+  - {fileID: 2971721683568096556}
 --- !u!50 &700319788286652840
 Rigidbody2D:
   serializedVersion: 4
@@ -294,9 +299,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cce85ee85fc42b5499b1091bf03e0937, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0
+  m_audioClip: {fileID: 8300000, guid: 2aa2ef6c6b0bbe746b7ed76c88620c81, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.727
   m_Pitch: 1
   Loop: 0
   Mute: 0

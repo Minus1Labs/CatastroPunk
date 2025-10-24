@@ -11,6 +11,8 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
     private Collider2D doorCollider = null;
     private bool is_closed = true;
 
+    public AudioSource doorOpenSound;
+
     protected override void Awake()
     {
         base.Awake();
@@ -54,6 +56,7 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
             spriteRenderer.sprite = openedSprite;
             doorCollider.enabled = false;
             is_closed = false;
+            doorOpenSound.Play();
         }
     }
     public bool Is_Closed()
