@@ -230,6 +230,8 @@ MonoBehaviour:
   baseSpeed: 2
   maxHealth: 10
   baseDamage: 10
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 1
   detectionRadius: 6
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -240,6 +242,7 @@ MonoBehaviour:
   historyKeepSeconds: 2
   shootInterval: 1
   bulletPrefab: {fileID: 0}
+  deadPrefab: {fileID: 0}
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -287,13 +290,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 790fdb0756302d945865dcc5725ed7b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.087
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 19
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

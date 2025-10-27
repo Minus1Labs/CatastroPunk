@@ -5,30 +5,31 @@ using UnityEngine;
 public class DeadEnemy : MonoBehaviour, IReversible
 {
     public GameObject originalEnemyObject;
-    public AudioClip reverseClip;
+    public AudioSource reverseClip;
     public float reverseVolume = 1f;
+
+    public SpriteRenderer[] sprites;
+
+
 
     public void Reverse(int strength)
     {
         // Respawn original enemy
         Instantiate(originalEnemyObject, transform.position, transform.rotation);
 
+        GetComponent<Collider2D>().enabled = false;
+        for (int i = 0; i < sprites.Length; i++)
+        {
+            sprites[i].enabled = false;
+        }
+
         // Play reverse SFX on a temp GameObject
         if (reverseClip != null)
         {
-            GameObject tempAudioGO = new GameObject("TempReverseSFX");
-            tempAudioGO.transform.position = transform.position;
-
-            AudioSource audioSource = tempAudioGO.AddComponent<AudioSource>();
-            audioSource.clip = reverseClip;
-            audioSource.volume = reverseVolume;
-            audioSource.spatialBlend = 0f;
-            audioSource.Play();
-
-            Destroy(tempAudioGO, reverseClip.length);
+            reverseClip.Play();
         }
 
         // Destroy this dead enemy object immediately
-        Destroy(gameObject);
+        Destroy(gameObject, reverseClip.clip.length);
     }
 }
