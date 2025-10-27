@@ -6,10 +6,10 @@ public class WireReceiver : MonoBehaviour
 {
     [SerializeField] private AudioClip puzzleCompleteSFX;   // ?? Assign sound effect in Inspector
 
-    private ISpecialInteractible interactible;
+    public ISpecialInteractible interactible;
     private AudioSource audioSource;
 
-    private void Awake()
+    private void Start()
     {
         // collider as trigger
         var col = GetComponent<PolygonCollider2D>();
@@ -21,7 +21,7 @@ public class WireReceiver : MonoBehaviour
         rb.gravityScale = 0f;
 
         // find ISpecialInteractible on self or children
-        interactible = GetComponent<ISpecialInteractible>() ?? GetComponentInChildren<ISpecialInteractible>();
+        interactible ??= GetComponent<ISpecialInteractible>() ?? GetComponentInChildren<ISpecialInteractible>();
         if (interactible == null)
         {
             Debug.LogWarning("No ISpecialInteractible found on WireReceiver!", this);

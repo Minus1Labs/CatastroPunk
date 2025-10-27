@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewCard", menuName = "Game/Card Definition")]
+[CreateAssetMenu(fileName = "NewCard", menuName = "Cards/Card Definition")]
 public class Card : ScriptableObject
 {
     public string cardName;
@@ -10,5 +10,5 @@ public class Card : ScriptableObject
     public string pickupQuip;
     public int itemTier;
     public Sprite UISprite;
-    public MonoScript cardBehavior;
+    public MonoBehaviour cardBehavior;
 }

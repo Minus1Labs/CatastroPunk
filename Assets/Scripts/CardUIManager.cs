@@ -38,7 +38,7 @@ public class CardUIManager : MonoBehaviour
     {
         //add selected card's behavior to player as a component:
         Player player = FindObjectOfType<Player>();
-        player.gameObject.AddComponent(selectedCard.cardBehavior.GetClass());
+        player.gameObject.AddComponent(selectedCard.cardBehavior.GetType());
         selectedCard = null;
         cardUI.SetActive(false);
     }

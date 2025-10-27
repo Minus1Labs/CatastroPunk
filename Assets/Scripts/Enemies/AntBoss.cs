@@ -53,10 +53,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private bool hasTarget = false;
     private bool inChargeEndlag = false;
     private bool isBarrelAttacking = false;
-    private bool refillingBarrels = false;
-
-    private Vector2 lastMoveDirection = new(0, 0);
-    private float lastMoveTime;
 
     public enum ANT_BOSS_BARREL_TYPE
     {

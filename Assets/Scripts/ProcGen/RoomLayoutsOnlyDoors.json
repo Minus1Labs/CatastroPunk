@@ -1,0 +1,81 @@
+{
+  "Rooms": [
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 3
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 5
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 6
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 9
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 10
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 12
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 7
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 11
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 13
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 14
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "DoorsLayout": 15
+    }
+  ]
+}

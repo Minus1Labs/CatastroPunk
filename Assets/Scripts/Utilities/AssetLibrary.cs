@@ -16,6 +16,8 @@ public class AssetLibrary : MonoBehaviour
     public Tile[] floor_tiles = new Tile[1];
     public GameObject[] door_teleporter = new GameObject[1];
     public GameObject[] enemies = new GameObject[1];
+    public GameObject[] wire_puzzle_start = new GameObject[1];
+    public GameObject[] wire_puzzle_end = new GameObject[1];
 
     public bool CheckAllPrefabs()
     {
