@@ -1,22 +1,18 @@
 {
   "Rooms": [
     {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
       "Doors": {
-        "Entrance_neg": {
+        "TopRight": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomLeft": {
           "x": 4,
           "y": 0
-        },
-        "Entrance_pos": {
-          "x": 4,
-          "y": 10
-        },
-        "Exit_neg": {
-          "x": 4,
-          "y": 10
-        },
-        "Exit_pos": {
-          "x": 0,
-          "y": 4
         }
       },
       "EnemySpawns": [
@@ -30,7 +26,98 @@
         "_2x1": [{"x": 0, "y": 3}],
         "_3x1": [{"x": 5, "y": 1}],
         "_2x2": [{"x": 7, "y": 7}]
-      }
+      },
+      "Decorations": {},
+      "Puzzles": []
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "Doors": {
+        "TopLeft": {
+          "x": 4,
+          "y": 0
+        },
+        "TopRight": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomLeft": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomRight": {
+          "x": 0,
+          "y": 4
+        }
+      },
+      "EnemySpawns": [],
+      "Props": {},
+      "Puzzles": [
+        {"Type": "Wire", "Positions": [{"x": 4, "y": 3}, {"x": 5, "y": 7}], "Modifiers": [20]},
+        {"Type": "ReversibleProp", "Positions": [], "Modifiers": [8]}
+      ]
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "Doors": {
+        "TopRight": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomLeft": {
+          "x": 4,
+          "y": 0
+        },
+        "TopLeft": {
+          "x": 0,
+          "y": 4
+        }
+        
+      },
+      "EnemySpawns": [
+        {"x": 2, "y": 1}, {"x": 7, "y": 4}, {"x": 2, "y": 9}
+      ],
+      "Props": {
+        "_1x1": [{"x": 7, "y": 9}, {"x": 9, "y": 5}, {"x": 6, "y": 0}],
+        "_1x2": [{"x": 2, "y": 3}, {"x": 2, "y": 6},{"x": 5, "y": 3}, {"x": 5, "y":6}],
+        "_2x1": [{"x": 2, "y": 0}]
+      },
+      "Decorations": {},
+      "Puzzles": []
+    },
+    {
+      "RoomSize": {
+        "x": 10,
+        "y": 10
+      },
+      "Doors": {
+        "TopLeft": {
+          "x": 4,
+          "y": 0
+        },
+        "TopRight": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomLeft": {
+          "x": 4,
+          "y": 10
+        },
+        "BottomRight": {
+          "x": 0,
+          "y": 4
+        }
+      },
+      "EnemySpawns": [],
+      "Props": {},
+      "Puzzles": [
+      ]
     }
   ]
 }

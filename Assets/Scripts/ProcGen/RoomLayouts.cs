@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine.Windows;
+using Unity.VisualScripting;
 
 
 /*
@@ -54,18 +55,20 @@ public static class RoomLayouts
     [Serializable]
     public struct Room
     {
+        public Position RoomSize;
         public Doors Doors;
-        // If using JsonUtility, rename your JSON key to "EnemySpawns"
+        public int DoorsLayout;
         public List<Position> EnemySpawns;
         public Props Props;
+        public List<Puzzle> Puzzles;
     }
     [Serializable]
     public struct Doors
     {
-        public Position Entrance_neg;
-        public Position Entrance_pos;
-        public Position Exit_neg;
-        public Position Exit_pos;
+        public Position TopLeft;
+        public Position TopRight;
+        public Position BottomLeft;
+        public Position BottomRight;
     }
     [Serializable]
     public struct Props
@@ -78,17 +81,64 @@ public static class RoomLayouts
         public List<Position> _2x2;
     }
     [Serializable]
+    public struct Puzzle
+    {
+        public string Type;
+        public List<Position> Positions;
+        public List<int> Modifiers;
+    }
+    [Serializable]
     public struct Position
     {
         public int x;
         public int y;
+        public Position(Vector2 pos)
+        {
+            x = (int)pos.x; y = (int)pos.y;
+        }
     }
     public static List<Room> GetRoomsFromDisk()
     {
-        string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/RoomLayouts.json");
+        string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/LayoutsFeatures.json");
         Root jsonRoot = JsonUtility.FromJson<Root>(json);
         Debug.Log("Got " + jsonRoot.Rooms.Count + " rooms from disk");
-        
+
         return jsonRoot.Rooms;
+    }
+}
+
+public class LayoutDictionary
+{
+    public Dictionary<int, List<DoorWrapper>> udict = new Dictionary<int, List<DoorWrapper>>();
+
+    public struct DoorWrapper
+    {
+        public int doorConfig;
+        public RoomLayouts.Room rlo;
+
+        public DoorWrapper(RoomLayouts.Room r)
+        {
+            rlo = r;
+            doorConfig = r.DoorsLayout;
+        }
+    }
+    public LayoutDictionary(List<RoomLayouts.Room> rooms)
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            udict[i] = new List<DoorWrapper>();
+        }
+
+        foreach (RoomLayouts.Room rm in rooms)
+        {
+            DoorWrapper dw = new DoorWrapper(rm);
+            List<DoorWrapper> ld = udict[dw.doorConfig];
+            ld.Add(dw);
+        }
+    }
+
+    public static int GetDoorConfig(bool d0, bool d1, bool d2, bool d3)
+    {
+        return (d0 ? 1 : 0) + (d1 ? 2 : 0) + (d2 ? 4 : 0) + (d3 ? 8 : 0);
     }
 }

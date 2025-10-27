@@ -12,6 +12,7 @@ TagManager:
   - Blue
   - Yellow
   - CardUI
+  - STARTING_DOOR
   layers:
   - Default
   - TransparentFX

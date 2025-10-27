@@ -15,7 +15,7 @@ namespace Enemies
 
         [Header("Stats")]
         [SerializeField] protected float baseSpeed = 2f;
-        [SerializeField] protected float maxHealth = 100;
+        [SerializeField] protected float maxHealth = 5;
         [SerializeField] protected int baseDamage = 1;
 
         protected float currentHealth;

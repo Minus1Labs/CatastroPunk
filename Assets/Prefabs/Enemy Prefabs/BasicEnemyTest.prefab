@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.23, y: -5.51, z: -0.11}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 182968628775440801}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 78c62c1d2e192d042a07947d3aff7357, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -154,14 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 2
-  maxHealth: 100
+  maxHealth: 7
   baseDamage: 1
-  spriteRenderers:
-  - {fileID: 315623507444140467}
-  - {fileID: 6411869164283904984}
-  - {fileID: 6915986441729997817}
-  - {fileID: 4443133353212761436}
-  whiteFlashMaterial: {fileID: 2100000, guid: 766fc8f0c4ac5684ab38d1723d39306e, type: 2}
   damageInterval: 1
   detectionRadius: 20
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -220,13 +214,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 790fdb0756302d945865dcc5725ed7b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 66
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -697,25 +691,5 @@ PrefabInstance:
 --- !u!4 &182968628775440801 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
-  m_PrefabInstance: {fileID: 1559897987741034623}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &315623507444140467 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -7943066488479538740, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
-  m_PrefabInstance: {fileID: 1559897987741034623}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &4443133353212761436 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2885946215684996387, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
-  m_PrefabInstance: {fileID: 1559897987741034623}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &6411869164283904984 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: -3648381908040356953, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
-  m_PrefabInstance: {fileID: 1559897987741034623}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &6915986441729997817 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 5359103177601667974, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
   m_PrefabInstance: {fileID: 1559897987741034623}
   m_PrefabAsset: {fileID: 0}

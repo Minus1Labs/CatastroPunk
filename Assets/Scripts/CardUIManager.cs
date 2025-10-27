@@ -38,26 +38,9 @@ public class CardUIManager : MonoBehaviour
     {
         //add selected card's behavior to player as a component:
         Player player = FindObjectOfType<Player>();
-        CopyComponent(selectedCard.cardBehavior, player.gameObject);
+        player.gameObject.AddComponent(selectedCard.cardBehavior.GetType());
         selectedCard = null;
         cardUI.SetActive(false);
-    }
-
-    public static T CopyComponent<T>(T original, GameObject destination) where T : Component
-    {
-        System.Type type = original.GetType();
-        var copy = destination.AddComponent(type) as T;
-
-        var fields = type.GetFields(System.Reflection.BindingFlags.Public |
-                                    System.Reflection.BindingFlags.NonPublic |
-                                    System.Reflection.BindingFlags.Instance);
-
-        foreach (var field in fields)
-        {
-            field.SetValue(copy, field.GetValue(original));
-        }
-
-        return copy;
     }
 
     void GenerateCards()
