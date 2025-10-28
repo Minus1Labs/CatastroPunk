@@ -57,6 +57,7 @@ namespace Enemies
 
         private IEnumerator FlashWhite()
         {
+            Debug.Log("FLASHING");
             // swap to white flash material
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].material = whiteFlashMaterial;

@@ -54,7 +54,12 @@ public class Projectile : MonoBehaviour, IReversible
 
         if (isReverseBullet)
         {
-            IReversible reversible = other.GetComponent<IReversible>();
+            IReversible reversible = other.GetComponentInParent<IReversible>();
+            Debug.Log("Found Reversible: " + reversible);
+            //if not found, then try top most parent:
+
+
+
             if (reversible != null)
             {
 

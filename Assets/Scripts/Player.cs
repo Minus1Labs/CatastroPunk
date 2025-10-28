@@ -357,6 +357,9 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            Projectile proj = go.GetComponent<Projectile>();
+            proj.SetStats(0, projectileSpeed, projLifetime);
+            
             //shootAnimation(dir);//do not delete, will change it to a nice shoot animation
             if (reverseBulletSound != null)
             {

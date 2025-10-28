@@ -16,9 +16,8 @@ namespace Enemies
         [SerializeField] private bool destroyOnTargetHit = true;
         [SerializeField, Tooltip("0 = Hurts only player, 1 = Hurts only enemy, 2 = Hurts only interactibles/environment, 3 = Hurts all")]
         private int projectileTeam = 0;
-        private Rigidbody2D rb;
+        protected Rigidbody2D rb;
         // Start is called before the first frame update
-        Quaternion isoBase;
 
         void Awake()
         {
@@ -44,6 +43,7 @@ namespace Enemies
 
             if (other.CompareTag("Wall") && destroyOnWall)
             {
+                Debug.Log("THIS IS WHAT HAPPENED");
                 OnProjectileRemove();
             }
             // check if other object has the IDamageable interface:
