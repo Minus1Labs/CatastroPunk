@@ -11,6 +11,8 @@ public class AntBossProjectile : Enemies.GenericEnemyProjectile, IReversible
     [SerializeField]
     private GameObject ToxicExplosionPrefab;
 
+    public bool damageEnemy;
+
     public override void OnProjectileRemove()
     {
         GameObject puddleInstance = Instantiate(PuddlePrefab, transform.position, transform.rotation);
@@ -21,5 +23,9 @@ public class AntBossProjectile : Enemies.GenericEnemyProjectile, IReversible
     public void Reverse(int direction)
     {
         rb.velocity = -rb.velocity;
+        projectileTeam = 1; // now damages enemies
+        damage = 100;
     }
+
+    
 }

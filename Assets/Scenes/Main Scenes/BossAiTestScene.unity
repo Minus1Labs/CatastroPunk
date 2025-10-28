@@ -3326,7 +3326,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0036924959, w: 0.99999326}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0036961166, w: 0.9999932}
   m_LocalPosition: {x: 10.55, y: -25.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5106,7 +5106,7 @@ GameObject:
   - component: {fileID: 1942521415}
   m_Layer: 0
   m_Name: AntBoss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5163,7 +5163,7 @@ MonoBehaviour:
   ToxicPuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
   explosionPrefab: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
   antBossAnimator: {fileID: 0}
-  BossCurrentBarrels: 0000000000000000000000000000000000000000000000000000000000000000
+  BossCurrentBarrels: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   reverseLookbackSeconds: 1
   historyKeepSeconds: 2
 --- !u!95 &1942521411

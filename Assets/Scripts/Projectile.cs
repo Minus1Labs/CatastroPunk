@@ -73,11 +73,10 @@ public class Projectile : MonoBehaviour, IReversible
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
         {
-            if (player != null)
+            if (damageable is not AntBoss)
             {
-                //player.HitTarget();
+                damageable.TakeDamage(damage);
             }
-            damageable.TakeDamage(damage);
             Destroy(gameObject);
         }
 

@@ -15,7 +15,7 @@ namespace Enemies
         [SerializeField] private bool destroyOnWall = true;
         [SerializeField] private bool destroyOnTargetHit = true;
         [SerializeField, Tooltip("0 = Hurts only player, 1 = Hurts only enemy, 2 = Hurts only interactibles/environment, 3 = Hurts all")]
-        private int projectileTeam = 0;
+        protected int projectileTeam = 0;
         protected Rigidbody2D rb;
         // Start is called before the first frame update
 
@@ -60,9 +60,11 @@ namespace Enemies
         private bool CheckProjectileTeamCollision(IDamageable damageable, Collider2D other)
         {
             //TODO: Envrionment damage from enemy projectile
-            return projectileTeam == 3 ||
+            bool val = projectileTeam == 3 ||
                 (projectileTeam == 0 && other.CompareTag("Player")) ||
-                (projectileTeam == 1 && (other.CompareTag("Player") || other.CompareTag("Enemy")));
+                (projectileTeam == 1 && (other.CompareTag("Enemy")));
+            Debug.Log("Projectile Team: " + projectileTeam + " Other Tag: " + other.tag + " Can Damage: " + val);
+            return val;
         }
 
         private IEnumerator DestroyAfterTime()
