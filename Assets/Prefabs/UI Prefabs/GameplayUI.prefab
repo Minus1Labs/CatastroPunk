@@ -931,6 +931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4443810194104585886}
+  - component: {fileID: 1147796672461078326}
   m_Layer: 5
   m_Name: Battery
   m_TagString: Untagged
@@ -969,6 +970,19 @@ RectTransform:
   m_AnchoredPosition: {x: -126, y: 152.5}
   m_SizeDelta: {x: 92, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1147796672461078326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024035398945188146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3c19d4db22a6d4aa9603e481cbdcbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reverseCooldownSlider: {fileID: 7493003572273268990}
 --- !u!1 &2063784182155017102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,12 +1628,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 03631bd807d9747748157eba89e4e2dd, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
