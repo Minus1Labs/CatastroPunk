@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 namespace ProcGen
 {
@@ -15,42 +16,73 @@ namespace ProcGen
             ScriptUtilities.FLOOR_NAMES.LAB;
 
         [SerializeField] private AssetLibrary asset_library;
-        [SerializeField] private int room_y = 10;
-        [SerializeField] private int room_x = 10;
-        [SerializeField] private int room_count = 3;
-        [SerializeField] private int room_offset = 250;
         [SerializeField] Tilemap floorTilemap;
-
-        private bool prefabsAreValid = false;
-
-        private List<RoomLayouts.Room> roomsList;
-
+        private List<FloorGenerator.PathRoom> roomPath;
         private Grid tilemapGrid;
+        private bool setVarsFinished = false;
+        private float roomSpacing = 50f;
 
-        public void Start()
+        public void SetVars(AssetLibrary theme, List<FloorGenerator.PathRoom> rpath, Tilemap groundmap)
         {
-            Debug.Log("Checking Prefabs");
-            //prefabsAreValid = asset_library.CheckAllPrefabs();
-            Debug.Log("Checked prefabs");
+            asset_library = theme;
+            roomPath = rpath;
+            floorTilemap = groundmap;
 
-            roomsList = RoomLayouts.GetRoomsFromDisk();
-            Debug.Log("Got rooms from disk");
+            setVarsFinished = true;
+        }
+
+        public void DoRoomGen()
+        {
+            if (!setVarsFinished)
+            {
+                Debug.LogError("Error: Vars were not set from FloorGenerator");
+            }
 
             if (floorTilemap == null)
             {
                 Debug.LogError("Tilemap not set! Not continuing");
                 return;
             }
+
             tilemapGrid = floorTilemap.layoutGrid;
 
             Vector3 roompos = transform.position;
+
+
+            foreach (FloorGenerator.PathRoom pr in roomPath)
+            {
+                //Assume that the first room has its door set to the correct exit point
+                if (pr.roomTile.ESCAPE_CONDITION == RoomTile.ROOM_ESCAPE_CONDITION.START)
+                {
+                    continue;
+                }
+                Vector2 rmPosUnscaled = new Vector2(pr.x, pr.y);
+                roompos = ScriptUtilities.IsoGridToWorld(rmPosUnscaled * roomSpacing);
+                GenerateRoom(roompos, pr.roomTile.layout, rmPosUnscaled);
+            }
+
+            //Connect start door
+
+        }
+
+        public void Awake()
+        {
+            /*
+            
+            */
+            
+
+
+
+            /*
             for (int i = 0; i < room_count; i++)
             {
                 GenerateRoom(roompos, roomsList[UnityEngine.Random.Range(0, roomsList.Count)]);
                 roompos.x += room_offset;
-            }
+            }*/
         }
 
+        /*
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.cyan;
@@ -67,36 +99,39 @@ namespace ProcGen
                 room_origin.x += room_offset;
             }
 
-        }
+        }*/
 
         private Vector3 WorldFromIsoV3(float x, float y)
         {
             return ScriptUtilities.IsoGridToWorld(new Vector2(x, y));
         }
 
-        public void GenerateRoom(Vector2 roomOrigin, RoomLayouts.Room room)
+        public void GenerateRoom(Vector2 roomOrigin, RoomLayouts.Room room, Vector2 roomGridPos)
         {
             //int index = (int)UnityEngine.Random.Range(0, roomsList.Count);
-            PlaceTiles(roomOrigin);
+            DoorController dc = new DoorController();
+            PlaceTiles(roomOrigin, room);
             PlaceProps(roomOrigin, room);
-            PlaceDoorTeleporter(roomOrigin, room);
+            PlaceDoors(roomOrigin, room, dc, roomGridPos);
+            PlaceEnemies(roomOrigin, room, dc);
+            PlacePuzzles(roomOrigin, room.Puzzles, dc);
+            dc.OpenIfCompleted();
         }
 
         //Later we can do patterns, but for now just set all tiles as the first
-        public void PlaceTiles(Vector2 roomOrigin)
+        public void PlaceTiles(Vector2 roomOrigin, RoomLayouts.Room room)
         {
             Vector2 tileRoomOrigin = ScriptUtilities.WorldToIsoGrid(roomOrigin);
 
-            for (int i = 0; i < room_x; i++)
+            for (int i = 0; i < room.RoomSize.x; i++)
             {
-                for (int j = 0; j < room_y; j++)
+                for (int j = 0; j < room.RoomSize.y; j++)
                 {
                     floorTilemap.SetTile(new
-                        Vector3Int(i + (int)tileRoomOrigin.x, (-(int)tileRoomOrigin.y - j) - 1, 0),
+                        Vector3Int((int)tileRoomOrigin.y + j, -(i + (int)tileRoomOrigin.x) - 1, 0),
                         asset_library.floor_tiles[0]);
                 }
             }
-
         }
 
         public void PlaceProps(Vector2 roomOrigin, RoomLayouts.Room room)
@@ -108,9 +143,21 @@ namespace ProcGen
             PlacePrefabs(roomOrigin, room.Props._3x1, asset_library.prop_collider_3x1);
         }
 
+        public void PlaceEnemies(Vector2 roomOrigin, RoomLayouts.Room room, DoorController dc)
+        {
+            if (room.EnemySpawns == null || room.EnemySpawns.Count == 0) { return; }
+            GameObject enemyGO = PlacePrefabs(roomOrigin, room.EnemySpawns, asset_library.enemies);
+            enemyGO.SetActive(true);
+            dc.AddRequiredEnemy(enemyGO.GetInstanceID());
+        }
+
         private GameObject PlacePrefabs(Vector2 roomOrigin, List<RoomLayouts.Position> positions, GameObject[] assets)
         {
-            if (assets.Length == 0)
+            if (positions == null)
+            {
+                return null;
+            }
+            if (assets == null || assets.Length == 0)
             {
                 Debug.Log("No Appropriate prefabs in the Asset Library");
                 return null;
@@ -127,29 +174,166 @@ namespace ProcGen
             return lastInstantiated;
         }
 
-        private void PlaceDoorTeleporter(Vector2 roomOrigin, RoomLayouts.Room room)
+        private void PlacePuzzles(Vector2 roomOrigin, List<RoomLayouts.Puzzle> puzzleInfo, DoorController dc)
         {
-            List<RoomLayouts.Position> doorPos = new List<RoomLayouts.Position>();
-            doorPos.Add(room.Doors.Entrance_pos);
-            GameObject doorPrefab = PlacePrefabs(roomOrigin, doorPos, asset_library.door_teleporter);
-            PlayerTeleporter ptp = doorPrefab.GetComponentInChildren<PlayerTeleporter>();
-            
-            if (ptp != null)
+            if (puzzleInfo == null || puzzleInfo.Count == 0) { return; }
+            foreach (RoomLayouts.Puzzle p in puzzleInfo)
             {
-                Vector2 location = roomOrigin;
-                location.x += room_offset;
-                ptp.targetLocation = location;
-                Debug.Log("set ptp location to " + location);
-            }
+                if (p.Type.ToLower() == "wire")
+                {
+                    if (p.Positions.Count < 2 || p.Modifiers.Count < 1 || asset_library.wire_puzzle_start[0] == null || asset_library.wire_puzzle_end[0] == null)
+                    {
+                        Debug.Log("Error placing wire puzzle! One or more of the JSON inputs are invalid OR the assetlibrary wires are set up incorrectly");
+                    }
 
-            floorTilemap.SetTile(new
-                        Vector3Int(10 + (int)roomOrigin.x, ((int)roomOrigin.y - 4) - 1, 0),
-                        asset_library.floor_tiles[0]);
-            
-            floorTilemap.SetTile(new
-                        Vector3Int(10 + (int)roomOrigin.x, ((int)roomOrigin.y - 5) - 1, 0),
-                        asset_library.floor_tiles[0]);
+                    PlaceWirePuzzle(roomOrigin, p.Positions[0], p.Positions[1], p.Modifiers[0],
+                        asset_library.wire_puzzle_start[0], asset_library.wire_puzzle_end[0], dc);
+                }
+            }
         }
 
+        private void PlaceWirePuzzle(Vector2 roomOrigin, RoomLayouts.Position start, RoomLayouts.Position end,
+            int wireLength, GameObject wireStartPrefab, GameObject wireEndPrefab, DoorController dc)
+        {
+            if (wireStartPrefab == null || wireEndPrefab == null)
+            {
+                Debug.LogError("Tried to place a wire puzzle, but prefabs were null");
+            }
+
+            Vector2 wireStartWorld = ScriptUtilities.IsoGridToWorld(new Vector2(start.x, start.y)) +
+                roomOrigin +
+                new Vector2(wireStartPrefab.transform.position.x, wireStartPrefab.transform.position.y);
+            GameObject wsGameObject = Instantiate(wireStartPrefab, wireStartWorld, Quaternion.identity);
+            WireSource ws = wsGameObject.GetComponentInChildren<WireSource>();
+            if (ws == null)
+            {
+                Debug.LogError("WireSource prefab doesn't contain a WireSource script");
+            }
+            ws.wireLength = wireLength;
+
+            Vector2 wireEndWorld = ScriptUtilities.IsoGridToWorld(new Vector2(end.x, end.y)) +
+                roomOrigin +
+                new Vector2(wireEndPrefab.transform.position.x, wireEndPrefab.transform.position.y);
+            GameObject wrGameObject = Instantiate(wireEndPrefab, wireEndWorld, Quaternion.identity);
+            WireReceiver wr = wrGameObject.GetComponent<WireReceiver>() ?? wrGameObject.GetComponentInChildren<WireReceiver>();
+            wr.interactible = dc;
+            dc.AddPuzzle(1);
+
+            if (wr == null)
+            {
+                Debug.LogError("WireReceiver prefab doesn't contain a WireReceiver script");
+            }
+
+        }
+
+        private void PlaceDoors(Vector2 roomOrigin, RoomLayouts.Room room, DoorController dc, Vector2 roomGridPos)
+        {
+            if (room.DoorsLayout != 0)
+            {
+                bool tl = false; bool tr = false; bool br = false; bool bl = false;
+                int tempLayoutNum = room.DoorsLayout;
+                if (tempLayoutNum % 2 == 1)
+                {
+                    tl = true;
+                }
+                tempLayoutNum >>= 1;
+                if (tempLayoutNum % 2 == 1)
+                {
+                    tr = true;
+                }
+                tempLayoutNum >>= 1;
+                if (tempLayoutNum % 2 == 1)
+                {
+                    br = true;
+                }
+                tempLayoutNum >>= 1;
+                if (tempLayoutNum % 2 == 1)
+                {
+                    bl = true;
+                }
+                //TODO: temp solution
+                Vector2 tlPos = new Vector2(0, 4);
+                Vector2 trPos = new Vector2(4, 9);
+                Vector2 brPos = new Vector2(9, 4);
+                Vector2 blPos = new Vector2(4, 0);
+
+
+                //scuffed
+                if (tl)
+                {
+                    GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(tlPos), asset_library.door_teleporter[0]);
+                    LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
+                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x - 1, roomGridPos.y) * roomSpacing);
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(9, 4));
+                    dc.AddDoor(doorInteractible);
+                }
+                if (tr)
+                {
+                    GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(trPos), asset_library.door_teleporter[1]);
+                    LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
+                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x, roomGridPos.y + 1) * roomSpacing);
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(4, 0));
+                    dc.AddDoor(doorInteractible);
+                }
+                if (br)
+                {
+                    GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(brPos), asset_library.door_teleporter[2]);
+                    LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
+                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x + 1, roomGridPos.y) * roomSpacing);
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(0, 4));
+                    dc.AddDoor(doorInteractible);
+                }
+                if (bl)
+                {
+                    GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(blPos), asset_library.door_teleporter[3]);
+                    LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
+                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x, roomGridPos.y - 1) * roomSpacing);
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(4, 9));
+                    dc.AddDoor(doorInteractible);
+                }
+            }
+            /*
+            if (room.Doors.TopLeft.x != 0 && room.Doors.TopLeft.y != 0)
+            {
+                dc.AddDoor(PlaceDoorTeleporter(roomOrigin, room.Doors.TopLeft, asset_library.door_teleporter[0]));
+            }
+
+            if (room.Doors.TopRight.x != 0 && room.Doors.TopRight.y != 0)
+            {
+                dc.AddDoor(PlaceDoorTeleporter(roomOrigin, room.Doors.TopRight, asset_library.door_teleporter[0]));
+            }
+
+            if (room.Doors.BottomLeft.x != 0 && room.Doors.BottomLeft.y != 0)
+            {
+                dc.AddDoor(PlaceDoorTeleporter(roomOrigin, room.Doors.BottomLeft, asset_library.door_teleporter[0]));
+            }
+
+            if (room.Doors.BottomRight.x != 0 && room.Doors.BottomRight.y != 0)
+            {
+                dc.AddDoor(PlaceDoorTeleporter(roomOrigin, room.Doors.BottomRight, asset_library.door_teleporter[0]));
+            }*/
+
+        }
+        private GameObject PlaceDoorTeleporter(Vector2 roomOrigin, RoomLayouts.Position doorPos, GameObject doorPrefab)
+        {
+            Vector2 world = ScriptUtilities.IsoGridToWorld(new Vector2(doorPos.x, doorPos.y));
+            GameObject doorRetPrefab = Instantiate(doorPrefab, world +
+                roomOrigin + new Vector2(doorPrefab.transform.position.x, doorPrefab.transform.position.y),
+                Quaternion.identity);
+            if (doorRetPrefab == null)
+            {
+                Debug.LogError("Error placing door teleporter prefab");
+            }
+
+            //TODO: SET DOOR TP POSITIONS
+
+            
+            return doorRetPrefab;
+        }
+        
     }
 }

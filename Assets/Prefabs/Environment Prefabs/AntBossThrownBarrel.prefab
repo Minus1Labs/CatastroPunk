@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2ad69562e46498387c5e50d72f344a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
-  projectileLifetime: 1.5
+  speed: 5
+  projectileLifetime: 8
   damage: 1
   destroyOnWall: 1
   destroyOnTargetHit: 1

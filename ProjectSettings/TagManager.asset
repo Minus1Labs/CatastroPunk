@@ -12,6 +12,8 @@ TagManager:
   - Blue
   - Yellow
   - CardUI
+  - STARTING_DOOR
+  - Enemy
   layers:
   - Default
   - TransparentFX

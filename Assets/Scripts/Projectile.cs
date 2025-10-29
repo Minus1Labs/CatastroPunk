@@ -54,7 +54,12 @@ public class Projectile : MonoBehaviour, IReversible
 
         if (isReverseBullet)
         {
-            IReversible reversible = other.GetComponent<IReversible>();
+            IReversible reversible = other.GetComponentInParent<IReversible>();
+            Debug.Log("Found Reversible: " + reversible);
+            //if not found, then try top most parent:
+
+
+
             if (reversible != null)
             {
 
@@ -68,11 +73,10 @@ public class Projectile : MonoBehaviour, IReversible
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
         {
-            if (player != null)
+            if (damageable is not AntBoss)
             {
-                //player.HitTarget();
+                damageable.TakeDamage(damage);
             }
-            damageable.TakeDamage(damage);
             Destroy(gameObject);
         }
 

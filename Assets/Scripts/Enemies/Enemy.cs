@@ -15,7 +15,7 @@ namespace Enemies
 
         [Header("Stats")]
         [SerializeField] protected float baseSpeed = 2f;
-        [SerializeField] protected float maxHealth = 100;
+        [SerializeField] protected float maxHealth = 5;
         [SerializeField] protected int baseDamage = 1;
 
         protected float currentHealth;
@@ -57,6 +57,7 @@ namespace Enemies
 
         private IEnumerator FlashWhite()
         {
+            Debug.Log("FLASHING");
             // swap to white flash material
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].material = whiteFlashMaterial;

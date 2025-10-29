@@ -357,6 +357,9 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            Projectile proj = go.GetComponent<Projectile>();
+            proj.SetStats(0, projectileSpeed, projLifetime);
+            
             //shootAnimation(dir);//do not delete, will change it to a nice shoot animation
             if (reverseBulletSound != null)
             {
@@ -410,7 +413,6 @@ public class Player : MonoBehaviour, IDamageable
                 proj.SetStats(GetDamage(), projectileSpeed, projLifetime);
                 if (fireSource != null)
                 {
-                    //slightly shift the pitch for variety:
                     fireSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                     fireSource.PlayOneShot(fireSound);
                 }
@@ -437,7 +439,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (onlyAnimations) return;
         // if not moving diagonal:
-        float speedModifier = currentSpeed * 5.0f;
+        float speedModifier = currentSpeed * 7.0f;
         if (currentCharge < GetBatteryCapacity() && canFire)
         {
             currentCharge += GetEnergyRegain() * Time.fixedDeltaTime;

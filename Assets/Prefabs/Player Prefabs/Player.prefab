@@ -244,7 +244,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &877057544736861108
 MonoBehaviour:
@@ -258,7 +258,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbf3c7941c43d2d4aa7bd4fcd978d777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 7
   projectilePrefab: {fileID: 3412664266963024560, guid: 790d5c2d643e2c0478ec4097de77c812, type: 3}
   reversalProjectilePrefab: {fileID: 829520782942192253, guid: a5defd99f402508498c8fd06b76dcbf0, type: 3}
   firePoint: {fileID: 6637450677528127453}
@@ -268,23 +267,22 @@ MonoBehaviour:
   currentIKManager: {fileID: 6330575002740866444}
   tailBone: {fileID: 5693431847914597828}
   onlyAnimations: 0
-  baseHealth: 100
   baseDashCd: 1
   iFrameDuration: 1
-  baseDamage: 80
-  reverseBulletCooldown: 1
+  reverseBulletCooldown: 0.75
   baseProjectileSpeed: 12
   baseDashSpeed: 3
-  baseAmmoPerRoom: 6
-  baseRefundTime: 10
   baseProjectileLifetime: 5
-  ammoRefundStartTime: 0
+  baseStats: {fileID: 0}
+  additiveStats: {fileID: 0}
+  multStats: {fileID: 0}
+  cash: 0
+  currentCharge: 0
   fireSource: {fileID: 8789384875300192159}
   fireSound: {fileID: 8300000, guid: a3b0f6b52324d684b8ec411c2b67e3f5, type: 3}
   dashSound: {fileID: 797350745824914300}
   hurtSound: {fileID: 1790850676508089123}
-  reverseBulletSound: {fileID: 0}
-  fireInterval: 0.3
+  reverseBulletSound: {fileID: 3078388357264560539}
 --- !u!82 &8789384875300192159
 AudioSource:
   m_ObjectHideFlags: 0
@@ -988,7 +986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.005026136
+      value: -0.005025747
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

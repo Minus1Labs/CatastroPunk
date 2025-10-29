@@ -51,6 +51,7 @@ MonoBehaviour:
   projectileLifetime: 5
   damage: 1
   isReverseBullet: 1
+  damagesPlayer: 0
 --- !u!50 &5162329496497276359
 Rigidbody2D:
   serializedVersion: 4
