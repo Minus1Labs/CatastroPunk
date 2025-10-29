@@ -99,7 +99,7 @@ public static class RoomLayouts
     }
     public static List<Room> GetRoomsFromDisk()
     {
-        string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/LayoutsFeatures.json");
+        string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/RoomLayoutsJQ.json");
         Root jsonRoot = JsonUtility.FromJson<Root>(json);
         Debug.Log("Got " + jsonRoot.Rooms.Count + " rooms from disk");
 
