@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7731325468105763233}
   - component: {fileID: 4108819476342405583}
+  - component: {fileID: 19162851202135846}
   m_Layer: 0
   m_Name: Bar_0
   m_TagString: Untagged
@@ -84,6 +85,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &19162851202135846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526618413939890702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -1.9907036, y: -2.288494}
+  SorterPositionOffset2: {x: 1.6505089, y: -0.48914528}
+  renderersToSort: []
 --- !u!1 &6097930251684047726
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,24 +187,24 @@ PolygonCollider2D:
       - {x: -5.5613017, y: 24.444437}
       - {x: -6.18594, y: 27.011488}
       - {x: -6.148178, y: 31.06317}
-      - {x: -5.080023, y: 32.11374}
-      - {x: -3.0353572, y: 35.2461}
-      - {x: -2.0023324, y: 36.05262}
+      - {x: -5.51424, y: 34.333073}
+      - {x: -4.0967846, y: 36.645245}
+      - {x: -2.0988169, y: 38.89915}
       - {x: 1.5336765, y: 39.146618}
       - {x: 3.5237312, y: 38.273766}
       - {x: 5.8431726, y: 38.07239}
       - {x: 1.2264318, y: 34.679256}
       - {x: 0.39605546, y: 32.702496}
       - {x: 0.596683, y: 30.327623}
-      - {x: 1.4471993, y: 28.565674}
-      - {x: 4.0984645, y: 27.389778}
-      - {x: 5.7450895, y: 26.61471}
-      - {x: 8.72521, y: 24.639135}
-      - {x: 8.946512, y: 23.632914}
-      - {x: 8.740726, y: 22.370893}
-      - {x: 9.194259, y: 19.680082}
-      - {x: 6.070382, y: 18.12649}
-      - {x: 3.6458075, y: 18.390245}
+      - {x: 0.6543785, y: 28.664776}
+      - {x: 1.0262794, y: 26.250097}
+      - {x: 2.6233504, y: 24.830862}
+      - {x: 5.157509, y: 23.400349}
+      - {x: 6.518494, y: 22.195925}
+      - {x: 7.303736, y: 20.636595}
+      - {x: 7.4104085, y: 18.88726}
+      - {x: 5.2280097, y: 17.531874}
+      - {x: 3.9431143, y: 18.142487}
       - {x: 2.6054473, y: 18.469137}
       - {x: 1.2324021, y: 19.433401}
       - {x: 0.27591276, y: 19.91724}
@@ -200,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8128627390814129914}
   - component: {fileID: 7520902923460947273}
+  - component: {fileID: 2403336088471976724}
   m_Layer: 0
   m_Name: Bar_1
   m_TagString: Untagged
@@ -274,3 +294,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2403336088471976724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6443447651797971717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 2.725975, y: -1.3549175}
+  SorterPositionOffset2: {x: -0.557251, y: 1.1251583}
+  renderersToSort: []
