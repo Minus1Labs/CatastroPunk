@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onBoardingUI: {fileID: 6409511273017174590}
-  GameplayUI: {fileID: 0}
+  GameplayUI: {fileID: 7652822563712714589, guid: 753c772e58a414b21acd7bd250b9cb07, type: 3}
 --- !u!1001 &6389634427826000874
 PrefabInstance:
   m_ObjectHideFlags: 0
