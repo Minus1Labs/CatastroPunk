@@ -51,7 +51,7 @@
       },
       "DoorsLayout": 9,
       "Puzzles": [
-        {"Type": "Wire", "Positions": [{"x": 6, "y": 6}, {"x": 1, "y": 1}], "Modifiers": [20]}
+        {"Type": "Wire", "Positions": [{"x": 6, "y": 6}, {"x": 1, "y": 1}], "Modifiers": [29]}
       ]
     },
     {
