@@ -59,6 +59,8 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField] private float reverseBulletCooldown = 1.5f;
 
+    private float reverseCooldownValue = 1f; //this is what we use to fill up the cooldown ui bar:
+
     [SerializeField] private float baseProjectileSpeed = 12f;
     private float projectileSpeed;
 
@@ -190,6 +192,11 @@ public class Player : MonoBehaviour, IDamageable
     public float GetShotEnergy()
     {
         return (baseStats.energyPerShot + additiveStats.energyPerShot) * multStats.energyPerShot;
+    }
+
+    public float GetReverseCooldownValue()
+    {
+        return reverseCooldownValue;
     }
 
     public void LockPlayer()
@@ -371,7 +378,14 @@ public class Player : MonoBehaviour, IDamageable
 
     IEnumerator ReverseCooldown()
     {
-        yield return new WaitForSeconds(reverseBulletCooldown);
+        reverseCooldownValue = 0f;
+        float cooldownTime = reverseBulletCooldown;
+        while (reverseCooldownValue < 1f)
+        {
+            reverseCooldownValue += Time.deltaTime / cooldownTime;
+            reverseCooldownValue = Mathf.Clamp01(reverseCooldownValue);
+            yield return null;
+        }
         canShootReverse = true;
     }
 

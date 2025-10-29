@@ -29,7 +29,6 @@ namespace ProcGen
             floorTilemap = groundmap;
 
             setVarsFinished = true;
-            Debug.Log("set vars");
         }
 
         public void DoRoomGen()
@@ -59,12 +58,11 @@ namespace ProcGen
                 }
                 Vector2 rmPosUnscaled = new Vector2(pr.x, pr.y);
                 roompos = ScriptUtilities.IsoGridToWorld(rmPosUnscaled * roomSpacing);
-                Debug.Log(pr.roomTile.doorConfig);
                 GenerateRoom(roompos, pr.roomTile.layout, rmPosUnscaled);
             }
 
             //Connect start door
-            
+
         }
 
         public void Awake()
@@ -130,7 +128,7 @@ namespace ProcGen
                 for (int j = 0; j < room.RoomSize.y; j++)
                 {
                     floorTilemap.SetTile(new
-                        Vector3Int((int)tileRoomOrigin.y + j, -(i + (int)tileRoomOrigin.x), 0),
+                        Vector3Int((int)tileRoomOrigin.y + j, -(i + (int)tileRoomOrigin.x) - 1, 0),
                         asset_library.floor_tiles[0]);
                 }
             }
