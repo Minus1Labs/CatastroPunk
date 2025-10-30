@@ -124,19 +124,19 @@ public class Player : MonoBehaviour, IDamageable
             Debug.LogError("Attempted to add card, but object is null");
         }
 
-        if (c.cardBehavior == null)
+        if (c.BehaviourType == null)
         {
             Debug.LogError("Attempted to add card, but CardBehavior attribute of Card is null");
         }
 
-        CardBehavior childComponent = GetComponent(c.cardBehavior.GetType()) as CardBehavior;
+        CardBehavior childComponent = GetComponent(c.BehaviourType) as CardBehavior;
         if (childComponent != null)
         {
             childComponent.AddStack(this);
         }
         else
         {
-            CardBehavior cb = gameObject.AddComponent(c.cardBehavior.GetType()) as CardBehavior;
+            CardBehavior cb = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
             cb.ApplyUpgrade(this);
         }
         // TODO: send out signal OR directly call UI to update item UI
