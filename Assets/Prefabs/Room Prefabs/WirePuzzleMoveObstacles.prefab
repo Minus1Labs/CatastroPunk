@@ -18055,8 +18055,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.009250164, y: 0.3992002, z: 0}
-    m_Extent: {x: 5.27105, y: 5.6575003, z: 0}
+    m_Center: {x: -0.007999897, y: 0.40045, z: 0}
+    m_Extent: {x: 5.2711, y: 5.65755, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -18098,7 +18098,7 @@ Transform:
   m_GameObject: {fileID: 2917120306317981309}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 350.1, y: 190.33, z: 0}
+  m_LocalPosition: {x: 348.13, y: 189.23, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -18188,10 +18188,10 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 2.75, y: 1.58}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.7302848, y: 0.37252086}
     oldSize: {x: 12.28, y: 12.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -18200,28 +18200,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.28868985, y: -0.16737455}
-      - {x: -0.38842028, y: -0.27959475}
-      - {x: -0.35761684, y: -0.4325936}
-      - {x: -0.26498067, y: -0.45279312}
-      - {x: -0.17706895, y: -0.47249803}
-      - {x: -0.10367509, y: -0.48685953}
-      - {x: 0.024895277, y: -0.52152944}
-      - {x: 0.06157192, y: -0.49168107}
-      - {x: 0.106425345, y: -0.4248749}
-      - {x: 0.14230658, y: -0.3766896}
-      - {x: 0.1641925, y: -0.35290492}
-      - {x: 0.16102661, y: -0.29737392}
-      - {x: 0.16148445, y: -0.25828078}
-      - {x: 0.16899906, y: -0.18930277}
-      - {x: 0.23667978, y: -0.15309246}
-      - {x: 0.34627402, y: -0.09441299}
-      - {x: 0.22648035, y: -0.017807677}
-      - {x: 0.10655877, y: 0.024307787}
-      - {x: -0.03875731, y: -0.03801717}
-      - {x: -0.14669378, y: -0.09904091}
-      - {x: -0.20341933, y: -0.12884536}
-      - {x: -0.22850978, y: -0.14008464}
+    - - {x: 1.5620422, y: -1.8399658}
+      - {x: 3.4274204, y: -0.89369285}
+      - {x: 1.7366407, y: 0.43747675}
+      - {x: -2.4555817, y: -1.2546692}
+      - {x: -3.5128174, y: -4.3220215}
+      - {x: 0.373035, y: -5.150153}
+      - {x: 1.6319157, y: -3.531559}
   m_UseDelaunayMesh: 0
 --- !u!1 &3794071969980051897
 GameObject:
@@ -18751,8 +18736,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.061699867, y: -1.1859493, z: 0}
-    m_Extent: {x: 23.1748, y: 19.08675, z: 0}
+    m_Center: {x: -0.06234932, y: -1.1859493, z: 0}
+    m_Extent: {x: 23.17445, y: 19.08795, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
