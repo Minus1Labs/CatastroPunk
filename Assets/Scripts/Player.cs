@@ -194,6 +194,11 @@ public class Player : MonoBehaviour, IDamageable
         return (baseStats.energyPerShot + additiveStats.energyPerShot) * multStats.energyPerShot;
     }
 
+    public float GetLuck()
+    {
+        return (baseStats.luck + additiveStats.luck) * multStats.luck;
+    }
+
     public float GetReverseCooldownValue()
     {
         return reverseCooldownValue;

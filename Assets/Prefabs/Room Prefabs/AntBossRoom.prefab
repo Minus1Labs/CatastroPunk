@@ -9350,8 +9350,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.5914497, y: -0.48350143, z: 0}
-    m_Extent: {x: 45.92035, y: 42.7841, z: 0}
+    m_Center: {x: 1.5921516, y: -0.48250008, z: 0}
+    m_Extent: {x: 45.92025, y: 42.784103, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -24975,7 +24975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7177692711850547081}
   m_Layer: 0
-  m_Name: Final Room (7)
+  m_Name: AntBossRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
