@@ -20,6 +20,16 @@ public class DoorController : ISpecialInteractible
         }
     }
 
+    public void SetLastDoorTP(Vector2 pos)
+    {
+        if (members.Count < 1) { return; }
+        
+        LockedDoor ld = members[0] as LockedDoor; //dangerous
+        Transform doorParent = ld.transform.parent;
+        PlayerTeleporter ptp = doorParent.GetComponentInChildren<PlayerTeleporter>() ?? doorParent.GetComponent<PlayerTeleporter>();
+        ptp.targetLocation = pos;
+    }
+
     public void AddDoor(ISpecialInteractible si)
     {
         members.Add(si);
