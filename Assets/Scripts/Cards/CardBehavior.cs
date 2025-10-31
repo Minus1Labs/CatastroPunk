@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class CardBehavior : MonoBehaviour
@@ -8,7 +9,7 @@ public abstract class CardBehavior : MonoBehaviour
     public abstract void RemoveUpgrade(Player player);
     public abstract void AddStack(Player player);
     public virtual void OnProjectileHit(Player player) { }
-    public virtual void OnEnemyKill(Player player) { }
+    public virtual void OnEnemyKill(EnemyDiedEvent e) { }
     public virtual void OnProjectileMiss(Player player) { }
     public virtual void OnDamaged(Player player) { }
 }

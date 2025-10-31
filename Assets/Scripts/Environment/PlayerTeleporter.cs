@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerTeleporter : MonoBehaviour
 {
+    public bool isEnabled = true;
     public Vector2 targetLocation;
 
     public Transform targetTransform; 
@@ -30,7 +31,7 @@ public class PlayerTeleporter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (isEnabled && collision.CompareTag("Player"))
         {
             Debug.Log("Player teleported!");
             if (loadScene)
