@@ -25,6 +25,8 @@ public class WireTrailRecorder : MonoBehaviour
 
     private float wireLength;
 
+    public int wireNumber;
+
     private void Awake()
     {
         line = GetComponent<LineRenderer>();
