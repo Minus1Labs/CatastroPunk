@@ -21,10 +21,27 @@ public class CardUIManager : MonoBehaviour
 
     private Card selectedCard = null;
 
+    private GameObject gameplayUI;
+
+    void Start()
+    {
+        gameplayUI = GameObject.Find("GameplayUI");
+        if(gameplayUI == null)
+        {
+            //search for it via whatever the parent of the instance of Hearts Ui is:
+            HeartsUI heartsUI = FindObjectOfType<HeartsUI>();
+            if (heartsUI != null)
+            {
+                gameplayUI = heartsUI.transform.parent.gameObject;
+            }
+        }
+    }
+
     public void EnableCardUI()
     {
         GenerateCards();
         cardUI.SetActive(true);
+        gameplayUI.SetActive(false);
     }
 
     public void SelectCardNumber(int cardNumber)
@@ -38,9 +55,10 @@ public class CardUIManager : MonoBehaviour
     {
         //add selected card's behavior to player as a component:
         Player player = FindObjectOfType<Player>();
-        player.gameObject.AddComponent(selectedCard.cardBehavior.GetType());
+        player.AddCard(selectedCard);
         selectedCard = null;
         cardUI.SetActive(false);
+        gameplayUI.SetActive(true);
     }
 
     void GenerateCards()

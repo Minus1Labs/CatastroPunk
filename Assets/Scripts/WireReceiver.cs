@@ -6,8 +6,15 @@ public class WireReceiver : MonoBehaviour
 {
     [SerializeField] private AudioClip puzzleCompleteSFX;   // ?? Assign sound effect in Inspector
 
-    public ISpecialInteractible interactible;
+    [SerializeField] public ISpecialInteractible interactible;
     private AudioSource audioSource;
+
+    public int wireNumber;
+
+    [System.NonSerialized]
+    public bool activated = false;
+
+    public bool multipleWiresRequired = false;
 
     private void Start()
     {
@@ -41,11 +48,12 @@ public class WireReceiver : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var recorder = other.GetComponent<WireTrailRecorder>() ?? other.GetComponentInParent<WireTrailRecorder>();
-        if (recorder != null)
+        if (recorder != null && wireNumber == recorder.wireNumber)
         {
+            activated = true;
             recorder.CompleteAt(transform.position);
 
-            if (interactible != null)
+            if (interactible != null && !multipleWiresRequired)
             {
                 interactible.SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
             }

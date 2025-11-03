@@ -21,6 +21,7 @@ namespace ProcGen
         private Grid tilemapGrid;
         private bool setVarsFinished = false;
         private float roomSpacing = 50f;
+        private DoorController lastDoor = null;
 
         public void SetVars(AssetLibrary theme, List<FloorGenerator.PathRoom> rpath, Tilemap groundmap)
         {
@@ -58,57 +59,31 @@ namespace ProcGen
                 }
                 Vector2 rmPosUnscaled = new Vector2(pr.x, pr.y);
                 roompos = ScriptUtilities.IsoGridToWorld(rmPosUnscaled * roomSpacing);
-                GenerateRoom(roompos, pr.roomTile.layout, rmPosUnscaled);
+                DoorController tlastDoor = GenerateRoom(roompos, pr.roomTile.layout, rmPosUnscaled);
+                if (tlastDoor != null)
+                {
+                    lastDoor = tlastDoor;
+                }
             }
 
-            //Connect start door
+            //Connect start door & end door
+            //hardcoded trash for temp connection
+            lastDoor?.SetLastDoorTP(new Vector2(92, -59));
 
         }
-
-        public void Awake()
-        {
-            /*
-            
-            */
-            
-
-
-
-            /*
-            for (int i = 0; i < room_count; i++)
-            {
-                GenerateRoom(roompos, roomsList[UnityEngine.Random.Range(0, roomsList.Count)]);
-                roompos.x += room_offset;
-            }*/
-        }
-
-        /*
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.cyan;
-            Vector3 room_origin = transform.position;
-            for (int i = 0; i < room_count; i++)
-            {
-                Vector3 topCorner = room_origin + WorldFromIsoV3(0, room_y);
-                Vector3 farCorner = room_origin + WorldFromIsoV3(room_x, room_y);
-                Vector3 bottomCorner = room_origin + WorldFromIsoV3(room_x, 0);
-                Gizmos.DrawLine(room_origin, topCorner);
-                Gizmos.DrawLine(room_origin, bottomCorner);
-                Gizmos.DrawLine(farCorner, topCorner);
-                Gizmos.DrawLine(farCorner, bottomCorner);
-                room_origin.x += room_offset;
-            }
-
-        }*/
 
         private Vector3 WorldFromIsoV3(float x, float y)
         {
             return ScriptUtilities.IsoGridToWorld(new Vector2(x, y));
         }
 
-        public void GenerateRoom(Vector2 roomOrigin, RoomLayouts.Room room, Vector2 roomGridPos)
+        public DoorController GenerateRoom(Vector2 roomOrigin, RoomLayouts.Room room, Vector2 roomGridPos)
         {
-            //int index = (int)UnityEngine.Random.Range(0, roomsList.Count);
+            //Assume that 0 doorslayout means no room layout for now
+            if (room.DoorsLayout == 0)
+            {
+                return null;
+            }
             DoorController dc = new DoorController();
             PlaceTiles(roomOrigin, room);
             PlaceProps(roomOrigin, room);
@@ -116,6 +91,7 @@ namespace ProcGen
             PlaceEnemies(roomOrigin, room, dc);
             PlacePuzzles(roomOrigin, room.Puzzles, dc);
             dc.OpenIfCompleted();
+            return dc;
         }
 
         //Later we can do patterns, but for now just set all tiles as the first
@@ -257,44 +233,49 @@ namespace ProcGen
                 Vector2 brPos = new Vector2(9, 4);
                 Vector2 blPos = new Vector2(4, 0);
 
+                PlayerTeleporter tp = null;
 
                 //scuffed
                 if (tl)
                 {
                     GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(tlPos), asset_library.door_teleporter[0]);
                     LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
-                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
                     Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x - 1, roomGridPos.y) * roomSpacing);
                     tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(9, 4));
                     dc.AddDoor(doorInteractible);
                 }
+
                 if (tr)
                 {
                     GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(trPos), asset_library.door_teleporter[1]);
                     LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
-                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
                     Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x, roomGridPos.y + 1) * roomSpacing);
-                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(4, 0));
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(4, 1));
                     dc.AddDoor(doorInteractible);
                 }
+
                 if (br)
                 {
                     GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(brPos), asset_library.door_teleporter[2]);
                     LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
-                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
                     Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x + 1, roomGridPos.y) * roomSpacing);
-                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(0, 4));
+                    tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(1, 4));
                     dc.AddDoor(doorInteractible);
                 }
+
                 if (bl)
                 {
                     GameObject doorPrefab = PlaceDoorTeleporter(roomOrigin, new RoomLayouts.Position(blPos), asset_library.door_teleporter[3]);
                     LockedDoor doorInteractible = doorPrefab.GetComponent<LockedDoor>() ?? doorPrefab.GetComponentInChildren<LockedDoor>();
-                    PlayerTeleporter tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
+                    tp = doorPrefab.GetComponent<PlayerTeleporter>() ?? doorPrefab.GetComponentInChildren<PlayerTeleporter>();
                     Vector2 tpTargetRoom = ScriptUtilities.IsoGridToWorld(new Vector2(roomGridPos.x, roomGridPos.y - 1) * roomSpacing);
                     tp.targetLocation = tpTargetRoom + ScriptUtilities.IsoGridToWorld(new Vector2(4, 9));
                     dc.AddDoor(doorInteractible);
                 }
+                
             }
             /*
             if (room.Doors.TopLeft.x != 0 && room.Doors.TopLeft.y != 0)
