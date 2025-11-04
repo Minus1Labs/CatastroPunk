@@ -897,6 +897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4443810194104585886, guid: 753c772e58a414b21acd7bd250b9cb07, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5285088803369383766, guid: 753c772e58a414b21acd7bd250b9cb07, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -22731,7 +22735,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.003845901, w: 0.99999267}
+  m_LocalRotation: {x: 0, y: 0, z: -0.00401622, w: 0.999992}
   m_LocalPosition: {x: 252.1, y: -11.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
