@@ -13,6 +13,11 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (GameplayUI == null)
+        {
+            //
+            GameplayUI = GameObject.Find("GameplayUI");
+        }
         isGamePaused = true;
         onBoardingUI.SetActive(true);
         GameplayUI.SetActive(false);
