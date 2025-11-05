@@ -32,6 +32,8 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     public GameObject explosionPrefab;
     //Animation
     public Animator antBossAnimator;
+    //Audio! doesn't work lol
+    public AudioSource audioSource;
 
 
     public enum ANT_BOSS_ENEMY_STATE
@@ -386,6 +388,20 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
+
+    public override void TakeDamage(float amount)
+    {
+        base.TakeDamage(amount);
+
+        // Debug line: helps confirm if this runs
+        Debug.Log("AntBoss took damage!");
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+    }
+
 
     protected override void Die()
     {
