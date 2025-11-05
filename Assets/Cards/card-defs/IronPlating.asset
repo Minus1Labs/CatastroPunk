@@ -17,5 +17,5 @@ MonoBehaviour:
   advancedDescription: Max HP += 2 + (2 per stack); Current HP += 4; MS -= 0.1
   pickupQuip: Heavy but durable
   itemTier: 1
-  UISprite: {fileID: 21300000, guid: 3b41611bff94f4cbc8b827e1359d2bef, type: 3}
-  cardBehavior: {fileID: 11500000, guid: 9f091560c0d4e4222a09c0c99c9ca0eb, type: 3}
+  UISprite: {fileID: 21300000, guid: 299d02200d7fc4377ac6308ac335e328, type: 3}
+  behaviorTypeName: IronPlatingBehavior

@@ -71,7 +71,7 @@ public class Projectile : MonoBehaviour, IReversible
 
         // check if other object has the IDamageable interface:
         IDamageable damageable = other.GetComponent<IDamageable>();
-        if (damageable != null && !other.CompareTag("Player") && !damagesPlayer) //TODO: nuke this later, no enemies have projectiles
+        if (damageable != null && !other.CompareTag("Player") && !damagesPlayer)
         {
             if (damageable is not AntBoss)
             {

@@ -17,6 +17,7 @@ namespace Enemies
         [SerializeField] protected float baseSpeed = 2f;
         [SerializeField] protected float maxHealth = 5;
         [SerializeField] protected int baseDamage = 1;
+        [SerializeField] protected int cashYield = 1;
 
         protected float currentHealth;
         protected Rigidbody2D rb;

@@ -17,5 +17,5 @@ MonoBehaviour:
   advancedDescription: Luck += 0.3; cashMultiplier += 0.15
   pickupQuip: Schmepth Perception
   itemTier: 2
-  UISprite: {fileID: 0}
-  behaviorTypeName: 
+  UISprite: {fileID: 21300000, guid: e0d4609db42484205a35ea838649dbea, type: 3}
+  behaviorTypeName: LuckyEyepatchBehavior
