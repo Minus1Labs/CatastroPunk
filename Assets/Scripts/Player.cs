@@ -49,9 +49,6 @@ public class Player : MonoBehaviour, IDamageable
     private bool canDash = true;
     [Header("Base Player Stats")]
     
-
-
-    [SerializeField] private float baseDashCd = 4.0f;
     private float dashCooldown;
 
     public float iFrameDuration = 1f;
@@ -168,6 +165,11 @@ public class Player : MonoBehaviour, IDamageable
         return (baseStats.dashCooldown + additiveStats.dashCooldown) * multStats.dashCooldown;
     }
 
+    public float GetDashDistance()
+    {
+        return (baseStats.dashDistance + additiveStats.dashDistance) * multStats.dashDistance;
+    }
+
     //public float GetIFrameDur() {}
 
     public float GetBatteryCapacity()
@@ -269,13 +271,13 @@ public class Player : MonoBehaviour, IDamageable
         if (dashSound != null) dashSound.Play();
         canDash = false;
         isDashing = true;
-        currentSpeed = GetMoveSpeed() * dashSpeed;
+        currentSpeed = GetMoveSpeed() * dashSpeed * GetDashDistance() * 0.5f;
         isInvincible = true;
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
         currentSpeed = GetMoveSpeed();
         isInvincible = false;
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(GetDashCd());
         canDash = true;
     }
 

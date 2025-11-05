@@ -24,7 +24,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     [SerializeField] private float throwWindupStartlag = 0.2f;
     [SerializeField] private float throwEndlagDuration = 0.4f;
     [SerializeField] private float chargeEndlagDuration = 1f;
-    [SerializeField] private float directionSwitchLockout = 1.5f;
     [SerializeField] private GameObject ThrownBarrelPrefab;
     [SerializeField] private GameObject ToxicPuddlePrefab;
     private float damageTimer = 0f;
@@ -48,7 +47,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     public List<Coroutine> coroutines = new();
     private bool charging = false;
-    private bool canCharge = true;
     private bool isPassiveMoving = false;
     private bool hasTarget = false;
     private bool inChargeEndlag = false;
@@ -289,7 +287,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     IEnumerator ChargeCoroutine(Vector2 direction)
     {
         charging = true;
-        canCharge = false;
         //play charge windup animation here. Moves back slightly and extends mouth blades
 
 
@@ -315,7 +312,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
 
-        canCharge = true;
         charging = false;
         inChargeEndlag = false;
         isBarrelAttacking = false;
@@ -458,7 +454,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         charging = false;
         inChargeEndlag = false;
         isBarrelAttacking = false;
-        canCharge = true;
 
         // Optional animation trigger
         if (antBossAnimator != null)

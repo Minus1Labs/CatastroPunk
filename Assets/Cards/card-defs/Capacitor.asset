@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca79f05057ecd54eaedef349baf7b4b, type: 3}
+  m_Name: Capacitor
+  m_EditorClassIdentifier: 
+  cardName: Capacitor
+  itemID: 22
+  advancedDescription: Shots use all available energy but do more damage scaling
+    with the energy used
+  pickupQuip: Maximized laser per laser
+  itemTier: 2
+  UISprite: {fileID: 21300000, guid: 6d1123222ceb64c6fb47cdc7ccb1609e, type: 3}
+  behaviorTypeName: CapacitorBehavior
