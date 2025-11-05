@@ -56,7 +56,7 @@ namespace Enemies
             }
         }
 
-        private IEnumerator FlashWhite()
+        protected IEnumerator FlashWhite()
         {
             // swap to white flash material
             for (int i = 0; i < spriteRenderers.Length; i++)

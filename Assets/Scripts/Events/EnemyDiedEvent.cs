@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyDiedEvent
+public class EnemyDiedEvent : GenericEvent
 {
     public GameObject Enemy { get; private set; }
     public GameObject Killer { get; private set; }

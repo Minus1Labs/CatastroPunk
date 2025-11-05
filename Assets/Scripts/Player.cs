@@ -12,6 +12,7 @@ using JetBrains.Annotations;
 using UnityEngine.Android;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using UnityEditor.PackageManager;
 using Spine.Unity;
 
 public class Player : MonoBehaviour, IDamageable
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerStats baseStats;
     public PlayerStats additiveStats;
     public PlayerStats multStats;
+    private float energyOnLastShot;
     public int cash;
     private int currentHealth;
     public float currentCharge;
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour, IDamageable
     private Vector2 aimInput;
     private bool usingGamepad;
 
-
+    public CharacterEvents characterEvents;
 
 
     void Awake()
@@ -162,6 +164,8 @@ public class Player : MonoBehaviour, IDamageable
         currentHealth = baseStats.health;
         currentSpeed = GetMoveSpeed();
         currentCharge = GetBatteryCapacity();
+
+        characterEvents = new CharacterEvents();
     }
 
     void OnEnable() => controls.Enable();
@@ -181,22 +185,29 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         CardBehavior childComponent = GetComponent(c.BehaviourType) as CardBehavior;
-        if (childComponent != null)
+        bool isNew = childComponent == null;
+        if (!isNew)
         {
             childComponent.AddStack(this);
         }
         else
         {
-            CardBehavior cb = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
-            cb.ApplyUpgrade(this);
+            childComponent = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
+            childComponent.ApplyUpgrade(this);
         }
+
         // TODO: send out signal OR directly call UI to update item UI
+        EventDispatcher.RaiseCardAddedEvent(new CardAddedEvent(c, childComponent, isNew, this));
         // TODO: send out signal to rigging to update visuals
     }
 
     public float GetDamage()
     {
-        return (baseStats.damage + additiveStats.damage) * multStats.damage;
+        float damagecalc = (baseStats.damage + additiveStats.damage) * multStats.damage;
+        CalculateDamageEvent cde = new CalculateDamageEvent(damagecalc);
+        characterEvents.RaiseCalculateDamageEvent(cde);
+
+        return cde.damage;
     }
 
     public float GetMoveSpeed()
@@ -501,6 +512,7 @@ public class Player : MonoBehaviour, IDamageable
                     fireSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                     fireSource.PlayOneShot(fireSound);
                 }
+                proj.transform.localScale *= GetDamage() / baseStats.damage;
             }
         }
     }
