@@ -288,7 +288,16 @@ public class Player : MonoBehaviour, IDamageable
 
         if (usingGamepad)
         {
-            
+            Vector2 stick = aimInput;
+            if (stick.sqrMagnitude > 0.01f)
+            {
+                Vector3 aimDir = new Vector3(stick.x, stick.y, 0f).normalized;
+                float aimDistance = 2.5f;
+                gunPos.transform.position = transform.position + aimDir * aimDistance;
+
+                float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+                firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
         }
         else
         {
