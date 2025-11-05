@@ -13,6 +13,7 @@ using UnityEngine.Android;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEditor.PackageManager;
+using Spine.Unity;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -32,9 +33,11 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField]
     private Transform firePoint;
-
+    
     public Animator catBodyAnimator;
     public Animator catTailAnimator;
+    private Spine.Unity.SkeletonMecanim skeletonMecanim;
+    private float currentFacingDirection = 1f;
 
     private Vector3 mousePos;
     public GameObject gunPos;
@@ -145,6 +148,7 @@ public class Player : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        skeletonMecanim = catBodyAnimator.GetComponent<SkeletonMecanim>();
         rb = GetComponent<Rigidbody2D>();
         catTailAnimator = tailBone.GetComponent<Animator>();
         projectileSpeed = baseProjectileSpeed;
@@ -327,6 +331,7 @@ public class Player : MonoBehaviour, IDamageable
         if (dashSound != null) dashSound.Play();
         canDash = false;
         isDashing = true;
+        catBodyAnimator.SetTrigger("IsDashing");
         currentSpeed = GetMoveSpeed() * dashSpeed * GetDashDistance() * 0.5f;
         isInvincible = true;
         yield return new WaitForSeconds(0.3f);
@@ -351,38 +356,48 @@ public class Player : MonoBehaviour, IDamageable
         return Mathf.Abs(Mathf.RoundToInt(v.x)) + Mathf.Abs(Mathf.RoundToInt(v.y));
     }
 
+    /*
     private void SetInputVector()
     {
-        Vector2 input = moveInput; // value from new Input System
+        Vector2 input = moveInput;
 
-        const float isoYScale = 0.5f; // tweak to match your tile/grid art
+        if (input.x > 0.01f) 
+        {
+            currentFacingDirection = -1f;
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = -1f; 
+        }
+        else if (input.x < -0.01f) 
+        {
+            currentFacingDirection = 1f;
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; 
+        }
+
+        const float isoYScale = 0.5f;
         Vector2 iso = new Vector2(input.x, input.y * isoYScale);
         movementInputVector = iso;
 
         bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
-        // animator mapping (MoveX <- vertical, MoveY <- horizontal)
-        float animX = input.y;
-        float animY = input.x;
+        Vector2 rawAnimDir = new Vector2(input.y, input.x);
+        Vector2 rawSnap = Snap8(rawAnimDir);
 
-        Vector2 curAnimDir = new Vector2(animX, animY);
-        Vector2 curSnap = Snap8(curAnimDir);
-        Vector2 prevAnimDir = new Vector2(prevInput.y, prevInput.x);
-        Vector2 prevSnap = Snap8(prevAnimDir);
-
-        bool startedMoving = !wasMoving && isMovingNow;
-        bool gotStronger = TaxiMag(curSnap) > TaxiMag(prevSnap);
-
-        if (startedMoving || (isMovingNow && gotStronger))
+        if (isMovingNow)
         {
-            lastAnimDir = curSnap;
+            lastAnimDir = rawSnap;
             lastRawDir = input;
         }
 
-        catBodyAnimator.SetFloat("MoveX", animX);
-        catBodyAnimator.SetFloat("MoveY", animY);
-        catBodyAnimator.SetFloat("LastX", lastAnimDir.x);
-        catBodyAnimator.SetFloat("LastY", lastAnimDir.y);
+
+        float snappedVertical = lastAnimDir.x;
+        float snappedAbsHorizontal = Mathf.Abs(lastAnimDir.y);
+
+
+        catBodyAnimator.SetFloat("MoveX", snappedVertical);
+        catBodyAnimator.SetFloat("MoveY", snappedAbsHorizontal);
+
+        catBodyAnimator.SetFloat("LastX", snappedVertical);
+        catBodyAnimator.SetFloat("LastY", snappedAbsHorizontal);
+
         catBodyAnimator.SetBool("IsMoving", isMovingNow);
 
         if (isMovingNow) tailChange(input.x, input.y);
@@ -391,8 +406,77 @@ public class Player : MonoBehaviour, IDamageable
         prevInput = input;
         wasMoving = isMovingNow;
     }
+    */
 
+    private void SetInputVector()
+    {
+        Vector2 input = moveInput;
+        bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
+        // --- 1. SKELETON FLIPPING (BUG 1 FIX) ---
+        // We add the 'else' block to fix the "Sticky Flip" bug.
+        // This ensures "Down Walk" plays on an unflipped skeleton.
+        if (input.x > 0.01f) // Moving Right
+        {
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = -1f; // Flipped
+        }
+        else if (input.x < -0.01f) // Moving Left
+        {
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; // Default (Left)
+        }
+        else // Moving Up or Down (input.x is 0)
+        {
+            // This is the fix.
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; // Default (Left)
+        }
+
+        // --- 2. ISO MOVEMENT ---
+        const float isoYScale = 0.5f;
+        Vector2 iso = new Vector2(input.x, input.y * isoYScale);
+        movementInputVector = iso;
+
+        // --- 3. ANIMATION DIRECTION (BUG 2 FIX) ---
+
+        Vector2 currentSnap;
+
+        if (isMovingNow)
+        {
+            // --- FIX 2: Race Condition ---
+            // We calculate the 8-way direction from the CURRENT input.
+            Vector2 rawAnimDir8Way = new Vector2(input.y, input.x);
+            currentSnap = Snap8(rawAnimDir8Way);
+
+            // We update 'lastAnimDir' for the *next* frame's Idle.
+            lastAnimDir = currentSnap;
+            lastRawDir = input;
+        }
+        else
+        {
+            // If not moving, we use the last-known direction for Idle.
+            currentSnap = lastAnimDir;
+        }
+
+        // --- 4. SET PARAMETERS ---
+        // This is the logic from your "almost-working" 5:02 AM code.
+        // It sends 5-way Right-Based data (0 or 1) to both trees.
+        float snappedVertical = currentSnap.x;
+        float snappedAbsHorizontal = Mathf.Abs(currentSnap.y);
+
+        // Set parameters for BOTH trees
+        catBodyAnimator.SetFloat("MoveX", snappedVertical);
+        catBodyAnimator.SetFloat("MoveY", snappedAbsHorizontal);
+        catBodyAnimator.SetFloat("LastX", snappedVertical);
+        catBodyAnimator.SetFloat("LastY", snappedAbsHorizontal);
+
+        catBodyAnimator.SetBool("IsMoving", isMovingNow);
+
+        // --- 5. TAIL UPDATE ---
+        if (isMovingNow) tailChange(input.x, input.y);
+        else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.x));
+
+        prevInput = input;
+        wasMoving = isMovingNow;
+    }
     void FireReverse()
     {
         canShootReverse = false;
@@ -600,9 +684,16 @@ public class Player : MonoBehaviour, IDamageable
         //make the player flash from opacity 0 to 1 for iframes:
         for (float i = 0; i < iFrameDuration; i += 0.1f)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<SpriteRenderer>().enabled = false;
+            catBodyAnimator.gameObject.SetActive(false);
+            catTailAnimator.gameObject.SetActive(false);
+
             yield return new WaitForSeconds(0.05f);
-            GetComponent<SpriteRenderer>().enabled = true;
+
+            //GetComponent<SpriteRenderer>().enabled = true;
+            catBodyAnimator.gameObject.SetActive(true);
+            catTailAnimator.gameObject.SetActive(true);
+
             yield return new WaitForSeconds(0.05f);
         }
         isInvincible = false;
