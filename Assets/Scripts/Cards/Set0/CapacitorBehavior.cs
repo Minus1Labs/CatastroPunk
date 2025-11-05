@@ -3,44 +3,44 @@ using UnityEngine;
 public class CapacitorBehavior : CardBehavior
 {
     private float beforeUpgradeEPS = 0;
-    private float totalDamageMult = 0;
+    private float totalDamageMult = 1;
     public float damageMultPerStack = 1.2f;
+    private Player p;
+    private bool isActive = true;
 
     public override void AddStack(Player player)
     {
-        player.multStats.damage *= damageMultPerStack;
-        SetEPStoCap(player);
         totalDamageMult += damageMultPerStack;
         itemStacks++;
     }
 
     public override void ApplyUpgrade(Player player)
     {
+        p = player;
+        p.characterEvents.OnDamageCalculate += GetCapacitorDamage;
+        totalDamageMult *= player.GetBatteryCapacity() / player.GetShotEnergy();
         beforeUpgradeEPS = player.GetShotEnergy();
-        totalDamageMult = player.GetDamage();
-        SetEPStoCap(player);
-
-        player.multStats.damage *= damageMultPerStack;
-        totalDamageMult *= damageMultPerStack;
-        totalDamageMult = player.GetDamage() / totalDamageMult;
     }
 
-    private void SetEPStoCap(Player p)
-    {
-        float currentShotEnergy = p.GetShotEnergy();
-        float batteryCapacity = p.GetBatteryCapacity();
-
-        p.additiveStats.energyPerShot = batteryCapacity - p.baseStats.energyPerShot;
-        p.multStats.energyPerShot = 1f;
-
-        float damageResult = batteryCapacity / currentShotEnergy;
-        p.multStats.damage *= damageResult;
-        totalDamageMult += damageMultPerStack;
-    }
 
     public override void RemoveUpgrade(Player player)
     {
+        isActive = false;
+        p.characterEvents.OnDamageCalculate -= GetCapacitorDamage;
+
         player.additiveStats.energyPerShot = beforeUpgradeEPS - player.baseStats.energyPerShot;
-        player.multStats.damage /= totalDamageMult;
+    }
+
+    public void FixedUpdate()
+    {
+        if (p != null && isActive)
+        {
+            p.additiveStats.energyPerShot = p.currentCharge - p.baseStats.energyPerShot;
+        }
+    }
+
+    public void GetCapacitorDamage(CalculateDamageEvent cde)
+    {
+        cde.damage *= (p.GetShotEnergy() / p.GetBatteryCapacity()) * totalDamageMult;
     }
 }
