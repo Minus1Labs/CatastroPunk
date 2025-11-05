@@ -151294,7 +151294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5286084116542152538, guid: 17ccd05fa633d44749427a2c1e9b4713, type: 3}
       propertyPath: options
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5286084116542152538, guid: 17ccd05fa633d44749427a2c1e9b4713, type: 3}
       propertyPath: seconds_per_option
@@ -151465,7 +151465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0026865432, w: 0.9999964}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0027130523, w: 0.99999636}
   m_LocalPosition: {x: 15.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -151946,7 +151946,7 @@ GameObject:
   - component: {fileID: 1505896283}
   - component: {fileID: 1505896288}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: TargetDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151969,7 +151969,8 @@ MonoBehaviour:
   baseDamage: 0
   cashYield: 1
   spriteRenderers: []
-  whiteFlashMaterial: {fileID: 0}
+  whiteFlashMaterial: {fileID: 2100000, guid: 766fc8f0c4ac5684ab38d1723d39306e, type: 2}
+  DamageTextPrefab: {fileID: 2803770149779122584, guid: abc5c11dad2ae4ca9a93dca92837f355, type: 3}
 --- !u!95 &1505896284
 Animator:
   serializedVersion: 5

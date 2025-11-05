@@ -42,7 +42,7 @@ namespace Enemies
             float offsetScale = UnityEngine.Random.Range(4f, 6f);
             GameObject textGO = Instantiate(DamageTextPrefab, transform.position + (offsetAngle * offsetScale) + DamageTextPrefab.transform.position, Quaternion.identity);
             TextMeshPro text = textGO.GetComponent<TextMeshPro>();
-            text.text = ((int)damage).ToString() + "." +(damage - (int)damage).ToString().Truncate(2, "");
+            text.text = ((int)damage).ToString();
             text.color = Color.red;
             yield return new WaitForSeconds(0.5f);
             Destroy(text);
