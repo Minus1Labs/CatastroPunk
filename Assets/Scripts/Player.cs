@@ -11,6 +11,7 @@ using Unity.Collections;
 using JetBrains.Annotations;
 using UnityEngine.Android;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -93,10 +94,55 @@ public class Player : MonoBehaviour, IDamageable
 
     private bool canFire = true;
 
+    private PlayerControls controls;
+    private Vector2 moveInput;
+    private Vector2 aimInput;
+    private bool usingGamepad;
 
 
 
 
+    void Awake()
+    {
+        controls = new PlayerControls();
+
+        controls.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Move.canceled += _ => moveInput = Vector2.zero;
+
+        controls.Gameplay.Aim.performed += ctx =>
+        {
+            aimInput = ctx.ReadValue<Vector2>();
+            usingGamepad = ctx.control.device is Gamepad;
+        };
+        controls.Gameplay.Aim.canceled += _ => aimInput = Vector2.zero;
+
+        // Shooting
+        // --- Shooting ---
+        controls.Gameplay.Fire1.performed += _ =>
+        {
+            if (CanInput() && currentCharge >= GetShotEnergy() && canFire)
+            {
+                currentCharge -= GetShotEnergy();
+                canFire = false;
+                FireProjectile();
+                StartCoroutine(EnableFire());
+            }
+        };
+
+        controls.Gameplay.Fire2.performed += _ =>
+        {
+            if (CanInput() && canShootReverse)
+                FireProjectile(true);
+        };
+
+        // --- Dash ---
+        controls.Gameplay.Dash.performed += _ =>
+        {
+            if (CanInput() && canDash && movementInputVector != Vector2.zero)
+                StartCoroutine(Dash());
+        };
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +162,10 @@ public class Player : MonoBehaviour, IDamageable
         currentSpeed = GetMoveSpeed();
         currentCharge = GetBatteryCapacity();
     }
+
+    void OnEnable() => controls.Enable();
+    void OnDisable() => controls.Disable();
+
 
     public void AddCard(Card c)
     {
@@ -232,37 +282,23 @@ public class Player : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (CanInput()) {
-            SetInputVector();
-            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentCharge >= GetShotEnergy() && canFire)
-            {
-                currentCharge -= GetShotEnergy();
-                canFire = false;
-                FireProjectile();
-                StartCoroutine(EnableFire());
-            }
-            else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
-            {
-                FireProjectile(true);
-            }
-        }
+        if (!CanInput()) return;
 
-        // make a dash button (shift)
-        if (canDash &&
-        (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space)) &&
-        movementInputVector != Vector2.zero)
+        SetInputVector();  // keep your movement + animation system
+
+        if (usingGamepad)
         {
-            StartCoroutine(Dash());
+            
         }
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        gunPos.transform.position = mousePos;
-        // Debug.Log(gunPos.transform.position);
-
-        //If you get an error with the above line, replace it with this:
-        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, zAxis);
+        else
+        {
+            Vector3 mouseScreen = new Vector3(aimInput.x, aimInput.y, 0f);
+            Vector3 world = Camera.main.ScreenToWorldPoint(mouseScreen);
+            world.z = 0;
+            gunPos.transform.position = world;
+        }
     }
+
 
     IEnumerator Dash()
     {
@@ -295,62 +331,55 @@ public class Player : MonoBehaviour, IDamageable
 
     private void SetInputVector()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
-
-        Vector2 input = new Vector2(moveHorizontal, moveVertical);
-        bool isMovingNow = input.sqrMagnitude > 0.0001f;
-
-
+        Vector2 input = moveInput; // value from new Input System
 
         const float isoYScale = 0.5f; // tweak to match your tile/grid art
-        Vector2 iso = new Vector2(
-            input.x,
-            input.y * isoYScale
-        );
-
+        Vector2 iso = new Vector2(input.x, input.y * isoYScale);
         movementInputVector = iso;
 
-        // Your animator mapping (MoveX <- vertical, MoveY <- horizontal)
-        float animX = moveVertical;
-        float animY = moveHorizontal;
+        bool isMovingNow = input.sqrMagnitude > 0.0001f;
 
-        // Decide when to update lastAnimDir (avoid diagonal→single on release)
+        // animator mapping (MoveX <- vertical, MoveY <- horizontal)
+        float animX = input.y;
+        float animY = input.x;
+
         Vector2 curAnimDir = new Vector2(animX, animY);
         Vector2 curSnap = Snap8(curAnimDir);
-        Vector2 prevAnimDir = new Vector2(prevInput.y, prevInput.x); // map prev input same way
+        Vector2 prevAnimDir = new Vector2(prevInput.y, prevInput.x);
         Vector2 prevSnap = Snap8(prevAnimDir);
 
-        bool startedMoving = !wasMoving && isMovingNow;                 // 0 → non-zero
-        bool gotStronger = TaxiMag(curSnap) > TaxiMag(prevSnap);      // single → diagonal
+        bool startedMoving = !wasMoving && isMovingNow;
+        bool gotStronger = TaxiMag(curSnap) > TaxiMag(prevSnap);
 
         if (startedMoving || (isMovingNow && gotStronger))
         {
             lastAnimDir = curSnap;
-            lastRawDir = input; // keep for tail logic
+            lastRawDir = input;
         }
 
-        // --- push animator params ---
         catBodyAnimator.SetFloat("MoveX", animX);
         catBodyAnimator.SetFloat("MoveY", animY);
         catBodyAnimator.SetFloat("LastX", lastAnimDir.x);
         catBodyAnimator.SetFloat("LastY", lastAnimDir.y);
         catBodyAnimator.SetBool("IsMoving", isMovingNow);
 
-        // Tail keeps the last facing when stopped
-        if (isMovingNow) tailChange(moveHorizontal, moveVertical);
+        if (isMovingNow) tailChange(input.x, input.y);
         else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.y));
 
-        // Remember for next frame
         prevInput = input;
         wasMoving = isMovingNow;
-
     }
+
 
     void FireReverse()
     {
         canShootReverse = false;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 screenPos = usingGamepad
+    ? (Vector2)Camera.main.WorldToScreenPoint(firePoint.position + (Vector3)aimInput * 10f)
+    : aimInput;
+
+    Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
         var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
@@ -403,7 +432,12 @@ public class Player : MonoBehaviour, IDamageable
         }
 
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 screenPos = usingGamepad
+    ? (Vector2)Camera.main.WorldToScreenPoint(firePoint.position + (Vector3)aimInput * 10f)
+    : aimInput;
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
         var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
