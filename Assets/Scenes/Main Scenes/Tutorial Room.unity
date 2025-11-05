@@ -26061,6 +26061,9 @@ MonoBehaviour:
   baseSpeed: 3
   maxHealth: 100
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 0.96
   detectionRadius: -0.02
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -51467,7 +51470,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e242987cac78a624782bfa960c22c7c2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 145373c8fd00d7049b7e725e01016aa1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -51715,8 +51718,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7797499, y: 2.43545, z: 0}
-    m_Extent: {x: 6.61905, y: 5.79425, z: 0}
+    m_Center: {x: 2.7802, y: 2.4358, z: 0}
+    m_Extent: {x: 6.6201, y: 5.7939, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -77262,7 +77265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0032006002, w: 0.99999493}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0032017326, w: 0.99999493}
   m_LocalPosition: {x: 45.3, y: -34.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -97968,6 +97971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023baeb89a4bfc43a84aeb357821475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
   targetLocation: {x: 152.1, y: -17.6}
   targetTransform: {fileID: 221438415}
   vcam: {fileID: 0}
@@ -98255,6 +98259,9 @@ MonoBehaviour:
   baseSpeed: 3
   maxHealth: 100
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 0.96
   detectionRadius: -0.02
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -98866,6 +98873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023baeb89a4bfc43a84aeb357821475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
   targetLocation: {x: 152.1, y: -17.6}
   targetTransform: {fileID: 0}
   vcam: {fileID: 0}
@@ -99312,6 +99320,9 @@ MonoBehaviour:
   baseSpeed: 3
   maxHealth: 100
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 0.96
   detectionRadius: -0.02
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -99913,8 +99924,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -2.7557502, y: 2.50885, z: 0}
-    m_Extent: {x: 6.60675, y: 5.72015, z: 0}
+    m_Center: {x: -2.7561502, y: 2.5083003, z: 0}
+    m_Extent: {x: 6.60635, y: 5.7195, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -118847,6 +118858,9 @@ MonoBehaviour:
   baseSpeed: 3
   maxHealth: 100
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 1
   detectionRadius: 0.002
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -134533,6 +134547,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2299760244719978319, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2475418680293006294, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -134604,6 +134622,10 @@ PrefabInstance:
     - target: {fileID: 7288647937829483870, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395570617441162747, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7909855097661312391, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
       propertyPath: m_Layer
@@ -134761,6 +134783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023baeb89a4bfc43a84aeb357821475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
   targetLocation: {x: 152.1, y: -17.6}
   targetTransform: {fileID: 1384134422}
   vcam: {fileID: 0}
