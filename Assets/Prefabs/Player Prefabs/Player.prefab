@@ -155,18 +155,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
-  - {fileID: 2100000, guid: cf9a1cc180a0b274d959721fef9a8c2d, type: 2}
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
-  - {fileID: 2100000, guid: cf9a1cc180a0b274d959721fef9a8c2d, type: 2}
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
-  - {fileID: 2100000, guid: cf9a1cc180a0b274d959721fef9a8c2d, type: 2}
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
-  - {fileID: 2100000, guid: cf9a1cc180a0b274d959721fef9a8c2d, type: 2}
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
-  - {fileID: 2100000, guid: cf9a1cc180a0b274d959721fef9a8c2d, type: 2}
-  - {fileID: 2100000, guid: 19e9f1f4af3e67f47a2c552b8f3b722d, type: 2}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,8 +338,6 @@ GameObject:
   - component: {fileID: 3237959614380204579}
   - component: {fileID: 877057544736861108}
   - component: {fileID: 8789384875300192159}
-  - component: {fileID: 393035887928329055}
-  - component: {fileID: 7779849858504169308}
   - component: {fileID: 797350745824914300}
   - component: {fileID: 1790850676508089123}
   - component: {fileID: 3078388357264560539}
@@ -539,79 +526,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!212 &393035887928329055
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848951686145171977}
-  m_Enabled: 0
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 839557506, guid: f2417f89a4d5f594ea889b76228a31ef, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 1
---- !u!95 &7779849858504169308
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8848951686145171977}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 13fdc02484e6d8941ab2e02d7aaea818, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &797350745824914300
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1146,7 +1060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0050245817
+      value: -0.0050261356
       objectReference: {fileID: 0}
     - target: {fileID: 311580695235782034, guid: bafa42623fe185c48b266e1a7b325a4a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

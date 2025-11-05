@@ -672,9 +672,16 @@ public class Player : MonoBehaviour, IDamageable
         //make the player flash from opacity 0 to 1 for iframes:
         for (float i = 0; i < iFrameDuration; i += 0.1f)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<SpriteRenderer>().enabled = false;
+            catBodyAnimator.gameObject.SetActive(false);
+            catTailAnimator.gameObject.SetActive(false);
+
             yield return new WaitForSeconds(0.05f);
-            GetComponent<SpriteRenderer>().enabled = true;
+
+            //GetComponent<SpriteRenderer>().enabled = true;
+            catBodyAnimator.gameObject.SetActive(true);
+            catTailAnimator.gameObject.SetActive(true);
+
             yield return new WaitForSeconds(0.05f);
         }
         isInvincible = false;
