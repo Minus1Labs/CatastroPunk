@@ -154,8 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 2
-  maxHealth: 100
+  maxHealth: 6
   baseDamage: 1
+  cashYield: 1
   spriteRenderers:
   - {fileID: 315623507444140467}
   - {fileID: 6411869164283904984}

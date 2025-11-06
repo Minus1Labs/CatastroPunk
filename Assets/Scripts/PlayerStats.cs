@@ -3,9 +3,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStats : ScriptableObject
 {
-    [Header("Core Stats")]
+    [Header("Core Stats")]  
     public int health = 18;
-    public float damage = 40f;
+    public float damage = 3f;
     public float shotsPerSecond = 1.5f;
     public float moveSpeed = 1.5f;
 
