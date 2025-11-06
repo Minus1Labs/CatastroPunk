@@ -75,6 +75,8 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p) { this.t = t; this.p = p; } }
     private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
+
+    public GameObject bossDoor;
     protected override void Awake()
     {
         base.Awake();
@@ -415,6 +417,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //TODO: add any other death logic before destroying
+        //lets open the door
+        //boss door is interactible open door:
+        bossDoor.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
         Destroy(gameObject);
     }
 

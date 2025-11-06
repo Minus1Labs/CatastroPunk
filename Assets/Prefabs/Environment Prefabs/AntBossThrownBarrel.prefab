@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6652297356245572285}
   - component: {fileID: 3748303587601258820}
   - component: {fileID: 4062899369539123376}
+  - component: {fileID: 6537500379850554140}
   m_Layer: 0
   m_Name: AntBossThrownBarrel
   m_TagString: Untagged
@@ -190,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2ad69562e46498387c5e50d72f344a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   projectileLifetime: 8
   damage: 1
   destroyOnWall: 1
@@ -198,3 +199,54 @@ MonoBehaviour:
   projectileTeam: 0
   PuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
   ToxicExplosionPrefab: {fileID: 5313072749716805626, guid: 3daac8dc8be654dbd8d3aac4e783ccdb, type: 3}
+  damageEnemy: 0
+--- !u!114 &6537500379850554140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779433509979182295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.67
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Intensity: 0.62
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: b7c5cdfa00000000bff6489ffd0508a5555b014b7f19f39a6b3bfb9a
+  m_LightCookieSprite: {fileID: 21300000, guid: 0a1e4143f19bb41048c8a6bfb1b53d09, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: -0.0042500496, y: 3.39385, z: 0}
+    m_Extent: {x: 7.87195, y: 8.38295, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.95
+  m_PointLightOuterRadius: 2.62
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 6.76
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: 2.9733973, y: -0.074858196, z: 0.45440635}
+  - {x: 2.9982877, y: 6.907313, z: 0.61770785}
+  - {x: -3.0072107, y: 6.8012066, z: 0.41179156}
+  - {x: -2.9732354, y: -0.118997365, z: 0.23429136}

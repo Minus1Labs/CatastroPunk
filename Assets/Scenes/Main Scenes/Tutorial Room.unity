@@ -26059,7 +26059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  maxHealth: 100
+  maxHealth: 6
   baseDamage: 10
   cashYield: 1
   spriteRenderers: []
@@ -51718,8 +51718,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7802, y: 2.4358, z: 0}
-    m_Extent: {x: 6.6201, y: 5.7939, z: 0}
+    m_Center: {x: 2.7799, y: 2.4358497, z: 0}
+    m_Extent: {x: 6.6191, y: 5.79345, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -77265,7 +77265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0032017326, w: 0.99999493}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0032282267, w: 0.9999949}
   m_LocalPosition: {x: 45.3, y: -34.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -98257,7 +98257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  maxHealth: 100
+  maxHealth: 6
   baseDamage: 10
   cashYield: 1
   spriteRenderers: []
@@ -99318,7 +99318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  maxHealth: 100
+  maxHealth: 6
   baseDamage: 10
   cashYield: 1
   spriteRenderers: []
@@ -99905,9 +99905,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 1
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.67
+  m_FalloffIntensity: 0.611
   m_Color: {r: 0, g: 1, b: 1, a: 1}
-  m_Intensity: 1.46
+  m_Intensity: 0.73
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: b7c5cdfa00000000bff6489ffd0508a5555b014b7f19f39a
@@ -99924,8 +99924,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -2.7561502, y: 2.5083003, z: 0}
-    m_Extent: {x: 6.60635, y: 5.7195, z: 0}
+    m_Center: {x: -2.7564, y: 2.51, z: 0}
+    m_Extent: {x: 3.4853, y: 2.6006, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -99933,7 +99933,7 @@ MonoBehaviour:
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 4.87
+  m_ShapeLightFalloffSize: 1.75
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: -2.4787152, y: 1.6573732, z: -0.30329123}
@@ -118856,7 +118856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  maxHealth: 100
+  maxHealth: 6
   baseDamage: 10
   cashYield: 1
   spriteRenderers: []
@@ -134593,7 +134593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5527633336641726955, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0037227422
+      value: -0.0037224723
       objectReference: {fileID: 0}
     - target: {fileID: 5601006481155984671, guid: 609345f34fd2de14a884031d8ea5f54f, type: 3}
       propertyPath: m_Layer
