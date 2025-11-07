@@ -24,10 +24,14 @@ public class DoorController : ISpecialInteractible
     {
         if (members.Count < 1) { return; }
         
-        LockedDoor ld = members[0] as LockedDoor; //dangerous
-        Transform doorParent = ld.transform.parent;
-        PlayerTeleporter ptp = doorParent.GetComponentInChildren<PlayerTeleporter>() ?? doorParent.GetComponent<PlayerTeleporter>();
-        ptp.targetLocation = pos;
+         //dangerous
+        for (int i = 0; i < members.Count; i++)
+        {
+            LockedDoor ld = members[i] as LockedDoor;
+            Transform doorParent = ld.transform.parent;
+            PlayerTeleporter ptp = doorParent.GetComponentInChildren<PlayerTeleporter>() ?? doorParent.GetComponent<PlayerTeleporter>();
+            ptp.targetLocation = pos;
+        }
     }
 
     public void AddDoor(ISpecialInteractible si)

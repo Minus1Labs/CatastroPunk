@@ -24,6 +24,7 @@ public class WiresManager : MonoBehaviour
         if (allConnected)
         {
             interactible.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
+            this.enabled = false;
         }
     }
 }
