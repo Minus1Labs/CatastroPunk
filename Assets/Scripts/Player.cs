@@ -103,8 +103,8 @@ public class Player : MonoBehaviour, IDamageable
     private bool usingGamepad;
 
     public CharacterEvents characterEvents;
-    [SerializeField]
-    private bool cantDie = false;
+
+    [SerializeField] private bool cantDie = false;
 
 
 
