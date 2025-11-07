@@ -77,6 +77,11 @@ public class Projectile : MonoBehaviour, IReversible
             {
                 damageable.TakeDamage(damage);
             }
+            else
+            {
+                AntBoss antBossScript = (AntBoss) damageable;
+                antBossScript.PlayFailedHitSound();
+            }
             Destroy(gameObject);
         }
 

@@ -117,6 +117,11 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         openBarrelUsesLeft = 4;
     }
 
+    public void PlayFailedHitSound()
+    {
+        audioSource.Play();
+    }
+
     public void AnimateBossRefill()
     {
 
@@ -392,14 +397,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     public override void TakeDamage(float amount)
     {
         base.TakeDamage(amount);
-
-        // Debug line: helps confirm if this runs
-        Debug.Log("AntBoss took damage!");
-
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
     }
 
 
