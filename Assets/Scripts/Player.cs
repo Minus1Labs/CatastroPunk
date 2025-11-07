@@ -356,7 +356,7 @@ public class Player : MonoBehaviour, IDamageable
         return Mathf.Abs(Mathf.RoundToInt(v.x)) + Mathf.Abs(Mathf.RoundToInt(v.y));
     }
 
-    /*
+    
     private void SetInputVector()
     {
         Vector2 input = moveInput;
@@ -389,6 +389,7 @@ public class Player : MonoBehaviour, IDamageable
 
 
         float snappedVertical = lastAnimDir.x;
+
         float snappedAbsHorizontal = Mathf.Abs(lastAnimDir.y);
 
 
@@ -400,83 +401,19 @@ public class Player : MonoBehaviour, IDamageable
 
         catBodyAnimator.SetBool("IsMoving", isMovingNow);
 
-        if (isMovingNow) tailChange(input.x, input.y);
-        else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.y));
+        if (isMovingNow) tailChange(snappedVertical, rawAnimDir.y);
+        else tailChange(snappedVertical, lastAnimDir.y);
 
         prevInput = input;
         wasMoving = isMovingNow;
     }
-    */
 
-    private void SetInputVector()
+    void tailChange(float x, float y)//will probably make this prefabs next time
     {
-        Vector2 input = moveInput;
-        bool isMovingNow = input.sqrMagnitude > 0.0001f;
-
-        // --- 1. SKELETON FLIPPING (BUG 1 FIX) ---
-        // We add the 'else' block to fix the "Sticky Flip" bug.
-        // This ensures "Down Walk" plays on an unflipped skeleton.
-        if (input.x > 0.01f) // Moving Right
-        {
-            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = -1f; // Flipped
-        }
-        else if (input.x < -0.01f) // Moving Left
-        {
-            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; // Default (Left)
-        }
-        else // Moving Up or Down (input.x is 0)
-        {
-            // This is the fix.
-            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; // Default (Left)
-        }
-
-        // --- 2. ISO MOVEMENT ---
-        const float isoYScale = 0.5f;
-        Vector2 iso = new Vector2(input.x, input.y * isoYScale);
-        movementInputVector = iso;
-
-        // --- 3. ANIMATION DIRECTION (BUG 2 FIX) ---
-
-        Vector2 currentSnap;
-
-        if (isMovingNow)
-        {
-            // --- FIX 2: Race Condition ---
-            // We calculate the 8-way direction from the CURRENT input.
-            Vector2 rawAnimDir8Way = new Vector2(input.y, input.x);
-            currentSnap = Snap8(rawAnimDir8Way);
-
-            // We update 'lastAnimDir' for the *next* frame's Idle.
-            lastAnimDir = currentSnap;
-            lastRawDir = input;
-        }
-        else
-        {
-            // If not moving, we use the last-known direction for Idle.
-            currentSnap = lastAnimDir;
-        }
-
-        // --- 4. SET PARAMETERS ---
-        // This is the logic from your "almost-working" 5:02 AM code.
-        // It sends 5-way Right-Based data (0 or 1) to both trees.
-        float snappedVertical = currentSnap.x;
-        float snappedAbsHorizontal = Mathf.Abs(currentSnap.y);
-
-        // Set parameters for BOTH trees
-        catBodyAnimator.SetFloat("MoveX", snappedVertical);
-        catBodyAnimator.SetFloat("MoveY", snappedAbsHorizontal);
-        catBodyAnimator.SetFloat("LastX", snappedVertical);
-        catBodyAnimator.SetFloat("LastY", snappedAbsHorizontal);
-
-        catBodyAnimator.SetBool("IsMoving", isMovingNow);
-
-        // --- 5. TAIL UPDATE ---
-        if (isMovingNow) tailChange(input.x, input.y);
-        else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.x));
-
-        prevInput = input;
-        wasMoving = isMovingNow;
+        catTailAnimator.SetFloat("MoveX", x);
+        catTailAnimator.SetFloat("MoveY", y);
     }
+
     void FireReverse()
     {
         canShootReverse = false;
@@ -619,42 +556,6 @@ public class Player : MonoBehaviour, IDamageable
 
     }
 
-    void tailChange(float x, float y)//will probably make this prefabs next time
-    {
-        if (x == 0 && y == -1)
-        {//down
-            tailBone.transform.localPosition = new Vector3(0f, 0.4f, 0f);
-        }
-        else if (x == 0 && y == 1)
-        {//up 
-            tailBone.transform.localPosition = new Vector3(0f, 0f, 0f);
-        }
-        else if (x == 1 && y == 0)
-        {//right
-            tailBone.transform.localPosition = new Vector3(-0.2f, .2f, 0f);
-        }
-        else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
-        {
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.2f, 0f);
-        }
-        else if (x == 1 && y == -1)//down right
-        {
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.3f, 0f);
-        }
-        else if (x == -1 && y == 0)//left
-        {
-            tailBone.transform.localPosition = new Vector3(0.3f, .3f, 0f);
-        }
-        else if (x == -1 && y == 1)//upleft
-        {
-            tailBone.transform.localPosition = new Vector3(0.25f, 0.2f, 0f);
-        }
-        else if (x == -1 && y == -1)// downleft
-        {
-            tailBone.transform.localPosition = new Vector3(0.2f, 0.3f, 0f);
-        }
-
-    }
 
     public void AddHealth(int amount)
     {
