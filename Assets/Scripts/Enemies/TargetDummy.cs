@@ -24,7 +24,7 @@ namespace Enemies
             return;
         }
 
-        protected override void Die()
+        public override void Die()
         {
             currentHealth = maxHealth;
         }

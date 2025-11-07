@@ -4,12 +4,8 @@ using UnityEngine;
 public class CharacterEvents
 {
     //public event Action<HitData> OnHitEnemy;
-    public event Action<Enemies.Enemy> OnKillEnemy;
-
-    //public event Action<DamageData> OnTakeDamage;
-
-    public event Action<float> OnHeal;
-
+    public event Action<EnemyDiedEvent> OnKillEnemy;
+    public event Action<CharacterDamagedEvent> OnTakeDamage;
     public event Action<ProjectileCreatedEvent> OnProjectileCreate;
     public event Action<CardAddedEvent> OnCardAdded;
     public event Action<CalculateDamageEvent> OnDamageCalculate;
@@ -21,9 +17,9 @@ public class CharacterEvents
         OnHitEnemy?.Invoke(hit);
     }*/
 
-    public void RaiseKill(Enemies.Enemy enemy)
+    public void RaiseKill(EnemyDiedEvent ede)
     {
-        OnKillEnemy?.Invoke(enemy);
+        OnKillEnemy?.Invoke(ede);
     }
 
     public void RaiseProjectileCreate(ProjectileCreatedEvent pce)
@@ -41,7 +37,10 @@ public class CharacterEvents
         OnDamageCalculate?.Invoke(cde);
     }
 
-    //public void RaiseTakeDamage(DamageData damage){ OnTakeDamage?.Invoke(damage);}
+    public void RaiseTakeDamage(CharacterDamagedEvent cde)
+    {
+        OnTakeDamage?.Invoke(cde);
+    }
 
     //public void RaiseHeal(float amount){OnHeal?.Invoke(amount);}
 }

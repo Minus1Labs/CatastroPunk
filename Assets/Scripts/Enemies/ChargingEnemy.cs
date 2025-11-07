@@ -263,9 +263,9 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    protected override void Die()
+    public override void Die()
     {
-        EventDispatcher.RaiseEnemyDied(new EnemyDiedEvent(gameObject, null, this.transform.position, null));
+        EventDispatcher.RaiseEnemyDied(new EnemyDiedEvent(this, null, this.transform.position, null));
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //TODO: add any other death logic before destroying
         Destroy(gameObject);

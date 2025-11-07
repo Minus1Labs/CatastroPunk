@@ -14,6 +14,7 @@ using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEditor.PackageManager;
 using Spine.Unity;
+using Enemies;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -144,6 +145,7 @@ public class Player : MonoBehaviour, IDamageable
                 StartCoroutine(Dash());
         };
 
+        EventDispatcher.OnEnemyDied += OnEnemyKilled;
     }
     // Start is called before the first frame update
     void Start()
@@ -199,6 +201,23 @@ public class Player : MonoBehaviour, IDamageable
         // TODO: send out signal OR directly call UI to update item UI
         EventDispatcher.RaiseCardAddedEvent(new CardAddedEvent(c, childComponent, isNew, this));
         // TODO: send out signal to rigging to update visuals
+    }
+
+    private void OnEnemyKilled(EnemyDiedEvent ede) {
+        Enemy e = ede.Enemy.GetComponent<Enemy>();
+        if (e == null)
+        {
+            Debug.LogError("Enemy object was null in EnemyDiedEvent!");
+            return;
+        }
+
+        //For calculating the cash for a kill, we take the int multiplier, and then have a chance
+        //equal to the remainder to add one to the multiplier
+        float cMultRaw = GetCashMultiplier();
+        int cMultInt = (int)cMultRaw;
+        float cMultDecimal = cMultRaw - (float)cMultInt;
+        cMultInt = UnityEngine.Random.Range(0f, 1f) < cMultDecimal ? cMultInt + 1 : cMultInt;
+        cash += e.cashYield * cMultInt;
     }
 
     public float GetDamage()
@@ -264,6 +283,10 @@ public class Player : MonoBehaviour, IDamageable
     public float GetLuck()
     {
         return (baseStats.luck + additiveStats.luck) * multStats.luck;
+    }
+
+    public float GetCashMultiplier() {
+        return (baseStats.cashMultiplier + additiveStats.cashMultiplier) * multStats.cashMultiplier;
     }
 
     public float GetReverseCooldownValue()
