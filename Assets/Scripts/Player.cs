@@ -103,6 +103,10 @@ public class Player : MonoBehaviour, IDamageable
     private bool usingGamepad;
 
     public CharacterEvents characterEvents;
+    [SerializeField]
+    private bool cantDie = false;
+
+
 
 
     void Awake()
@@ -625,6 +629,10 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if(cantDie)
+        {
+            return;
+        }
         //TODO: more logic for player death
         // for now, we will just have it reload the scene:
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
