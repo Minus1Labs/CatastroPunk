@@ -12,7 +12,9 @@ using JetBrains.Annotations;
 using UnityEngine.Android;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using UnityEditor.PackageManager;
 using Spine.Unity;
+using Enemies;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -76,6 +78,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerStats baseStats;
     public PlayerStats additiveStats;
     public PlayerStats multStats;
+    private float energyOnLastShot;
     public int cash;
     private int currentHealth;
     public float currentCharge;
@@ -99,9 +102,9 @@ public class Player : MonoBehaviour, IDamageable
     private Vector2 aimInput;
     private bool usingGamepad;
 
+    public CharacterEvents characterEvents;
 
-    [SerializeField]
-    private bool cantDie = false;
+    [SerializeField] private bool cantDie = false;
 
 
 
@@ -146,6 +149,7 @@ public class Player : MonoBehaviour, IDamageable
                 StartCoroutine(Dash());
         };
 
+        EventDispatcher.OnEnemyDied += OnEnemyKilled;
     }
     // Start is called before the first frame update
     void Start()
@@ -166,6 +170,8 @@ public class Player : MonoBehaviour, IDamageable
         currentHealth = baseStats.health;
         currentSpeed = GetMoveSpeed();
         currentCharge = GetBatteryCapacity();
+
+        characterEvents = new CharacterEvents();
     }
 
     void OnEnable() => controls.Enable();
@@ -185,22 +191,46 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         CardBehavior childComponent = GetComponent(c.BehaviourType) as CardBehavior;
-        if (childComponent != null)
+        bool isNew = childComponent == null;
+        if (!isNew)
         {
             childComponent.AddStack(this);
         }
         else
         {
-            CardBehavior cb = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
-            cb.ApplyUpgrade(this);
+            childComponent = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
+            childComponent.ApplyUpgrade(this);
         }
+
         // TODO: send out signal OR directly call UI to update item UI
+        EventDispatcher.RaiseCardAddedEvent(new CardAddedEvent(c, childComponent, isNew, this));
         // TODO: send out signal to rigging to update visuals
+    }
+
+    private void OnEnemyKilled(EnemyDiedEvent ede) {
+        Enemy e = ede.Enemy.GetComponent<Enemy>();
+        if (e == null)
+        {
+            Debug.LogError("Enemy object was null in EnemyDiedEvent!");
+            return;
+        }
+
+        //For calculating the cash for a kill, we take the int multiplier, and then have a chance
+        //equal to the remainder to add one to the multiplier
+        float cMultRaw = GetCashMultiplier();
+        int cMultInt = (int)cMultRaw;
+        float cMultDecimal = cMultRaw - (float)cMultInt;
+        cMultInt = UnityEngine.Random.Range(0f, 1f) < cMultDecimal ? cMultInt + 1 : cMultInt;
+        cash += e.cashYield * cMultInt;
     }
 
     public float GetDamage()
     {
-        return (baseStats.damage + additiveStats.damage) * multStats.damage;
+        float damagecalc = (baseStats.damage + additiveStats.damage) * multStats.damage;
+        CalculateDamageEvent cde = new CalculateDamageEvent(damagecalc);
+        characterEvents.RaiseCalculateDamageEvent(cde);
+
+        return cde.damage;
     }
 
     public float GetMoveSpeed()
@@ -257,6 +287,10 @@ public class Player : MonoBehaviour, IDamageable
     public float GetLuck()
     {
         return (baseStats.luck + additiveStats.luck) * multStats.luck;
+    }
+
+    public float GetCashMultiplier() {
+        return (baseStats.cashMultiplier + additiveStats.cashMultiplier) * multStats.cashMultiplier;
     }
 
     public float GetReverseCooldownValue()
@@ -505,6 +539,7 @@ public class Player : MonoBehaviour, IDamageable
                     fireSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
                     fireSource.PlayOneShot(fireSound);
                 }
+                proj.transform.localScale *= GetDamage() / baseStats.damage;
             }
         }
     }

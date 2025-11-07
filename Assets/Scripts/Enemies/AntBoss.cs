@@ -402,7 +402,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     }
 
 
-    protected override void Die()
+    public override void Die()
     {
         if (player != null)
         {

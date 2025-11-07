@@ -40,6 +40,12 @@ public static class ScriptUtilities
         JUPITER_CITY_STREETS
     }
 
+    public enum DAMAGE_TYPE
+    {
+        NORMAL,
+        PUDDLE,
+    }
+
     public static readonly int gridScalar = 5;
 
     /*

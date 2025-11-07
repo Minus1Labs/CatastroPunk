@@ -17,7 +17,7 @@ namespace Enemies
         [SerializeField] protected float baseSpeed = 2f;
         [SerializeField] protected float maxHealth = 5;
         [SerializeField] protected int baseDamage = 1;
-        [SerializeField] protected int cashYield = 1;
+        [SerializeField] public int cashYield = 1;
 
         protected float currentHealth;
         protected Rigidbody2D rb;
@@ -27,6 +27,7 @@ namespace Enemies
         public SpriteRenderer[] spriteRenderers; // assign in inspector
         public Material whiteFlashMaterial;       // assign the white material here
         private Material[] originalMaterials;
+        public CharacterEvents characterEvents = new CharacterEvents();
 
         private float flashDuration = 0.1f;
 
@@ -47,8 +48,10 @@ namespace Enemies
 
         public virtual void TakeDamage(float damage)
         {
-            currentHealth -= damage;
             StartCoroutine(FlashWhite());
+            CharacterDamagedEvent cde = new CharacterDamagedEvent(null, this, damage, true, ScriptUtilities.DAMAGE_TYPE.NORMAL);
+            characterEvents.RaiseTakeDamage(cde);
+            currentHealth -= cde.damage;
             //play animation to take damage goes here
             if (currentHealth <= 0)
             {
@@ -56,7 +59,7 @@ namespace Enemies
             }
         }
 
-        private IEnumerator FlashWhite()
+        protected IEnumerator FlashWhite()
         {
             // swap to white flash material
             for (int i = 0; i < spriteRenderers.Length; i++)
@@ -68,9 +71,15 @@ namespace Enemies
             for (int i = 0; i < spriteRenderers.Length; i++)
                 spriteRenderers[i].material = originalMaterials[i];
         }
-        //aaahh
 
-        protected abstract void Die();
+
+        //override this for special death behavior, but be sure to include the event raise.
+        //This generic does not include the explosion prefab
+        public virtual void Die()
+        {
+            EventDispatcher.RaiseEnemyDied(new EnemyDiedEvent(this, null, this.transform.position, null));
+            Destroy(gameObject);
+        }
 
         // Movement — override in subclasses
         public abstract void Move();

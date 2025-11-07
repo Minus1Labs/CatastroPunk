@@ -130,10 +130,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.507534, y: -3.2990584}
+    - - {x: 1.9611685, y: -4.233935}
+      - {x: 3.507534, y: -3.2990584}
       - {x: -1.0167658, y: -0.8644321}
-      - {x: -3.0240123, y: -1.8860925}
-      - {x: 1.9875908, y: -4.2650137}
+      - {x: -2.8283513, y: -1.8162137}
+      - {x: -2.488599, y: -1.997221}
+      - {x: -0.98694444, y: -1.2715777}
+      - {x: 2.9511852, y: -3.293994}
+      - {x: 1.5403652, y: -4.069353}
   m_UseDelaunayMesh: 0
 --- !u!1 &8790878469871814822
 GameObject:
@@ -145,7 +149,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6657941359062202893}
   - component: {fileID: 612162418083576872}
-  - component: {fileID: 2320395013124848673}
   m_Layer: 0
   m_Name: ExtraDesktop_2x1
   m_TagString: Wall
@@ -220,52 +223,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2320395013124848673
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790878469871814822}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.08, y: 11.35}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 3.507534, y: -3.2990584}
-      - {x: -1.0167658, y: -0.8644321}
-      - {x: -3.0240123, y: -1.8860925}
-      - {x: 1.9875908, y: -4.2650137}
-  m_UseDelaunayMesh: 0
