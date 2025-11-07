@@ -142,6 +142,17 @@
                 },
                 {
                     "name": "",
+                    "id": "3560f947-ed35-4d4b-80c7-a35c13d71d45",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "190cfc82-3fd1-433f-8446-bf0b7fd6ba96",
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
@@ -164,19 +175,19 @@
                 },
                 {
                     "name": "",
-                    "id": "bcbb34ab-d6ce-4926-9b2f-94471a93378f",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "255a12dc-0723-4a1f-a595-d092f6829b26",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "Fire2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "43f4ce30-9c6c-4158-8a33-b98d407c241e",
-                    "path": "<Mouse>/position",
+                    "id": "bcbb34ab-d6ce-4926-9b2f-94471a93378f",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -236,6 +247,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "195cdb58-3950-4868-855f-9bc102d752e8",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
