@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5595254214545373407}
   - component: {fileID: 2878913392648810494}
   - component: {fileID: 3021029088149579146}
+  - component: {fileID: 5586447721241288222}
   m_Layer: 0
   m_Name: Sofa_B_2x1
   m_TagString: Untagged
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 4.545058, y: -2.7508316}
       - {x: -1.9807305, y: 0.46886387}
   m_UseDelaunayMesh: 0
+--- !u!114 &5586447721241288222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179667254451227190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -3.319487, y: -0.55039126}
+  SorterPositionOffset2: {x: 3.3065846, y: -1.984629}
+  renderersToSort: []

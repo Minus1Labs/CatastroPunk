@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1312485854231680472}
   - component: {fileID: 6353094551474284619}
   - component: {fileID: 4043256735247274202}
+  - component: {fileID: 4351907719384744472}
   m_Layer: 0
   m_Name: Desktop_2x1
   m_TagString: Wall
@@ -143,3 +144,21 @@ PolygonCollider2D:
       - {x: 0.23138046, y: -3.723936}
       - {x: 1.1194277, y: -3.841115}
   m_UseDelaunayMesh: 0
+--- !u!114 &4351907719384744472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197246058596195830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -3.1326618, y: -2.2826843}
+  SorterPositionOffset2: {x: 2.9398558, y: -2.796227}
+  renderersToSort: []

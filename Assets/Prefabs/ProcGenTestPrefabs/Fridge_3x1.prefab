@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5682029432050678706}
   - component: {fileID: 8335225825082872473}
   - component: {fileID: 6607067293155085921}
+  - component: {fileID: 291241494311216861}
   m_Layer: 0
   m_Name: Fridge_3x1
   m_TagString: Untagged
@@ -140,3 +141,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &291241494311216861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4095917212730983418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.11220217, y: -0.27846968}
+  SorterPositionOffset2: {x: 6.916258, y: -1.4774044}
+  renderersToSort: []

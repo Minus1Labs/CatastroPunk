@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 567975867792392080}
   - component: {fileID: 8165262145121348591}
   - component: {fileID: 5824916088594077991}
+  - component: {fileID: 1946678033822300366}
   m_Layer: 0
   m_Name: boxes_1x1
   m_TagString: Untagged
@@ -139,3 +140,21 @@ PolygonCollider2D:
       - {x: -1.0388256, y: -0.5353777}
       - {x: 0.09415448, y: 0.17623305}
   m_UseDelaunayMesh: 0
+--- !u!114 &1946678033822300366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987280175214378448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -1.6769452, y: 0.33775854}
+  SorterPositionOffset2: {x: 0.158741, y: -0.73888767}
+  renderersToSort: []

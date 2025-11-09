@@ -310,6 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8986166083162141360}
+  - component: {fileID: 3653950009477417239}
   m_Layer: 0
   m_Name: ClosedDoorTopRight
   m_TagString: Untagged
@@ -335,6 +336,24 @@ Transform:
   - {fileID: 5565086397185600727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3653950009477417239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7106349513453824459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 1.4561548, y: -3.2951806}
+  SorterPositionOffset2: {x: 8.748545, y: 2.149392}
+  renderersToSort: []
 --- !u!1001 &9102454961725486082
 PrefabInstance:
   m_ObjectHideFlags: 0

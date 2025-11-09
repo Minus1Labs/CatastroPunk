@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6026526323238217828}
   - component: {fileID: 5643645838756684657}
   - component: {fileID: 8538609389717736995}
+  - component: {fileID: 4417246086862699023}
   m_Layer: 0
   m_Name: techtable_1x2
   m_TagString: Untagged
@@ -137,3 +138,21 @@ PolygonCollider2D:
       - {x: -6.27845, y: -3.5396776}
       - {x: -8.468138, y: -3.1845164}
   m_UseDelaunayMesh: 0
+--- !u!114 &4417246086862699023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980304833245401652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.830378, y: -0.5700898}
+  SorterPositionOffset2: {x: 0.046016216, y: 0.006157458}
+  renderersToSort: []

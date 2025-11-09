@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7681082282956985728}
   - component: {fileID: 6336172922351746219}
   - component: {fileID: 9219770829403791443}
+  - component: {fileID: 9139896736658221897}
   m_Layer: 0
   m_Name: amogus_1x3 1
   m_TagString: Untagged
@@ -135,3 +136,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9139896736658221897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059744866182524360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.12755853, y: -0.021583356}
+  SorterPositionOffset2: {x: 8.748546, y: 2.1493917}
+  renderersToSort: []
