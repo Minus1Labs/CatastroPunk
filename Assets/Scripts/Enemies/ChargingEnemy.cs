@@ -63,8 +63,6 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
             player = p.transform;
         }
 
-        Debug.Log("Woke up enemy");
-
         enemyState = ChargingEnemyState.Idle;
 
         posHistory.Clear();
@@ -265,16 +263,9 @@ public class ChargingEnemy : Enemies.Enemy, IEnemyCommunicator
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    protected override void Die()
+    public override void Die()
     {
-        if (player != null)
-        {
-            Player pl = player.GetComponent<Player>();
-            if (pl != null)
-            {
-                //pl.KilledEnemy();
-            }
-        }
+        EventDispatcher.RaiseEnemyDied(new EnemyDiedEvent(this, null, this.transform.position, null));
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //TODO: add any other death logic before destroying
         Destroy(gameObject);

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -1435854925571976835, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 3930316614524903308, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -198,8 +198,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6038561936932169923}
   - {fileID: 4609862483621671897}
@@ -255,8 +255,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalEnemyObject: {fileID: 4414995321013640732, guid: 6295babdd26c04f1e854b4ed62e18483, type: 3}
-  reverseClip: {fileID: 0}
+  reverseClip: {fileID: 6507705096131388260}
   reverseVolume: 1
+  sprites:
+  - {fileID: 760992298787330972}
+  - {fileID: 2721902297714494934}
+  - {fileID: 4210902154906158468}
+  - {fileID: 2971721683568096556}
 --- !u!50 &700319788286652840
 Rigidbody2D:
   serializedVersion: 4
@@ -294,9 +299,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cce85ee85fc42b5499b1091bf03e0937, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0
+  m_audioClip: {fileID: 8300000, guid: 2aa2ef6c6b0bbe746b7ed76c88620c81, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.727
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -452,7 +457,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: -7601262946055231971, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -536,7 +541,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7663255067651952033, guid: e030f9c9f2aa60a4da191f4e8b9da36a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

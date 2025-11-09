@@ -146,7 +146,7 @@ public class BasicEnemy : Enemies.Enemy
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    protected override void Die()
+    public override void Die()
     {
         if (player != null)
         {

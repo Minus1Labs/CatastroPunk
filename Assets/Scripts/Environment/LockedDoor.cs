@@ -10,6 +10,9 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
 
     private Collider2D doorCollider = null;
     private bool is_closed = true;
+    private PlayerTeleporter ptp;
+
+    public AudioSource doorOpenSound;
 
     protected override void Awake()
     {
@@ -18,6 +21,7 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
         spriteRenderer = GetComponent<SpriteRenderer>();
         Transform parentTransform = transform.parent; // get parent
         Transform sibling = parentTransform.Find("DoorCollider"); // find the sibling by name
+        ptp = parentTransform.GetComponent<PlayerTeleporter>() ?? parentTransform.GetComponentInChildren<PlayerTeleporter>();
 
         if (sibling != null)
         {
@@ -34,6 +38,11 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
         interactible_type = InteractibleType.SPECIAL_INTERACTIBLE;
         spriteRenderer.sprite = closedSprite;
         doorCollider.enabled = true;
+
+        if (is_closed)
+        {
+            ptp.isEnabled = false;
+        }
     }
 
     void Start()
@@ -54,7 +63,9 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
             spriteRenderer.sprite = openedSprite;
             doorCollider.enabled = false;
             is_closed = false;
+            doorOpenSound.Play();
         }
+        ptp.isEnabled = true;
     }
     public bool Is_Closed()
     {

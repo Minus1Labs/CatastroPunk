@@ -11,6 +11,10 @@ using Unity.Collections;
 using JetBrains.Annotations;
 using UnityEngine.Android;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
+using UnityEditor.PackageManager;
+using Spine.Unity;
+using Enemies;
 
 public class Player : MonoBehaviour, IDamageable
 {
@@ -30,9 +34,11 @@ public class Player : MonoBehaviour, IDamageable
 
     [SerializeField]
     private Transform firePoint;
-
+    
     public Animator catBodyAnimator;
     public Animator catTailAnimator;
+    private Spine.Unity.SkeletonMecanim skeletonMecanim;
+    private float currentFacingDirection = 1f;
 
     private Vector3 mousePos;
     public GameObject gunPos;
@@ -49,15 +55,14 @@ public class Player : MonoBehaviour, IDamageable
     private bool canDash = true;
     [Header("Base Player Stats")]
     
-
-
-    [SerializeField] private float baseDashCd = 4.0f;
     private float dashCooldown;
 
     public float iFrameDuration = 1f;
     private bool isInvincible = false;
 
     [SerializeField] private float reverseBulletCooldown = 1.5f;
+
+    private float reverseCooldownValue = 1f; //this is what we use to fill up the cooldown ui bar:
 
     [SerializeField] private float baseProjectileSpeed = 12f;
     private float projectileSpeed;
@@ -73,6 +78,7 @@ public class Player : MonoBehaviour, IDamageable
     public PlayerStats baseStats;
     public PlayerStats additiveStats;
     public PlayerStats multStats;
+    private float energyOnLastShot;
     public int cash;
     private int currentHealth;
     public float currentCharge;
@@ -91,13 +97,64 @@ public class Player : MonoBehaviour, IDamageable
 
     private bool canFire = true;
 
+    private PlayerControls controls;
+    private Vector2 moveInput;
+    private Vector2 aimInput;
+    private bool usingGamepad;
+
+    public CharacterEvents characterEvents;
+
+    [SerializeField] private bool cantDie = false;
 
 
 
 
+    void Awake()
+    {
+        controls = new PlayerControls();
+
+        controls.Gameplay.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Gameplay.Move.canceled += _ => moveInput = Vector2.zero;
+
+        controls.Gameplay.Aim.performed += ctx =>
+        {
+            aimInput = ctx.ReadValue<Vector2>();
+            usingGamepad = ctx.control.device is Gamepad;
+        };
+        controls.Gameplay.Aim.canceled += _ => aimInput = Vector2.zero;
+
+        // Shooting
+        // --- Shooting ---
+        controls.Gameplay.Fire1.performed += _ =>
+        {
+            if (CanInput() && currentCharge >= GetShotEnergy() && canFire)
+            {
+                currentCharge -= GetShotEnergy();
+                canFire = false;
+                FireProjectile();
+                StartCoroutine(EnableFire());
+            }
+        };
+
+        controls.Gameplay.Fire2.performed += _ =>
+        {
+            if (CanInput() && canShootReverse)
+                FireProjectile(true);
+        };
+
+        // --- Dash ---
+        controls.Gameplay.Dash.performed += _ =>
+        {
+            if (CanInput() && canDash && movementInputVector != Vector2.zero)
+                StartCoroutine(Dash());
+        };
+
+        EventDispatcher.OnEnemyDied += OnEnemyKilled;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        skeletonMecanim = catBodyAnimator.GetComponent<SkeletonMecanim>();
         rb = GetComponent<Rigidbody2D>();
         catTailAnimator = tailBone.GetComponent<Animator>();
         projectileSpeed = baseProjectileSpeed;
@@ -113,7 +170,13 @@ public class Player : MonoBehaviour, IDamageable
         currentHealth = baseStats.health;
         currentSpeed = GetMoveSpeed();
         currentCharge = GetBatteryCapacity();
+
+        characterEvents = new CharacterEvents();
     }
+
+    void OnEnable() => controls.Enable();
+    void OnDisable() => controls.Disable();
+
 
     public void AddCard(Card c)
     {
@@ -122,28 +185,52 @@ public class Player : MonoBehaviour, IDamageable
             Debug.LogError("Attempted to add card, but object is null");
         }
 
-        if (c.cardBehavior == null)
+        if (c.BehaviourType == null)
         {
             Debug.LogError("Attempted to add card, but CardBehavior attribute of Card is null");
         }
 
-        CardBehavior childComponent = GetComponent(c.cardBehavior.GetClass()) as CardBehavior;
-        if (childComponent != null)
+        CardBehavior childComponent = GetComponent(c.BehaviourType) as CardBehavior;
+        bool isNew = childComponent == null;
+        if (!isNew)
         {
             childComponent.AddStack(this);
         }
         else
         {
-            CardBehavior cb = gameObject.AddComponent(c.cardBehavior.GetClass()) as CardBehavior;
-            cb.ApplyUpgrade(this);
+            childComponent = gameObject.AddComponent(c.BehaviourType) as CardBehavior;
+            childComponent.ApplyUpgrade(this);
         }
+
         // TODO: send out signal OR directly call UI to update item UI
+        EventDispatcher.RaiseCardAddedEvent(new CardAddedEvent(c, childComponent, isNew, this));
         // TODO: send out signal to rigging to update visuals
+    }
+
+    private void OnEnemyKilled(EnemyDiedEvent ede) {
+        Enemy e = ede.Enemy.GetComponent<Enemy>();
+        if (e == null)
+        {
+            Debug.LogError("Enemy object was null in EnemyDiedEvent!");
+            return;
+        }
+
+        //For calculating the cash for a kill, we take the int multiplier, and then have a chance
+        //equal to the remainder to add one to the multiplier
+        float cMultRaw = GetCashMultiplier();
+        int cMultInt = (int)cMultRaw;
+        float cMultDecimal = cMultRaw - (float)cMultInt;
+        cMultInt = UnityEngine.Random.Range(0f, 1f) < cMultDecimal ? cMultInt + 1 : cMultInt;
+        cash += e.cashYield * cMultInt;
     }
 
     public float GetDamage()
     {
-        return (baseStats.damage + additiveStats.damage) * multStats.damage;
+        float damagecalc = (baseStats.damage + additiveStats.damage) * multStats.damage;
+        CalculateDamageEvent cde = new CalculateDamageEvent(damagecalc);
+        characterEvents.RaiseCalculateDamageEvent(cde);
+
+        return cde.damage;
     }
 
     public float GetMoveSpeed()
@@ -164,6 +251,11 @@ public class Player : MonoBehaviour, IDamageable
     public float GetDashCd()
     {
         return (baseStats.dashCooldown + additiveStats.dashCooldown) * multStats.dashCooldown;
+    }
+
+    public float GetDashDistance()
+    {
+        return (baseStats.dashDistance + additiveStats.dashDistance) * multStats.dashDistance;
     }
 
     //public float GetIFrameDur() {}
@@ -190,6 +282,20 @@ public class Player : MonoBehaviour, IDamageable
     public float GetShotEnergy()
     {
         return (baseStats.energyPerShot + additiveStats.energyPerShot) * multStats.energyPerShot;
+    }
+
+    public float GetLuck()
+    {
+        return (baseStats.luck + additiveStats.luck) * multStats.luck;
+    }
+
+    public float GetCashMultiplier() {
+        return (baseStats.cashMultiplier + additiveStats.cashMultiplier) * multStats.cashMultiplier;
+    }
+
+    public float GetReverseCooldownValue()
+    {
+        return reverseCooldownValue;
     }
 
     public void LockPlayer()
@@ -220,50 +326,46 @@ public class Player : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        if (CanInput()) {
-            SetInputVector();
-            if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.O)) && currentCharge >= GetShotEnergy() && canFire)
-            {
-                currentCharge -= GetShotEnergy();
-                canFire = false;
-                FireProjectile();
-                StartCoroutine(EnableFire());
-            }
-            else if (canShootReverse && (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.P)))
-            {
-                FireProjectile(true);
-            }
-        }
+        if (!CanInput()) return;
 
-        // make a dash button (shift)
-        if (canDash &&
-        (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Space)) &&
-        movementInputVector != Vector2.zero)
+        SetInputVector();  // keep your movement + animation system
+
+        if (usingGamepad)
         {
-            StartCoroutine(Dash());
+            Vector2 stick = aimInput;
+            if (stick.sqrMagnitude > 0.01f)
+            {
+                Vector3 aimDir = new Vector3(stick.x, stick.y, 0f).normalized;
+                float aimDistance = 2.5f;
+                gunPos.transform.position = transform.position + aimDir * aimDistance;
+
+                float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+                firePoint.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
         }
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0;
-        gunPos.transform.position = mousePos;
-        // Debug.Log(gunPos.transform.position);
-
-        //If you get an error with the above line, replace it with this:
-        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, zAxis);
+        else
+        {
+            Vector3 mouseScreen = new Vector3(aimInput.x, aimInput.y, 0f);
+            Vector3 world = Camera.main.ScreenToWorldPoint(mouseScreen);
+            world.z = 0;
+            gunPos.transform.position = world;
+        }
     }
+
 
     IEnumerator Dash()
     {
         if (dashSound != null) dashSound.Play();
         canDash = false;
         isDashing = true;
-        currentSpeed = GetMoveSpeed() * dashSpeed;
+        catBodyAnimator.SetTrigger("IsDashing");
+        currentSpeed = GetMoveSpeed() * dashSpeed * GetDashDistance() * 0.5f;
         isInvincible = true;
         yield return new WaitForSeconds(0.3f);
         isDashing = false;
         currentSpeed = GetMoveSpeed();
         isInvincible = false;
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitForSeconds(GetDashCd());
         canDash = true;
     }
 
@@ -281,64 +383,73 @@ public class Player : MonoBehaviour, IDamageable
         return Mathf.Abs(Mathf.RoundToInt(v.x)) + Mathf.Abs(Mathf.RoundToInt(v.y));
     }
 
+    
     private void SetInputVector()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+        Vector2 input = moveInput;
 
-        Vector2 input = new Vector2(moveHorizontal, moveVertical);
-        bool isMovingNow = input.sqrMagnitude > 0.0001f;
-
-
-
-        const float isoYScale = 0.5f; // tweak to match your tile/grid art
-        Vector2 iso = new Vector2(
-            input.x,
-            input.y * isoYScale
-        );
-
-        movementInputVector = iso;
-
-        // Your animator mapping (MoveX <- vertical, MoveY <- horizontal)
-        float animX = moveVertical;
-        float animY = moveHorizontal;
-
-        // Decide when to update lastAnimDir (avoid diagonal→single on release)
-        Vector2 curAnimDir = new Vector2(animX, animY);
-        Vector2 curSnap = Snap8(curAnimDir);
-        Vector2 prevAnimDir = new Vector2(prevInput.y, prevInput.x); // map prev input same way
-        Vector2 prevSnap = Snap8(prevAnimDir);
-
-        bool startedMoving = !wasMoving && isMovingNow;                 // 0 → non-zero
-        bool gotStronger = TaxiMag(curSnap) > TaxiMag(prevSnap);      // single → diagonal
-
-        if (startedMoving || (isMovingNow && gotStronger))
+        if (input.x > 0.01f) 
         {
-            lastAnimDir = curSnap;
-            lastRawDir = input; // keep for tail logic
+            currentFacingDirection = -1f;
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = -1f; 
+        }
+        else if (input.x < -0.01f) 
+        {
+            currentFacingDirection = 1f;
+            if (skeletonMecanim != null) skeletonMecanim.skeleton.ScaleX = 1f; 
         }
 
-        // --- push animator params ---
-        catBodyAnimator.SetFloat("MoveX", animX);
-        catBodyAnimator.SetFloat("MoveY", animY);
-        catBodyAnimator.SetFloat("LastX", lastAnimDir.x);
-        catBodyAnimator.SetFloat("LastY", lastAnimDir.y);
+        const float isoYScale = 0.5f;
+        Vector2 iso = new Vector2(input.x, input.y * isoYScale);
+        movementInputVector = iso;
+
+        bool isMovingNow = input.sqrMagnitude > 0.0001f;
+
+        Vector2 rawAnimDir = new Vector2(input.y, input.x);
+        Vector2 rawSnap = Snap8(rawAnimDir);
+
+        if (isMovingNow)
+        {
+            lastAnimDir = rawSnap;
+            lastRawDir = input;
+        }
+
+
+        float snappedVertical = lastAnimDir.x;
+
+        float snappedAbsHorizontal = Mathf.Abs(lastAnimDir.y);
+
+
+        catBodyAnimator.SetFloat("MoveX", snappedVertical);
+        catBodyAnimator.SetFloat("MoveY", snappedAbsHorizontal);
+
+        catBodyAnimator.SetFloat("LastX", snappedVertical);
+        catBodyAnimator.SetFloat("LastY", snappedAbsHorizontal);
+
         catBodyAnimator.SetBool("IsMoving", isMovingNow);
 
-        // Tail keeps the last facing when stopped
-        if (isMovingNow) tailChange(moveHorizontal, moveVertical);
-        else tailChange(Mathf.RoundToInt(lastRawDir.x), Mathf.RoundToInt(lastRawDir.y));
+        if (isMovingNow) tailChange(snappedVertical, rawAnimDir.y);
+        else tailChange(snappedVertical, lastAnimDir.y);
 
-        // Remember for next frame
         prevInput = input;
         wasMoving = isMovingNow;
+    }
 
+    void tailChange(float x, float y)//will probably make this prefabs next time
+    {
+        catTailAnimator.SetFloat("MoveX", x);
+        catTailAnimator.SetFloat("MoveY", y);
     }
 
     void FireReverse()
     {
         canShootReverse = false;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 screenPos = usingGamepad
+    ? (Vector2)Camera.main.WorldToScreenPoint(firePoint.position + (Vector3)aimInput * 10f)
+    : aimInput;
+
+    Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
         var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
@@ -357,6 +468,9 @@ public class Player : MonoBehaviour, IDamageable
             // firePoint.right = dir;
 
             GameObject go = Instantiate(reversalProjectilePrefab, firePoint.position, firePoint.rotation);
+            Projectile proj = go.GetComponent<Projectile>();
+            proj.SetStats(0, projectileSpeed, projLifetime);
+            
             //shootAnimation(dir);//do not delete, will change it to a nice shoot animation
             if (reverseBulletSound != null)
             {
@@ -368,7 +482,14 @@ public class Player : MonoBehaviour, IDamageable
 
     IEnumerator ReverseCooldown()
     {
-        yield return new WaitForSeconds(reverseBulletCooldown);
+        reverseCooldownValue = 0f;
+        float cooldownTime = reverseBulletCooldown;
+        while (reverseCooldownValue < 1f)
+        {
+            reverseCooldownValue += Time.deltaTime / cooldownTime;
+            reverseCooldownValue = Mathf.Clamp01(reverseCooldownValue);
+            yield return null;
+        }
         canShootReverse = true;
     }
 
@@ -381,7 +502,12 @@ public class Player : MonoBehaviour, IDamageable
         }
 
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 screenPos = usingGamepad
+    ? (Vector2)Camera.main.WorldToScreenPoint(firePoint.position + (Vector3)aimInput * 10f)
+    : aimInput;
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+
 
         // Plane: normal facing +Z (XY plane), passing through z = firePoint.position.z
         var plane = new Plane(Vector3.forward, new Vector3(0f, 0f, firePoint.position.z));
@@ -408,7 +534,12 @@ public class Player : MonoBehaviour, IDamageable
                 Projectile proj = projectileInstance.GetComponent<Projectile>();
                 //shootAnimation(dir);//do not delete will change to a nice shooting anim
                 proj.SetStats(GetDamage(), projectileSpeed, projLifetime);
-                if (fireSource != null) fireSource.PlayOneShot(fireSound);
+                if (fireSource != null)
+                {
+                    fireSource.pitch = UnityEngine.Random.Range(0.9f, 1.1f);
+                    fireSource.PlayOneShot(fireSound);
+                }
+                proj.transform.localScale *= GetDamage() / baseStats.damage;
             }
         }
     }
@@ -432,7 +563,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (onlyAnimations) return;
         // if not moving diagonal:
-        float speedModifier = currentSpeed * 5.0f;
+        float speedModifier = currentSpeed * 7.0f;
         if (currentCharge < GetBatteryCapacity() && canFire)
         {
             currentCharge += GetEnergyRegain() * Time.fixedDeltaTime;
@@ -452,42 +583,6 @@ public class Player : MonoBehaviour, IDamageable
 
     }
 
-    void tailChange(float x, float y)//will probably make this prefabs next time
-    {
-        if (x == 0 && y == -1)
-        {//down
-            tailBone.transform.localPosition = new Vector3(0f, 0.4f, 0f);
-        }
-        else if (x == 0 && y == 1)
-        {//up 
-            tailBone.transform.localPosition = new Vector3(0f, 0f, 0f);
-        }
-        else if (x == 1 && y == 0)
-        {//right
-            tailBone.transform.localPosition = new Vector3(-0.2f, .2f, 0f);
-        }
-        else if (x == 1 && y == 1 || (x == 0 && y == 0))//up right
-        {
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.2f, 0f);
-        }
-        else if (x == 1 && y == -1)//down right
-        {
-            tailBone.transform.localPosition = new Vector3(-0.2f, 0.3f, 0f);
-        }
-        else if (x == -1 && y == 0)//left
-        {
-            tailBone.transform.localPosition = new Vector3(0.3f, .3f, 0f);
-        }
-        else if (x == -1 && y == 1)//upleft
-        {
-            tailBone.transform.localPosition = new Vector3(0.25f, 0.2f, 0f);
-        }
-        else if (x == -1 && y == -1)// downleft
-        {
-            tailBone.transform.localPosition = new Vector3(0.2f, 0.3f, 0f);
-        }
-
-    }
 
     public void AddHealth(int amount)
     {
@@ -517,9 +612,16 @@ public class Player : MonoBehaviour, IDamageable
         //make the player flash from opacity 0 to 1 for iframes:
         for (float i = 0; i < iFrameDuration; i += 0.1f)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
+            //GetComponent<SpriteRenderer>().enabled = false;
+            catBodyAnimator.gameObject.SetActive(false);
+            catTailAnimator.gameObject.SetActive(false);
+
             yield return new WaitForSeconds(0.05f);
-            GetComponent<SpriteRenderer>().enabled = true;
+
+            //GetComponent<SpriteRenderer>().enabled = true;
+            catBodyAnimator.gameObject.SetActive(true);
+            catTailAnimator.gameObject.SetActive(true);
+
             yield return new WaitForSeconds(0.05f);
         }
         isInvincible = false;
@@ -527,6 +629,10 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Die()
     {
+        if(cantDie)
+        {
+            return;
+        }
         //TODO: more logic for player death
         // for now, we will just have it reload the scene:
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

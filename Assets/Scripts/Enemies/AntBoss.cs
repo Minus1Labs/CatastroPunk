@@ -24,7 +24,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     [SerializeField] private float throwWindupStartlag = 0.2f;
     [SerializeField] private float throwEndlagDuration = 0.4f;
     [SerializeField] private float chargeEndlagDuration = 1f;
-    [SerializeField] private float directionSwitchLockout = 1.5f;
     [SerializeField] private GameObject ThrownBarrelPrefab;
     [SerializeField] private GameObject ToxicPuddlePrefab;
     private float damageTimer = 0f;
@@ -33,6 +32,8 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     public GameObject explosionPrefab;
     //Animation
     public Animator antBossAnimator;
+    //Audio! doesn't work lol
+    public AudioSource audioSource;
 
 
     public enum ANT_BOSS_ENEMY_STATE
@@ -48,15 +49,10 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     public List<Coroutine> coroutines = new();
     private bool charging = false;
-    private bool canCharge = true;
     private bool isPassiveMoving = false;
     private bool hasTarget = false;
     private bool inChargeEndlag = false;
     private bool isBarrelAttacking = false;
-    private bool refillingBarrels = false;
-
-    private Vector2 lastMoveDirection = new(0, 0);
-    private float lastMoveTime;
 
     public enum ANT_BOSS_BARREL_TYPE
     {
@@ -76,6 +72,11 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     [SerializeField] private float reverseLookbackSeconds = 3f;
     [SerializeField] private float historyKeepSeconds = 2f;
+
+    private struct PosSample { public float t; public Vector2 p; public PosSample(float t, Vector2 p) { this.t = t; this.p = p; } }
+    private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
+
+    public GameObject bossDoor;
     protected override void Awake()
     {
         base.Awake();
@@ -89,8 +90,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         }
 
         FillBossBarrels();
-
-        Debug.Log("Woke up boss");
 
         enemyState = ANT_BOSS_ENEMY_STATE.Idle;
 
@@ -118,7 +117,11 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         }
         NextBarrelIndex = 0;
         openBarrelUsesLeft = 4;
-        Debug.Log("Filled boss barrels. Open count: " + openBarrelCount);
+    }
+
+    public void PlayFailedHitSound()
+    {
+        audioSource.Play();
     }
 
     public void AnimateBossRefill()
@@ -159,6 +162,12 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         {
             Move();
         }
+
+        // --- Reverse position tracking ---
+        posHistory.AddLast(new PosSample(Time.time, transform.position));
+        while (posHistory.Count > 1 && posHistory.First.Value.t < Time.time - historyKeepSeconds)
+        posHistory.RemoveFirst();
+
     }
     public override void Move()
     {
@@ -192,11 +201,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         if (NextBarrelIndex >= BossCurrentBarrels.Length)
         {
-            Debug.Log("Refilling Barrels. Currently unimplemented!");
             lastBarrelUseTime = Time.time;
             return;
         }
-        Debug.Log("Doing Barrel Routine. Current Barrel is " + BossCurrentBarrels[NextBarrelIndex] + " at index " + NextBarrelIndex);
         if (BossCurrentBarrels[NextBarrelIndex] == ANT_BOSS_BARREL_TYPE.OPEN)
         {
             //TODO: Maybe change this to do easier, more dodgable attacks and keep barrel downtime?
@@ -210,7 +217,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         if (BossCurrentBarrels[NextBarrelIndex] == ANT_BOSS_BARREL_TYPE.SEALED)
         {
             //Start throw coroutine
-            Debug.Log("Throwing Barrel");
 
             coroutines.Add(StartCoroutine(ThrowBarrelCoroutine()));
 
@@ -230,7 +236,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         if (openBarrelUsesLeft > 0)
         {
-            Debug.Log("Splashing Toxic waste towards " + direction + ". rb velocity mag is " + rb.velocity.magnitude);
             float distanceMult = UnityEngine.Random.Range(2f, 4f) * ((rb.velocity.magnitude / 3f) + 2f);
             for (int i = 0; i < openBarrelCount; i++)
             {
@@ -276,7 +281,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         if (ThrownBarrelPrefab == null || ThrownBarrelPrefab.GetComponent<AntBossProjectile>() == null)
         {
-            Debug.Log("Error with prefab. skipping throw");
             return;
         }
         GameObject thrownBarrel = Instantiate(ThrownBarrelPrefab, transform.position, Quaternion.identity);
@@ -284,18 +288,16 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         //TODO set barrel speed as variable?
         if (proj == null || thrownBarrel == null)
         {
-            Debug.Log("Projectile instance is null? what the helly!");
             return;
         }
-        proj.SetVelocity(direction, 30f);
+        proj.SetVelocity(direction, ThrownBarrelPrefab.GetComponent<AntBossProjectile>().speed);
     }
 
     IEnumerator ChargeCoroutine(Vector2 direction)
     {
         charging = true;
-        canCharge = false;
         //play charge windup animation here. Moves back slightly and extends mouth blades
-       
+
 
         rb.velocity = (direction * -1).normalized * (baseSpeed * .1f);
         antBossAnimator.SetTrigger("windup");
@@ -305,9 +307,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         antBossAnimator.SetTrigger("attack");
         //play charge animation here. Quick dash with stabbing mouth blades
         rb.velocity = chargeSpeed * direction;
-        
+
         yield return new WaitForSeconds(chargeDuration);
-        
+
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
         //play charge animation endlag here. Boss is stunned in place after charge.
@@ -319,7 +321,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         if (enemyState == ANT_BOSS_ENEMY_STATE.CrowdControlled ||
             enemyState == ANT_BOSS_ENEMY_STATE.Dead) { charging = false; yield break; }
 
-        canCharge = true;
         charging = false;
         inChargeEndlag = false;
         isBarrelAttacking = false;
@@ -344,7 +345,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         if (isPassiveMoving)
         {
-            Debug.Log("Tried to idle move ChargingEnemy, but it was already idle moving");
             yield break;
         }
 
@@ -355,7 +355,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         float moveTime = barrelCycleTimer - (Time.time - lastBarrelUseTime);
         rb.velocity = moveDirection.normalized * baseSpeed;
 
-        Debug.Log("PassiveMoving the Ant Boss for " + moveTime + "seconds with the direction: " + moveDirection);
         yield return new WaitForSeconds(moveTime);
         rb.velocity = new Vector2(0, 0);
         isPassiveMoving = false;
@@ -363,7 +362,6 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     public override void Attack(GameObject target)
     {
-        Debug.Log("Attacking Player!");
         var damageable = target.GetComponent<IDamageable>();
         if (target.transform.parent != null)
         {
@@ -398,7 +396,13 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 
-    protected override void Die()
+    public override void TakeDamage(float amount)
+    {
+        base.TakeDamage(amount);
+    }
+
+
+    public override void Die()
     {
         if (player != null)
         {
@@ -410,16 +414,70 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //TODO: add any other death logic before destroying
+        //lets open the door
+        //boss door is interactible open door:
+        bossDoor.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
         Destroy(gameObject);
-    }
-
-    public override void Reverse(int strength)
-    {
-        //
     }
 
     public void NotifyMeOfPlayer()
     {
         throw new System.NotImplementedException();
     }
+
+    public override void Reverse(int strength)
+    {
+        if (posHistory.Count == 0) return;
+
+        float targetT = Time.time - Mathf.Max(0.01f, reverseLookbackSeconds);
+        Vector2 targetPos;
+
+        // find the oldest sample before the target time
+        var node = posHistory.Last;
+        while (node != null && node.Value.t > targetT)
+            node = node.Previous;
+
+        if (node == null)
+        {
+            targetPos = posHistory.First.Value.p;
+        }
+        else
+        {
+            var newer = node.Next;
+            if (newer == null || Mathf.Approximately(node.Value.t, newer.Value.t))
+                targetPos = node.Value.p;
+            else
+            {
+                float u = Mathf.InverseLerp(node.Value.t, newer.Value.t, targetT);
+                targetPos = Vector2.Lerp(node.Value.p, newer.Value.p, u);
+            }
+        }
+
+        // --- Apply rewind ---
+        rb.velocity = Vector2.zero;
+        foreach (var c in coroutines)
+        {
+            if (c != null)
+                StopCoroutine(c);
+        }
+        coroutines.Clear();
+
+        rb.position = targetPos;
+
+        while (posHistory.Count > 0 && posHistory.Last.Value.t > targetT)
+            posHistory.RemoveLast();
+
+        posHistory.AddLast(new PosSample(Time.time, rb.position));
+
+        charging = false;
+        inChargeEndlag = false;
+        isBarrelAttacking = false;
+
+        // Optional animation trigger
+        if (antBossAnimator != null)
+            antBossAnimator.SetTrigger("Reverse");
+
+        Debug.Log($"AntBoss reversed to {targetPos}");
+    }
+
 }

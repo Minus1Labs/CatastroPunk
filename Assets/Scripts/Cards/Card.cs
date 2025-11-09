@@ -1,7 +1,8 @@
 using UnityEditor;
 using UnityEngine;
+using System;
 
-[CreateAssetMenu(fileName = "NewCard", menuName = "Game/Card Definition")]
+[CreateAssetMenu(fileName = "NewCard", menuName = "Cards/Card Definition")]
 public class Card : ScriptableObject
 {
     public string cardName;
@@ -10,5 +11,9 @@ public class Card : ScriptableObject
     public string pickupQuip;
     public int itemTier;
     public Sprite UISprite;
-    public MonoScript cardBehavior;
+
+    [SerializeField] private string behaviorTypeName;
+
+    public Type BehaviourType => Type.GetType(behaviorTypeName);
+    //public MonoBehaviour cardBehavior;
 }
