@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4392094483915512929}
   - component: {fileID: 7784795541787070134}
   - component: {fileID: 1677569033606608184}
+  - component: {fileID: 1472193816504996914}
   m_Layer: 0
   m_Name: Booth_Back
   m_TagString: Wall
@@ -134,6 +135,24 @@ PolygonCollider2D:
       - {x: 5.646681, y: 4.71784}
       - {x: 12.637674, y: 1.1783457}
   m_UseDelaunayMesh: 0
+--- !u!114 &1472193816504996914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399022723809906205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.19409847, y: -0.09251213}
+  SorterPositionOffset2: {x: 6.1323857, y: -0.39745998}
+  renderersToSort: []
 --- !u!1 &4822467674478872625
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +198,7 @@ GameObject:
   - component: {fileID: 6031732883316363122}
   - component: {fileID: 4489523388613972471}
   - component: {fileID: 4522328189935826930}
+  - component: {fileID: 5926621029483215810}
   m_Layer: 0
   m_Name: Booth_Front
   m_TagString: Wall
@@ -303,6 +323,24 @@ PolygonCollider2D:
       - {x: 7.299357, y: -2.1019588}
       - {x: 8.427375, y: -2.8646464}
   m_UseDelaunayMesh: 0
+--- !u!114 &5926621029483215810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8816593216861102523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.0064897537, y: -0.08229053}
+  SorterPositionOffset2: {x: 5.9700127, y: -0.35685635}
+  renderersToSort: []
 --- !u!1 &8921441715023680713
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +352,7 @@ GameObject:
   - component: {fileID: 8996059699442314996}
   - component: {fileID: 3037300753002037664}
   - component: {fileID: 8481484436089903524}
+  - component: {fileID: 3617001421436301962}
   m_Layer: 0
   m_Name: Booth_Table
   m_TagString: Wall
@@ -443,3 +482,21 @@ PolygonCollider2D:
       - {x: -0.9926472, y: -4.3121076}
       - {x: -1.6466045, y: -4.8307614}
   m_UseDelaunayMesh: 0
+--- !u!114 &3617001421436301962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8921441715023680713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0.02656579, y: 1.1467271}
+  SorterPositionOffset2: {x: 0.054227352, y: -0.072898865}
+  renderersToSort: []

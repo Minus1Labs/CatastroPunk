@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5699963505134552613}
   - component: {fileID: 38127247201327925}
   - component: {fileID: 2018152591155436509}
+  - component: {fileID: 8455122328078791148}
   m_Layer: 0
   m_Name: Open_RestroomStall
   m_TagString: Untagged
@@ -238,6 +239,24 @@ PolygonCollider2D:
       - {x: -0.10253907, y: -10.151368}
       - {x: 0.96679693, y: -9.624024}
   m_UseDelaunayMesh: 0
+--- !u!114 &8455122328078791148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069423555687076793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -11.781221, y: -2.8603106}
+  SorterPositionOffset2: {x: 8.3829975, y: -5.8389664}
+  renderersToSort: []
 --- !u!1 &4856405557102730773
 GameObject:
   m_ObjectHideFlags: 0

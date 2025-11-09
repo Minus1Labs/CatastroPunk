@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3748303587601258820}
   - component: {fileID: 4062899369539123376}
   - component: {fileID: 6537500379850554140}
+  - component: {fileID: 5083519258905977602}
   m_Layer: 0
   m_Name: AntBossThrownBarrel
   m_TagString: Untagged
@@ -234,8 +235,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0042500496, y: 3.39385, z: 0}
-    m_Extent: {x: 7.87195, y: 8.38295, z: 0}
+    m_Center: {x: -0.004099846, y: 3.39425, z: 0}
+    m_Extent: {x: 9.7632, y: 10.27285, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -250,3 +251,21 @@ MonoBehaviour:
   - {x: 2.9982877, y: 6.907313, z: 0.61770785}
   - {x: -3.0072107, y: 6.8012066, z: 0.41179156}
   - {x: -2.9732354, y: -0.118997365, z: 0.23429136}
+--- !u!114 &5083519258905977602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779433509979182295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -0.20607853, y: -0.6035328}
+  SorterPositionOffset2: {x: 0.054226875, y: -0.072898865}
+  renderersToSort: []

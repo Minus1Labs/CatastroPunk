@@ -1762,6 +1762,7 @@ GameObject:
   - component: {fileID: 3474235618539131571}
   - component: {fileID: 4674515074046838750}
   - component: {fileID: 8269495585835184074}
+  - component: {fileID: 511478032036183938}
   m_Layer: 0
   m_Name: AntBoss
   m_TagString: Enemy
@@ -1901,6 +1902,7 @@ MonoBehaviour:
   baseSpeed: 2
   maxHealth: 800
   baseDamage: 1
+  cashYield: 1
   spriteRenderers:
   - {fileID: 5645009966961974914}
   - {fileID: 2060133300640194492}
@@ -1933,14 +1935,15 @@ MonoBehaviour:
   throwWindupStartlag: 0.2
   throwEndlagDuration: 0.7
   chargeEndlagDuration: 1
-  directionSwitchLockout: 1.5
   ThrownBarrelPrefab: {fileID: 3779433509979182295, guid: 0fc49dbc0cc8e43988da302f55e99094, type: 3}
   ToxicPuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
   explosionPrefab: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
   antBossAnimator: {fileID: 0}
+  audioSource: {fileID: 0}
   BossCurrentBarrels: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   reverseLookbackSeconds: 1
   historyKeepSeconds: 2
+  bossDoor: {fileID: 0}
 --- !u!58 &8269495585835184074
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1976,6 +1979,24 @@ CircleCollider2D:
   m_Offset: {x: -0.87799835, y: 1.0617294}
   serializedVersion: 2
   m_Radius: 4.882229
+--- !u!114 &511478032036183938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4037750942329547332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 3.3560271, y: -3.856298}
+  SorterPositionOffset2: {x: -7.5027027, y: -0.72379297}
+  renderersToSort: []
 --- !u!1 &4892107127828480075
 GameObject:
   m_ObjectHideFlags: 0

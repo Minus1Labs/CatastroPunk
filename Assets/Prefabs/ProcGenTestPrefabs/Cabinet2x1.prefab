@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1312485854231680472}
   - component: {fileID: 6353094551474284619}
   - component: {fileID: 4043256735247274202}
+  - component: {fileID: 6441036955986059414}
   m_Layer: 0
   m_Name: Cabinet2x1
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: -7.060406, y: 0.5412866}
       - {x: -3.0546265, y: -1.9221168}
   m_UseDelaunayMesh: 0
+--- !u!114 &6441036955986059414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8197246058596195830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -6.6558313, y: 0.556615}
+  SorterPositionOffset2: {x: 0.054227352, y: -0.072898746}
+  renderersToSort: []

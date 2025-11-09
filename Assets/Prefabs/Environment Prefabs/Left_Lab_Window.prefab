@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3168924491254633627}
   - component: {fileID: 6141973213522927039}
+  - component: {fileID: 1444174841223342810}
   m_Layer: 0
   m_Name: Left_Lab_Window
   m_TagString: Untagged
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1444174841223342810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404474337219722156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -2.5617626, y: -3.6825683}
+  SorterPositionOffset2: {x: -4.8708096, y: -0.80094504}
+  renderersToSort: []

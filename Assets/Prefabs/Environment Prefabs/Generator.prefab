@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
+  interactibleTarget: {fileID: 0}
 --- !u!70 &8580110199346680680
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -532,6 +533,7 @@ GameObject:
   - component: {fileID: 3524087184467498009}
   - component: {fileID: 585059357478661928}
   - component: {fileID: 3964330664621177497}
+  - component: {fileID: 8498945887812799415}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -606,6 +608,24 @@ CapsuleCollider2D:
   m_Offset: {x: -1.1251945, y: 1.01089}
   m_Size: {x: 0.830492, y: 0.98788834}
   m_Direction: 0
+--- !u!114 &8498945887812799415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963132490648943394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.5356369, y: 4.2779703}
+  SorterPositionOffset2: {x: -5.060176, y: 2.7128592}
+  renderersToSort: []
 --- !u!1 &8268868322474885771
 GameObject:
   m_ObjectHideFlags: 0

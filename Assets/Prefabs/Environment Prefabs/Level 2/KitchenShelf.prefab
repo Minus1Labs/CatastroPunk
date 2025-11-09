@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2212575350521313406}
   - component: {fileID: 6364086657534247227}
   - component: {fileID: 397050848640342818}
+  - component: {fileID: 5864470243379406522}
   m_Layer: 0
   m_Name: KitchenShelf
   m_TagString: Untagged
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 11.254864, y: 5.975632}
       - {x: 16.52377, y: 3.5240464}
   m_UseDelaunayMesh: 0
+--- !u!114 &5864470243379406522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514753755293354930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.12430763, y: 0.0166111}
+  SorterPositionOffset2: {x: 5.745434, y: 1.1609459}
+  renderersToSort: []

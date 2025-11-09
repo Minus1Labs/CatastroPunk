@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4711110138358947452}
   - component: {fileID: 6770814307563016127}
   - component: {fileID: 182743053785552453}
+  - component: {fileID: 3850703964573822710}
   m_Layer: 0
   m_Name: Jukebox
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 0.061709404, y: -9.035011}
       - {x: 5.5164566, y: -6.2461214}
   m_UseDelaunayMesh: 0
+--- !u!114 &3850703964573822710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218242721129685863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.049748898, y: -0.14006972}
+  SorterPositionOffset2: {x: 9.30263, y: 0.18428397}
+  renderersToSort: []

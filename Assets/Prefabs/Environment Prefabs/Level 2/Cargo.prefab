@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 698658536294982820}
   - component: {fileID: 6675621397183782982}
   - component: {fileID: 3069651731100371727}
+  - component: {fileID: 645971843108066160}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 12.787452, y: 9.094255}
       - {x: 6.861527, y: 11.7972555}
   m_UseDelaunayMesh: 0
+--- !u!114 &645971843108066160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575620486724077849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.26977897, y: -0.25081873}
+  SorterPositionOffset2: {x: 12.973141, y: 0.5143237}
+  renderersToSort: []

@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 7890633895564878629}
   - component: {fileID: 901881676546710268}
   - component: {fileID: 2641422401659268118}
+  - component: {fileID: 4768888438528022465}
   m_Layer: 0
   m_Name: BearEnemy
   m_TagString: Untagged
@@ -805,6 +806,7 @@ MonoBehaviour:
   baseSpeed: 2
   maxHealth: 10
   baseDamage: 10
+  cashYield: 1
   spriteRenderers: []
   whiteFlashMaterial: {fileID: 0}
   damageInterval: 1
@@ -853,6 +855,24 @@ CircleCollider2D:
   m_Offset: {x: 0.029605865, y: -0.0530262}
   serializedVersion: 2
   m_Radius: 7.2780933
+--- !u!114 &4768888438528022465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712586329542383959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -0.048171997, y: -3.4226036}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
 --- !u!1 &7927542006805638750
 GameObject:
   m_ObjectHideFlags: 0

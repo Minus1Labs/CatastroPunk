@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8906203385645573027}
   - component: {fileID: 875575281054999407}
   - component: {fileID: 8342941302553306376}
+  - component: {fileID: 6627906157606328048}
   m_Layer: 0
   m_Name: cabinets
   m_TagString: Wall
@@ -130,10 +131,28 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -2.5448143, y: -1.6069891}
-      - {x: -3.0023372, y: -1.8834572}
+      - {x: -3.061614, y: -1.8960961}
       - {x: -7.024701, y: 0.47482967}
-      - {x: -7.7200885, y: 1.4640474}
-      - {x: -5.814798, y: 2.6513343}
+      - {x: -7.0052514, y: 1.035362}
+      - {x: -4.106655, y: 2.653795}
       - {x: -1.013419, y: 1.2537662}
-      - {x: 0.4580246, y: -0.028454937}
+      - {x: 0.101316035, y: -0.015998367}
   m_UseDelaunayMesh: 0
+--- !u!114 &6627906157606328048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246763427767457704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -7.1336365, y: 0.20911598}
+  SorterPositionOffset2: {x: 0.108436584, y: -0.036769867}
+  renderersToSort: []

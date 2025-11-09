@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4576447894879912279}
   - component: {fileID: 7370639205769079594}
   - component: {fileID: 4809065387169949188}
+  - component: {fileID: 1487492704063230185}
   m_Layer: 0
   m_Name: Stove
   m_TagString: Untagged
@@ -135,3 +136,21 @@ PolygonCollider2D:
       - {x: 6.1139274, y: 8.03011}
       - {x: -0.012577534, y: 5.053845}
   m_UseDelaunayMesh: 0
+--- !u!114 &1487492704063230185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4178098261412749477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.034894943, y: -0.01329422}
+  SorterPositionOffset2: {x: 6.2225666, y: 0.7851982}
+  renderersToSort: []

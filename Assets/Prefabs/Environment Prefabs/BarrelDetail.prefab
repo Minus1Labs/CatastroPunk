@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4243776889722896567}
   - component: {fileID: 1454994657058247561}
   - component: {fileID: 3897103058871743843}
+  - component: {fileID: 4007700039408452153}
   m_Layer: 0
   m_Name: BarrelDetail
   m_TagString: Untagged
@@ -134,3 +135,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oldVersion: {fileID: 0}
+--- !u!114 &4007700039408452153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427787368583577317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0, y: 0}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []

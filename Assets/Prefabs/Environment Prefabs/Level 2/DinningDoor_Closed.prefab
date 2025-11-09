@@ -200,6 +200,7 @@ MonoBehaviour:
   closedSprite: {fileID: 21300000, guid: 102b163ca2f22f344b6fb4121fdd8e31, type: 3}
   blownOpenSprite: {fileID: 0}
   openedSprite: {fileID: 21300000, guid: 5892eb9102d5f304f8cbe83a3ae81c08, type: 3}
+  doorOpenSound: {fileID: 0}
 --- !u!1 &5236034460784170267
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2442225133957146033}
+  - component: {fileID: 5152679656374492068}
   m_Layer: 0
   m_Name: DinningDoor_Closed
   m_TagString: Untagged
@@ -232,3 +234,21 @@ Transform:
   - {fileID: 2371344747353633281}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5152679656374492068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5236034460784170267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 4.012207, y: -8.888019}
+  SorterPositionOffset2: {x: 0.054227352, y: -0.072898746}
+  renderersToSort: []

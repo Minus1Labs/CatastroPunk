@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2772658516803393090}
   - component: {fileID: 3873555720725426181}
   - component: {fileID: 6537819698450348147}
+  - component: {fileID: 3363431628545622017}
   m_Layer: 0
   m_Name: ProduceShelf1
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 5.044428, y: -2.7572584}
       - {x: 0.06697655, y: -0.16839695}
   m_UseDelaunayMesh: 0
+--- !u!114 &3363431628545622017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3170566334866823744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.021669388, y: -0.044696808}
+  SorterPositionOffset2: {x: 4.6289215, y: 0.8686924}
+  renderersToSort: []

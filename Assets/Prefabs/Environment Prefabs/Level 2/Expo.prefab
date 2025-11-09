@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8958851801273763299}
   - component: {fileID: 1917627600263651467}
   - component: {fileID: 2908023360181023395}
+  - component: {fileID: 6015965765537312651}
   m_Layer: 0
   m_Name: Expo
   m_TagString: Untagged
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 7.0839143, y: 1.768125}
       - {x: -0.6334526, y: 5.8710613}
   m_UseDelaunayMesh: 0
+--- !u!114 &6015965765537312651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841206977263993671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.08400893, y: 0.024791718}
+  SorterPositionOffset2: {x: 11.412464, y: 2.7761574}
+  renderersToSort: []

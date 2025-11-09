@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7681082282956985728}
   - component: {fileID: 6336172922351746219}
   - component: {fileID: 9219770829403791443}
+  - component: {fileID: 6028451656291280424}
   m_Layer: 0
   m_Name: Console1x3
   m_TagString: Untagged
@@ -134,3 +135,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6028451656291280424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059744866182524360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -5.4112716, y: -0.826645}
+  SorterPositionOffset2: {x: 3.5961447, y: 1.698558}
+  renderersToSort: []

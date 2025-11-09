@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2392948368795275939}
   - component: {fileID: 5317267656932456756}
   - component: {fileID: 85838981405220118}
+  - component: {fileID: 8812021625066183985}
   m_Layer: 0
   m_Name: barrel_lab_1x1
   m_TagString: Untagged
@@ -68,7 +69,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49762067, y: 0.22466207}
+    pivot: {x: 0.49762073, y: 0.26445392}
     oldSize: {x: 12.28, y: 12.28}
     newSize: {x: 12.28, y: 12.28}
     adaptiveTilingThreshold: 0.5
@@ -140,3 +141,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8812021625066183985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127366249059490749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -0.062258244, y: -0.18767379}
+  SorterPositionOffset2: {x: 8.748545, y: 2.1493917}
+  renderersToSort: []

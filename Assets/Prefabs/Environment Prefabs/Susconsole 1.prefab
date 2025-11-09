@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1674604191962656882}
+  - component: {fileID: 3904012728781657136}
   m_Layer: 0
   m_Name: Susconsole 1
   m_TagString: Wall
@@ -32,6 +33,24 @@ Transform:
   - {fileID: 7007715386643797950}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3904012728781657136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828147420386523803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -1.4391127, y: -0.018558502}
+  SorterPositionOffset2: {x: -7.6589017, y: -1.4096127}
+  renderersToSort: []
 --- !u!1 &4250485561449263231
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +62,7 @@ GameObject:
   - component: {fileID: 7007715386643797950}
   - component: {fileID: 6863962829622537612}
   - component: {fileID: 5758128065581955437}
+  - component: {fileID: 1195171294830711592}
   m_Layer: 0
   m_Name: Square
   m_TagString: Wall
@@ -161,8 +181,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.29114532, y: 0.11226344}
-      - {x: -6.7277665, y: -3.174629}
+    - - {x: 0.12782669, y: 0.32224202}
+      - {x: -6.6811047, y: -2.941318}
       - {x: -8.899438, y: -1.752218}
       - {x: -2.244156, y: 1.3689699}
   m_UseDelaunayMesh: 0
+--- !u!114 &1195171294830711592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4250485561449263231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.03520584, y: 0.014312744}
+  SorterPositionOffset2: {x: 6.152857, y: 1.5013256}
+  renderersToSort: []

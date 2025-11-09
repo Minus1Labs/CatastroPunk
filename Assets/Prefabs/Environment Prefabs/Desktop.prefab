@@ -106,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2536203015157097881}
   - component: {fileID: 7148001531566150249}
+  - component: {fileID: 7651266699592639515}
   m_Layer: 0
   m_Name: Desktop
   m_TagString: Untagged
@@ -181,3 +182,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7651266699592639515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8321682339276746436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 2.935501, y: -2.8390732}
+  SorterPositionOffset2: {x: -3.0961304, y: -2.1511536}
+  renderersToSort: []
