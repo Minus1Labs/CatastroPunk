@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4072596235913944524}
   - component: {fileID: 2247698695942158147}
   - component: {fileID: 216807277679848579}
+  - component: {fileID: 7316559159195816286}
   m_Layer: 0
   m_Name: ProduceShelf2
   m_TagString: Wall
@@ -120,7 +121,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.3144183, y: 0.12645724}
     oldSize: {x: 30.000002, y: 30.000002}
     newSize: {x: 30.000002, y: 30.000002}
     adaptiveTilingThreshold: 0.5
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 5.044428, y: -2.7572584}
       - {x: 0.06697655, y: -0.16839695}
   m_UseDelaunayMesh: 0
+--- !u!114 &7316559159195816286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5536075044543642735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.02438736, y: -0.03448105}
+  SorterPositionOffset2: {x: 4.7115936, y: 0.9136524}
+  renderersToSort: []

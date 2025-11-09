@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6965073165704981671}
   - component: {fileID: 3605671753111536180}
   - component: {fileID: 3718187970609609922}
+  - component: {fileID: 4270924781006039651}
   m_Layer: 0
   m_Name: RestroomSink
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 5.4888563, y: 0.7530613}
       - {x: 19.786892, y: 7.8106575}
   m_UseDelaunayMesh: 0
+--- !u!114 &4270924781006039651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7949710898267756465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.034606934, y: 2.9547377}
+  SorterPositionOffset2: {x: 19.986322, y: 3.8423347}
+  renderersToSort: []

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7840804298225369525}
   - component: {fileID: 611861455447283648}
   - component: {fileID: 1297633006835264580}
+  - component: {fileID: 3617566543869650752}
   m_Layer: 0
   m_Name: MeatBin
   m_TagString: Wall
@@ -134,3 +135,21 @@ PolygonCollider2D:
       - {x: 14.963884, y: -1.8549094}
       - {x: 5.872067, y: 2.3186307}
   m_UseDelaunayMesh: 0
+--- !u!114 &3617566543869650752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7164594951425032375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.12297177, y: -0.030603409}
+  SorterPositionOffset2: {x: 14.881616, y: -1.761167}
+  renderersToSort: []

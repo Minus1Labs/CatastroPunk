@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7848600022863873075}
+  - component: {fileID: 196271580172216963}
   m_Layer: 0
   m_Name: Freezer
   m_TagString: Untagged
@@ -32,6 +33,24 @@ Transform:
   - {fileID: 4223215737340705243}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &196271580172216963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167722889440527132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.20473409, y: -0.26996064}
+  SorterPositionOffset2: {x: 6.7494755, y: 0.34038806}
+  renderersToSort: []
 --- !u!1 &2586219309016604889
 GameObject:
   m_ObjectHideFlags: 0

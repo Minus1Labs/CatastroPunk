@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7343212068444716306}
   - component: {fileID: 4871508214030345099}
   - component: {fileID: 3333223731581988645}
+  - component: {fileID: 2744403248640133297}
   m_Layer: 0
   m_Name: Chair_Back
   m_TagString: Wall
@@ -134,6 +135,24 @@ PolygonCollider2D:
       - {x: -1.3615928, y: -7.8077183}
       - {x: -3.8456278, y: -6.6692553}
   m_UseDelaunayMesh: 0
+--- !u!114 &2744403248640133297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713006491582526916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.11871195, y: -0.19974709}
+  SorterPositionOffset2: {x: 5.0786257, y: 0.3593111}
+  renderersToSort: []
 --- !u!1 &5102545588522463236
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +164,7 @@ GameObject:
   - component: {fileID: 510282213110957240}
   - component: {fileID: 2795209156011952423}
   - component: {fileID: 5881761436704288853}
+  - component: {fileID: 8469667689360813222}
   m_Layer: 0
   m_Name: Table_Table
   m_TagString: Wall
@@ -276,6 +296,24 @@ PolygonCollider2D:
       - {x: 3.8740127, y: -5.8034506}
       - {x: 3.9188607, y: -5.2498655}
   m_UseDelaunayMesh: 0
+--- !u!114 &8469667689360813222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102545588522463236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0.20544195, y: 2.3934894}
+  SorterPositionOffset2: {x: 0.054227352, y: -0.072898865}
+  renderersToSort: []
 --- !u!1 &5980255250687017790
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +325,7 @@ GameObject:
   - component: {fileID: 7717916689675666040}
   - component: {fileID: 2730066826598205025}
   - component: {fileID: 4879805799421585672}
+  - component: {fileID: 191925143291251242}
   m_Layer: 0
   m_Name: Chair_Front
   m_TagString: Wall
@@ -410,6 +449,24 @@ PolygonCollider2D:
       - {x: 13.062184, y: -0.9405789}
       - {x: 10.6565895, y: 0.11822975}
   m_UseDelaunayMesh: 0
+--- !u!114 &191925143291251242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5980255250687017790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 0.08196163, y: 0.041624546}
+  SorterPositionOffset2: {x: 5.075381, y: 0.527925}
+  renderersToSort: []
 --- !u!1 &6791836543326993604
 GameObject:
   m_ObjectHideFlags: 0
