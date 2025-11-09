@@ -6,16 +6,43 @@ using UnityEngine.UI;
 public class HeartsUI : MonoBehaviour
 {
     private Player player;
-    public Image[] uiHearts;
+    private Image[] uiHearts;
 
     public Sprite emptyHeart;
     public Sprite halfHeart;
     public Sprite fullHeart;
+
+    public GameObject uiHeartPrefab;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        int maxHealth = player.GetMaxHP();
+        int totalHearts = Mathf.CeilToInt(maxHealth / 2f);
+        uiHearts = new Image[totalHearts];
+
+        float spacing = 5f; //spacing between hearts
+        GameObject sampleHeart = uiHeartPrefab;
+        RectTransform sampleRT = sampleHeart.GetComponent<RectTransform>();
+        float heartWidth = sampleRT.sizeDelta.x;
+
+        // Calculate total width of all hearts + spacing
+        float totalWidth = totalHearts * heartWidth + (totalHearts - 1) * spacing;
+        float startX = -totalWidth / 2f + heartWidth / 2f; // center origin
+
+        for (int i = 0; i < totalHearts; i++)
+        {
+            GameObject heart = Instantiate(uiHeartPrefab, transform);
+            RectTransform rt = heart.GetComponent<RectTransform>();
+
+            float x = startX + i * (heartWidth + spacing);
+            rt.anchoredPosition = new Vector2(x, 0);
+
+            uiHearts[i] = heart.GetComponent<Image>();
+        }
     }
+
 
     // Update is called once per frame
     void Update()
