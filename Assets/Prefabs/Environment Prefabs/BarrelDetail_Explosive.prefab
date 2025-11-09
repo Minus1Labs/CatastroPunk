@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1313236389010648809}
   - component: {fileID: 4389968399122759127}
   - component: {fileID: 2558305741677041321}
+  - component: {fileID: 3861103100600978494}
   m_Layer: 0
   m_Name: BarrelDetail_Explosive
   m_TagString: Untagged
@@ -134,3 +135,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
+  interactibleTarget: {fileID: 0}
+--- !u!114 &3861103100600978494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679017350794580155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0, y: 0}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
