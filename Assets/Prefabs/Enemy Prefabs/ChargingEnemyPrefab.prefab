@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 716363155666365441}
   - component: {fileID: 3453259124348639334}
   - component: {fileID: 2386352436946480419}
+  - component: {fileID: 6181896337754398029}
   m_Layer: 0
   m_Name: ChargingEnemyPrefab
   m_TagString: Untagged
@@ -153,6 +154,9 @@ MonoBehaviour:
   baseSpeed: 2
   maxHealth: 100
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 1
   detectionRadius: 12
   alertsOtherEnemies: 1
@@ -244,6 +248,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4245033, y: 1.3002996}
   m_EdgeRadius: 0
+--- !u!114 &6181896337754398029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3770378573639926962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -2.679985, y: 0.49133015}
+  SorterPositionOffset2: {x: 2.4272594, y: 0.092139244}
+  renderersToSort: []
 --- !u!1001 &5866001851381497112
 PrefabInstance:
   m_ObjectHideFlags: 0

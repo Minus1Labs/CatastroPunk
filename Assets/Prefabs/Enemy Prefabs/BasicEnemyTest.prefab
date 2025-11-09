@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -4531253686184383317}
   - component: {fileID: 325335039402089892}
   - component: {fileID: 8632020821789447647}
+  - component: {fileID: 8446945297645043275}
   m_Layer: 0
   m_Name: BasicEnemyTest
   m_TagString: Untagged
@@ -497,6 +498,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8446945297645043275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414995321013640732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -0.02541788, y: -1.96662}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
 --- !u!1 &6119806409191277649
 GameObject:
   m_ObjectHideFlags: 0

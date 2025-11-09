@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2240375481374158042, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: 0.0053482056
+      objectReference: {fileID: 0}
+    - target: {fileID: 2240375481374158042, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -1.3680725
+      objectReference: {fileID: 0}
     - target: {fileID: 2721902297714494934, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
       propertyPath: m_Color.b
       value: 1

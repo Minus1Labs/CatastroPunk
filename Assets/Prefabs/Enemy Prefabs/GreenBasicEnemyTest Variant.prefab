@@ -128,6 +128,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8446945297645043275, guid: 6295babdd26c04f1e854b4ed62e18483, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: -0.00844574
+      objectReference: {fileID: 0}
+    - target: {fileID: 8446945297645043275, guid: 6295babdd26c04f1e854b4ed62e18483, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -1.3274517
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

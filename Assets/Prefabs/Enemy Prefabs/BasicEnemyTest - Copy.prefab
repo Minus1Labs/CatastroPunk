@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 995505005214128938}
   - component: {fileID: 2961709587126161359}
   - component: {fileID: 8370681384738457594}
+  - component: {fileID: 3533554059614361971}
   m_Layer: 0
   m_Name: BasicEnemyTest - Copy
   m_TagString: Untagged
@@ -113,7 +114,7 @@ SpriteRenderer:
   m_Size: {x: 2.22, y: 2.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &995505005214128938
@@ -152,6 +153,9 @@ MonoBehaviour:
   baseSpeed: 2
   maxHealth: 10
   baseDamage: 10
+  cashYield: 1
+  spriteRenderers: []
+  whiteFlashMaterial: {fileID: 0}
   damageInterval: 1
   detectionRadius: 6
   explosionPrefab: {fileID: 1713557816674029684, guid: a3e34a1beff41334c901015c7cbc0fce, type: 3}
@@ -160,6 +164,9 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   reverseLookbackSeconds: 3
   historyKeepSeconds: 2
+  shootInterval: 1
+  bulletPrefab: {fileID: 0}
+  deadPrefab: {fileID: 0}
 --- !u!58 &8370681384738457594
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +202,24 @@ CircleCollider2D:
   m_Offset: {x: 0.029606132, y: -0.051279332}
   serializedVersion: 2
   m_Radius: 1.5018692
+--- !u!114 &3533554059614361971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4414995321013640732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -0.014074996, y: -1.2917132}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
 --- !u!1001 &1559897987741034623
 PrefabInstance:
   m_ObjectHideFlags: 0

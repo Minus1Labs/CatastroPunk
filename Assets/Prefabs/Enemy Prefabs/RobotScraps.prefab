@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 6179357217793677460}
   - component: {fileID: 700319788286652840}
   - component: {fileID: 6507705096131388260}
+  - component: {fileID: 2240375481374158042}
   m_Layer: 0
   m_Name: RobotScraps
   m_TagString: Untagged
@@ -385,6 +386,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2240375481374158042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575834101007669348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0.0053461418, y: -1.3680729}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
 --- !u!1 &1761751276010811738
 GameObject:
   m_ObjectHideFlags: 0
