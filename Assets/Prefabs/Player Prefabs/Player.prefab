@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 1790850676508089123}
   - component: {fileID: 3078388357264560539}
   - component: {fileID: 2345706319032520085}
+  - component: {fileID: 5568282814384600117}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -362,9 +363,9 @@ Transform:
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 1302645940253346533}
   - {fileID: 5293161001103299471}
   - {fileID: 6902676607330366887}
-  - {fileID: 1302645940253346533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3237959614380204579
@@ -430,6 +431,7 @@ MonoBehaviour:
   dashSound: {fileID: 797350745824914300}
   hurtSound: {fileID: 1790850676508089123}
   reverseBulletSound: {fileID: 3078388357264560539}
+  cantDie: 0
 --- !u!82 &8789384875300192159
 AudioSource:
   m_ObjectHideFlags: 0
@@ -849,6 +851,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0010954844, y: 0.07931575}
   m_Size: {x: 0.6870526, y: 0.52734005}
   m_Direction: 1
+--- !u!114 &5568282814384600117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848951686145171977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 1
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 0.004146576, y: 0.029050827}
+  SorterPositionOffset2: {x: 0, y: 0}
+  renderersToSort: []
 --- !u!1 &9100276502300092637
 GameObject:
   m_ObjectHideFlags: 0
