@@ -15,15 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Scenes/TubeRoom.unity
     guid: b9405d0662bf7427c871638cb2f7e053
   - enabled: 1
+    path: Assets/Scenes/Main Scenes/Vent_Room.unity
+    guid: 5089e5f06205f234cbedac019f572c1a
+  - enabled: 1
     path: Assets/Scenes/Main Scenes/BossAiTestScene.unity
     guid: 3ee7e0ac3abf0469bb96450ac0660985
   - enabled: 1
-    path: Assets/Scenes/Main Scenes/Vent_Room.unity
-    guid: 5089e5f06205f234cbedac019f572c1a
+    path: Assets/Scenes/Main Scenes/Level_2.unity
+    guid: 7e3922a0dc3e2e54fa68d757d1d2b3ea
   - enabled: 0
     path: Assets/Scenes/Testing Scenes/TubeRoom_UITest.unity
     guid: 937a2415a8123406893be8ef805111e1
-  - enabled: 1
-    path: Assets/Scenes/Main Scenes/Level_2.unity
-    guid: 7e3922a0dc3e2e54fa68d757d1d2b3ea
   m_configObjects: {}
