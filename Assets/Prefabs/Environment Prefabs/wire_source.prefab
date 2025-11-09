@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 822110699869544472}
   - component: {fileID: 536832066297980726}
   - component: {fileID: 1949785778255219884}
+  - component: {fileID: 6661666687433341943}
   m_Layer: 0
   m_Name: wire_source
   m_TagString: Untagged
@@ -106,6 +107,24 @@ PolygonCollider2D:
       - {x: -0.06645119, y: 1.3289658}
       - {x: -0.73590004, y: 0.996328}
   m_UseDelaunayMesh: 0
+--- !u!114 &6661666687433341943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90724205938943127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -1.032342, y: -1.1211491}
+  SorterPositionOffset2: {x: -4.8708096, y: -0.8009448}
+  renderersToSort: []
 --- !u!1 &7250481987311329728
 GameObject:
   m_ObjectHideFlags: 0

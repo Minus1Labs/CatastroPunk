@@ -311,6 +311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5382974337209552931}
+  - component: {fileID: 5242340677893494921}
   m_Layer: 0
   m_Name: DoorInteractibleFrame
   m_TagString: Untagged
@@ -336,6 +337,24 @@ Transform:
   - {fileID: 7268026702083324228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5242340677893494921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5226547261882722337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: 3.7418194, y: -1.3004856}
+  SorterPositionOffset2: {x: -4.8708096, y: -0.8009453}
+  renderersToSort: []
 --- !u!1001 &6319805779532734865
 PrefabInstance:
   m_ObjectHideFlags: 0

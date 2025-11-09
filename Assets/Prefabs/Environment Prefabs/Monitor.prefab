@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5775615010374947383}
   - component: {fileID: 2690762731235329737}
   - component: {fileID: 6102326346520895797}
+  - component: {fileID: 2598441136012250455}
   m_Layer: 0
   m_Name: Monitor
   m_TagString: Untagged
@@ -186,3 +187,21 @@ PolygonCollider2D:
       - {x: 5.5328803, y: 4.8856034}
       - {x: 4.9713826, y: 5.0019474}
   m_UseDelaunayMesh: 0
+--- !u!114 &2598441136012250455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229321638118235173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: 6.5330887, y: 1.8765984}
+  SorterPositionOffset2: {x: -1.9197845, y: -0.04324913}
+  renderersToSort: []

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3340559207866383822}
   - component: {fileID: -5838271003492853850}
+  - component: {fileID: 5672919056763654032}
   m_Layer: 0
   m_Name: Extra_Left_Door
   m_TagString: Wall
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5672919056763654032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243801612123571771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -1.4933031, y: -4.2403636}
+  SorterPositionOffset2: {x: -4.8708096, y: -0.80094504}
+  renderersToSort: []

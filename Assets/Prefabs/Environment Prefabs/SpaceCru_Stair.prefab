@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4754232991364527770}
+  - component: {fileID: 471603786658609667}
   m_Layer: 0
   m_Name: SpaceCru_Stair
   m_TagString: Untagged
@@ -33,6 +34,24 @@ Transform:
   - {fileID: 8912055824892074940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &471603786658609667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3729214792147451250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 0
+  SorterPositionOffset: {x: -4.399217, y: -9.888388}
+  SorterPositionOffset2: {x: -4.8708096, y: -0.80094504}
+  renderersToSort: []
 --- !u!1 &4869476009333324317
 GameObject:
   m_ObjectHideFlags: 0
