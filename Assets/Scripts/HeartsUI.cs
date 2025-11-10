@@ -17,7 +17,11 @@ public class HeartsUI : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        InitializeHeartsUI();
+    }
 
+    void InitializeHeartsUI()
+    {
         int maxHealth = player.GetMaxHP();
         int totalHearts = Mathf.CeilToInt(maxHealth / 2f);
         uiHearts = new Image[totalHearts];
@@ -47,6 +51,10 @@ public class HeartsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (uiHearts == null)
+        {
+            InitializeHeartsUI();
+        }
         //use player GetCurrentHealth to update hearts UI:
         //each hp is half a heart:
         float currentHealth = player.GetCurrentHealth();

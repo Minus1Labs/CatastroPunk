@@ -261,6 +261,17 @@
                 },
                 {
                     "name": "",
+                    "id": "fb1505b1-217c-48b9-9ff6-ea08f593bb72",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "195cdb58-3950-4868-855f-9bc102d752e8",
                     "path": "<Mouse>/position",
                     "interactions": "",
