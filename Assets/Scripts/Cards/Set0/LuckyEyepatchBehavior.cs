@@ -16,6 +16,7 @@ public class LuckyEyepatchBehavior : CardBehavior
     {
         AddStack(player);
         itemStacks--;
+        
     }
 
     public override void RemoveUpgrade(Player player)
