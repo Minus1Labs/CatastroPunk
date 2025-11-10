@@ -122,6 +122,13 @@ public class Player : MonoBehaviour, IDamageable
         };
         controls.Gameplay.Aim.canceled += _ => aimInput = Vector2.zero;
 
+        controls.Gameplay.AimGamepad.performed += ctx =>
+        {
+            aimInput = ctx.ReadValue<Vector2>();
+            usingGamepad = ctx.control.device is Gamepad;
+        };
+        controls.Gameplay.AimGamepad.canceled += _ => aimInput = Vector2.zero;
+
         // Shooting
         // --- Shooting ---
         controls.Gameplay.Fire1.performed += _ =>
@@ -628,13 +635,23 @@ public class Player : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        if(cantDie)
+        if (cantDie)
         {
             return;
         }
         //TODO: more logic for player death
         // for now, we will just have it reload the scene:
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //find DeathScreen using find by component:
+        DeathScreen ds = GameObject.FindObjectOfType<DeathScreen>();
+
+        if (ds != null)
+        {
+            ds.ActivateDeathScreen();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
     }
 }

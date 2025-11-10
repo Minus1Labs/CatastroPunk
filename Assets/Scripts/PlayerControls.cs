@@ -64,6 +64,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""AimGamepad"",
+                    ""type"": ""Value"",
+                    ""id"": ""b4988be0-9142-4a36-80ce-30186904d7f7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""42e077b1-9761-4776-9f90-d079eb2e294c"",
@@ -282,6 +291,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fda2594c-d308-4fcb-9d46-3dfeb7424fc0"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimGamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Analog"",
+                    ""id"": ""925a7de0-fcd5-4426-873c-6f9a0bca1353"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimGamepad"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""35219ad8-0e62-485a-a90b-01788f0af3f7"",
+                    ""path"": ""<Joystick>/rz"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimGamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3ad6097b-d4d3-497e-a4fa-f192120ac686"",
+                    ""path"": ""<Joystick>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimGamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -294,6 +347,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Fire1 = m_Gameplay.FindAction("Fire1", throwIfNotFound: true);
         m_Gameplay_Fire2 = m_Gameplay.FindAction("Fire2", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+        m_Gameplay_AimGamepad = m_Gameplay.FindAction("AimGamepad", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
     }
 
@@ -360,6 +414,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Fire1;
     private readonly InputAction m_Gameplay_Fire2;
     private readonly InputAction m_Gameplay_Aim;
+    private readonly InputAction m_Gameplay_AimGamepad;
     private readonly InputAction m_Gameplay_Dash;
     public struct GameplayActions
     {
@@ -369,6 +424,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Fire1 => m_Wrapper.m_Gameplay_Fire1;
         public InputAction @Fire2 => m_Wrapper.m_Gameplay_Fire2;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+        public InputAction @AimGamepad => m_Wrapper.m_Gameplay_AimGamepad;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -391,6 +447,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @AimGamepad.started += instance.OnAimGamepad;
+            @AimGamepad.performed += instance.OnAimGamepad;
+            @AimGamepad.canceled += instance.OnAimGamepad;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -410,6 +469,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @AimGamepad.started -= instance.OnAimGamepad;
+            @AimGamepad.performed -= instance.OnAimGamepad;
+            @AimGamepad.canceled -= instance.OnAimGamepad;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -436,6 +498,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFire1(InputAction.CallbackContext context);
         void OnFire2(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnAimGamepad(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
     }
 }
