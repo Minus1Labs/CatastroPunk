@@ -109,36 +109,56 @@ public static class RoomLayouts
 
 public class LayoutDictionary
 {
-    public Dictionary<int, List<DoorWrapper>> udict = new Dictionary<int, List<DoorWrapper>>();
+  public Dictionary<int, List<DoorWrapper>> udict = new Dictionary<int, List<DoorWrapper>>();
 
-    public struct DoorWrapper
+  public struct DoorWrapper
+  {
+    public int doorConfig;
+    public RoomLayouts.Room rlo;
+
+    public DoorWrapper(RoomLayouts.Room r)
     {
-        public int doorConfig;
-        public RoomLayouts.Room rlo;
-
-        public DoorWrapper(RoomLayouts.Room r)
-        {
-            rlo = r;
-            doorConfig = r.DoorsLayout;
-        }
+      rlo = r;
+      doorConfig = r.DoorsLayout;
     }
-    public LayoutDictionary(List<RoomLayouts.Room> rooms)
+  }
+  public LayoutDictionary(List<RoomLayouts.Room> rooms)
+  {
+    for (int i = 0; i < 16; i++)
     {
-        for (int i = 0; i < 16; i++)
-        {
-            udict[i] = new List<DoorWrapper>();
-        }
-
-        foreach (RoomLayouts.Room rm in rooms)
-        {
-            DoorWrapper dw = new DoorWrapper(rm);
-            List<DoorWrapper> ld = udict[dw.doorConfig];
-            ld.Add(dw);
-        }
+      udict[i] = new List<DoorWrapper>();
     }
 
-    public static int GetDoorConfig(bool d0, bool d1, bool d2, bool d3)
+    foreach (RoomLayouts.Room rm in rooms)
     {
-        return (d0 ? 1 : 0) + (d1 ? 2 : 0) + (d2 ? 4 : 0) + (d3 ? 8 : 0);
+      DoorWrapper dw = new DoorWrapper(rm);
+      List<DoorWrapper> ld = udict[dw.doorConfig];
+      ld.Add(dw);
     }
+  }
+
+  public static int GetDoorConfig(bool d0, bool d1, bool d2, bool d3)
+  {
+    return (d0 ? 1 : 0) + (d1 ? 2 : 0) + (d2 ? 4 : 0) + (d3 ? 8 : 0);
+  }
+
+  public static bool HasDoor0(int doorConfigNum)
+  {
+    return doorConfigNum % 2 == 1;
+  }
+
+  public static bool HasDoor1(int doorConfigNum)
+  {
+    return (doorConfigNum >> 1) % 2 == 1;
+  }
+
+  public static bool HasDoor2(int doorConfigNum)
+  {
+    return (doorConfigNum >> 2) % 2 == 1;
+  }
+
+  public static bool HasDoor3(int doorConfigNum)
+  {
+    return (doorConfigNum >> 3) % 2 == 1;
+  }
 }
