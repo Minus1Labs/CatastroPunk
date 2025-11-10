@@ -155,6 +155,12 @@ public class Player : MonoBehaviour, IDamageable
                 StartCoroutine(Dash());
         };
 
+        baseStats = ScriptableObject.CreateInstance<PlayerStats>();
+        additiveStats = ScriptableObject.CreateInstance<PlayerStats>();
+        additiveStats.SetAllNum(0);
+        multStats = ScriptableObject.CreateInstance<PlayerStats>();
+        multStats.SetAllNum(1);
+
         EventDispatcher.OnEnemyDied += OnEnemyKilled;
     }
     // Start is called before the first frame update
@@ -166,12 +172,6 @@ public class Player : MonoBehaviour, IDamageable
         projectileSpeed = baseProjectileSpeed;
         dashSpeed = baseDashSpeed;
         projLifetime = baseProjectileLifetime;
-
-        baseStats = ScriptableObject.CreateInstance<PlayerStats>();
-        additiveStats = ScriptableObject.CreateInstance<PlayerStats>();
-        additiveStats.SetAllNum(0);
-        multStats = ScriptableObject.CreateInstance<PlayerStats>();
-        multStats.SetAllNum(1);
 
         currentHealth = baseStats.health;
         currentSpeed = GetMoveSpeed();
