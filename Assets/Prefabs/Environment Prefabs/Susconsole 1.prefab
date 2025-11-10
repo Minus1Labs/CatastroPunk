@@ -48,8 +48,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -1.4391127, y: -0.018558502}
-  SorterPositionOffset2: {x: -7.6589017, y: -1.4096127}
+  SorterPositionOffset: {x: -1.4391098, y: -0.018558502}
+  SorterPositionOffset2: {x: -7.658901, y: -1.4096146}
   renderersToSort: []
 --- !u!1 &4250485561449263231
 GameObject:
@@ -62,7 +62,6 @@ GameObject:
   - component: {fileID: 7007715386643797950}
   - component: {fileID: 6863962829622537612}
   - component: {fileID: 5758128065581955437}
-  - component: {fileID: 1195171294830711592}
   m_Layer: 0
   m_Name: Square
   m_TagString: Wall
@@ -186,21 +185,3 @@ PolygonCollider2D:
       - {x: -8.899438, y: -1.752218}
       - {x: -2.244156, y: 1.3689699}
   m_UseDelaunayMesh: 0
---- !u!114 &1195171294830711592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4250485561449263231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMovable: 0
-  renderBelowAll: 0
-  sortType: 1
-  SorterPositionOffset: {x: -0.03520584, y: 0.014312744}
-  SorterPositionOffset2: {x: 6.152857, y: 1.5013256}
-  renderersToSort: []
