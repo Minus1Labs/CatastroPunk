@@ -47,3 +47,4 @@ MonoBehaviour:
   floor_type: 0
   asset_library: {fileID: 0}
   floorTilemap: {fileID: 0}
+  RoomControllerPrefab: {fileID: 3228419581387889738, guid: adf9cbbcead084aa8981f1cacab19924, type: 3}

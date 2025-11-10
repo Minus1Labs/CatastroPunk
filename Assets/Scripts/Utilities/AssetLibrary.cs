@@ -12,7 +12,8 @@ public class AssetLibrary : MonoBehaviour
     public GameObject[] prop_collider_2x2 = new GameObject[1];
     public GameObject[] prop_collider_2x1 = new GameObject[1];
     public GameObject[] prop_collider_3x1 = new GameObject[1];
-    public GameObject[] wall_4x1 = new GameObject[1];
+    public GameObject[] walls_y = new GameObject[1];
+    public GameObject[] walls_x = new GameObject[1];
     public Tile[] floor_tiles = new Tile[1];
     public GameObject[] door_teleporter = new GameObject[1];
     public GameObject[] enemies = new GameObject[1];
@@ -21,7 +22,7 @@ public class AssetLibrary : MonoBehaviour
 
     public bool CheckAllPrefabs()
     {
-        return CheckProps() && CheckWalls() && CheckEnemies() && CheckDoors() && CheckFloors();
+        return CheckProps() && CheckEnemies() && CheckDoors() && CheckFloors();
     }
 
     public bool CheckProps()
@@ -31,11 +32,6 @@ public class AssetLibrary : MonoBehaviour
             CheckArray(prop_collider_1x3) &&
             CheckArray(prop_collider_2x2) &&
             CheckArray(prop_collider_2x1);
-    }
-
-    public bool CheckWalls()
-    {
-        return CheckArray(wall_4x1);
     }
 
     public bool CheckDoors()
