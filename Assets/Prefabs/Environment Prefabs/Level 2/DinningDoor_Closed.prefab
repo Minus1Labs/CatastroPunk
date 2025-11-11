@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 0
+  sortType: 1
   SorterPositionOffset: {x: 4.012207, y: -8.888019}
-  SorterPositionOffset2: {x: 0.054227352, y: -0.072898746}
+  SorterPositionOffset2: {x: -0.8991467, y: -0.12508953}
   renderersToSort: []
