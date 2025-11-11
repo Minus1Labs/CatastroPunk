@@ -150,6 +150,6 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -0.106081665, y: 0.1270976}
-  SorterPositionOffset2: {x: 6.3484225, y: -0.7817316}
+  SorterPositionOffset: {x: -0.021134436, y: 0.007044919}
+  SorterPositionOffset2: {x: 5.5745087, y: -0.7076717}
   renderersToSort: []
