@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4297363805927008697}
   - component: {fileID: 8016792049847344294}
   m_Layer: 0
-  m_Name: ExtraDesktop
+  m_Name: ExtraDesktop_2x1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 6324665864756466440}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1556, y: 1.1556, z: 1.1556}
+  m_LocalPosition: {x: -6.92, y: 14.5, z: 0}
+  m_LocalScale: {x: 1.2618, y: 1.2618, z: 1.2618}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2301763792541266664}
@@ -48,7 +48,7 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 0
-  SorterPositionOffset: {x: 2.1511753, y: -4.7627444}
+  SorterPositionOffset: {x: 2.1511803, y: -4.7627563}
   SorterPositionOffset2: {x: -4.8708096, y: -0.80094504}
   renderersToSort: []
 --- !u!1 &8562813327659424253
@@ -80,8 +80,8 @@ Transform:
   m_GameObject: {fileID: 8562813327659424253}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.26, y: -0.01, z: 0}
+  m_LocalScale: {x: 0.81615, y: 0.81615, z: 0.81615}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4297363805927008697}
@@ -182,21 +182,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -3.742226, y: 0.44921494}
-      - {x: -3.7525907, y: 0.119331434}
-      - {x: -2.8188941, y: -0.30192184}
+    - - {x: 2.9259348, y: -3.112991}
+      - {x: 2.150364, y: -2.7099512}
+      - {x: -1.2336923, y: -0.87474954}
+      - {x: -1.8728421, y: -1.2759945}
+      - {x: -2.8186765, y: -1.8321146}
       - {x: -2.808844, y: -1.8607564}
       - {x: -2.5441208, y: -1.9641329}
       - {x: -1.0973046, y: -1.1997293}
       - {x: 1.5126818, y: -2.5751054}
       - {x: 1.491169, y: -3.9739308}
       - {x: 1.8304379, y: -4.20749}
-      - {x: 3.4399998, y: -3.4142866}
-      - {x: 3.4399998, y: -0.945}
-      - {x: 3.4399998, y: -0.945}
-      - {x: 3.4243875, y: -0.61713886}
-      - {x: -1.6393745, y: 1.4068052}
-      - {x: -2.8038237, y: 0.9203746}
+      - {x: 3.4757931, y: -3.37849}
   m_UseDelaunayMesh: 0
 --- !u!114 &5131634449097566640
 MonoBehaviour:
