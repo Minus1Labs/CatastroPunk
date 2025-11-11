@@ -269,9 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 0
-  SorterPositionOffset: {x: 5.638126, y: -10.122405}
-  SorterPositionOffset2: {x: 0.05422592, y: -0.072898865}
+  sortType: 1
+  SorterPositionOffset: {x: 7.82261, y: -9.534273}
+  SorterPositionOffset2: {x: 0.04678166, y: 2.2829356}
   renderersToSort: []
 --- !u!1 &8776422473195606800
 GameObject:
