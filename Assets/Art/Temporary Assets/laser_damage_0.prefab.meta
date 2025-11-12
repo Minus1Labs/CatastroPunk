@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Temporary Assets/laser_damage_0.prefab.meta
 guid: 9c7619320184a41b8beaf7fee3a2d50c
+========
+guid: b5a0953dedbf5c34db52b8e9038d4840
+>>>>>>>> 3b6ab11c95728aa001c05e9e37fccd9ebdfd8ffd:Assets/Prefabs/ProcGenTestPrefabs/Cargo_1x2.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

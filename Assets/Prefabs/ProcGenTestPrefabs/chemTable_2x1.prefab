@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1949918184342583979}
   m_Layer: 0
-  m_Name: ChemTable_2x1
+  m_Name: chemTable_2x1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,5 +183,5 @@ MonoBehaviour:
   renderBelowAll: 0
   sortType: 1
   SorterPositionOffset: {x: -0.021134436, y: 0.007044919}
-  SorterPositionOffset2: {x: 8.170696, y: -1.0980759}
+  SorterPositionOffset2: {x: 5.736123, y: -0.77447677}
   renderersToSort: []
