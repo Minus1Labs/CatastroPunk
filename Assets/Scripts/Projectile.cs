@@ -73,16 +73,18 @@ public class Projectile : MonoBehaviour, IReversible
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !other.CompareTag("Player") && !damagesPlayer)
         {
+            damageable.TakeDamage(damage);
+            /*
             if (damageable is not AntBoss)
             {
                 damageable.TakeDamage(damage);
             }
             else
             {
-                AntBoss antBossScript = (AntBoss) damageable;
+                AntBoss antBossScript = (AntBoss)damageable;
                 antBossScript.PlayFailedHitSound();
             }
-            Destroy(gameObject);
+            Destroy(gameObject);*/
         }
 
         if (damageable != null && damagesPlayer && other.CompareTag("Player"))

@@ -61,7 +61,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         NO_BARREL
     }
 
-    public ANT_BOSS_BARREL_TYPE[] BossCurrentBarrels = new ANT_BOSS_BARREL_TYPE[8];
+    public ANT_BOSS_BARREL_TYPE[] BossCurrentBarrels = new ANT_BOSS_BARREL_TYPE[50];
     private int NextBarrelIndex = 0;
     private int openBarrelCount = 0;
     private int openBarrelUsesLeft = 4;
@@ -121,7 +121,7 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
     public void PlayFailedHitSound()
     {
-        audioSource.Play();
+        //audioSource.Play();
     }
 
     public void AnimateBossRefill()
@@ -416,7 +416,10 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         //TODO: add any other death logic before destroying
         //lets open the door
         //boss door is interactible open door:
-        bossDoor.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
+        if (bossDoor != null)
+        {
+            bossDoor.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
+        }
         Destroy(gameObject);
     }
 

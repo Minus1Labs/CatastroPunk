@@ -99,11 +99,14 @@ public static class RoomLayouts
     }
     public static List<Room> GetRoomsFromDisk()
     {
-        string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/RoomLayoutsJQ.json");
-        Root jsonRoot = JsonUtility.FromJson<Root>(json);
-        Debug.Log("Got " + jsonRoot.Rooms.Count + " rooms from disk");
+      TextAsset jsonTA = Resources.Load<TextAsset>("ProcGen/RoomLayoutsJQ");
+      string json = jsonTA.text;
+      //Below doesn't work in build
+      //string json = System.IO.File.ReadAllText("Assets/Scripts/ProcGen/RoomLayoutsJQ.json");
+      Root jsonRoot = JsonUtility.FromJson<Root>(json);
+      Debug.Log("Got " + jsonRoot.Rooms.Count + " rooms from disk");
 
-        return jsonRoot.Rooms;
+      return jsonRoot.Rooms;
     }
 }
 
