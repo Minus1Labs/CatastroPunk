@@ -69411,7 +69411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.004942342, w: 0.99998784}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0039288546, w: 0.9999924}
   m_LocalPosition: {x: 113.2, y: -105.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -149586,19 +149586,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7193537048629251355, guid: 5f4c01f895c934347a4ad9ba1b11e475, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
-      value: 5.9163
+      value: 5.9151497
       objectReference: {fileID: 0}
     - target: {fileID: 7193537048629251355, guid: 5f4c01f895c934347a4ad9ba1b11e475, type: 3}
       propertyPath: m_LocalBounds.m_Center.y
-      value: 2.2968001
+      value: 2.2958999
       objectReference: {fileID: 0}
     - target: {fileID: 7193537048629251355, guid: 5f4c01f895c934347a4ad9ba1b11e475, type: 3}
       propertyPath: m_LocalBounds.m_Extent.x
-      value: 12.5151005
+      value: 12.51545
       objectReference: {fileID: 0}
     - target: {fileID: 7193537048629251355, guid: 5f4c01f895c934347a4ad9ba1b11e475, type: 3}
       propertyPath: m_LocalBounds.m_Extent.y
-      value: 11.9883995
+      value: 11.988501
       objectReference: {fileID: 0}
     - target: {fileID: 7193537048629251355, guid: 5f4c01f895c934347a4ad9ba1b11e475, type: 3}
       propertyPath: m_ShapePath.Array.data[0].x
