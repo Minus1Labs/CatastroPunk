@@ -150,8 +150,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -0.11871338, y: -0.19974709}
-  SorterPositionOffset2: {x: 5.0786285, y: 0.3593111}
+  SorterPositionOffset: {x: -2.6041718, y: 0.1748048}
+  SorterPositionOffset2: {x: -0.04472351, y: 0.038267016}
   renderersToSort: []
 --- !u!1 &5102545588522463236
 GameObject:
@@ -311,7 +311,7 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 0
-  SorterPositionOffset: {x: 0.20544195, y: 2.3934894}
+  SorterPositionOffset: {x: -0.75323486, y: 1.2631156}
   SorterPositionOffset2: {x: 0.054227352, y: -0.072898865}
   renderersToSort: []
 --- !u!1 &5980255250687017790
@@ -464,8 +464,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: 0.08196163, y: 0.041624546}
-  SorterPositionOffset2: {x: 5.075381, y: 0.527925}
+  SorterPositionOffset: {x: -2.8074493, y: 0.295784}
+  SorterPositionOffset2: {x: -0.006378174, y: -0.0071492195}
   renderersToSort: []
 --- !u!1 &6791836543326993604
 GameObject:

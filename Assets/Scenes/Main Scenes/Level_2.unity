@@ -24483,7 +24483,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0039370055, w: 0.9999923}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003940552, w: 0.9999923}
   m_LocalPosition: {x: 113.2, y: -105.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -66691,6 +66691,30 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 384160727}
+    - target: {fileID: 7254153329332261043, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: -0.014129639
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254153329332261043, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -1.3444176
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813004501547806413, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: 4.2173157
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813004501547806413, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -1.5062561
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813004501547806413, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset2.x
+      value: 2.0326233
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813004501547806413, guid: c07931d4d92b6ed42a0767619d6dc457, type: 3}
+      propertyPath: SorterPositionOffset2.y
+      value: 1.6201515
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
