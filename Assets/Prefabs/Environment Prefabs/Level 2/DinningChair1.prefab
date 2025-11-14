@@ -232,6 +232,6 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 0
-  SorterPositionOffset: {x: 0.14627075, y: 1.731082}
+  SorterPositionOffset: {x: 0.016708374, y: 0.026863098}
   SorterPositionOffset2: {x: 0.054227352, y: -0.072898746}
   renderersToSort: []

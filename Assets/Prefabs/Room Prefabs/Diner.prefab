@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8914662188622858646}
   - component: {fileID: 7975851307565611044}
+  - component: {fileID: 7033816930216250107}
   m_Layer: 0
   m_Name: Hallway_WallTile1
   m_TagString: Untagged
@@ -115,6 +116,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7033816930216250107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182164325205214790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.559494, y: -1.0521903}
+  SorterPositionOffset2: {x: 4.0042267, y: -5.4012437}
+  renderersToSort: []
 --- !u!1 &634100660893893893
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,8 +369,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.5141501, y: 3.21415, z: 0}
-    m_Extent: {x: 9.11455, y: 11.06745, z: 0}
+    m_Center: {x: 2.51435, y: 3.2149, z: 0}
+    m_Extent: {x: 9.11415, y: 11.0682, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -647,8 +666,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.5933456, y: -0.48284912, z: 0}
-    m_Extent: {x: 142.33875, y: 139.20415, z: 0}
+    m_Center: {x: 1.5932999, y: -0.48225403, z: 0}
+    m_Extent: {x: 142.3396, y: 139.20465, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -747,6 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7948866812446064100}
   - component: {fileID: 2621667771235882573}
+  - component: {fileID: 1364071154731312933}
   m_Layer: 0
   m_Name: Hallway_WallTile1 (4)
   m_TagString: Untagged
@@ -821,6 +841,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1364071154731312933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565291323963922746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.559494, y: -1.0521908}
+  SorterPositionOffset2: {x: 4.0042267, y: -5.401243}
+  renderersToSort: []
 --- !u!1 &4999252209478676175
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,6 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5945594937104502424}
   - component: {fileID: 8397121630995951394}
+  - component: {fileID: 7443705905064802773}
   m_Layer: 0
   m_Name: Hallway_WallTile1 (1)
   m_TagString: Untagged
@@ -936,6 +975,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7443705905064802773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491160838625933473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.559494, y: -1.0521903}
+  SorterPositionOffset2: {x: 4.0042267, y: -5.4012437}
+  renderersToSort: []
 --- !u!1 &5837806798490926488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,6 +1171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2453454981195123139}
   - component: {fileID: 6594814090406359659}
+  - component: {fileID: 8725729479763575412}
   m_Layer: 0
   m_Name: Hallway_WallTile1 (3)
   m_TagString: Untagged
@@ -1188,6 +1246,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8725729479763575412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196843068172325026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.559494, y: -1.0521903}
+  SorterPositionOffset2: {x: 4.0042267, y: -5.401243}
+  renderersToSort: []
 --- !u!1 &6304744987186659461
 GameObject:
   m_ObjectHideFlags: 0
@@ -27833,6 +27909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2367128434106359033}
   - component: {fileID: 1802170460186413485}
+  - component: {fileID: 2300701001071540541}
   m_Layer: 0
   m_Name: Hallway_WallTile1 (2)
   m_TagString: Untagged
@@ -27907,6 +27984,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2300701001071540541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147202945301370061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -4.559494, y: -1.0521903}
+  SorterPositionOffset2: {x: 4.0042267, y: -5.401243}
+  renderersToSort: []
 --- !u!1001 &72471107266836757
 PrefabInstance:
   m_ObjectHideFlags: 0
