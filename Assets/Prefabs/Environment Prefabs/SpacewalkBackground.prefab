@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3695104675228757739}
   m_Layer: 0
-  m_Name: SpaceBackground
+  m_Name: SpacewalkBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
