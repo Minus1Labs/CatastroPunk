@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Spikes : MonoBehaviour
+public class Spikes : MonoBehaviour, IReversible
 {
 
     public float spikeDamage = 1;
@@ -12,10 +12,14 @@ public class Spikes : MonoBehaviour
 
     private Player player;
 
+    private bool activated = false;
+
+    public SpriteRenderer spikesRenderer;
+
 
     void Update()
     {
-        if (playerInSpike)
+        if (activated && playerInSpike)
         {
             if (player == null)
             {
@@ -24,6 +28,25 @@ public class Spikes : MonoBehaviour
             player.TakeDamage(spikeDamage);
         }
     }
+
+    public void ActivateSpikes()
+    {
+        activated = true;
+        spikesRenderer.enabled = true;
+    }
+
+    public void DeactivateSpikes()
+    {
+        activated = false;
+        spikesRenderer.enabled = false;
+    }
+
+    public void Reverse(int direction)
+    {
+        DeactivateSpikes();
+    }
+
+    
 
     void OnTriggerEnter2D(Collider2D collision)
     {
