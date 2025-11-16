@@ -151465,7 +151465,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0028555968, w: 0.999996}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0029145011, w: 0.9999958}
   m_LocalPosition: {x: 15.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -151601,8 +151601,10 @@ MonoBehaviour:
   - {fileID: 1179667254451227190, guid: 3510619dd36dc8c4bb81904c30d5e886, type: 3}
   prop_collider_3x1:
   - {fileID: 4095917212730983418, guid: ee78422dff109475fb4374028e7ab177, type: 3}
-  wall_4x1:
-  - {fileID: 9007207028545036683, guid: 79beb9afe98d54848b8454383b9db4cd, type: 3}
+  walls_y:
+  - {fileID: 0}
+  walls_x:
+  - {fileID: 0}
   floor_tiles:
   - {fileID: 11400000, guid: 44fd570255c41fb42a6e298b8254b543, type: 2}
   door_teleporter:
