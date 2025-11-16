@@ -48894,8 +48894,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.0046999454, y: 3.3930497, z: 0}
-    m_Extent: {x: 7.8726997, y: 8.38265, z: 0}
+    m_Center: {x: -0.004349947, y: 3.3940501, z: 0}
+    m_Extent: {x: 7.87245, y: 8.38335, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -78759,7 +78759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.003962293, w: 0.9999922}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003965139, w: 0.9999922}
   m_LocalPosition: {x: 56, y: -31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -78824,7 +78824,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
