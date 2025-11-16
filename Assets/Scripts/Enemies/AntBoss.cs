@@ -35,6 +35,9 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     //Audio! doesn't work lol
     public AudioSource audioSource;
 
+    [System.NonSerialized]
+    public bool isVulnerable = false;
+
 
     public enum ANT_BOSS_ENEMY_STATE
     {
@@ -186,6 +189,20 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private bool BossCanAttack()
     {
         return Time.time - lastBarrelUseTime > barrelCycleTimer;
+    }
+
+    public void SetVulnerableState()
+    {
+        isVulnerable = true;
+        enemyState = ANT_BOSS_ENEMY_STATE.Idle;
+        StartCoroutine(Recover());
+    }
+
+    IEnumerator Recover()
+    {
+        yield return new WaitForSeconds(3f);
+        isVulnerable = false;
+        enemyState = ANT_BOSS_ENEMY_STATE.Fighting;
     }
 
 
