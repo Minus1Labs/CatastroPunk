@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.Collections;
@@ -198,6 +199,7 @@ namespace ProcGen
             PlaceProps(roomOrigin, room, rmc);
             PlaceDoors(roomOrigin, room, dc, roomGridPos, rmc);
             PlaceEnemies(roomOrigin, room, dc, rmc);
+            PlaceVendingMachine(roomOrigin, room, rmc, asset_library.VendingMachinePrefab);
 
             //TODO ADD PUZZLES BACK IN
             //PlacePuzzles(roomOrigin, room.Puzzles, dc);
@@ -211,6 +213,28 @@ namespace ProcGen
             
             dc.OpenIfCompleted();
             return dc;
+        }
+
+        //Quick & dirty code for beta
+        public void PlaceVendingMachine(Vector2 roomOrigin, RoomLayouts.Room room, RoomController rmc, GameObject[] assets)
+        {
+            if (room.Props.VendingSpawn == null || room.Props.VendingSpawn.Count < 1 || assets.Count() < 1)
+            {
+                return;
+            }
+
+            // 30% chance to spawn a VM in the room. TODO change this to a variable set in the floorgen instead of Hard coded
+            RoomLayouts.Position pos = room.Props.VendingSpawn[0];
+            if (UnityEngine.Random.Range(0f, 1f) < 0.3f)
+            {
+                Vector2 world = ScriptUtilities.IsoGridToWorld(new Vector2(pos.x, pos.y));
+                int randomAssetIndex = UnityEngine.Random.Range(0, assets.Length);
+                GameObject assetPlaced = Instantiate(assets[randomAssetIndex],
+                    roomOrigin + world + new Vector2(assets[randomAssetIndex].transform.position.x, assets[randomAssetIndex].transform.position.y),
+                    Quaternion.identity);
+
+                assetPlaced.transform.SetParent(rmc.transform);
+            }
         }
 
         public void PlaceWalls(Vector2 roomOrigin, RoomLayouts.Room room, RoomController rmc)

@@ -151372,7 +151372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.002887843, w: 0.9999959}
+  m_LocalRotation: {x: 0, y: 0, z: -0.002891017, w: 0.9999959}
   m_LocalPosition: {x: 15.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -151491,7 +151491,6 @@ MonoBehaviour:
   - {fileID: 356336961612236985, guid: 087bd64062b27084e8649c0da38abd95, type: 3}
   - {fileID: 987280175214378448, guid: 50eda23c7f67b49208dcf8f21e230bd5, type: 3}
   - {fileID: 1127366249059490749, guid: 746f5e4e7519aad49bdea572eb81e279, type: 3}
-  - {fileID: 2630897060648965212, guid: f7a8c8a2eb04249408ff568e764bba55, type: 3}
   prop_collider_1x2:
   - {fileID: 2460606249729668911, guid: d302acc6b55cc754a938c85089b2ab1b, type: 3}
   - {fileID: 8186778476493145173, guid: 207056ff7e8770d45b6462a17731f333, type: 3}
@@ -151517,6 +151516,8 @@ MonoBehaviour:
   - {fileID: 6624827389713820231, guid: fff400d8cd5395145999c139b873f254, type: 3}
   - {fileID: 5765383763178362830, guid: 45a67d55f61624e4799ed7a9f4b0b6de, type: 3}
   - {fileID: 3729549798193945260, guid: ce86ed96d876ad449806a0a158ccf16d, type: 3}
+  VendingMachinePrefab:
+  - {fileID: 8963593318050891500, guid: 17ccd05fa633d44749427a2c1e9b4713, type: 3}
   walls_y:
   - {fileID: 531130420470154756, guid: 6edf05395329d4fdd8c1ea48965a0440, type: 3}
   walls_x:
@@ -151774,6 +151775,14 @@ PrefabInstance:
     - target: {fileID: 4674515074046838750, guid: 127dd7f7393b845159e525c68af23272, type: 3}
       propertyPath: detectionRadius
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621299216555798047, guid: 127dd7f7393b845159e525c68af23272, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621299216555798047, guid: 127dd7f7393b845159e525c68af23272, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Prefabs/ProcGenTestPrefabs/BlueSofa_3x1.prefab.meta
-guid: 929c53bedc742a04ab1bedd50d3e75b8
-PrefabImporter:
-========
+<<<<<<<< HEAD:Assets/Art/Temporary Assets/laser-test.anim.meta
 guid: f1d5191047e604d7dbf6cb082fd7a54c
 NativeFormatImporter:
->>>>>>>> main:Assets/Art/Temporary Assets/laser-test.anim.meta
+========
+guid: eaaae6a78696a894cba8afb0d03368f5
+PrefabImporter:
+>>>>>>>> 3b6ab11c95728aa001c05e9e37fccd9ebdfd8ffd:Assets/Prefabs/ProcGenTestPrefabs/Cargo_2x1.prefab.meta
   externalObjects: {}
   mainObjectFileID: 7400000
   userData: 

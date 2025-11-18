@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Temporary Assets/laser_startup_0 (1).controller.meta
 guid: d1860fda8c810455fb69dcb918b7af7c
 NativeFormatImporter:
+========
+guid: 81b788a446b83934b936cdf2acbc0119
+PrefabImporter:
+>>>>>>>> 3b6ab11c95728aa001c05e9e37fccd9ebdfd8ffd:Assets/Prefabs/ProcGenTestPrefabs/PurpleSofa_1x3.prefab.meta
   externalObjects: {}
   mainObjectFileID: 9100000
   userData: 

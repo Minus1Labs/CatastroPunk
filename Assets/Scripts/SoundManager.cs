@@ -5,7 +5,6 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public AudioSource[] musicSources;
-
     public AudioSource[] sfxSources;
     private int currentMusicIndex = 0;
 
