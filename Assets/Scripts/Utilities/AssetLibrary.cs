@@ -12,6 +12,7 @@ public class AssetLibrary : MonoBehaviour
     public GameObject[] prop_collider_2x2 = new GameObject[1];
     public GameObject[] prop_collider_2x1 = new GameObject[1];
     public GameObject[] prop_collider_3x1 = new GameObject[1];
+    public GameObject[] VendingMachinePrefab = new GameObject[1];
     public GameObject[] walls_y = new GameObject[1];
     public GameObject[] walls_x = new GameObject[1];
     public Tile[] floor_tiles = new Tile[1];

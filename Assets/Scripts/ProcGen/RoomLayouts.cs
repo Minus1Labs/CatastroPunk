@@ -73,12 +73,13 @@ public static class RoomLayouts
     [Serializable]
     public struct Props
     {
-        public List<Position> _1x1;
-        public List<Position> _1x2;
-        public List<Position> _1x3;
-        public List<Position> _2x1;
-        public List<Position> _3x1;
-        public List<Position> _2x2;
+      public List<Position> _1x1;
+      public List<Position> _1x2;
+      public List<Position> _1x3;
+      public List<Position> _2x1;
+      public List<Position> _3x1;
+      public List<Position> _2x2;
+      public List<Position> VendingSpawn;
     }
     [Serializable]
     public struct Puzzle
