@@ -312,8 +312,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -3.0517998, y: -2.55015, z: 0}
-    m_Extent: {x: 50.5638, y: 44.85105, z: 0}
+    m_Center: {x: -3.0515995, y: -2.5504494, z: 0}
+    m_Extent: {x: 50.5633, y: 44.85115, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -20905,13 +20905,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9058311899121791404}
     m_Modifications:
+    - target: {fileID: 1003040320899997327, guid: 92a16c3723eb98a42a2a2579ad62a022, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: 2.618515
+      objectReference: {fileID: 0}
     - target: {fileID: 1278543155890627806, guid: 92a16c3723eb98a42a2a2579ad62a022, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.118637
+      value: -8.68
       objectReference: {fileID: 0}
     - target: {fileID: 1278543155890627806, guid: 92a16c3723eb98a42a2a2579ad62a022, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.3502045
+      value: 4.05
       objectReference: {fileID: 0}
     - target: {fileID: 1278543155890627806, guid: 92a16c3723eb98a42a2a2579ad62a022, type: 3}
       propertyPath: m_LocalPosition.z
