@@ -14,6 +14,7 @@ TagManager:
   - CardUI
   - STARTING_DOOR
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
