@@ -80,6 +80,10 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private readonly System.Collections.Generic.LinkedList<PosSample> posHistory = new System.Collections.Generic.LinkedList<PosSample>();
 
     public GameObject bossDoor;
+
+    public GameObject antRenderObject;
+    private SpriteRenderer[] childSprites;
+
     protected override void Awake()
     {
         base.Awake();
@@ -98,6 +102,8 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
 
         //TODO: Decide if player should have limited reverse bullets by cooldown
         //TODO: Decide if reverse bullets should rewind boss. For now, let's say they do nothing
+        //set child sprites to all the sprite renderer components across all children:
+        childSprites = antRenderObject.GetComponentsInChildren<SpriteRenderer>();
     }
 
     public void FillBossBarrels()
@@ -137,6 +143,13 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     private void Update()
     {
         if (player == null) return;
+
+        if (isVulnerable)
+        {
+            rb.velocity = Vector2.zero;
+            return; // skip all movement/AI logic completely
+        }
+
 
         if (!hasTarget)
         {
@@ -195,6 +208,26 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
     {
         isVulnerable = true;
         enemyState = ANT_BOSS_ENEMY_STATE.Idle;
+
+        rb.velocity = Vector2.zero;
+        foreach (var c in coroutines)
+        {
+            if (c != null)
+                StopCoroutine(c);
+        }
+        coroutines.Clear();
+
+        charging = false;
+        inChargeEndlag = false;
+        isBarrelAttacking = false;
+        isPassiveMoving = false;
+
+        //set child sprites to a red color:
+        foreach (SpriteRenderer sr in childSprites)
+        {
+            sr.color = Color.red;
+        }
+
         StartCoroutine(Recover());
     }
 
@@ -203,6 +236,11 @@ public class AntBoss : Enemies.Enemy, IEnemyCommunicator
         yield return new WaitForSeconds(3f);
         isVulnerable = false;
         enemyState = ANT_BOSS_ENEMY_STATE.Fighting;
+        //reset child sprites to white color:
+        foreach (SpriteRenderer sr in childSprites)
+        {
+            sr.color = Color.white;
+        }
     }
 
 
