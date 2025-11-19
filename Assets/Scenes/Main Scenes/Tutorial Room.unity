@@ -26079,6 +26079,8 @@ MonoBehaviour:
   shootInterval: 1
   bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
   deadPrefab: {fileID: 575834101007669348, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+  firePoint: {fileID: 0}
+  stopWhenShooting: 0
 --- !u!95 &308098851
 Animator:
   serializedVersion: 5
@@ -51722,8 +51724,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.77975, y: 2.4354496, z: 0}
-    m_Extent: {x: 6.6200504, y: 5.79385, z: 0}
+    m_Center: {x: 2.78015, y: 2.43545, z: 0}
+    m_Extent: {x: 6.62065, y: 5.7937503, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -77269,7 +77271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0032372565, w: 0.9999948}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003239894, w: 0.9999948}
   m_LocalPosition: {x: 45.3, y: -34.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -96978,6 +96980,134 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1323192934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1323192936}
+  - component: {fileID: 1323192935}
+  m_Layer: 0
+  m_Name: BGMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1323192935
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323192934}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 54fc97fad848eee4cb9ae25471675755, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.698
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1323192936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323192934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 103.36359, y: -39.022186, z: -0.7006462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338104432
 GameObject:
   m_ObjectHideFlags: 0
@@ -98048,6 +98178,8 @@ MonoBehaviour:
   shootInterval: 1
   bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
   deadPrefab: {fileID: 575834101007669348, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+  firePoint: {fileID: 0}
+  stopWhenShooting: 0
 --- !u!95 &1504130956
 Animator:
   serializedVersion: 5
@@ -99097,6 +99229,8 @@ MonoBehaviour:
   shootInterval: 1
   bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
   deadPrefab: {fileID: 575834101007669348, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+  firePoint: {fileID: 0}
+  stopWhenShooting: 0
 --- !u!95 &1904191339
 Animator:
   serializedVersion: 5
@@ -99687,8 +99821,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -2.75505, y: 2.5089, z: 0}
-    m_Extent: {x: 3.48535, y: 2.6003, z: 0}
+    m_Center: {x: -2.756, y: 2.5097, z: 0}
+    m_Extent: {x: 3.4846, y: 2.6006, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -118639,6 +118773,8 @@ MonoBehaviour:
   shootInterval: 1
   bulletPrefab: {fileID: 825752847778719284, guid: 3685f78c6276f3849916408e0b16706b, type: 3}
   deadPrefab: {fileID: 575834101007669348, guid: 262609b2b54326648955a59ccb9211e3, type: 3}
+  firePoint: {fileID: 0}
+  stopWhenShooting: 0
 --- !u!1 &1344168843659874351
 GameObject:
   m_ObjectHideFlags: 0
@@ -139186,3 +139322,4 @@ SceneRoots:
   - {fileID: 315088374}
   - {fileID: 2102265077}
   - {fileID: 752159873}
+  - {fileID: 1323192936}

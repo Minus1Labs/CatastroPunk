@@ -38,6 +38,8 @@ public class VendingMachineEntity : MonoBehaviour
     public string purchaseNoise = "";
     public string noMoneyNoise = "";*/
 
+    public AudioSource vendingSFX;
+
     private bool instantiated = false;
     private float timeLastDisplayed = 0.0f;
     private int displayedIndex = -1;
@@ -118,6 +120,8 @@ public class VendingMachineEntity : MonoBehaviour
             FloppyDisk.SetActive(true);
             floppyDiskAnimator.SetTrigger("eatCard");
 
+            if (vendingSFX != null)
+                vendingSFX.Play();
 
             if (uses_remaining > 0)
             {
