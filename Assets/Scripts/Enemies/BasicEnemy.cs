@@ -31,6 +31,11 @@ public class BasicEnemy : Enemies.Enemy
 
     [SerializeField] private GameObject deadPrefab;
 
+    //if this is null just use the enemy position
+    public Transform firePoint;
+
+    public bool stopWhenShooting = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -48,11 +53,12 @@ public class BasicEnemy : Enemies.Enemy
 
     private void Update()
     {
+        Debug.Log("is shooting player: " + isShootingPlayer);
         currentEnemyTime += Time.deltaTime;
         if (player == null) return;
         if (UIManager.isGamePaused) return;
 
-        if (canShoot && isShootingPlayer)
+        if (canShoot)
         {
             ShootPlayer();
             canShoot = false;
@@ -62,7 +68,12 @@ public class BasicEnemy : Enemies.Enemy
         float dist = Vector2.Distance(transform.position, player.position);
         if (dist <= detectionRadius)
         {
+            
             Move();
+            if(isShootingPlayer && stopWhenShooting)
+            {
+                rb.velocity = Vector2.zero;
+            }
             robotAnimator.SetBool("Follow", true);
         }
         else
@@ -78,14 +89,28 @@ public class BasicEnemy : Enemies.Enemy
 
     void ShootPlayer()
     {
+        isShootingPlayer = true;
         if (player == null || bulletPrefab == null) return;
 
         Vector2 shootDir = (player.position - transform.position).normalized;
         float angle = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
         Quaternion rot = Quaternion.AngleAxis(angle, Vector3.forward);
-        Instantiate(bulletPrefab, transform.position, rot);
+
+        if(firePoint != null)
+        {
+            Instantiate(bulletPrefab, firePoint.position, rot);
+        } else {
+            Instantiate(bulletPrefab, transform.position, rot);
+        }
+
+        StartCoroutine(ResetNotShooting());
     }
 
+    IEnumerator ResetNotShooting()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isShootingPlayer = false;
+    }
     IEnumerator ResetShoot()
     {
         yield return new WaitForSeconds(shootInterval);
