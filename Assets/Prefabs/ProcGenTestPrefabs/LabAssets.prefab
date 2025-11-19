@@ -76,6 +76,8 @@ MonoBehaviour:
   - {fileID: 4606307705119333581, guid: cbacc8feb81e2e3429eff8285508f98c, type: 3}
   - {fileID: 5765383763178362830, guid: 45a67d55f61624e4799ed7a9f4b0b6de, type: 3}
   - {fileID: 3729549798193945260, guid: ce86ed96d876ad449806a0a158ccf16d, type: 3}
+  VendingMachinePrefab:
+  - {fileID: 8963593318050891500, guid: 17ccd05fa633d44749427a2c1e9b4713, type: 3}
   walls_y:
   - {fileID: 531130420470154756, guid: 6edf05395329d4fdd8c1ea48965a0440, type: 3}
   walls_x:

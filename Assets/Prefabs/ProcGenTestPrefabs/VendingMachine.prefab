@@ -277,6 +277,7 @@ MonoBehaviour:
   triggerArea: {fileID: 0}
   rb: {fileID: 5376743602643995109}
   heldCards: []
+  vendingSFX: {fileID: 0}
   FloppyDisk: {fileID: 823585292804075348}
   eatCardPosition: {fileID: 193498397215397385}
 --- !u!50 &5376743602643995109
