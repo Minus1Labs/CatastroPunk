@@ -195495,7 +195495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0034550938, w: 0.9999941}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003460801, w: 0.9999941}
   m_LocalPosition: {x: 15.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -195974,7 +195974,7 @@ PrefabInstance:
       objectReference: {fileID: 2044430014}
     - target: {fileID: 4674515074046838750, guid: 127dd7f7393b845159e525c68af23272, type: 3}
       propertyPath: maxHealth
-      value: 250
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4674515074046838750, guid: 127dd7f7393b845159e525c68af23272, type: 3}
       propertyPath: detectionRadius
@@ -196599,8 +196599,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.5928993, y: -0.48214912, z: 0}
-    m_Extent: {x: 58.2802, y: 55.146248, z: 0}
+    m_Center: {x: 1.5921497, y: -0.4824009, z: 0}
+    m_Extent: {x: 58.279747, y: 55.146202, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
