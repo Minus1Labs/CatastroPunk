@@ -9,6 +9,7 @@ public class DeathScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("YO!!!!");
         AudioListener.pause = false;
     }
 

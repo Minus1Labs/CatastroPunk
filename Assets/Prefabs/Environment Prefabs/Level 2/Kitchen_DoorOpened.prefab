@@ -129,10 +129,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -4.4649673, y: -4.491647}
-      - {x: 4.500836, y: -9.104801}
-      - {x: 10.201759, y: -4.5854044}
-      - {x: 1.9374542, y: -1.1788607}
+    - - {x: -8.437361, y: -1.8433821}
+      - {x: 0.4023344, y: -6.2043257}
+      - {x: 8.43625, y: -1.6849244}
+      - {x: -0.08026981, y: 1.8477273}
   m_UseDelaunayMesh: 0
 --- !u!1 &5202510658682943754
 GameObject:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 1
-  SorterPositionOffset: {x: 3.9572203, y: -7.617873}
-  SorterPositionOffset2: {x: 1.6212662, y: -0.7626066}
+  sortType: 0
+  SorterPositionOffset: {x: 3.7907994, y: -8.006196}
+  SorterPositionOffset2: {x: 0.054227352, y: -0.072898746}
   renderersToSort: []

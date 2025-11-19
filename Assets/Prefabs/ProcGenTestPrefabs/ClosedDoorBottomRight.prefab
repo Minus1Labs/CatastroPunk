@@ -49,9 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 1
+  sortType: 0
   SorterPositionOffset: {x: -1.4331745, y: -3.249211}
-  SorterPositionOffset2: {x: 0.6103945, y: -0.7748244}
+  SorterPositionOffset2: {x: 8.748545, y: 2.1493917}
   renderersToSort: []
 --- !u!1 &6282083048524089112
 GameObject:
@@ -83,7 +83,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.38, y: 0.38, z: 0.38}
+  m_LocalScale: {x: 0.6999999, y: 0.6999999, z: 0.70000005}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1396001858974297170}
@@ -129,9 +129,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: abcee8b2c66d2d64a8a839f25e487474, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 683cb63a03a6d46949ef7d75a9593606, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 8.11, y: 9.72}
@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c06e4cc546f0143d3b86e9bf72fb1b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedSprite: {fileID: 21300000, guid: abcee8b2c66d2d64a8a839f25e487474, type: 3}
-  blownOpenSprite: {fileID: 21300000, guid: de04c533868a35e4d90b2e201984b7fa, type: 3}
-  openedSprite: {fileID: 21300000, guid: de04c533868a35e4d90b2e201984b7fa, type: 3}
+  closedSprite: {fileID: 21300000, guid: 683cb63a03a6d46949ef7d75a9593606, type: 3}
+  blownOpenSprite: {fileID: 21300000, guid: 53e2c61b1ebaf40149026193a3cb07b8, type: 3}
+  openedSprite: {fileID: 21300000, guid: 53e2c61b1ebaf40149026193a3cb07b8, type: 3}
   doorOpenSound: {fileID: 1533671272377517500}
 --- !u!82 &1533671272377517500
 AudioSource:

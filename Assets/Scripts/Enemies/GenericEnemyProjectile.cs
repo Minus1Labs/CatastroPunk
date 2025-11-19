@@ -51,11 +51,7 @@ namespace Enemies
             if (damageable != null && CheckProjectileTeamCollision(damageable, other))
             {
                 damageable.TakeDamage(damage);
-                //lets do another thing if it is the ant boss
-                if(damageable is AntBoss antBoss)
-                {
-                    antBoss.SetVulnerableState();
-                }
+                Debug.Log("Hit " + other.name + " for " + damage);
                 OnProjectileRemove();
             }
         }

@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 1
-  SorterPositionOffset: {x: 7.221371, y: -9.516363}
-  SorterPositionOffset2: {x: -0.31798625, y: 2.7894692}
+  sortType: 0
+  SorterPositionOffset: {x: 5.759407, y: -10.122398}
+  SorterPositionOffset2: {x: 0.05422592, y: -0.072898865}
   renderersToSort: []
 --- !u!1 &7607438451793338454
 GameObject:
@@ -124,7 +124,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d9e93737293f44849b4939c17a7c25a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89aa60aee0dfba347a81ab1e986c5919, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

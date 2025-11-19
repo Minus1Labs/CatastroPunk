@@ -24,7 +24,7 @@ public class AntBossProjectile : Enemies.GenericEnemyProjectile, IReversible
     {
         rb.velocity = -rb.velocity;
         projectileTeam = 1; // now damages enemies
-        // damage = 100;
+        damage = 100;
     }
 
     

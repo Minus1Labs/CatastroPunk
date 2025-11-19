@@ -6,23 +6,13 @@ using UnityEngine.UI;
 public class HeartsUI : MonoBehaviour
 {
     private Player player;
+    private Image[] uiHearts;
 
     public Sprite emptyHeart;
     public Sprite halfHeart;
     public Sprite fullHeart;
 
     public GameObject uiHeartPrefab;
-
-    public bool dynamicallyGeneratedHearts = false;
-    
-    
-    
-    
-    //EXPLICITLY SET THIS, IF DYNAMICALLY GENERATED IS FALSE. make that a tooltiP:
-
-    
-    public Image[] uiHearts;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +22,6 @@ public class HeartsUI : MonoBehaviour
 
     void InitializeHeartsUI()
     {
-        if(!dynamicallyGeneratedHearts)
-        {
-            return;
-        }
         int maxHealth = player.GetMaxHP();
         int totalHearts = Mathf.CeilToInt(maxHealth / 2f);
         uiHearts = new Image[totalHearts];

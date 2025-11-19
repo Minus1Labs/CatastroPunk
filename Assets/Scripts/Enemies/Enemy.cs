@@ -59,16 +59,6 @@ namespace Enemies
             }
         }
 
-        public float GetCurrentHealth()
-        {
-            return currentHealth;
-        }
-
-        public float GetMaxHP()
-        {
-            return maxHealth;
-        }
-
         protected IEnumerator FlashWhite()
         {
             // swap to white flash material

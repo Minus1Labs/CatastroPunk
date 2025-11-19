@@ -186,7 +186,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public void AddCard(Card c)
     {
-
         if (c == null)
         {
             Debug.LogError("Attempted to add card, but object is null");
@@ -209,11 +208,6 @@ public class Player : MonoBehaviour, IDamageable
             childComponent.ApplyUpgrade(this);
         }
 
-        //transform.position = new Vector3(-7f, -9.94f, 0f);
-        catBodyAnimator.SetTrigger("eatCard");
-        catTailAnimator.SetTrigger("eatCard");
-
-        StartCoroutine(StopPlayer());
         // TODO: send out signal OR directly call UI to update item UI
         EventDispatcher.RaiseCardAddedEvent(new CardAddedEvent(c, childComponent, isNew, this));
         // TODO: send out signal to rigging to update visuals
@@ -316,13 +310,6 @@ public class Player : MonoBehaviour, IDamageable
         this.enabled = false;
         // set rb velocity to 0:
         rb.velocity = Vector2.zero;
-    }
-
-    private IEnumerator StopPlayer()
-    {
-        LockPlayer();
-        yield return new WaitForSeconds(1f);
-        UnlockPlayer();
     }
 
     public void UnlockPlayer()

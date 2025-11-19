@@ -9350,8 +9350,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.5914497, y: -0.48309898, z: 0}
-    m_Extent: {x: 45.91995, y: 42.783897, z: 0}
+    m_Center: {x: 1.5921516, y: -0.48250008, z: 0}
+    m_Extent: {x: 45.92025, y: 42.784103, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -25563,18 +25563,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoxShelves_1 (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 3514690823337295631, guid: 2d39c6f20de00dc45aa01d8a6902c120, type: 3}
-      propertyPath: SorterPositionOffset.x
-      value: -7.313221
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514690823337295631, guid: 2d39c6f20de00dc45aa01d8a6902c120, type: 3}
-      propertyPath: SorterPositionOffset.y
-      value: -0.72587967
-      objectReference: {fileID: 0}
-    - target: {fileID: 3514690823337295631, guid: 2d39c6f20de00dc45aa01d8a6902c120, type: 3}
-      propertyPath: SorterPositionOffset2.y
-      value: 1.8922367
-      objectReference: {fileID: 0}
     - target: {fileID: 4747730867621529996, guid: 2d39c6f20de00dc45aa01d8a6902c120, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -25649,14 +25637,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7177692711850547081}
     m_Modifications:
-    - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
-      propertyPath: SorterPositionOffset.x
-      value: 7.822609
-      objectReference: {fileID: 0}
-    - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
-      propertyPath: SorterPositionOffset2.x
-      value: 0.04678154
-      objectReference: {fileID: 0}
     - target: {fileID: 4931445771039981163, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: m_Name
       value: BossRoom_DoorClosed
