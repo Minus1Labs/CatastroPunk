@@ -195253,10 +195253,6 @@ PrefabInstance:
       propertyPath: blownOpenSprite
       value: 
       objectReference: {fileID: 21300000, guid: d9e93737293f44849b4939c17a7c25a6, type: 3}
-    - target: {fileID: 3601210076526593425, guid: d3328e49b3569b040aab9184689954ec, type: 3}
-      propertyPath: loadScene
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5799209763710479558, guid: d3328e49b3569b040aab9184689954ec, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
       value: 1.5919495
@@ -195499,7 +195495,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0034136095, w: 0.9999942}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003414876, w: 0.9999942}
   m_LocalPosition: {x: 15.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

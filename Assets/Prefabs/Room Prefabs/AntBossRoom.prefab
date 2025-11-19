@@ -25679,7 +25679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8137118065946441604, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: sceneName
-      value: Level_2
+      value: Spacewalk
       objectReference: {fileID: 0}
     - target: {fileID: 9177829392963843964, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: m_LocalScale.x
