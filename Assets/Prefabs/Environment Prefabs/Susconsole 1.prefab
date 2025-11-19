@@ -48,8 +48,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -1.4391098, y: -0.018558502}
-  SorterPositionOffset2: {x: -7.658901, y: -1.4096146}
+  SorterPositionOffset: {x: -2.2954407, y: 0.13435936}
+  SorterPositionOffset2: {x: -12.154633, y: -2.1741962}
   renderersToSort: []
 --- !u!1 &4250485561449263231
 GameObject:
