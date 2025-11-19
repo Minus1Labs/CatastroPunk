@@ -2076,7 +2076,7 @@ MonoBehaviour:
   throwEndlagDuration: 0.7
   chargeEndlagDuration: 1
   ThrownBarrelPrefab: {fileID: 3779433509979182295, guid: 0fc49dbc0cc8e43988da302f55e99094, type: 3}
-  ToxicPuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
+  ToxicPuddlePrefab: {fileID: 8214921849521843096, guid: dcacfc10c27a2e844a9299c1292b1868, type: 3}
   explosionPrefab: {fileID: 4916991142357727099, guid: 85d21c360fc01c14d98899e825163dbb, type: 3}
   antBossAnimator: {fileID: 3474235618539131571}
   audioSource: {fileID: 115815578234778932}
@@ -2135,8 +2135,8 @@ MonoBehaviour:
   isMovable: 1
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: 3.3560276, y: -3.8562975}
-  SorterPositionOffset2: {x: -7.5027027, y: -0.723793}
+  SorterPositionOffset: {x: 3.3560257, y: -3.8562965}
+  SorterPositionOffset2: {x: -7.502701, y: -0.723793}
   renderersToSort: []
 --- !u!82 &115815578234778932
 AudioSource:
