@@ -9350,8 +9350,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.5914497, y: -0.48309898, z: 0}
-    m_Extent: {x: 45.91995, y: 42.783897, z: 0}
+    m_Center: {x: 1.5913486, y: -0.48259926, z: 0}
+    m_Extent: {x: 45.92005, y: 42.7844, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -25651,11 +25651,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: SorterPositionOffset.x
-      value: 7.822609
+      value: 7.8226166
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -9.534271
       objectReference: {fileID: 0}
     - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: SorterPositionOffset2.x
-      value: 0.04678154
+      value: 0.046783447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1737397874904344262, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
+      propertyPath: SorterPositionOffset2.y
+      value: 2.282936
       objectReference: {fileID: 0}
     - target: {fileID: 4931445771039981163, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: m_Name
