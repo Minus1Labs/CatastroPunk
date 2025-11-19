@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4062899369539123376}
   - component: {fileID: 6537500379850554140}
   - component: {fileID: 5083519258905977602}
+  - component: {fileID: 3950560065077471827}
   m_Layer: 0
   m_Name: AntBossThrownBarrel
   m_TagString: Untagged
@@ -30,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3779433509979182295}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.42625293, w: 0.9046041}
-  m_LocalPosition: {x: 11.900729, y: -18.64724, z: 1.1480007}
+  m_LocalRotation: {x: -0, y: -0, z: 0.5588301, w: 0.8292823}
+  m_LocalPosition: {x: 12.574432, y: -18.38967, z: 1.148001}
   m_LocalScale: {x: 0.20000002, y: 0.20000002, z: 0.13333334}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 50.46}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 67.95}
 --- !u!212 &7479654267935773487
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 16ef4fafc6c452947a3d4e8a3e17a37e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2426147d33b03b142ba1abed294dcbcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +125,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.26064214, y: 0.23619129}
+    pivot: {x: 0.5090579, y: 0.40338162}
     oldSize: {x: 12.28, y: 12.28}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
@@ -133,12 +134,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.2384682, y: -2.2626276}
-      - {x: -0.050322413, y: -1.0757827}
-      - {x: -0.19036889, y: 6.1320124}
-      - {x: 2.6376786, y: 7.503679}
-      - {x: 5.986066, y: 6.251753}
-      - {x: 5.982629, y: -0.85790265}
+    - - {x: -0.616791, y: -4.2088966}
+      - {x: -3.2619162, y: -2.6857677}
+      - {x: -3.383767, y: 3.944006}
+      - {x: -0.17200494, y: 5.568108}
+      - {x: 2.876527, y: 3.803805}
+      - {x: 2.7892306, y: -3.045909}
   m_UseDelaunayMesh: 0
 --- !u!50 &3748303587601258820
 Rigidbody2D:
@@ -222,8 +223,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.79545, y: 2.6753497, z: 0}
-    m_Extent: {x: 9.98815, y: 11.61385, z: 0}
+    m_Center: {x: -0.23035002, y: 0.6730499, z: 0}
+    m_Extent: {x: 9.97995, y: 11.89645, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
@@ -234,12 +235,12 @@ MonoBehaviour:
   m_ShapeLightFalloffSize: 6.76
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
-  - {x: 5.9968143, y: -0.9198279, z: 0.45440683}
-  - {x: 6.0228953, y: 6.3170586, z: 0.6177086}
-  - {x: 2.73682, y: 7.531119, z: 0.0000013003346}
-  - {x: -0.4341345, y: 6.0919485, z: 0.4117919}
-  - {x: -0.079961106, y: -1.1136876, z: 0.23429134}
-  - {x: 3.0133374, y: -2.178518, z: 0.0000013003346}
+  - {x: 2.7253523, y: -3.1725938, z: 0.4544067}
+  - {x: 2.990565, y: 3.5377429, z: 0.6177085}
+  - {x: -0.052914813, y: 5.8098083, z: 0.0000011811251}
+  - {x: -3.4523091, y: 3.851611, z: 0.41179177}
+  - {x: -3.1420758, y: -2.6655555, z: 0.23429123}
+  - {x: -0.6932932, y: -4.4627914, z: 0.0000011811251}
 --- !u!114 &5083519258905977602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,3 +259,24 @@ MonoBehaviour:
   SorterPositionOffset: {x: -0.20607853, y: -0.6035328}
   SorterPositionOffset2: {x: 0.054226875, y: -0.072898865}
   renderersToSort: []
+--- !u!95 &3950560065077471827
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3779433509979182295}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4d237db8779cee40bee5198c33e2017, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
