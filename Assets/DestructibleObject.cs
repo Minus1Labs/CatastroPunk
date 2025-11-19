@@ -125,6 +125,7 @@ public class DestructibleObject : MonoBehaviour
         {
             timesHit++;
             //play shader
+            StartCoroutine(particlesPlay());
 
             if (timesHit >= maxHits)
             {
