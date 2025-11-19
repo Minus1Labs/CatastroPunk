@@ -55,12 +55,14 @@ public class RoomController : MonoBehaviour
 
     private void OnEnemyDied(EnemyDiedEvent ede)
     {
+        
         enemies.Remove(ede.Enemy.gameObject);
-        if (enemies.Count == 0 && puzzleObjects.Count == 0)
+        if (enemies.Count == 0 && puzzleObjects.Count == 0 && !roomIsCleared)
         {
             roomIsCleared = true;
             doorController.SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
