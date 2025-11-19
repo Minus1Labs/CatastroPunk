@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class DestructibleObject : MonoBehaviour
 {
     private string objectName;
-    private Animator objectAnimator;
     private int timesHit;
+    private ParticleSystem rubbleParticles;
+    public int maxHits;
+
 
     private SpriteRenderer parentSprite;
-    private Sprite setSprite;
+    private SpriteRenderer destructiveSprite;
+
+    private Collider2D parentCollider;
+    public Collider2D destructiveCollider;
     public enum SpriteSize
     {
         Size_1x1,
@@ -61,55 +66,85 @@ public class DestructibleObject : MonoBehaviour
                 }
             }
         }
+
     }
 
     void Start()
     {
         objectName = transform.parent.name;
-        objectAnimator = GetComponentInParent<Animator>();
 
-        parentSprite = GetComponentInParent<SpriteRenderer>();
+        rubbleParticles = GetComponentInChildren<ParticleSystem>();
 
-        objectAnimator = GetComponentInParent<Animator>();
-
-        parentSprite = GetComponentInParent<SpriteRenderer>();
-        if (parentSprite == null)//if not in parent
+        Transform spriteColliderObj = transform.parent.Find("SpriteCollider");
+        if (spriteColliderObj != null)
         {
-            Transform spriteColliderObj = transform.parent.Find("SpriteCollider");
-            if (spriteColliderObj != null)
-            {
-                parentSprite = spriteColliderObj.GetComponent<SpriteRenderer>();
-            }
+            parentSprite = spriteColliderObj.GetComponent<SpriteRenderer>();
+            parentCollider = spriteColliderObj.GetComponentInParent<Collider2D>();
+
         }
+        else if(parentSprite == null)
+        {
+            parentSprite = transform.parent.GetComponentInParent<SpriteRenderer>();
+            parentCollider = transform.parent.GetComponentInParent<Collider2D>();
+        }
+        parentSprite.enabled = true;
+
+        destructiveSprite = GetComponent<SpriteRenderer>();
+        //destructiveCollider = GetComponent<Collider2D>();
+
+        destructiveSprite.flipX = parentSprite.flipX;
+        destructiveSprite.enabled = false;
+        destructiveCollider.enabled = false;
+
+
 
         var lookupKey = (mySize, myType);
 
         if (spriteMap.ContainsKey(lookupKey))
         {
-            setSprite = spriteMap[lookupKey];
-            Debug.Log("Assigned sprite: " + setSprite.name + " based on size: " + mySize + " and type: " + myType);
+            destructiveSprite.sprite = spriteMap[lookupKey];
+            //Debug.Log("Assigned sprite: " + destructiveSprite.name + " based on size: " + mySize + " and type: " + myType);
+
         }
         else
         {
-            Debug.LogError("Sprite for " + mySize + " / " + myType + " not found in database!", this.gameObject);
+           // Debug.LogError("Sprite for " + mySize + " / " + myType + " not found in database!", this.gameObject);
         }
     }
 
+
+    public void Update()
+    {
+        
+
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.tag == "Bullet" && timesHit < 4)
+        if (collision.tag == "Bullet" && timesHit < maxHits)
         {
             timesHit++;
             //play shader
 
-            if (timesHit >= 3)
+            if (timesHit >= maxHits)
             {
                 //disable shader
-                //spawn animation ruble break //add next sprint
-                parentSprite.sprite = setSprite;
+                parentSprite.enabled = false;
+                StartCoroutine(particlesPlay());
+                destructiveSprite.enabled = true;
+                destructiveCollider.enabled = true;
+
+
+                //disable old collider and enable new one
             }
         }
+    }
+
+    public IEnumerator particlesPlay()
+    {
+        rubbleParticles.Play();
+
+        yield return new WaitForSeconds(1f);
     }
 
 }
