@@ -25645,6 +25645,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: bee8dc07d8dd14545a4f5667dffb035a, type: 3}
+    - target: {fileID: 8137118065946441604, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
+      propertyPath: loadScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137118065946441604, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
+      propertyPath: sceneName
+      value: Level_2
+      objectReference: {fileID: 0}
     - target: {fileID: 9177829392963843964, guid: 7c0d641e911e81d43a101d20cc738d0f, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.83736
