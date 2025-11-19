@@ -753,7 +753,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996461280}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.003802435, w: 0.99999285}
+  m_LocalRotation: {x: 0, y: 0, z: -0.003804998, w: 0.99999285}
   m_LocalPosition: {x: 113.2, y: -105.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19086,6 +19086,46 @@ PrefabInstance:
     - target: {fileID: 3704564840564037845, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: -9.542679
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
+      value: 4.211479
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: -13.58715
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 1.9840086
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
+      value: -8.664812
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].y
+      value: -0.7617873
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].x
+      value: -2.9755387
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
+      value: -0.43079734
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].x
+      value: -1.6333399
+      objectReference: {fileID: 0}
+    - target: {fileID: 9202666287191009115, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[4].y
+      value: 0.84297746
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
