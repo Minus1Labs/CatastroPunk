@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 193498397215397385}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.09, y: -1.57, z: -0.017072365}
+  m_LocalPosition: {x: -3.22, y: -1.57, z: -0.017072365}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,7 +107,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 58d0f58bc4e245c49a662d578764d1b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.95, y: 4.65}
@@ -162,13 +162,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072096745577989719}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.72, y: 1.79, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.022230217, w: 0.99975294}
+  m_LocalPosition: {x: -1.82, y: 1.71, z: 0}
   m_LocalScale: {x: 1.224225, y: 1.224225, z: 1.224225}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3680344840588448185}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.548}
 --- !u!212 &4986038574851499173
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 5286084116542152538}
   - component: {fileID: 5376743602643995109}
   - component: {fileID: 6140034588102816670}
+  - component: {fileID: 605792131782251788}
   m_Layer: 0
   m_Name: script
   m_TagString: Untagged
@@ -277,7 +278,7 @@ MonoBehaviour:
   triggerArea: {fileID: 0}
   rb: {fileID: 5376743602643995109}
   heldCards: []
-  vendingSFX: {fileID: 0}
+  vendingSFX: {fileID: 605792131782251788}
   FloppyDisk: {fileID: 823585292804075348}
   eatCardPosition: {fileID: 193498397215397385}
 --- !u!50 &5376743602643995109
@@ -352,10 +353,106 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -1.68719, y: 0.4709658}
-      - {x: -3.8392978, y: -0.6203675}
-      - {x: -1.7459414, y: -1.7384017}
-      - {x: 0.40190852, y: -0.6231401}
+      - {x: -4.12845, y: -0.7718282}
+      - {x: -1.6082499, y: -2.041322}
+      - {x: 0.9251343, y: -0.7470622}
   m_UseDelaunayMesh: 0
+--- !u!82 &605792131782251788
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445716462557778492}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 57119ab37814cfb409f09e8660796aff, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6837057187870400634
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +528,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b69e3fc1068d8064c933a7e28446bcfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 48, y: 64}

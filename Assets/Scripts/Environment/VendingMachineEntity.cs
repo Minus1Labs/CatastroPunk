@@ -117,11 +117,10 @@ public class VendingMachineEntity : MonoBehaviour
             //TODO: play purchase animation and noise
             Vector3 cardPosition = eatCardPosition.GetComponent<Transform>().position;
             p.transform.localPosition = cardPosition;
+            vendingSFX.Play();
             FloppyDisk.SetActive(true);
             floppyDiskAnimator.SetTrigger("eatCard");
 
-            if (vendingSFX != null)
-                vendingSFX.Play();
 
             if (uses_remaining > 0)
             {
