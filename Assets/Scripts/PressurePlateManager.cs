@@ -8,6 +8,9 @@ public class PressurePlateManager : MonoBehaviour
     [SerializeField] private GameObject interactible;
 
     private bool activated = false;
+
+    public bool doorIsOpen = false;
+
     void Update()
     {
         activated = true;
@@ -16,12 +19,14 @@ public class PressurePlateManager : MonoBehaviour
             if (!plate.isEnabled)
             {
                 activated = false;
+                break;
             }
         }
 
-        if (activated)
+        if (activated && !doorIsOpen)
         {
             interactible.GetComponent<ISpecialInteractible>().SpecialInteract(ISpecialInteractible.SpecialInteractType.PUZZLE_ONLY);
+            doorIsOpen = true;
         }
     }
 

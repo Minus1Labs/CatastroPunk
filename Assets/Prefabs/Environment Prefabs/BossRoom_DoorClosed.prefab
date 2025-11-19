@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f38748c988a37b843a649aba9532a111, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e50cc7896a27ec428c13602596ba16c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -269,9 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMovable: 0
   renderBelowAll: 0
-  sortType: 0
-  SorterPositionOffset: {x: 5.638126, y: -10.122405}
-  SorterPositionOffset2: {x: 0.05422592, y: -0.072898865}
+  sortType: 1
+  SorterPositionOffset: {x: 7.822609, y: -9.534273}
+  SorterPositionOffset2: {x: 0.04678154, y: 2.2829356}
   renderersToSort: []
 --- !u!1 &8776422473195606800
 GameObject:
@@ -364,6 +364,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9177829392963843964}
     m_Modifications:
+    - target: {fileID: 565872232168538066, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
+      propertyPath: sceneName
+      value: SpaceWalk
+      objectReference: {fileID: 0}
     - target: {fileID: 1660669797313424242, guid: f417dd83a64390e43acc38e29b7c164f, type: 3}
       propertyPath: m_Name
       value: TeleportationArea

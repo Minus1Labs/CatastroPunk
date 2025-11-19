@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,8 +150,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -0.19409847, y: -0.09251213}
-  SorterPositionOffset2: {x: 6.1323857, y: -0.39745998}
+  SorterPositionOffset: {x: -6.084259, y: -0.58172894}
+  SorterPositionOffset2: {x: 0.12478638, y: -0.02565384}
   renderersToSort: []
 --- !u!1 &4822467674478872625
 GameObject:
@@ -241,7 +241,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -338,8 +338,8 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: -0.0064897537, y: -0.08229053}
-  SorterPositionOffset2: {x: 5.9700127, y: -0.35685635}
+  SorterPositionOffset: {x: -5.8868713, y: -0.26322556}
+  SorterPositionOffset2: {x: 0.097229004, y: 0.24638557}
   renderersToSort: []
 --- !u!1 &8921441715023680713
 GameObject:
@@ -395,7 +395,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -497,6 +497,6 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 0
-  SorterPositionOffset: {x: 0.02656579, y: 1.1467271}
+  SorterPositionOffset: {x: -0.03616333, y: 0.0450058}
   SorterPositionOffset2: {x: 0.054227352, y: -0.072898865}
   renderersToSort: []

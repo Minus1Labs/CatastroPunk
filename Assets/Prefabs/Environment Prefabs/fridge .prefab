@@ -118,10 +118,10 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.85, y: 2.3}
+  m_Offset: {x: 3.88, y: 3.68}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.64347667, y: 0.3431668}
+    pivot: {x: 0.30407453, y: 0.2490553}
     oldSize: {x: 20, y: 15}
     newSize: {x: 20, y: 15}
     adaptiveTilingThreshold: 0.5
@@ -155,6 +155,6 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 1
-  SorterPositionOffset: {x: 0.10935974, y: -0.30173874}
-  SorterPositionOffset2: {x: -8.650932, y: -1.8180809}
+  SorterPositionOffset: {x: 4.744499, y: 0.8664627}
+  SorterPositionOffset2: {x: -0.32276154, y: 0.14147949}
   renderersToSort: []

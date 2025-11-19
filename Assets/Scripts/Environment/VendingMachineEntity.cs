@@ -44,10 +44,11 @@ public class VendingMachineEntity : MonoBehaviour
 
     private float lastInteractTime = 0f;
     private float interactLockoutTime = 1.5f;
-    
 
-    
 
+    public GameObject FloppyDisk;
+    Animator floppyDiskAnimator;
+    public GameObject eatCardPosition;
 
 
     public void Awake()
@@ -57,6 +58,7 @@ public class VendingMachineEntity : MonoBehaviour
         {
             instantiated = true;
         }
+        floppyDiskAnimator = FloppyDisk.GetComponent<Animator>();
     }
 
     public void FixedUpdate()
@@ -111,6 +113,11 @@ public class VendingMachineEntity : MonoBehaviour
 
 
             //TODO: play purchase animation and noise
+            Vector3 cardPosition = eatCardPosition.GetComponent<Transform>().position;
+            p.transform.localPosition = cardPosition;
+            FloppyDisk.SetActive(true);
+            floppyDiskAnimator.SetTrigger("eatCard");
+
 
             if (uses_remaining > 0)
             {
