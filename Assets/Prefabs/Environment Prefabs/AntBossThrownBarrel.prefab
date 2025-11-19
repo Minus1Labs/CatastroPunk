@@ -185,8 +185,8 @@ MonoBehaviour:
   destroyOnWall: 1
   destroyOnTargetHit: 1
   projectileTeam: 0
-  PuddlePrefab: {fileID: 8214921849521843096, guid: fd30efeb66304401eafc599238a4d1a4, type: 3}
-  ToxicExplosionPrefab: {fileID: 5313072749716805626, guid: 3daac8dc8be654dbd8d3aac4e783ccdb, type: 3}
+  PuddlePrefab: {fileID: 8214921849521843096, guid: dcacfc10c27a2e844a9299c1292b1868, type: 3}
+  ToxicExplosionPrefab: {fileID: 5313072749716805626, guid: 17bc357e64c912e4fab428c793c14c05, type: 3}
   damageEnemy: 0
 --- !u!114 &6537500379850554140
 MonoBehaviour:
@@ -222,8 +222,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 2.7959, y: 2.67595, z: 0}
-    m_Extent: {x: 9.9874, y: 11.61335, z: 0}
+    m_Center: {x: 2.79545, y: 2.6753497, z: 0}
+    m_Extent: {x: 9.98815, y: 11.61385, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.95
