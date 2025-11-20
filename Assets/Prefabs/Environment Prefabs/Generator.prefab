@@ -1,5 +1,103 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2395700443176069391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1274076371599429708}
+  - component: {fileID: 8171219058533566018}
+  - component: {fileID: 4029202741214480714}
+  m_Layer: 0
+  m_Name: Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1274076371599429708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395700443176069391}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.547201, y: 0.15680097, z: 0.90000033}
+  m_LocalScale: {x: 0.32, y: 0.32000002, z: 0.32000002}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 5356735950222213878}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8171219058533566018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395700443176069391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 1
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0, g: 0.76902175, b: 1, a: 1}
+  m_Intensity: 0
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: b7c5cdfa00000000bff6489ffd0508a5555b014b7f19f39a
+  m_LightCookieSprite: {fileID: 21300000, guid: 6d17d6c80d41aca4ab71c036b280b6a9, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 8.368, y: 4.48775, z: 0}
+    m_Extent: {x: 2.3688002, y: 2.89085, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 2.17
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: 6.4989605, y: 2.0963988, z: -0.00000004202127}
+  - {x: 10.038923, y: 2.2939494, z: -0.00000004202127}
+  - {x: 10.236474, y: 6.84988, z: -0.00000004202127}
+  - {x: 6.5271893, y: 6.878109, z: -0.00000004202127}
+--- !u!114 &4029202741214480714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395700443176069391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f97d378e1f9b55043908d14c604a9096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minIntensity: 0
+  maxIntensity: 1.5
+  period: 2.5
 --- !u!1 &3380096554011685896
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +110,8 @@ GameObject:
   - component: {fileID: 5049224902851333298}
   - component: {fileID: 7511447547453399740}
   - component: {fileID: 7759137274906482918}
+  - component: {fileID: 2639152956208716229}
+  - component: {fileID: 1501177046674935506}
   m_Layer: 0
   m_Name: Barrel1
   m_TagString: Untagged
@@ -33,6 +133,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5422564109952384245}
+  - {fileID: 1274076371599429708}
   m_Father: {fileID: 3524087184467498009}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5049224902851333298
@@ -120,6 +221,38 @@ CapsuleCollider2D:
   m_Offset: {x: -0.9000001, y: 1.1673651}
   m_Size: {x: 1.120452, y: 0.71518534}
   m_Direction: 1
+--- !u!114 &2639152956208716229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380096554011685896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 646d68c34334abe44bb05cf2f10a53a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMovable: 0
+  renderBelowAll: 0
+  sortType: 1
+  SorterPositionOffset: {x: -0.74186707, y: 2.1776962}
+  SorterPositionOffset2: {x: -2.8083496, y: 2.214859}
+  renderersToSort: []
+--- !u!114 &1501177046674935506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380096554011685896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d7de74a558054185d9f64a6bf1546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barrel1: {fileID: 3380096554011685896}
+  barrel2: {fileID: 5374108889250267132}
 --- !u!1 &3526057901193726496
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +664,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3524087184467498009}
-  - component: {fileID: 585059357478661928}
   - component: {fileID: 3964330664621177497}
   - component: {fileID: 8498945887812799415}
   m_Layer: 0
@@ -559,20 +691,6 @@ Transform:
   - {fileID: 8016778524730793096}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &585059357478661928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7963132490648943394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 127d7de74a558054185d9f64a6bf1546, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barrel1: {fileID: 3380096554011685896}
-  barrel2: {fileID: 5374108889250267132}
 --- !u!70 &3964330664621177497
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

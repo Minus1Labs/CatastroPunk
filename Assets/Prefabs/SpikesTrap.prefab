@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 5679548731601597495}
   - component: {fileID: 2023383821778068398}
   - component: {fileID: 1003040320899997327}
+  - component: {fileID: 6253129985245014296}
   m_Layer: 0
   m_Name: SpikesTrap
   m_TagString: Untagged
@@ -314,6 +315,26 @@ MonoBehaviour:
   isMovable: 0
   renderBelowAll: 0
   sortType: 0
-  SorterPositionOffset: {x: 0.17022705, y: 2.6185226}
+  SorterPositionOffset: {x: 0.17022705, y: 2.618515}
   SorterPositionOffset2: {x: 0, y: 0}
   renderersToSort: []
+--- !u!249 &6253129985245014296
+AreaEffector2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854133113228176909}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGlobalAngle: 0
+  m_ForceAngle: 0
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_ForceTarget: 0
+  m_Drag: 0
+  m_AngularDrag: 0

@@ -50,6 +50,7 @@ public class EnvironmentHazard : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("HAZARD SIR");
             Player p = collision.GetComponent<Player>();
             if (Time.time - lastTickTime >= ticksPerSecond)
             {
