@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DestructibleObject : MonoBehaviour
+public class DestructibleObject : MonoBehaviour, IReversible
 {
     private string objectName;
     private int timesHit;
@@ -146,6 +146,18 @@ public class DestructibleObject : MonoBehaviour
         rubbleParticles.Play();
 
         yield return new WaitForSeconds(1f);
+    }
+
+    public void Reverse(int strength)
+    {
+        //reverse the destruction:
+        if (timesHit >= maxHits)
+        {
+            destructiveSprite.enabled = false;
+            destructiveCollider.enabled = false;
+            parentSprite.enabled = true;
+        }
+        timesHit = Mathf.Max(0, timesHit - strength);
     }
 
 }
