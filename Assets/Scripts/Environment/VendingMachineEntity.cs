@@ -52,6 +52,8 @@ public class VendingMachineEntity : MonoBehaviour
     Animator floppyDiskAnimator;
     public GameObject eatCardPosition;
 
+    public bool classicVendingMachine = false;
+
 
     public void Awake()
     {
@@ -98,7 +100,16 @@ public class VendingMachineEntity : MonoBehaviour
                     Debug.LogError("Tagged object Player doesn't have player component?");
                     return;
                 }
-                GiveCard(p);
+                if(classicVendingMachine)
+                {
+                    //do the original way where u get a choice
+                    CardUIManager cardUIManager = FindObjectOfType<CardUIManager>();
+                    cardUIManager.EnableCardUI();
+                    
+                } else 
+                {
+                    GiveCard(p);
+                }
                 lastInteractTime = Time.time;
             }
         }
