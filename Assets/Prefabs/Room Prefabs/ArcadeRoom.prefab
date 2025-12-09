@@ -63843,6 +63843,7 @@ MonoBehaviour:
   - {fileID: 3090411683387070638}
   - {fileID: 542373361535556292}
   interactible: {fileID: 940705194845871205}
+  doorIsOpen: 0
 --- !u!1 &7204039975406760148
 GameObject:
   m_ObjectHideFlags: 0
@@ -63909,8 +63910,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.592102, y: -0.48214722, z: 0}
-    m_Extent: {x: 89.1894, y: 86.05465, z: 0}
+    m_Center: {x: 1.592701, y: -0.48189926, z: 0}
+    m_Extent: {x: 89.18919, y: 86.05521, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -78944,6 +78945,22 @@ PrefabInstance:
     - target: {fileID: 5226547261882722337, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: -0.32043457
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: 0.0063323975
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset2.x
+      value: -3.3636475
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset2.y
+      value: -1.5276642
       objectReference: {fileID: 0}
     - target: {fileID: 5382974337209552931, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
       propertyPath: m_LocalPosition.x

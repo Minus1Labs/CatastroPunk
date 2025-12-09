@@ -20666,6 +20666,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorInteractibleFrame3 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset.x
+      value: 1.9432678
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset.y
+      value: -2.7275085
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset2.x
+      value: -1.4205933
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242340677893494921, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
+      propertyPath: SorterPositionOffset2.y
+      value: -0.90657806
+      objectReference: {fileID: 0}
     - target: {fileID: 5382974337209552931, guid: 626f644cdf0024ed2a920e29c8ab6511, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.28106964
