@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class DeathScreen : MonoBehaviour
 {
     public GameObject uiElements;
+
+    public AudioSource deathScreenMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class DeathScreen : MonoBehaviour
         //time scale to 0, cease sounds, etc.
         Time.timeScale = 0f;
         AudioListener.pause = true;
+        deathScreenMusic.ignoreListenerPause = true;
+        
     }
 
     public void ResetLevel()
