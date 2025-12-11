@@ -23,6 +23,12 @@ public class CardUIManager : MonoBehaviour
 
     private GameObject gameplayUI;
 
+    private AudioSource vendingSFX;
+    private GameObject FloppyDisk;
+    private Animator floppyDiskAnimator;
+
+    private VendingMachineEntity myVendingMachie;
+
     void Start()
     {
         gameplayUI = GameObject.Find("GameplayUI");
@@ -53,12 +59,16 @@ public class CardUIManager : MonoBehaviour
 
     public void ConfirmCard()
     {
+
         //add selected card's behavior to player as a component:
         Player player = FindObjectOfType<Player>();
         player.AddCard(selectedCard);
+
         selectedCard = null;
         cardUI.SetActive(false);
         gameplayUI.SetActive(true);
+
+        myVendingMachie.GiveCard(player);
     }
 
     void GenerateCards()
@@ -70,5 +80,10 @@ public class CardUIManager : MonoBehaviour
             cardUIDescriptions[i].text = currentCards[i].advancedDescription;
         }
         selectedCard = currentCards[0];
+    }
+
+    public void SetVendingMachine(VendingMachineEntity VendingMachine)
+    {
+        myVendingMachie = VendingMachine;
     }
 }

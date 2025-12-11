@@ -280,7 +280,9 @@ MonoBehaviour:
   heldCards: []
   vendingSFX: {fileID: 605792131782251788}
   FloppyDisk: {fileID: 823585292804075348}
+  floppyDiskAnimator: {fileID: 0}
   eatCardPosition: {fileID: 193498397215397385}
+  classicVendingMachine: 1
 --- !u!50 &5376743602643995109
 Rigidbody2D:
   serializedVersion: 4
