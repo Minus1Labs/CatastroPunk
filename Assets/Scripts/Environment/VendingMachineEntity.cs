@@ -50,7 +50,7 @@ public class VendingMachineEntity : MonoBehaviour
 
 
     public GameObject FloppyDisk;
-    Animator floppyDiskAnimator;
+    public Animator floppyDiskAnimator;
     public GameObject eatCardPosition;
 
     public bool classicVendingMachine = true;
@@ -64,6 +64,7 @@ public class VendingMachineEntity : MonoBehaviour
             instantiated = true;
         }
         floppyDiskAnimator = FloppyDisk.GetComponent<Animator>();
+        vendingSFX = GetComponent<AudioSource>();
     }
 
     public void FixedUpdate()
@@ -105,8 +106,8 @@ public class VendingMachineEntity : MonoBehaviour
                 {
                     //do the original way where u get a choice
                     CardUIManager cardUIManager = FindObjectOfType<CardUIManager>();
+                    cardUIManager.SetVendingMachine(this);
                     cardUIManager.EnableCardUI();
-                    
                 } else 
                 {
                     GiveCard(p);
@@ -116,14 +117,14 @@ public class VendingMachineEntity : MonoBehaviour
         }
     }
 
-    private void GiveCard(Player p)
+    public void GiveCard(Player p)
     {
         if (p.cash >= cost)
         {
             p.cash -= cost;
-            p.AddCard(heldCards[displayedIndex]);
+            //p.AddCard(heldCards[displayedIndex]);
             uses_remaining--;
-            Debug.Log("Gave player the card: " + heldCards[displayedIndex].cardName);
+            //Debug.Log("Gave player the card: " + heldCards[displayedIndex].cardName);
 
 
             //TODO: play purchase animation and noise
