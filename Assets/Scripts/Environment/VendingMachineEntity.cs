@@ -40,6 +40,7 @@ public class VendingMachineEntity : MonoBehaviour
 
     public AudioSource vendingSFX;
 
+
     private bool instantiated = false;
     private float timeLastDisplayed = 0.0f;
     private int displayedIndex = -1;
@@ -52,7 +53,7 @@ public class VendingMachineEntity : MonoBehaviour
     Animator floppyDiskAnimator;
     public GameObject eatCardPosition;
 
-    public bool classicVendingMachine = false;
+    public bool classicVendingMachine = true;
 
 
     public void Awake()
