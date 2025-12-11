@@ -6,18 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Scenes/IntroCutScene.unity
+    guid: 91759ec382d12d041a989ca875edd54a
+  - enabled: 1
     path: Assets/Scenes/Main Scenes/Tutorial Room.unity
     guid: ceb0f1c59055534428b0c87f19976c59
   - enabled: 1
-    path: Assets/Scenes/Testing Scenes/ProcGenPlayground.unity
-    guid: 8762bccd4aa43406b968009f87005a43
-  - enabled: 1
-    path: Assets/Scenes/Main Scenes/IntroCutScene.unity
-    guid: 91759ec382d12d041a989ca875edd54a
+    path: Assets/Scenes/Main Scenes/TuberoomProcGen.unity
+    guid: 95a02ca0186e22b47aea633a07d6520d
   - enabled: 1
     path: Assets/Scenes/Main Scenes/SpaceWalk.unity
     guid: 7e45a2689ace0ca4cb7bb1484b398b1b
   - enabled: 1
     path: Assets/Scenes/Main Scenes/Level_2.unity
     guid: 7e3922a0dc3e2e54fa68d757d1d2b3ea
+  - enabled: 1
+    path: Assets/Scenes/Main Scenes/EndingScene.unity
+    guid: 0484645f248586d408a5be1bf2606111
   m_configObjects: {}
