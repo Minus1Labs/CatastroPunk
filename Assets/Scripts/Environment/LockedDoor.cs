@@ -14,6 +14,8 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
 
     public AudioSource doorOpenSound;
 
+    public GameObject[] optionalObjectsToEnable;
+
     protected override void Awake()
     {
         base.Awake();
@@ -64,6 +66,14 @@ public class LockedDoor : InteractibleEntity, ISpecialInteractible
             doorCollider.enabled = false;
             is_closed = false;
             doorOpenSound.Play();
+
+            if (optionalObjectsToEnable != null)
+            {
+                foreach (GameObject go in optionalObjectsToEnable)
+                {
+                    go.SetActive(true);
+                }
+            }
         }
         ptp.isEnabled = true;
     }
