@@ -4925,7 +4925,7 @@ GameObject:
   - component: {fileID: 7278338897184406169}
   - component: {fileID: 1137515489803907263}
   m_Layer: 0
-  m_Name: DestructibleObject
+  m_Name: DestructiblePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
